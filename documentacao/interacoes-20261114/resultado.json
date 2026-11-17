@@ -1,0 +1,622 @@
+{
+  "executadoEm": "2026-11-14T19:39:49.9029169-03:00",
+  "total": 154,
+  "checks": [
+    {
+      "teste": "Servidor inicia em c\u00F3pia isolada do banco",
+      "passou": true
+    },
+    {
+      "teste": "Jogos n\u00E3o exigem migra\u00E7\u00E3o ou altera\u00E7\u00E3o de esquema",
+      "passou": true
+    },
+    {
+      "teste": "Integridade SQLite",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Jornada",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Mapa",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Faq",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Home/Sobre",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Especies",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro dos jogos continua criando somente estudante",
+      "passou": true
+    },
+    {
+      "teste": "Servidor impede pular para a miss\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 1",
+      "passou": true
+    },
+    {
+      "teste": "Detetive inicia cartas, sem quest\u00F5es de quiz",
+      "passou": true
+    },
+    {
+      "teste": "Edi\u00E7\u00E3o de esp\u00E9cie n\u00E3o muda cartas de uma tentativa iniciada",
+      "passou": true
+    },
+    {
+      "teste": "Outra conta n\u00E3o l\u00EA as cartas da tentativa",
+      "passou": true
+    },
+    {
+      "teste": "Outra conta n\u00E3o modifica as cartas da tentativa",
+      "passou": true
+    },
+    {
+      "teste": "A\u00E7\u00F5es exigem autentica\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "A\u00E7\u00F5es exigem antifalsifica\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "N\u00E3o existe comando de conclus\u00E3o arbitr\u00E1ria ou pontua\u00E7\u00E3o enviada pelo cliente",
+      "passou": true
+    },
+    {
+      "teste": "Associa\u00E7\u00E3o exige explorar todas as cartas",
+      "passou": true
+    },
+    {
+      "teste": "Mapa permanece bloqueado durante as cartas",
+      "passou": true
+    },
+    {
+      "teste": "Administra\u00E7\u00E3o distingue quiz atual e acervo anterior",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Flashcard vira pelo teclado e registra estudo",
+      "passou": true
+    },
+    {
+      "teste": "Virada 3D executada pela API de anima\u00E7\u00E3o do navegador",
+      "passou": true
+    },
+    {
+      "teste": "Prefer\u00EAncia por movimento reduzido desativa anima\u00E7\u00F5es de a\u00E7\u00F5es",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 02-flashcard-verso",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 02-flashcard-verso",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 02-flashcard-verso",
+      "passou": true
+    },
+    {
+      "teste": "Reenvio concorrente n\u00E3o repete a a\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Cartas exploradas s\u00E3o retomadas ap\u00F3s novo login",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 03-flashcards-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 03-flashcards-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 03-flashcards-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Associa\u00E7\u00E3o oferece pista textual e descri\u00E7\u00E3o acess\u00EDvel da fotografia",
+      "passou": true
+    },
+    {
+      "teste": "Associa\u00E7\u00E3o incorreta d\u00E1 pista e n\u00E3o concede objetivo",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 04-associacao-incorreta-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 04-associacao-incorreta-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 04-associacao-incorreta-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 05-associacao-desktop-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 05-associacao-desktop-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 05-associacao-desktop-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Par correto desenha uma conex\u00E3o animada entre as cartas",
+      "passou": true
+    },
+    {
+      "teste": "Todas as associa\u00E7\u00F5es conquistam o avatar no servidor",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 06-resultado-cartas",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 06-resultado-cartas",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 06-resultado-cartas",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 2",
+      "passou": true
+    },
+    {
+      "teste": "Quiz mant\u00E9m erro, reprova\u00E7\u00E3o e nova tentativa",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 2",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 07-quiz-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 07-quiz-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 07-quiz-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Quiz mant\u00E9m m\u00EDnimo de 70% e conquista do escudo",
+      "passou": true
+    },
+    {
+      "teste": "Duas etapas n\u00E3o desbloqueiam mapa",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 3",
+      "passou": true
+    },
+    {
+      "teste": "Miss\u00E3o tem cen\u00E1rio pr\u00F3prio sem repetir perguntas do Detetive ou Guardi\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Chamar equipe sem investigar n\u00E3o pula etapas",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 08-missao-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 08-missao-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 08-missao-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Feedback de uma partida n\u00E3o aparece em outra atividade",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 09-missao-tablet-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 09-missao-tablet-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 09-missao-tablet-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 10-missao-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 10-missao-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 10-missao-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Alvos do cen\u00E1rio t\u00EAm pelo menos 44 pixels no celular",
+      "passou": true
+    },
+    {
+      "teste": "Item selecionado por clique ou teclado",
+      "passou": true
+    },
+    {
+      "teste": "Selecionar res\u00EDduo pelo teclado aguarda confirma\u00E7\u00E3o do destino",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 11-missao-residuo-na-bolsa",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 11-missao-residuo-na-bolsa",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 11-missao-residuo-na-bolsa",
+      "passou": true
+    },
+    {
+      "teste": "Descarte muda o cen\u00E1rio e registra objetivo",
+      "passou": true
+    },
+    {
+      "teste": "Repetir descarte vazio n\u00E3o duplica pontos",
+      "passou": true
+    },
+    {
+      "teste": "Servidor rejeita destino incompat\u00EDvel sem conceder pontos",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Soltar fora da lixeira devolve o objeto sem pontuar",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Escape cancela o arraste sem alterar progresso",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Arraste real com mouse destina res\u00EDduo no servidor",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Arraste real por toque destina res\u00EDduo no servidor",
+      "passou": true
+    },
+    {
+      "teste": "Miss\u00E3o avan\u00E7a para a ave e apresenta somente o item necess\u00E1rio",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 17-ave-celular-item-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 17-ave-celular-item-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 17-ave-celular-item-claro",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Recolher n\u00E3o captura ou solta a ave",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Observa\u00E7\u00E3o, sinaliza\u00E7\u00E3o e r\u00E1dio trazem equipe para a ave",
+      "passou": true
+    },
+    {
+      "teste": "Miss\u00E3o incompleta ainda protege mapa",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 12-missao-equipe-no-local",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 12-missao-equipe-no-local",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 12-missao-equipe-no-local",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste mouse",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Origem e destino vis\u00EDveis no arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Objeto acompanha arraste touch",
+      "passou": true
+    },
+    {
+      "teste": "Destino correto destacado durante arraste",
+      "passou": true
+    },
+    {
+      "teste": "Arraste finaliza sem objeto preso ou carregamento pendente",
+      "passou": true
+    },
+    {
+      "teste": "Tr\u00EAs miss\u00F5es e oito objetivos concluem jogo no servidor",
+      "passou": true
+    },
+    {
+      "teste": "Cen\u00E1rio conclu\u00EDdo fica dispon\u00EDvel para revis\u00E3o sem novas a\u00E7\u00F5es",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 13-missao-concluida",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 13-missao-concluida",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 13-missao-concluida",
+      "passou": true
+    },
+    {
+      "teste": "Tr\u00EAs experi\u00EAncias desbloqueiam mapa",
+      "passou": true
+    },
+    {
+      "teste": "A\u00E7\u00E3o depois da conclus\u00E3o n\u00E3o altera hist\u00F3rico",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 14-resultado-missao",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 14-resultado-missao",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 14-resultado-missao",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 15-conquistas-tres-experiencias",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 15-conquistas-tres-experiencias",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 15-conquistas-tres-experiencias",
+      "passou": true
+    },
+    {
+      "teste": "Avatar, escudo e mapa continuam integrados",
+      "passou": true
+    },
+    {
+      "teste": "Novo login preserva desbloqueio final",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 3",
+      "passou": true
+    },
+    {
+      "teste": "Nova partida cria cen\u00E1rio limpo sem revogar recompensa",
+      "passou": true
+    },
+    {
+      "teste": "Formul\u00E1rio nativo executa a\u00E7\u00E3o com JavaScript desativado",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 16-missao-celular-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 16-missao-celular-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 16-missao-celular-claro",
+      "passou": true
+    },
+    {
+      "teste": "Tentativa antiga em andamento apresenta transi\u00E7\u00E3o, sem repetir quiz",
+      "passou": true
+    },
+    {
+      "teste": "Transi\u00E7\u00E3o n\u00E3o encerra tentativa sem confirma\u00E7\u00E3o na interface",
+      "passou": true
+    },
+    {
+      "teste": "Transi\u00E7\u00E3o preserva quest\u00F5es e respostas antigas no hist\u00F3rico",
+      "passou": true
+    },
+    {
+      "teste": "Resultado hist\u00F3rico continua acess\u00EDvel",
+      "passou": true
+    },
+    {
+      "teste": "Transi\u00E7\u00E3o cria uma \u00FAnica tentativa nova de cartas",
+      "passou": true
+    }
+  ]
+}

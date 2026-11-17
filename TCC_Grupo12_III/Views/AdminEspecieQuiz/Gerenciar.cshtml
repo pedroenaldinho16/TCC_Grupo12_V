@@ -1,0 +1,30 @@
+@model TCC_Grupo12_III.Models.AdminEspecieQuizViewModel
+
+@{
+    ViewData["Title"] = "Quiz: " + Model.EspecieNome;
+    ViewData["AdminTab"] = "quizespecies";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <a class="eco-back-link" asp-controller="AdminEspecieQuiz" asp-action="Index">&larr; Todas as espécies</a>
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Quiz: @Model.EspecieNome</h1>
+            <p>Monte as perguntas do quiz desta espécie. @Model.Perguntas.Count pergunta@(Model.Perguntas.Count == 1 ? "" : "s") cadastrada@(Model.Perguntas.Count == 1 ? "" : "s").</p>
+        </div>
+    </div>
+
+    <div class="eco-admin__form" style="max-width: 860px;">
+        <form asp-controller="AdminEspecieQuiz" asp-action="Gerenciar" method="post">
+            @await Html.PartialAsync("_Form", Model)
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/admin-quiz-form.js" asp-append-version="true"></script>
+}

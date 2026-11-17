@@ -1,0 +1,27 @@
+@model TCC_Grupo12_III.Models.Campanha
+
+@{
+    ViewData["Title"] = "Nova campanha";
+    ViewData["AdminTab"] = "campanhas";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Nova campanha</h1>
+            <p>Cadastre uma nova campanha ambiental.</p>
+        </div>
+    </div>
+
+    <div class="eco-admin__form">
+        <form asp-controller="AdminCampanhas" asp-action="Create" method="post" enctype="multipart/form-data">
+            @await Html.PartialAsync("_Form", Model)
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

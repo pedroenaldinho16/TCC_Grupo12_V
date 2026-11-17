@@ -1,0 +1,1071 @@
+{
+  "executadoEm": "2026-11-14T15:38:11.9138533-03:00",
+  "total": 266,
+  "checks": [
+    {
+      "teste": "Modelo EF Core coincide com o snapshot",
+      "passou": true
+    },
+    {
+      "teste": "Todas as migra\u00E7\u00F5es aplicadas",
+      "passou": true
+    },
+    {
+      "teste": "Integridade SQLite",
+      "passou": true
+    },
+    {
+      "teste": "Integridade das chaves estrangeiras",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Login",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Cadastro",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Home/Sobre",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Home/Preservar",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Especies",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Especies?filtro=Aves",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Especies?filtro=Terrestres",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Especies/Detalhe/1",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Campanhas",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Campanhas/Detalhes/1",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Educacao",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Faq",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina p\u00FAblica /Jornada",
+      "passou": true
+    },
+    {
+      "teste": "Visitante sem acesso administrativo",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro vazio recebe valida\u00E7\u00E3o sem erro de execu\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro p\u00FAblico de estudante",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro ignora privil\u00E9gios e XP enviados pelo cliente",
+      "passou": true
+    },
+    {
+      "teste": "Senha persistida com hash BCrypt",
+      "passou": true
+    },
+    {
+      "teste": "E-mail duplicado sem distin\u00E7\u00E3o de mai\u00FAsculas",
+      "passou": true
+    },
+    {
+      "teste": "Login incorreto tratado",
+      "passou": true
+    },
+    {
+      "teste": "Login v\u00E1lido e perfil",
+      "passou": true
+    },
+    {
+      "teste": "Estudante sem permiss\u00E3o administrativa",
+      "passou": true
+    },
+    {
+      "teste": "Logout exige POST e GET preserva a sess\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Prote\u00E7\u00E3o antifalsifica\u00E7\u00E3o de requisi\u00E7\u00F5es",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro administrativo vazio recebe valida\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Administrador previamente autorizado",
+      "passou": true
+    },
+    {
+      "teste": "Marcadores hist\u00F3ricos n\u00E3o concedem administra\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Antigo Moderador tratado como Estudante",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio de acesso direto /Avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio de acesso direto /Avistamentos/Registrar",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio de acesso direto /Avistamentos/Criar",
+      "passou": true
+    },
+    {
+      "teste": "N\u00E3o \u00E9 poss\u00EDvel pular desafios",
+      "passou": true
+    },
+    {
+      "teste": "XP alto n\u00E3o desbloqueia mapa",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 1",
+      "passou": true
+    },
+    {
+      "teste": "Tentativa n\u00E3o pode ser lida por outro estudante",
+      "passou": true
+    },
+    {
+      "teste": "Tentativa n\u00E3o pode ser respondida por outro estudante",
+      "passou": true
+    },
+    {
+      "teste": "POST do quiz n\u00E3o avan\u00E7a jogo de cartas",
+      "passou": true
+    },
+    {
+      "teste": "Edi\u00E7\u00E3o administrativa preserva cartas de tentativas iniciadas",
+      "passou": true
+    },
+    {
+      "teste": "Associa\u00E7\u00F5es do primeiro desafio conclu\u00EDdas",
+      "passou": true
+    },
+    {
+      "teste": "Reenvio do quiz n\u00E3o altera associa\u00E7\u00F5es conclu\u00EDdas",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 2",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.0",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.0",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.1",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.1",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.2",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.2",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.3",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.3",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.4",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.4",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.5",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.5",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.6",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.6",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.7",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.7",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.8",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.8",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.9",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.9",
+      "passou": true
+    },
+    {
+      "teste": "Tentativa insuficiente fica registrada e permite repeti\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 2",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.0",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.0",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.1",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.1",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.2",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.2",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.3",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.3",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.4",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.4",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.5",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.5",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.6",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.6",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.7",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.7",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.8",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.8",
+      "passou": true
+    },
+    {
+      "teste": "Persistir resposta 2.9",
+      "passou": true
+    },
+    {
+      "teste": "Feedback explicativo 2.9",
+      "passou": true
+    },
+    {
+      "teste": "Limite de 70% aplicado no servidor",
+      "passou": true
+    },
+    {
+      "teste": "Dois desafios ainda n\u00E3o liberam mapa",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 3",
+      "passou": true
+    },
+    {
+      "teste": "Tr\u00EAs desafios desbloqueiam mapa",
+      "passou": true
+    },
+    {
+      "teste": "Registro liberado ap\u00F3s jornada",
+      "passou": true
+    },
+    {
+      "teste": "Avatar e acess\u00F3rio exibidos no progresso",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 1",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar desafio 1",
+      "passou": true
+    },
+    {
+      "teste": "Continuar desafio reutiliza tentativa em andamento",
+      "passou": true
+    },
+    {
+      "teste": "Registro inv\u00E1lido recebe orienta\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Coordenada de teste dentro da Cantareira",
+      "passou": true
+    },
+    {
+      "teste": "Envio de avistamento com evid\u00EAncia real",
+      "passou": true
+    },
+    {
+      "teste": "Novo avistamento aguarda aprova\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia nova n\u00E3o \u00E9 servida como arquivo p\u00FAblico",
+      "passou": true
+    },
+    {
+      "teste": "Mapa do estudante n\u00E3o revela coordenadas precisas",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia dispon\u00EDvel \u00E0 administra\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia restrita \u00E0 administra\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Quiz da esp\u00E9cie apresenta corre\u00E7\u00E3o educativa",
+      "passou": true
+    },
+    {
+      "teste": "Leitura e quiz conquistam esp\u00E9cie na CantaDex",
+      "passou": true
+    },
+    {
+      "teste": "Estudante envia texto para revis\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Texto n\u00E3o \u00E9 publicado automaticamente",
+      "passou": true
+    },
+    {
+      "teste": "Texto pendente n\u00E3o fica p\u00FAblico",
+      "passou": true
+    },
+    {
+      "teste": "Texto aprovado dispon\u00EDvel com HTML do estudante escapado",
+      "passou": true
+    },
+    {
+      "teste": "Mural pertence a uma campanha",
+      "passou": true
+    },
+    {
+      "teste": "Coment\u00E1rios e apoios persistidos",
+      "passou": true
+    },
+    {
+      "teste": "Administra\u00E7\u00E3o arquiva publica\u00E7\u00E3o sem apagar registro",
+      "passou": true
+    },
+    {
+      "teste": "Participa\u00E7\u00E3o na campanha persistida",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /Admin",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /Admin/Contas",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /Admin/Create",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminEspecies",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminEspecies/Create",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminEspecies/Edit/1",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminJornada",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminJornada/Edit",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminEspecieQuiz",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminCampanhas",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminCampanhas/Create",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminAvistamentos",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /Educacao/Revisar",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /Forum/Moderacao",
+      "passou": true
+    },
+    {
+      "teste": "P\u00E1gina administrativa /AdminFaq",
+      "passou": true
+    },
+    {
+      "teste": "D\u00FAvida de suporte persistida",
+      "passou": true
+    },
+    {
+      "teste": "Logout invalida acesso autenticado",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 01-login",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 01-login",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 01-login",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 02-cadastro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 02-cadastro",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 02-cadastro",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 03-inicio",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 03-inicio",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 03-inicio",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento sobre-projeto",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas sobre-projeto",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas sobre-projeto",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento mapa-bloqueado",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas mapa-bloqueado",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas mapa-bloqueado",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento inicio-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas inicio-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas inicio-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento inicio-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas inicio-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas inicio-celular",
+      "passou": true
+    },
+    {
+      "teste": "Menu m\u00F3vel abre",
+      "passou": true
+    },
+    {
+      "teste": "Menu m\u00F3vel fecha com Escape",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 04-inicio-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 04-inicio-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 04-inicio-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 05-catalogo",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 05-catalogo",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 05-catalogo",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 06-ficha",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 06-ficha",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 06-ficha",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 07-jornada",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 07-jornada",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 07-jornada",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 08-detetive",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 08-detetive",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 08-detetive",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 09-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 09-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 09-guardiao",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 10-missao",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 10-missao",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 10-missao",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 11-progresso",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 11-progresso",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 11-progresso",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 12-mapa",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 12-mapa",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 12-mapa",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 13-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 13-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 13-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 14-campanha-mural",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 14-campanha-mural",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 14-campanha-mural",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 15-voz-estudantil",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 15-voz-estudantil",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 15-voz-estudantil",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento registro-avistamento",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas registro-avistamento",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas registro-avistamento",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento perfil-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas perfil-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas perfil-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento ajuda-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas ajuda-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas ajuda-estudante",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento voz-publicar",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas voz-publicar",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas voz-publicar",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento catalogo-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas catalogo-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas catalogo-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento ficha-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas ficha-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas ficha-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento jornada-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas jornada-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas jornada-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento mapa-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas mapa-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas mapa-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 16-admin",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 16-admin",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 16-admin",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 17-admin-especies",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 17-admin-especies",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 17-admin-especies",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 18-admin-desafios",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 18-admin-desafios",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 18-admin-desafios",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 19-admin-voz",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 19-admin-voz",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 19-admin-voz",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 20-admin-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 20-admin-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 20-admin-campanhas",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 21-admin-avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 21-admin-avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 21-admin-avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 22-admin-usuarios",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 22-admin-usuarios",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas 22-admin-usuarios",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-cadastro-usuario",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-cadastro-usuario",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-cadastro-usuario",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-formulario-especie",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-formulario-especie",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-formulario-especie",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-editor-desafio",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-editor-desafio",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-editor-desafio",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-editor-quiz",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-editor-quiz",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-editor-quiz",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-cadastro-campanha",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-cadastro-campanha",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-cadastro-campanha",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-suporte",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-suporte",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-suporte",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-mural",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-mural",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-mural",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-especies-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas admin-especies-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sora e Inter carregadas admin-especies-celular",
+      "passou": true
+    },
+    {
+      "teste": "Atalho para conte\u00FAdo dispon\u00EDvel",
+      "passou": true
+    },
+    {
+      "teste": "Revoga\u00E7\u00E3o administrativa invalida cookie anterior",
+      "passou": true
+    },
+    {
+      "teste": "Progresso e desbloqueio persistem em novo login",
+      "passou": true
+    }
+  ],
+  "fixture": "C:\\Users\\Admin\\Desktop\\recupera\u00E7\u00E3o\\TCC_Grupo12_V\\documentacao\\validacao\\execucao-20261114-153730"
+}

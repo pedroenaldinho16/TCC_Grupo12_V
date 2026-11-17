@@ -1,0 +1,52 @@
+@model JornadaJogoViewModel
+@{ ViewData["Title"] = "Detetive da Fauna · Cartas"; }
+<div class="ec-page ec-game-page">
+    <a class="ec-breadcrumb" asp-action="Index">← Voltar para a jornada</a>
+    <span class="ec-eyebrow">Desafio 01 · Descobrir e associar</span>
+    <h1>Detetive da Fauna</h1>
+    <p class="ec-lead">Vire as cartas para conhecer os animais. Depois, conecte cada fotografia ao seu nome. Você pode consultar as fichas e tentar novamente.</p>
+    <button class="ec-motion-toggle" type="button" data-game-motion-toggle hidden aria-pressed="false">Animações</button>
+    <div id="atividade" data-game="cartas" data-attempt="@Model.Tentativa.Id">
+        <partial name="_EstadoJogo" model="Model" />
+        @if (Model.Estado.Etapa == "estudo")
+        {
+            <div class="ec-section-head"><div><h2>Uma carta, uma descoberta.</h2><p data-study-count>@Model.Estado.Estudadas.Count de @Model.Jogo.Cartas.Count cartas exploradas. Toque em cada carta para ver o verso.</p></div></div>
+            <partial name="_Flashcards" model="Model" />
+            <form asp-action="Agir" method="post" class="ec-actions" data-game-form>
+                <input type="hidden" name="id" value="@Model.Tentativa.Id" /><input type="hidden" name="revisao" value="@Model.Estado.Revisao" /><input type="hidden" name="acao" value="associar" />
+                <button class="ec-button" type="submit" disabled="@(Model.Estado.Estudadas.Count < Model.Jogo.Cartas.Count)">Montar minhas associações →</button>
+            </form>
+        }
+        else
+        {
+            <h2>Encontre os pares.</h2>
+            <p>1. Selecione uma fotografia. 2. Toque na carta com o nome correspondente. Todos os pares completam este desafio.</p>
+            @if(Model.Estado.Selecionada is int selecionada){var pista=Model.Jogo.Cartas.Single(c=>c.Id==selecionada);<p class="ec-notice"><strong>Pista da ficha:</strong> @pista.Caracteristicas Habitat: @pista.Habitat</p>}
+            <div class="ec-pair-board">
+                <section aria-labelledby="fotos-titulo"><h3 id="fotos-titulo">Fotografias</h3><div class="ec-pair-photos">
+                    @for (var i = 0; i < Model.Jogo.Cartas.Count; i++)
+                    {
+                        var carta = Model.Jogo.Cartas[i]; var feita = Model.Estado.Associadas.Contains(carta.Id);
+                        <form asp-action="Agir" method="post" data-game-form>
+                            <input type="hidden" name="id" value="@Model.Tentativa.Id" /><input type="hidden" name="revisao" value="@Model.Estado.Revisao" /><input type="hidden" name="acao" value="foto" /><input type="hidden" name="alvo" value="@carta.Id" />
+                            <button class="ec-pair-photo @(feita ? "is-matched" : "")" type="submit" disabled="@feita" aria-describedby="pista-foto-@carta.Id" aria-pressed="@((Model.Estado.Selecionada == carta.Id).ToString().ToLowerInvariant())" data-focus-key="foto-@carta.Id"><img src="@carta.Imagem" alt="Fotografia @(i + 1) para identificar" /><span>@(feita ? "✓ " + carta.Nome : "Fotografia " + (i + 1))</span></button>
+                            <span id="pista-foto-@carta.Id" class="visually-hidden">Pista: @carta.Caracteristicas Habitat: @carta.Habitat</span>
+                        </form>
+                    }
+                </div></section>
+                <section aria-labelledby="nomes-titulo"><h3 id="nomes-titulo">Nomes das espécies</h3><div class="ec-pair-names">
+                    @foreach (var id in Model.Jogo.OrdemNomes)
+                    {
+                        var carta = Model.Jogo.Cartas.Single(c => c.Id == id); var feita = Model.Estado.Associadas.Contains(id);
+                        <form asp-action="Agir" method="post" data-game-form>
+                            <input type="hidden" name="id" value="@Model.Tentativa.Id" /><input type="hidden" name="revisao" value="@Model.Estado.Revisao" /><input type="hidden" name="acao" value="nome" /><input type="hidden" name="alvo" value="@id" />
+                            <button class="ec-pair-name @(feita ? "is-matched" : "")" type="submit" disabled="@feita" data-focus-key="nome-@id"><strong>@(feita ? "✓ " : "")@carta.Nome</strong><em>@carta.NomeCientifico</em></button>
+                        </form>
+                    }
+                </div></section>
+            </div>
+            <details class="ec-game-reference"><summary>Consultar minhas cartas e as pistas</summary><partial name="_Flashcards" model="Model" /></details>
+        }
+    </div>
+</div>
+@section Scripts { <script src="~/js/jornada-jogos.js" asp-append-version="true"></script> }

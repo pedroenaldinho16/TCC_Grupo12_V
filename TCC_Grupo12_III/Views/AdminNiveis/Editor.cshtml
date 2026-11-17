@@ -1,0 +1,131 @@
+@model TCC_Grupo12_III.Models.AdminNivelViewModel
+
+@{
+    var editando = Model.Id > 0;
+    ViewData["Title"] = editando ? "Editar nível" : "Novo nível";
+    ViewData["AdminTab"] = "niveis";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>@(editando ? "Editar nível" : "Novo nível")</h1>
+            <p>Preencha as informações e desenhe o nível no editor abaixo.</p>
+        </div>
+    </div>
+
+    <form asp-controller="AdminNiveis" asp-action="@(editando ? "Edit" : "Create")" asp-route-id="@(editando ? Model.Id : null)" method="post" id="nivelForm">
+        @if (editando)
+        {
+            <input type="hidden" asp-for="Id" />
+        }
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="eco-form-grid">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Titulo"></label>
+                <input class="form-control" asp-for="Titulo" />
+                <span class="text-danger" asp-validation-for="Titulo"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Data"></label>
+                <input class="form-control" asp-for="Data" />
+                <span class="text-danger" asp-validation-for="Data"></span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Descricao"></label>
+            <textarea class="form-control" asp-for="Descricao" rows="2"></textarea>
+            <span class="text-danger" asp-validation-for="Descricao"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" asp-for="Ativo" />
+            <label class="form-check-label" asp-for="Ativo"></label>
+        </div>
+
+        <input type="hidden" asp-for="DadosJson" id="nivelDadosJson" />
+        <span class="text-danger" asp-validation-for="DadosJson"></span>
+
+        <div class="eco-editor">
+            <div class="eco-editor__toolbar" id="editorToolbar">
+                <span class="eco-editor__label">Blocos & Terreno:</span>
+                <button type="button" class="eco-editor__tool is-active" data-tool="terra" title="Chão de terra (sólido) — arraste para desenhar">🟫 Terra</button>
+                <button type="button" class="eco-editor__tool" data-tool="plataforma" title="Plataforma flutuante">🌿 Plataforma</button>
+                <button type="button" class="eco-editor__tool" data-tool="oneway" title="Plataforma One-Way (dá para pular por baixo e atravessar para cima!)">🪜 One-Way</button>
+                <button type="button" class="eco-editor__tool" data-tool="plat_movel" title="Plataforma Móvel — clique 1x no Começo e 1x na Parada">🚀 Plataforma Móvel</button>
+                <button type="button" class="eco-editor__tool" data-tool="mola" title="Mola propulsora (super pulo) — impulsione o jogador bem alto!">🌀 Mola</button>
+                <button type="button" class="eco-editor__tool" data-tool="madeira" title="Tronco / Madeira (sólido) — permite Wall Jump com Espeto de Sapatos!">🪵 Madeira</button>
+                <button type="button" class="eco-editor__tool" data-tool="pedra" title="Bloco de pedra sólida — arraste para desenhar">🪨 Pedra</button>
+
+                <span class="eco-editor__label eco-editor__label--sep">Perigos:</span>
+                <button type="button" class="eco-editor__tool" data-tool="espinho" title="Espinho — aperte [R] para rotacionar: Cima, Direita, Baixo, Esquerda ou 4 Lados!">🌵 Espinho</button>
+                <button type="button" class="eco-editor__tool" data-tool="espinho_movel" title="Espinho Móvel — clique 1x no Começo e 1x na Parada">⚙️ Espinho Móvel</button>
+                <button type="button" class="eco-editor__tool" data-tool="fogo" title="Fogo — tira vida">🔥 Fogo</button>
+                <button type="button" class="eco-editor__tool" data-tool="agua" title="Água — tira vida (Atenção: a água não pode estar em cima da terra!)">💧 Água</button>
+
+                <span class="eco-editor__label eco-editor__label--sep">Itens &amp; Poderes:</span>
+                <button type="button" class="eco-editor__tool" data-tool="item_dash" title="Cristal de Dash — recarrega 3 dashes ao coletar!">⚡ Dash (3x)</button>
+                <button type="button" class="eco-editor__tool" data-tool="item_espeto" title="Espeto de Sapatos — recarrega 3 wall jumps na madeira!">🥾 Espetos (3x)</button>
+                <button type="button" class="eco-editor__tool" data-tool="item_pulo_duplo" title="Pulo Duplo — recarrega 3 pulos duplos ao coletar!">🪽 Pulo Duplo (3x)</button>
+                <button type="button" class="eco-editor__tool" data-tool="item_cura" title="Cura / Coração — recupera +1 vida perdida!">❤️ +1 Vida</button>
+                <button type="button" class="eco-editor__tool" data-tool="checkpoint" title="Checkpoint — salva o ponto se perder vida; perde as 3 vidas volta ao início!">🏕️ Checkpoint</button>
+                <button type="button" class="eco-editor__tool" data-tool="animal" title="Animal para resgatar — escolha a espécie e clique no mapa">🐾 Animal</button>
+                <button type="button" class="eco-editor__tool" data-tool="inicio" title="Ponto de início do jogador">🏃 Início</button>
+                <button type="button" class="eco-editor__tool" data-tool="objetivo" title="Base de resgate (fim do nível)">🚩 Objetivo</button>
+                <button type="button" class="eco-editor__tool" data-tool="borracha" title="Apagar — clique ou arraste (botão direito também apaga)">🧽 Borracha</button>
+
+                <span class="eco-editor__label eco-editor__label--sep">Espécie:</span>
+                <select id="editorEspecie" class="form-select form-select-sm eco-editor__select">
+                    @foreach (var especie in Model.Especies)
+                    {
+                        <option value="@especie.Id">@especie.Nome</option>
+                    }
+                </select>
+
+                <span class="eco-editor__label eco-editor__label--sep">Tamanho:</span>
+                <span title="Largura">L:</span>
+                <input type="number" id="editorLargura" class="form-control form-control-sm eco-editor__largura" min="40" max="400" step="1" title="Largura em tiles" />
+                <span title="Altura">A:</span>
+                <input type="number" id="editorAltura" class="form-control form-control-sm eco-editor__largura" min="12" max="100" step="1" title="Altura em tiles" />
+                <span class="eco-editor__label">tiles</span>
+
+                <span class="eco-editor__label eco-editor__label--sep">Velocidade Móvel:</span>
+                <select id="editorVelocidade" class="form-select form-select-sm" style="width: 82px;" title="Velocidade de plataformas e espinhos móveis">
+                    <option value="0.5">0.5x</option>
+                    <option value="1.0" selected>1.0x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2.0">2.0x</option>
+                    <option value="3.0">3.0x</option>
+                </select>
+
+                <button type="button" class="btn btn-sm btn-outline-success ms-2" id="btnRotacionar" title="Rotacionar bloco selecionado [Pressione R no teclado]">
+                    🔄 Rotacionar: <strong id="lblRotacao">Cima</strong> <kbd>R</kbd>
+                </button>
+            </div>
+
+            <div class="eco-editor__canvas-wrap" id="editorCanvasWrap">
+                <canvas id="editorCanvas" height="544"></canvas>
+            </div>
+
+            <p class="eco-editor__dica">
+                <strong>Controles do Editor:</strong> Pressione <kbd>R</kbd> para rotacionar <strong>QUALQUER bloco</strong> (Terra, Madeira, Pedra, Mola, Plataformas, Espinhos, Fogo, etc.). A rotação fica memorizada.
+                Para <strong>Plataforma Móvel</strong> e <strong>Espinho Móvel</strong>, selecione a velocidade desejada e clique uma vez no começo e depois na parada.
+                Ghost preview transparente mostra exatamente onde e como o bloco ficará. Borracha ou botão direito apaga.
+            </p>
+        </div>
+
+        <div class="eco-editor__acoes">
+            <button type="submit" class="btn-eco btn-eco--solid">@(editando ? "Salvar alterações" : "Criar nível")</button>
+            <a class="btn-eco btn-eco--ghost" asp-controller="AdminNiveis" asp-action="Index">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin-nivel-editor.js" asp-append-version="true"></script>
+}

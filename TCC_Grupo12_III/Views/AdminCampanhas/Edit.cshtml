@@ -1,0 +1,27 @@
+@model TCC_Grupo12_III.Models.Campanha
+
+@{
+    ViewData["Title"] = "Editar campanha";
+    ViewData["AdminTab"] = "campanhas";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Editar campanha</h1>
+            <p>Atualize os dados de @Model.Titulo.</p>
+        </div>
+    </div>
+
+    <div class="eco-admin__form">
+        <form asp-controller="AdminCampanhas" asp-action="Edit" method="post" enctype="multipart/form-data">
+            @await Html.PartialAsync("_Form", Model)
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

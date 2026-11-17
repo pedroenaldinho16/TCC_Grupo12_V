@@ -1,0 +1,592 @@
+@model List<TCC_Grupo12_III.Models.ForumTopico>
+@using TCC_Grupo12_III.Data
+
+@{
+    ViewData["Title"] = "Fórum & Comunidades da Serra";
+    var populares = (List<(string Tag, int Total)>)ViewBag.HashtagsPopulares;
+    var hashtagAtivo = (string?)ViewBag.HashtagAtivo;
+    var busca = (string?)ViewBag.Busca;
+    var ordem = (string?)ViewBag.Ordem ?? "recentes";
+    var curtidos = (HashSet<int>)ViewBag.TopicosCurtidos;
+    var abaAtiva = (string)ViewBag.AbaAtiva;
+    var totalNoticias = (int)ViewBag.TotalNoticias;
+    var totalPosts = (int)ViewBag.TotalPosts;
+    var totalRespostas = (int)ViewBag.TotalRespostas;
+    var totalAutores = (int)ViewBag.TotalAutores;
+    var totalComunidades = (int)(ViewBag.TotalComunidades ?? 0);
+    var comunidades = (List<TCC_Grupo12_III.Models.ForumComunidade>)(ViewBag.Comunidades ?? new List<TCC_Grupo12_III.Models.ForumComunidade>());
+    var comunidadeFiltro = (int?)ViewBag.ComunidadeFiltro;
+    var isAdmin = (bool)ViewBag.IsAdmin;
+    var isModerador = (bool)(ViewBag.IsModerador ?? false);
+    var usuarioSuspenso = (bool)(ViewBag.UsuarioSuspenso ?? false);
+    var suspensoForumAte = (DateTime?)ViewBag.SuspensoForumAte;
+    var motivoSuspensao = (string?)ViewBag.MotivoSuspensao;
+    var podePublicarNoticia = (bool)(ViewBag.PodePublicarNoticia ?? false);
+    var podeCriarComunidade = (bool)(ViewBag.PodeCriarComunidade ?? false);
+    var motivoPodeCriarComunidade = (string?)ViewBag.MotivoPodeCriarComunidade;
+    var totalEstudosComunidade = (int)(ViewBag.TotalEstudosComunidade ?? 0);
+    var podeCriarTopicoNivel = (bool)(ViewBag.PodeCriarTopicoNivel ?? false);
+}
+
+<div class="eco-page">
+    <!-- Cabeçalho Principal -->
+    <div class="eco-admin__head">
+        <div class="eco-page__head" style="margin-bottom:0;">
+            <span class="eco-eyebrow">Comunidade & Ciência Cidadã</span>
+            <h1>Fórum & Comunidades da Cantareira</h1>
+            <p>Conecte-se em grupos temáticos, participe de campanhas e debata com guardiões da maior floresta urbana do planeta.</p>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+            @if (isModerador || isAdmin)
+            {
+                <a class="btn-eco btn-eco--ghost shadow-sm" asp-controller="Forum" asp-action="Moderacao">
+                    <i class="bi bi-shield-shaded me-2 text-primary"></i> Painel de Moderação
+                </a>
+            }
+
+            @if (podeCriarComunidade)
+            {
+                <a class="btn btn-outline-success shadow-sm fw-semibold rounded-pill px-3" asp-controller="Forum" asp-action="CriarComunidade">
+                    <i class="bi bi-plus-circle me-1"></i> Fundar Comunidade
+                </a>
+            }
+            else
+            {
+                <button type="button" class="btn btn-outline-secondary shadow-sm fw-semibold rounded-pill px-3" 
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                        title="@motivoPodeCriarComunidade"
+                        onclick="window.mostrarModalEco('Fundação de Comunidades', '@motivoPodeCriarComunidade', 'info')">
+                    <i class="bi bi-lock-fill text-warning me-1"></i> Fundar Comunidade
+                </button>
+            }
+
+            @if (usuarioSuspenso)
+            {
+                <span class="btn-eco btn-eco--ghost text-muted border-warning" style="opacity: 0.85;" title="Você está temporariamente suspenso">
+                    <i class="bi bi-lock-fill me-1 text-warning"></i> Publicação Bloqueada
+                </span>
+            }
+            else if (!podeCriarTopicoNivel)
+            {
+                <a class="btn-eco btn-eco--ghost" asp-controller="Nivel" asp-action="Index">
+                    <i class="bi bi-lock-fill text-warning me-1"></i> Nova Publicação (Nível 2)
+                </a>
+            }
+            else if (abaAtiva == "noticias")
+            {
+                @if (podePublicarNoticia)
+                {
+                    <a class="btn-eco btn-eco--solid shadow-sm" asp-controller="Forum" asp-action="Criar" asp-route-categoria="noticia">
+                        <i class="bi bi-megaphone-fill me-2"></i> Publicar Notícia Oficial
+                    </a>
+                }
+            }
+            else
+            {
+                <a class="btn-eco btn-eco--solid shadow-sm" asp-controller="Forum" asp-action="Criar" asp-route-categoria="comunidade">
+                    <i class="bi bi-pencil-square me-2"></i> Nova Publicação
+                </a>
+            }
+        </div>
+    </div>
+
+    @if (usuarioSuspenso)
+    {
+        <div class="alert alert-warning border-warning shadow-sm d-flex align-items-start gap-3 my-3 p-3 rounded-3" role="alert">
+            <i class="bi bi-pause-circle-fill text-warning fs-3 flex-shrink-0"></i>
+            <div>
+                <h5 class="alert-heading fw-bold mb-1">Aviso da Moderação: Conta com Suspensão Ativa</h5>
+                <p class="mb-1">
+                    Você está suspenso de criar publicações e postar comentários no fórum até 
+                    <strong>@(suspensoForumAte?.ToString("dd/MM/yyyy às HH:mm"))</strong>.
+                </p>
+                @if (!string.IsNullOrWhiteSpace(motivoSuspensao))
+                {
+                    <div class="small text-muted"><strong>Motivo registrado:</strong> @motivoSuspensao</div>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- Barra de Métricas Rápidas da Comunidade -->
+    <div class="eco-forum-metrics">
+        <div class="eco-forum-metric-card">
+            <div class="eco-forum-metric-icon" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="eco-forum-metric-info">
+                <strong>@totalComunidades</strong>
+                <span>Comunidades</span>
+            </div>
+        </div>
+
+        <div class="eco-forum-metric-card">
+            <div class="eco-forum-metric-icon">
+                <i class="bi bi-newspaper"></i>
+            </div>
+            <div class="eco-forum-metric-info">
+                <strong>@totalNoticias</strong>
+                <span>Notícias Oficiais</span>
+            </div>
+        </div>
+
+        <div class="eco-forum-metric-card">
+            <div class="eco-forum-metric-icon">
+                <i class="bi bi-chat-quote"></i>
+            </div>
+            <div class="eco-forum-metric-info">
+                <strong>@totalPosts</strong>
+                <span>Debates & Posts</span>
+            </div>
+        </div>
+
+        <div class="eco-forum-metric-card">
+            <div class="eco-forum-metric-icon">
+                <i class="bi bi-reply-all"></i>
+            </div>
+            <div class="eco-forum-metric-info">
+                <strong>@totalRespostas</strong>
+                <span>Comentários</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seletor de Abas Profissional -->
+    <div class="eco-forum-tabs">
+        <a class="eco-forum-tab-btn @(abaAtiva == "comunidades" ? "is-active" : "")" 
+           asp-controller="Forum" asp-action="Index" asp-route-aba="comunidades">
+            <i class="bi bi-people"></i>
+            Comunidades Temáticas
+            <span class="eco-forum-tab-badge">@totalComunidades</span>
+        </a>
+        <a class="eco-forum-tab-btn @(abaAtiva == "noticias" ? "is-active" : "")" 
+           asp-controller="Forum" asp-action="Index" asp-route-aba="noticias" asp-route-ordem="@ordem">
+            <i class="bi bi-newspaper"></i>
+            Notícias sobre a Serra
+            <span class="eco-forum-tab-badge">@totalNoticias</span>
+        </a>
+        <a class="eco-forum-tab-btn @(abaAtiva == "posts" ? "is-active" : "")" 
+           asp-controller="Forum" asp-action="Index" asp-route-aba="posts" asp-route-ordem="@ordem">
+            <i class="bi bi-chat-square-dots"></i>
+            Todas as Discussões
+            <span class="eco-forum-tab-badge">@totalPosts</span>
+        </a>
+    </div>
+
+    @if (abaAtiva == "comunidades")
+    {
+        <!-- ABA: COMUNIDADES TEMÁTICAS -->
+        <div class="my-4">
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                <div>
+                    <h2 class="h4 fw-bold text-dark mb-1">Comunidades Ativas na Cantareira</h2>
+                    <p class="text-muted small mb-0">Participe dos grupos dedicados a espécies, causas, estudos e campanhas.</p>
+                </div>
+                @if (podeCriarComunidade)
+                {
+                    <a class="btn-eco btn-eco--solid btn-eco--sm shadow-sm" asp-controller="Forum" asp-action="CriarComunidade">
+                        <i class="bi bi-plus-circle me-1"></i> Propor Nova Comunidade
+                    </a>
+                }
+            </div>
+
+            <div class="row g-4">
+                @foreach (var com in comunidades)
+                {
+                    var campanhasAtivas = com.Campanhas.Count(c => c.Ativa && (c.StatusAprovacao == "Aprovado" || string.IsNullOrEmpty(c.StatusAprovacao)));
+                    var totalTopicosCom = com.Topicos.Count;
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border rounded-4 bg-white shadow-sm overflow-hidden d-flex flex-column hover-shadow transition">
+                            <!-- Capa / Banner -->
+                            <div style="height: 110px; width: 100%; position: relative; @(string.IsNullOrWhiteSpace(com.BannerPath) ? "background: linear-gradient(135deg, #064E3B 0%, #0E7C66 100%);" : $"background: url('{com.BannerPath}') center/cover no-repeat;")">
+                                <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);"></div>
+                                @if (com.IsGeral)
+                                {
+                                    <span class="position-absolute top-0 end-0 m-2 badge bg-success shadow-sm">
+                                        <i class="bi bi-shield-check me-1"></i> Oficial
+                                    </span>
+                                }
+                            </div>
+
+                            <div class="card-body p-3 d-flex flex-column flex-grow-1 position-relative">
+                                <!-- Ícone Sobreposto -->
+                                <div class="rounded-circle border border-2 border-white shadow-sm d-flex align-items-center justify-content-center overflow-hidden flex-shrink-0"
+                                     style="width: 52px; height: 52px; margin-top: -38px; background: #fff; z-index: 2;">
+                                    @if (!string.IsNullOrWhiteSpace(com.IconePath))
+                                    {
+                                        <img src="@com.IconePath" alt="@com.Nome" style="width: 100%; height: 100%; object-fit: cover;" />
+                                    }
+                                    else if (com.IsGeral)
+                                    {
+                                        <span style="font-size: 1.6rem;">🏛️</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="font-size: 1.6rem;">🌿</span>
+                                    }
+                                </div>
+
+                                <h3 class="h5 fw-bold text-dark mt-2 mb-1">
+                                    <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@com.Slug" class="text-decoration-none text-dark hover-underline">
+                                        @com.Nome
+                                    </a>
+                                </h3>
+
+                                <p class="text-muted small mb-3 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45;">
+                                    @com.Descricao
+                                </p>
+
+                                @if (campanhasAtivas > 0)
+                                {
+                                    <div class="p-2 mb-3 rounded-3 bg-success-subtle text-success border border-success-subtle small d-flex align-items-center gap-2">
+                                        <i class="bi bi-megaphone-fill"></i>
+                                        <strong>@campanhasAtivas campanha(s) em destaque</strong>
+                                    </div>
+                                }
+
+                                <div class="d-flex align-items-center justify-content-between text-muted small pt-2 border-top mt-auto">
+                                    <div><i class="bi bi-chat-left-text me-1 text-success"></i> @totalTopicosCom post(s)</div>
+                                    <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@com.Slug" class="btn btn-sm btn-outline-success rounded-pill px-3 fw-semibold">
+                                        Entrar <i class="bi bi-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Barra de Busca e Ordenação para Notícias e Posts -->
+        <div class="eco-forum-toolbar">
+            <form asp-controller="Forum" asp-action="Index" method="get" class="eco-forum-search-form">
+                <input type="hidden" name="aba" value="@abaAtiva" />
+                @if (comunidadeFiltro.HasValue)
+                {
+                    <input type="hidden" name="comunidadeId" value="@comunidadeFiltro" />
+                }
+                @if (!string.IsNullOrWhiteSpace(hashtagAtivo))
+                {
+                    <input type="hidden" name="hashtag" value="@hashtagAtivo" />
+                }
+                <input type="hidden" name="ordem" value="@ordem" />
+                <i class="bi bi-search eco-forum-search-icon"></i>
+                <input type="text" name="busca" value="@busca" class="eco-forum-search-input" 
+                       placeholder="Buscar por título, conteúdo ou autor..." />
+                @if (!string.IsNullOrWhiteSpace(busca))
+                {
+                    <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-hashtag="@hashtagAtivo" asp-route-ordem="@ordem" 
+                       class="btn-close ms-2" style="font-size: 0.75rem;" title="Limpar busca"></a>
+                }
+            </form>
+
+            <form asp-controller="Forum" asp-action="Index" method="get" class="eco-forum-sort-group">
+                <input type="hidden" name="aba" value="@abaAtiva" />
+                @if (comunidadeFiltro.HasValue)
+                {
+                    <input type="hidden" name="comunidadeId" value="@comunidadeFiltro" />
+                }
+                @if (!string.IsNullOrWhiteSpace(hashtagAtivo))
+                {
+                    <input type="hidden" name="hashtag" value="@hashtagAtivo" />
+                }
+                @if (!string.IsNullOrWhiteSpace(busca))
+                {
+                    <input type="hidden" name="busca" value="@busca" />
+                }
+                <span class="eco-forum-sort-label"><i class="bi bi-arrow-down-up me-1"></i> Ordenar por:</span>
+                <select name="ordem" class="eco-forum-sort-select" onchange="this.form.submit()">
+                    <option value="recentes" selected="@(ordem == "recentes")">Mais recentes</option>
+                    <option value="populares" selected="@(ordem == "populares")">Mais curtidos</option>
+                    <option value="respostas" selected="@(ordem == "respostas")">Mais comentados</option>
+                </select>
+            </form>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(hashtagAtivo) || !string.IsNullOrWhiteSpace(busca) || comunidadeFiltro.HasValue)
+        {
+            <div class="eco-forum-active-filters my-2">
+                <span class="eco-forum-filter-label"><i class="bi bi-funnel me-1"></i> Filtros aplicados:</span>
+                @if (!string.IsNullOrWhiteSpace(hashtagAtivo))
+                {
+                    <span class="eco-forum-filter-pill">
+                        #@hashtagAtivo
+                        <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-busca="@busca" asp-route-ordem="@ordem" class="eco-filter-remove">&times;</a>
+                    </span>
+                }
+                @if (!string.IsNullOrWhiteSpace(busca))
+                {
+                    <span class="eco-forum-filter-pill">
+                        Busca: "@busca"
+                        <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-hashtag="@hashtagAtivo" asp-route-ordem="@ordem" class="eco-filter-remove">&times;</a>
+                    </span>
+                }
+                @if (comunidadeFiltro.HasValue)
+                {
+                    var nomeCom = comunidades.FirstOrDefault(c => c.Id == comunidadeFiltro.Value)?.Nome ?? "Comunidade";
+                    <span class="eco-forum-filter-pill">
+                        Comunidade: @nomeCom
+                        <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-busca="@busca" asp-route-ordem="@ordem" class="eco-filter-remove">&times;</a>
+                    </span>
+                }
+                <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" class="eco-forum-clear-all ms-2">Limpar todos</a>
+            </div>
+        }
+
+        <!-- Layout Principal com Sidebar -->
+        <div class="eco-forum-layout">
+            <div class="eco-forum-list">
+                @foreach (var topico in Model)
+                {
+                    var tags = topico.Hashtags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                    var jaCurti = curtidos.Contains(topico.Id);
+                    var isNoticia = topico.Categoria == "noticia";
+                    var autorAdmin = topico.Usuario != null && topico.Usuario.IsAdmin;
+                    var autorModerador = topico.Usuario != null && topico.Usuario.IsModerador;
+                    var autorBanido = topico.Usuario != null && topico.Usuario.IsBanido;
+                    var autorJornalista = topico.Usuario != null && topico.Usuario.IsJornalista && topico.Usuario.StatusJornalista == "Aprovado";
+                    var nivelAutor = topico.Usuario != null ? NivelHelper.Nivel(topico.Usuario.Xp) : 1;
+
+                    <article class="eco-forum-card @(isNoticia ? "eco-forum-card--news" : "")">
+                        <!-- Topo do Card: Autor + Categoria + Comunidade -->
+                        <div class="eco-forum-card__header">
+                            <div class="eco-forum-card__author">
+                                <div class="eco-forum-card__avatar @(autorAdmin ? "eco-forum-card__avatar--admin" : (autorModerador ? "eco-forum-card__avatar--admin" : (autorJornalista ? "eco-forum-card__avatar--journalist" : "")))">
+                                    @if (autorAdmin)
+                                    {
+                                        <i class="bi bi-shield-check"></i>
+                                    }
+                                    else if (autorModerador)
+                                    {
+                                        <i class="bi bi-shield-shaded"></i>
+                                    }
+                                    else if (autorJornalista)
+                                    {
+                                        <i class="bi bi-newspaper"></i>
+                                    }
+                                    else
+                                    {
+                                        @(topico.Usuario != null && topico.Usuario.Nome.Length > 0 ? topico.Usuario.Nome[0].ToString().ToUpper() : "?")
+                                    }
+                                </div>
+                                <div class="eco-forum-card__author-details">
+                                    <span class="eco-forum-card__author-name">
+                                        @(topico.Usuario?.Nome ?? (isNoticia ? "Administração da Cantareira" : "Guardião"))
+                                        @if (autorBanido)
+                                        {
+                                            <span class="badge bg-danger ms-1" style="font-size: 0.68rem;">
+                                                <i class="bi bi-slash-circle me-1"></i>Banido
+                                            </span>
+                                        }
+                                        else if (autorAdmin)
+                                        {
+                                            <span class="eco-forum-card__role-badge eco-forum-card__role-badge--admin">
+                                                <i class="bi bi-patch-check-fill me-1"></i>Admin
+                                            </span>
+                                        }
+                                        else if (autorModerador)
+                                        {
+                                            <span class="eco-forum-card__role-badge" style="background: #2563EB; color: #fff;">
+                                                <i class="bi bi-shield-shaded me-1"></i>Moderador
+                                            </span>
+                                        }
+                                        else if (autorJornalista)
+                                        {
+                                            <span class="eco-forum-card__role-badge eco-forum-card__role-badge--journalist">
+                                                <i class="bi bi-patch-check-fill me-1"></i>Jornalista
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="eco-forum-card__role-badge">
+                                                <i class="bi bi-tree me-1"></i>Nv. @nivelAutor
+                                            </span>
+                                        }
+                                    </span>
+                                    <span class="eco-forum-card__time">
+                                        <i class="bi bi-clock me-1"></i>@topico.CriadoEm.ToString("dd/MM/yyyy às HH:mm")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-1 flex-wrap">
+                                @if (topico.Comunidade != null)
+                                {
+                                    <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@topico.Comunidade.Slug" class="badge bg-light text-dark border text-decoration-none px-2 py-1" title="Ver comunidade">
+                                        @(topico.Comunidade.IsGeral ? "🏛️ " : "🌿 ") @topico.Comunidade.Nome
+                                    </a>
+                                }
+                                @if (isNoticia)
+                                {
+                                    <span class="badge" style="background: #0E7C66; color: #fff; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px; font-weight: 700;">
+                                        <i class="bi bi-megaphone-fill me-1"></i> Notícia Oficial
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo: Título e Resumo -->
+                        <a asp-controller="Forum" asp-action="Detalhe" asp-route-id="@topico.Id" style="text-decoration:none;">
+                            <h2 class="eco-forum-card__title">@topico.Titulo</h2>
+                            <p class="eco-forum-card__snippet mt-2">@topico.Conteudo</p>
+                        </a>
+
+                        <!-- Tags -->
+                        @if (tags.Length > 0)
+                        {
+                            <div class="eco-forum-card__tags">
+                                @foreach (var tag in tags)
+                                {
+                                    <a asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-hashtag="@tag" asp-route-ordem="@ordem" class="eco-tag eco-tag--sm text-decoration-none">
+                                        #@tag
+                                    </a>
+                                }
+                            </div>
+                        }
+
+                        <!-- Rodapé do Card: Curtir + Comentários + Ler Completo -->
+                        <div class="eco-forum-card__footer">
+                            <form asp-controller="Forum" asp-action="CurtirTopico" asp-route-id="@topico.Id" method="post" class="eco-like-form mb-0">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="eco-like-btn eco-like-btn--sm @(jaCurti ? "is-liked" : "")" title="Curtir este post">
+                                    <i class="bi @(jaCurti ? "bi-heart-fill" : "bi-heart")"></i>
+                                    <span>@topico.Curtidas.Count</span>
+                                </button>
+                            </form>
+
+                            <div class="eco-forum-card__stats">
+                                <a asp-controller="Forum" asp-action="Detalhe" asp-route-id="@topico.Id" class="eco-forum-stat-pill">
+                                    <i class="bi bi-chat-text-fill text-muted"></i>
+                                    <span>@topico.Respostas.Count @(topico.Respostas.Count == 1 ? "comentário" : "comentários")</span>
+                                </a>
+                                <a asp-controller="Forum" asp-action="Detalhe" asp-route-id="@topico.Id" class="eco-forum-read-more ms-2 text-decoration-none">
+                                    Ler completo <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                }
+
+                @if (Model.Count == 0)
+                {
+                    <div class="text-center py-5" style="background: var(--eco-surface); border: 1px dashed var(--eco-border); border-radius: var(--eco-radius); padding: 48px 24px;">
+                        <div class="mb-3" style="font-size: 2.5rem; color: var(--eco-primary);">
+                            <i class="bi bi-chat-square-dots"></i>
+                        </div>
+                        @if (abaAtiva == "noticias")
+                        {
+                            <h3 class="h5 fw-bold mb-2">Nenhuma notícia encontrada</h3>
+                            <p class="text-muted mb-3" style="max-width: 420px; margin: 0 auto 16px;">Não há informes oficiais correspondentes aos filtros selecionados.</p>
+                            @if (podePublicarNoticia)
+                            {
+                                <a class="btn-eco btn-eco--solid" asp-controller="Forum" asp-action="Criar" asp-route-categoria="noticia">Publicar a primeira notícia</a>
+                            }
+                        }
+                        else
+                        {
+                            <h3 class="h5 fw-bold mb-2">Nenhum post encontrado</h3>
+                            <p class="text-muted mb-3" style="max-width: 420px; margin: 0 auto 16px;">Seja o primeiro a abrir uma discussão ou compartilhe um relato sobre a Serra da Cantareira!</p>
+                            @if (podeCriarTopicoNivel && !usuarioSuspenso)
+                            {
+                                <a class="btn-eco btn-eco--solid" asp-controller="Forum" asp-action="Criar" asp-route-categoria="comunidade">
+                                    <i class="bi bi-pencil-square me-2"></i> Criar Primeira Publicação
+                                </a>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Coluna Lateral (Sidebar Profissional) -->
+            <aside class="eco-forum-sidebar">
+                <!-- Widget de Comunidades em Destaque -->
+                <div class="eco-forum-widget">
+                    <div class="eco-forum-widget__header">
+                        <i class="bi bi-people-fill text-success"></i>
+                        <h4>Comunidades da Serra</h4>
+                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        @foreach (var c in comunidades.Take(5))
+                        {
+                            <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@c.Slug" class="d-flex align-items-center justify-content-between p-2 rounded text-decoration-none text-dark hover-bg-light border border-light">
+                                <div class="d-flex align-items-center gap-2 text-truncate">
+                                    <span style="font-size: 1.1rem;">@(c.IsGeral ? "🏛️" : "🌿")</span>
+                                    <span class="small fw-semibold text-truncate">@c.Nome</span>
+                                </div>
+                                <span class="badge bg-light text-muted border">@c.Topicos.Count</span>
+                            </a>
+                        }
+                    </div>
+                    <div class="mt-3 pt-2 border-top">
+                        <a asp-controller="Forum" asp-action="Index" asp-route-aba="comunidades" class="btn btn-outline-success btn-sm w-100">
+                            Explorar todas as comunidades
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Widget de Diretrizes da Comunidade -->
+                <div class="eco-forum-widget">
+                    <div class="eco-forum-widget__header">
+                        <i class="bi bi-shield-check"></i>
+                        <h4>Diretrizes da Comunidade</h4>
+                    </div>
+                    <div class="eco-forum-guideline-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div><strong>Respeito Mútuo:</strong> Mantenha o diálogo construtivo e acolhedor para estudantes e membros.</div>
+                    </div>
+                    <div class="eco-forum-guideline-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div><strong>Ciência Cidadã:</strong> Compartilhe dados verídicos sobre a fauna e cite locais ou fontes seguras.</div>
+                    </div>
+                    <div class="eco-forum-guideline-item">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <div><strong>Proteção Ativa:</strong> Não divulgue coordenadas exatas de espécies sob risco iminente de caça.</div>
+                    </div>
+                    <div class="mt-3 pt-2 border-top">
+                        <a asp-controller="Faq" asp-action="Index" class="btn btn-outline-success btn-sm w-100 d-flex align-items-center justify-content-center gap-2">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Ver todas as Diretrizes &amp; FAQ</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Widget de Hashtags em Alta -->
+                <div class="eco-forum-widget">
+                    <div class="eco-forum-widget__header">
+                        <i class="bi bi-fire text-danger"></i>
+                        <h4>Hashtags em Alta</h4>
+                    </div>
+                    @if (populares.Count == 0)
+                    {
+                        <p class="text-muted small mb-0">Nenhuma hashtag registrada ainda.</p>
+                    }
+                    else
+                    {
+                        <div class="eco-hashtag-cloud">
+                            @foreach (var item in populares)
+                            {
+                                <a class="eco-chip @(string.Equals(hashtagAtivo, item.Tag, StringComparison.OrdinalIgnoreCase) ? "is-active" : "")" 
+                                   asp-controller="Forum" asp-action="Index" asp-route-aba="@abaAtiva" asp-route-hashtag="@item.Tag" asp-route-ordem="@ordem">
+                                    <span>#@item.Tag</span>
+                                    <span class="eco-hashtag-count">@item.Total</span>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+
+                <!-- Widget de XP e Gamificação -->
+                <div class="eco-forum-xp-box">
+                    <strong><i class="bi bi-stars"></i> Ganhe XP no Fórum</strong>
+                    <p class="mb-0">
+                        Abertura de novo post concede <strong>+15 XP</strong> e cada resposta colaborativa rende <strong>+5 XP</strong> para sua progressão de Guardião!
+                    </p>
+                </div>
+            </aside>
+        </div>
+    }
+</div>

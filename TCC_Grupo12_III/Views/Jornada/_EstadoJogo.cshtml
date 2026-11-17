@@ -1,0 +1,8 @@
+@model JornadaJogoViewModel
+<div class="ec-game-state">
+    <span>@Model.Tentativa.Pontos / @Model.Tentativa.Total objetivos</span>
+    <progress value="@Model.Tentativa.Pontos" max="@Model.Tentativa.Total" aria-label="Objetivos concluídos"></progress>
+    <span>Progresso salvo · sem limite de tempo</span>
+    <span class="ec-save-state" data-save-state hidden aria-live="polite">Salvando…</span>
+</div>
+<p id="jogo-feedback" class="ec-game-feedback" tabindex="-1">@(TempData[$"JogoFeedback-{Model.Tentativa.Id}"] ?? (Model.Jogo.Tipo == "cartas" ? "Comece virando as cartas. Observe as fotografias e conheça as fichas do grupo." : TCC_Grupo12_III.Services.JornadaJogosService.Passo(Model.Estado).Instrucao))</p>

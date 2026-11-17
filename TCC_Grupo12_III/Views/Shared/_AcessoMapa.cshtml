@@ -1,0 +1,12 @@
+@model AcessoMapaViewModel
+<section class="ec-map-access" aria-label="Acesso ao mapa de avistamentos">
+    <div class="ec-map-symbol" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 12-5 14 5 12-5v29l-12 5-14-5-12 5Z"/><path d="M17 7v29M31 12v29"/><path d="M34 17c0 5-6 10-6 10s-6-5-6-10a6 6 0 1 1 12 0Z"/><circle cx="28" cy="17" r="2"/></svg>
+    </div>
+    <div class="ec-map-access-copy">
+        <span class="ec-eyebrow">@Model.Estado</span>
+        <h2>Mapa de avistamentos</h2>
+        <p>@(Model.Liberado ? "Explore a Cantareira e os registros de fauna aprovados." : "Descubra o que você poderá explorar e acompanhe os passos para liberar o mapa.")</p>
+    </div>
+    <a class="ec-button @(Model.Liberado ? "" : "ec-button-outline")" asp-controller="Jornada" asp-action="Mapa">@Model.Acao <span aria-hidden="true">→</span></a>
+</section>

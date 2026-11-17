@@ -1,0 +1,3 @@
+System.Exception: Resposta enviada pelo teclado e feedback exibido
+   at Complementos.<>c__DisplayClass0_1.<Run>g__Check|1(Boolean ok, String name) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\Complementos.cs:line 16
+   at Complementos.Run(String root) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\Complementos.cs:line 70

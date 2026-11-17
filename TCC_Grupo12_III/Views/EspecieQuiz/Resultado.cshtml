@@ -1,0 +1,16 @@
+@model TCC_Grupo12_III.Models.EspecieQuizResultadoViewModel
+
+@{
+    ViewData["Title"] = "Resultado: " + Model.Especie.Nome;
+}
+
+<div class="ec-page">
+    <div class="eco-page__head">
+        <h1>Resultado do quiz</h1>
+        <p>@Model.Especie.Nome</p>
+    </div>
+
+    @await Html.PartialAsync("_ResultadoConteudo", Model)
+
+    <a class="btn-eco btn-eco--solid" asp-controller="Especies" asp-action="Detalhe" asp-route-id="@Model.Especie.Id" asp-fragment="quiz">Voltar para o quiz da espécie</a>
+</div>

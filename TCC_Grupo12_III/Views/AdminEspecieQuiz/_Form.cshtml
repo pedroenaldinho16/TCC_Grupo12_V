@@ -1,0 +1,23 @@
+@model TCC_Grupo12_III.Models.AdminEspecieQuizViewModel
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<input type="hidden" asp-for="EspecieId" />
+
+<div class="eco-quiz-admin-questions" id="perguntas">
+    @for (var i = 0; i < Model.Perguntas.Count; i++)
+    {
+        @await Html.PartialAsync("_PerguntaCampos", Model.Perguntas[i], new ViewDataDictionary(ViewData) { ["Prefixo"] = $"Perguntas[{i}]" })
+    }
+</div>
+
+<button type="button" class="btn-eco btn-eco--ghost" id="adicionarPergunta">Adicionar pergunta</button>
+
+<template id="modeloPergunta">
+    @await Html.PartialAsync("_PerguntaCampos", new TCC_Grupo12_III.Models.AdminEspecieQuizPerguntaViewModel(), new ViewDataDictionary(ViewData) { ["Prefixo"] = "Perguntas[__index__]" })
+</template>
+
+<div class="d-flex gap-2 mt-4">
+    <button type="submit" class="btn-eco btn-eco--solid">Salvar quiz</button>
+    <a class="btn-eco btn-eco--ghost" asp-controller="AdminEspecieQuiz" asp-action="Index">Cancelar</a>
+</div>

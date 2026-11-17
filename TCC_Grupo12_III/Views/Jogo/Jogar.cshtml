@@ -1,0 +1,161 @@
+@model TCC_Grupo12_III.Models.JogoJogarViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = Model.ModoTeste ? $"Testando: {Model.Nivel.Titulo}" : Model.Nivel.Titulo;
+
+    var animaisJson = JsonSerializer.Serialize(
+        Model.Animais.ToDictionary(kv => kv.Key.ToString(), kv => new { nome = kv.Value.Nome, emoji = kv.Value.Emoji }));
+
+    var especieAlvoJson = JsonSerializer.Serialize(new
+    {
+        id = Model.EspecieAlvo?.Id ?? 0,
+        nome = Model.EspecieAlvo?.Nome ?? "Animal",
+        emoji = Model.EspecieAlvoEmoji
+    });
+}
+
+<div class="eco-jogo">
+    <div class="eco-jogo__topo">
+        <div>
+            <h1>@Model.Nivel.Titulo</h1>
+            @if (Model.ModoTeste)
+            {
+                <p><span class="eco-status-pill eco-status-pill--ativa">Modo teste</span> Nenhum XP ou progresso é salvo aqui.</p>
+            }
+            else
+            {
+                <p>
+                    Corra pela Serra da Cantareira, pule nas molas e chegue à base de resgate para salvar:
+                    <strong class="text-success">@Model.EspecieAlvoEmoji @(Model.EspecieAlvo?.Nome ?? "o animal")</strong>!
+                </p>
+            }
+        </div>
+        @if (Model.ModoTeste)
+        {
+            <a class="btn-eco btn-eco--ghost" asp-controller="AdminNiveis" asp-action="Edit" asp-route-id="@Model.Nivel.Id">Voltar ao editor</a>
+        }
+        else
+        {
+            <a class="btn-eco btn-eco--ghost" asp-controller="Jogo" asp-action="Index">Voltar</a>
+        }
+    </div>
+
+    <div class="eco-jogo__alvo-chip mb-2">
+        <span>🎯 <strong>Missão de Resgate:</strong> Salvar @Model.EspecieAlvoEmoji <strong>@(Model.EspecieAlvo?.Nome ?? "Animal")</strong> no final da trilha! (+1 na reserva)</span>
+    </div>
+
+    <div class="eco-jogo__palco" id="jogoPalco">
+        <canvas id="jogoCanvas" width="960" height="544"></canvas>
+
+        <div class="eco-jogo__overlay" id="jogoOverlayInicio">
+            <div class="eco-jogo__painel">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h2 class="m-0 fs-5">@(Model.ModoTeste ? "Teste do nível" : "Missão de Resgate")</h2>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle">Nível Diário</span>
+                </div>
+
+                <div class="mb-2 p-2 bg-light rounded text-center d-flex align-items-center justify-content-center gap-3">
+                    <span style="font-size: 2.2rem; line-height: 1;">@Model.EspecieAlvoEmoji</span>
+                    <div class="text-start">
+                        <strong>Resgate: @(Model.EspecieAlvo?.Nome ?? "Animal")</strong><br />
+                        <small class="text-muted">Chegue na base final para resgatar (+1 na reserva)!</small>
+                    </div>
+                </div>
+
+                <div class="eco-jogo__instrucoes-grid">
+                    <div class="eco-instrucao-item">⬅️ ➡️ ou A/D <span>Correr</span></div>
+                    <div class="eco-instrucao-item">Espaço / W / ⬆️ <span>Pulo variável</span></div>
+                    <div class="eco-instrucao-item">⚡ Shift <span>Dash (3 cargas)</span></div>
+                    <div class="eco-instrucao-item">🪽 Pulo Duplo <span>Pule no ar (3x)</span></div>
+                    <div class="eco-instrucao-item">🥾 Madeira <span>Wall Jump (3x)</span></div>
+                    <div class="eco-instrucao-item">🪜 One-Way <span>Pula por baixo / ⬇️ desce</span></div>
+                    <div class="eco-instrucao-item">🌀 Molas <span>Super pulo</span></div>
+                    <div class="eco-instrucao-item">❤️ Coração <span>Recupera +1 vida</span></div>
+                    <div class="eco-instrucao-item">🏕️ Checkpoint <span>Salva progresso</span></div>
+                    <div class="eco-instrucao-item">🐾 Animais <span>Toque p/ resgate</span></div>
+                    <div class="eco-instrucao-item">🌵🔥 Perigos <span>Desvie de tudo</span></div>
+                </div>
+
+                <button type="button" class="btn-eco btn-eco--solid btn-eco--lg w-100" id="jogoBtnComecar" autofocus>
+                    ▶ Começar Missão <kbd class="ms-2 d-none d-sm-inline">Espaço / Enter</kbd>
+                </button>
+            </div>
+        </div>
+
+        <div class="eco-jogo__overlay is-hidden" id="jogoOverlayVitoria">
+            <div class="eco-jogo__painel">
+                <h2>Missão cumprida! 🎉</h2>
+                <div class="mb-3 text-center">
+                    <span style="font-size: 2.5rem;">@Model.EspecieAlvoEmoji</span><br />
+                    <strong class="text-success">@(Model.EspecieAlvo?.Nome ?? "Animal") resgatado com sucesso!</strong>
+                </div>
+                <p id="jogoResumoVitoria"></p>
+                @if (Model.ModoTeste)
+                {
+                    <button type="button" class="btn-eco btn-eco--solid" id="jogoBtnVitoriaOk">Jogar de novo</button>
+                }
+                else
+                {
+                    <button type="button" class="btn-eco btn-eco--solid" id="jogoBtnVitoriaOk">Ver meu resultado &amp; Reserva</button>
+                }
+            </div>
+        </div>
+
+        <div class="eco-jogo__overlay is-hidden" id="jogoOverlayDerrota">
+            <div class="eco-jogo__painel">
+                <h2>As vidas acabaram 😢</h2>
+                <p>Os animais da Cantareira ainda precisam de você. Tente de novo!</p>
+                <button type="button" class="btn-eco btn-eco--solid" id="jogoBtnTentarDeNovo">Tentar de novo</button>
+            </div>
+        </div>
+
+        <div class="eco-jogo__toast is-hidden" id="jogoToast"></div>
+    </div>
+
+    <div class="eco-jogo__touch" id="jogoTouch" aria-hidden="false">
+        <div class="eco-jogo__touch-grupo">
+            <button type="button" class="eco-jogo__touch-btn" id="jogoTouchEsq" aria-label="Mover para a esquerda">◀</button>
+            <button type="button" class="eco-jogo__touch-btn" id="jogoTouchDir" aria-label="Mover para a direita">▶</button>
+            <button type="button" class="eco-jogo__touch-btn" id="jogoTouchBaixo" aria-label="Descer plataforma">▼</button>
+        </div>
+        <div class="eco-jogo__touch-grupo">
+            <button type="button" class="eco-jogo__touch-btn eco-jogo__touch-btn--dash" id="jogoTouchDash" aria-label="Dash">⚡ Dash</button>
+            <button type="button" class="eco-jogo__touch-btn eco-jogo__touch-btn--pulo" id="jogoTouchPulo" aria-label="Pular">⤒ Pular</button>
+        </div>
+    </div>
+</div>
+
+@if (!Model.ModoTeste)
+{
+    <form id="jogoForm" asp-controller="Jogo" asp-action="Concluir" method="post" class="d-none">
+        <input type="hidden" name="vidasRestantes" id="jogoCampoVidas" />
+        <input type="hidden" name="tempoSegundos" id="jogoCampoTempo" />
+        <input type="hidden" name="animaisIds" id="jogoCampoAnimais" />
+        <input type="hidden" name="especieSalvarId" id="jogoCampoEspecieSalvar" value="@(Model.EspecieAlvo?.Id ?? 0)" />
+    </form>
+}
+
+<style>
+    .eco-jogo__alvo-chip {
+        display: inline-block;
+        background: #e8f5e9;
+        border: 1px solid #c8e6c9;
+        color: #2e7d32;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        window.JOGO_CONFIG = {
+            dados: @Html.Raw(Model.DadosJson),
+            animais: @Html.Raw(animaisJson),
+            especieAlvo: @Html.Raw(especieAlvoJson),
+            modoTeste: @(Model.ModoTeste ? "true" : "false")
+        };
+    </script>
+    <script src="~/js/jogo-plataforma.js" asp-append-version="true"></script>
+}

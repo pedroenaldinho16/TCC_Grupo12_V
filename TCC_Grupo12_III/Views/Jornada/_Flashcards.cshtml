@@ -1,0 +1,32 @@
+@model JornadaJogoViewModel
+<div class="ec-flash-grid">
+    @foreach (var carta in Model.Jogo.Cartas)
+    {
+        var aberta = Model.Estado.CartaAberta == carta.Id;
+        <article class="ec-flashcard @(aberta ? "is-flipped" : "")" data-carta="@carta.Id" data-studied="@Model.Estado.Estudadas.Contains(carta.Id).ToString().ToLowerInvariant()">
+            <form asp-action="Agir" method="post" data-game-form>
+                <input type="hidden" name="id" value="@Model.Tentativa.Id" />
+                <input type="hidden" name="revisao" value="@Model.Estado.Revisao" />
+                <input type="hidden" name="acao" value="estudar" />
+                <input type="hidden" name="alvo" value="@carta.Id" />
+                <button class="ec-flash-turn" type="submit" aria-expanded="@aberta.ToString().ToLowerInvariant()" data-focus-key="carta-@carta.Id">
+                    <span class="ec-flash-inner">
+                        <span class="ec-flash-face ec-flash-face-front" aria-hidden="@aberta.ToString().ToLowerInvariant()">
+                            <img src="@carta.Imagem" alt="@carta.Nome" width="320" height="200" />
+                            <span class="ec-flash-front"><small>@(carta.Categoria == "Aves" ? "Aves" : "Animais terrestres") <span data-card-seen>@(Model.Estado.Estudadas.Contains(carta.Id) ? "· Explorada ✓" : "")</span></small><strong>@carta.Nome</strong><span class="ec-flash-instruction">↻ Virar e conhecer</span></span>
+                        </span>
+                        <span class="ec-flash-face ec-flash-back" aria-hidden="@((!aberta).ToString().ToLowerInvariant())">
+                            <strong>@carta.Nome</strong><em>@carta.NomeCientifico</em>
+                            <span><b>Habitat</b> @carta.Habitat</span>
+                            <span><b>Alimentação</b> @carta.Alimentacao</span>
+                            @if (!string.IsNullOrWhiteSpace(carta.Importancia)) { <span><b>Importância ecológica</b> @carta.Importancia</span> }
+                            <span class="ec-flash-instruction">↶ Voltar à fotografia</span>
+                        </span>
+                    </span>
+                </button>
+            </form>
+            <a asp-controller="Especies" asp-action="Detalhe" asp-route-id="@carta.Id" target="_blank" rel="noopener">Consultar ficha completa <span class="visually-hidden">de @carta.Nome (abre em outra aba)</span> ↗</a>
+        </article>
+    }
+</div>
+<p class="ec-game-caption">Cartas baseadas no acervo existente do Grupo 12. A revisão científica das fichas continua necessária; nenhum estado de conservação foi presumido.</p>

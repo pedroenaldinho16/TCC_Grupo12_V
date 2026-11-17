@@ -1,0 +1,180 @@
+@model TCC_Grupo12_III.Models.JogoIndexViewModel
+@using TCC_Grupo12_III.Data
+@using TCC_Grupo12_III.Services
+
+@{
+    ViewData["Title"] = "Jogo diário";
+    var tentativa = Model.Tentativa;
+}
+
+<div class="eco-page">
+    <div class="eco-page__head">
+        <h1>Guardiões da Cantareira</h1>
+        <p>Corra pela Serra, use as molas, desvie dos perigos e resgate a espécie escolhida no fim da trilha.</p>
+    </div>
+
+    <div class="eco-quiz-card mb-4">
+        <div class="eco-quiz-card__meta">
+            <span class="eco-status-pill eco-status-pill--ativa">@Model.Nivel.Data.ToString("dd/MM/yyyy")</span>
+            <span class="eco-quiz-timer-chip">🐾 @Model.TotalAnimais animais no percurso</span>
+            <span class="eco-quiz-timer-chip">❤️ @TCC_Grupo12_III.Controllers.JogoController.VidasPorTentativa vidas</span>
+            <span class="eco-quiz-timer-chip">+@NivelHelper.XpJogoDiarioBase XP base · +@NivelHelper.XpPorAnimalResgatado por animal</span>
+        </div>
+
+        <h2>@Model.Nivel.Titulo</h2>
+        <p>@Model.Nivel.Descricao</p>
+
+        @if (tentativa != null && tentativa.Concluida)
+        {
+            <div class="eco-quiz-done mb-4">
+                <p>
+                    Você já concluiu o nível de hoje e resgatou
+                    <strong>@tentativa.AnimaisResgatados de @tentativa.TotalAnimais animais</strong>
+                    em @TimeSpan.FromSeconds(tentativa.TempoSegundos).ToString(@"mm\:ss").
+                </p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a class="btn-eco btn-eco--solid" asp-controller="Jogo" asp-action="Resultado">Ver meu resultado</a>
+                </div>
+            </div>
+        }
+
+        <form asp-controller="Jogo" asp-action="Jogar" method="get" class="eco-escolha-resgate">
+            <div class="eco-escolha-header">
+                <h3>🐾 Escolha qual espécie salvar no final do nível:</h3>
+                <p class="text-muted">
+                    Ao chegar na base de resgate no fim da trilha e resgatar esta espécie, você ganhará 
+                    <strong>+1 avistamento disponível</strong> dela na sua <em>Reserva de Avistamentos</em>!
+                </p>
+            </div>
+
+            <div class="eco-especies-grid">
+                @foreach (var especie in Model.EspeciesDisponiveis)
+                {
+                    var qtdReserva = Model.ReservaPorEspecie.TryGetValue(especie.Id, out var q) ? q : 0;
+                    var selecionada = (Model.EspecieSelecionadaId == especie.Id) || (Model.EspecieSelecionadaId == null && especie == Model.EspeciesDisponiveis.First());
+
+                    <label class="eco-especie-card @(selecionada ? "is-selected" : "")">
+                        <input type="radio" name="especieId" value="@especie.Id" @(selecionada ? "checked" : "") class="eco-especie-radio" />
+                        <div class="eco-especie-card__corpo">
+                            <span class="eco-especie-card__emoji">@NivelJogoService.EmojiPara(especie)</span>
+                            <div class="eco-especie-card__info">
+                                <strong>@especie.Nome</strong>
+                                <small class="text-muted d-block">@especie.Categoria</small>
+                                <span class="eco-reserva-badge @(qtdReserva > 0 ? "eco-reserva-badge--disponivel" : "eco-reserva-badge--zero")">
+                                    Reserva: <strong>@qtdReserva</strong> disp.
+                                </span>
+                            </div>
+                        </div>
+                    </label>
+                }
+            </div>
+
+            <div class="eco-quiz-warning mt-4">
+                <strong>Controles & Regras:</strong> Use as setas (ou A/D) para correr e Espaço (ou W/↑) para pular.
+                Pule nas <strong>molas 🌀</strong> para ganhar impulso e saltar grandes distâncias.
+                Cuidado com os espinhos, fogo e lagos d'água! Salve a espécie no final da trilha para recarregar sua reserva.
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn-eco btn-eco--solid btn-eco--lg">
+                    @(tentativa != null && tentativa.Concluida ? "Jogar novamente para salvar mais" : "Começar Missão de Resgate")
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .eco-escolha-resgate {
+        background: #f8faf9;
+        border: 1px solid #dcebe2;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .eco-especies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+    }
+    .eco-especie-card {
+        display: block;
+        cursor: pointer;
+        background: #fff;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 12px;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+    .eco-especie-card:hover {
+        border-color: #0E7C66;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .eco-especie-card.is-selected {
+        border-color: #0E7C66;
+        background: #eef7f3;
+        box-shadow: 0 0 0 1px #0E7C66;
+    }
+    .eco-especie-radio {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        accent-color: #0E7C66;
+    }
+    .eco-especie-card__corpo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .eco-especie-card__emoji {
+        font-size: 2rem;
+        line-height: 1;
+    }
+    .eco-reserva-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 2px 6px;
+        border-radius: 6px;
+        margin-top: 4px;
+    }
+    .eco-reserva-badge--disponivel {
+        background: #d4edda;
+        color: #155724;
+    }
+    .eco-reserva-badge--zero {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    @@media (max-width: 576px) {
+        .eco-escolha-resgate {
+            padding: 14px;
+        }
+        .eco-especies-grid {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+        }
+        .eco-especie-card {
+            padding: 10px;
+        }
+        .eco-especie-card__corpo {
+            gap: 8px;
+        }
+        .eco-especie-card__emoji {
+            font-size: 1.6rem;
+        }
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.eco-especie-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.eco-especie-card').forEach(function(c) {
+                c.classList.remove('is-selected');
+            });
+            this.classList.add('is-selected');
+        });
+    });
+</script>

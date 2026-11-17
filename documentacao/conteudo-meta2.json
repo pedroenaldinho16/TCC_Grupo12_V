@@ -1,0 +1,894 @@
+[
+    {
+        "filename":  "Meta2_Subsecao_4_2_EcoCanta.docx",
+        "title":  "EcoCanta — Subseção 4.2",
+        "blocks":  [
+                       {
+                           "kind":  "p",
+                           "text":  "4.2 APRESENTAÇÃO DA APLICAÇÃO DESENVOLVIDA",
+                           "style":  "Title"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "EcoCanta · Grupo 12 · Meta 2 · ETEC de Campo Limpo Paulista",
+                           "style":  "Subtitle"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A aplicação EcoCanta foi organizada para permitir o acesso estruturado e intuitivo às funcionalidades desenvolvidas para cada perfil de usuário do sistema. Após a readequação, as principais interfaces da plataforma compreendem as telas de acesso e apresentação inicial (4.2.1), a Área do Estudante (4.2.2) e a Área do Administrador (4.2.3). A seguir, são apresentadas as telas da aplicação acompanhadas da descrição de suas respectivas funcionalidades e elementos visuais.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A organização prioriza o catálogo de espécies, as fichas informativas dos animais, os materiais educativos, os jogos e as campanhas relacionadas à preservação das espécies terrestres e aviárias da Serra da Cantareira. A reformulação atende ao recorte de estudantes do ensino médio e mantém a finalidade e a terminologia estabelecidas pelo grupo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "As imagens deste documento são capturas reais da aplicação ASP.NET Core MVC executada localmente. Para a demonstração dos fluxos autenticados, foram utilizados registros de teste em uma cópia isolada do banco SQLite. Os dados demonstrativos não constituem resultados de pesquisa nem comprovação de ações ambientais realizadas. O protótipo fornecido foi utilizado apenas como referência estética.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Repositório GitHub: LINK PENDENTE DE FORNECIMENTO PELO GRUPO. Conforme informado pelo responsável, o endereço será acrescentado após o envio por um integrante. Este campo deve ser preenchido antes da entrega às professoras.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.1 Telas de acesso e apresentação inicial",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.1.1 Tela de login",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Após a realização do cadastro, o usuário realiza sua autenticação na plataforma por meio da tela de login. O formulário solicita o e-mail e a senha cadastrados e disponibiliza os links para criação de conta e retorno à página inicial. A autenticação direciona o Estudante para a página inicial e o Administrador para o painel administrativo. Dessa forma, o acesso organiza o acompanhamento do aprendizado sem dificultar a consulta aos conteúdos públicos.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/01-login.png",
+                           "caption":  "Tela de login"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.1.2 Tela de cadastro",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Para participar dos desafios e registrar seu progresso, o estudante realiza seu cadastro na plataforma. O formulário solicita nome completo, e-mail e senha com pelo menos seis caracteres. O cadastro público cria exclusivamente contas de Estudante; a concessão de acesso administrativo depende de um Administrador autorizado. Após o envio válido, a plataforma orienta o usuário a realizar o login.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/02-cadastro.png",
+                           "caption":  "Tela de cadastro"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.1.3 Página inicial pública",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela inicial da EcoCanta constitui o ponto de entrada público da plataforma, apresentando sua identidade visual e os recursos voltados à conscientização ambiental. A apresentação destaca a fauna da Serra da Cantareira e disponibiliza os botões “Começar minha jornada” e “Conhecer os animais”. Em seguida, organiza os três desafios, as categorias Aves e Animais Terrestres e uma seção sobre preservação. No cabeçalho, o visitante encontra Início, Conheça os animais, Jogos e desafios, Campanhas e Sobre o projeto, além dos acessos à conta.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/03-inicio.png",
+                           "caption":  "Página inicial pública"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.1.4 Apresentação do projeto",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela Sobre o projeto apresenta a finalidade da EcoCanta, o público-alvo e a relação entre o conhecimento da fauna e a preservação dos habitats. A identificação do grupo, da instituição e das orientadoras contextualiza o desenvolvimento do TCC. Os atalhos para catálogo e jornada permitem iniciar o percurso educativo a partir dessa apresentação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/sobre-projeto.png",
+                           "caption":  "Apresentação do projeto"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2 Área do Estudante",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A Área do Estudante concentra as ferramentas educativas destinadas aos discentes do ensino médio. O percurso parte da consulta às espécies e de suas fichas, avança para a realização dos três desafios e permite acompanhar o progresso, as conquistas e, após a conclusão da jornada, o mapa de avistamentos. A Voz Estudantil e as campanhas ampliam as possibilidades de leitura, reflexão e participação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.1 Página inicial do estudante",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Após a autenticação, a página inicial apresenta uma saudação nominal e a quantidade de desafios concluídos. A navegação complementar reúne Minha jornada, Voz Estudantil, Mapa de avistamentos, Minha conta e Ajuda. O estudante pode retomar o percurso de aprendizagem ou consultar o catálogo, mantendo a mesma estrutura visual da página pública.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/04-inicio-estudante.png",
+                           "caption":  "Página inicial do estudante"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.2 Catálogo de espécies — CantaDex",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela CantaDex funciona como o catálogo educativo da plataforma, reunindo os animais em uma grade com fotografias, nomes populares, nomes científicos e características. O estudante pode buscar espécies e filtrar por Aves ou Animais Terrestres. Ao concluir o quiz e a leitura de uma ficha, a espécie recebe a indicação de conquista na CantaDex. A composição definitiva de sete aves e sete espécies terrestres ainda depende da validação do grupo; os seis registros existentes foram preservados.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/05-catalogo.png",
+                           "caption":  "Catálogo de espécies — CantaDex"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.3 Ficha educativa da espécie",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Ao selecionar uma espécie, o usuário acessa sua ficha educativa. A página reúne fotografia, nome científico, habitat, alimentação, características, comportamento e ameaças. Também apresenta espaços para importância ecológica, atitudes de preservação e referências científicas. As avaliações de conservação são separadas em abrangência global, brasileira e paulista, evitando tratar categorias distintas como equivalentes. Informações ainda não fundamentadas aparecem como pendentes de revisão. Ao final, o estudante pode responder ao quiz da espécie e marcar a ficha como estudada.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/06-ficha.png",
+                           "caption":  "Ficha educativa da espécie"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.4 Jornada de aprendizagem",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A jornada apresenta a sequência Detetive da Fauna → Guardião da Cantareira → Missão de Preservação → Mapa. Cada etapa informa seu propósito e a recompensa correspondente. O estudante explora as cartas e completa as associações no Detetive, alcança pelo menos 70% no quiz do Guardião e cumpre todos os objetivos do cenário da Missão. O sistema permite continuar uma tentativa em andamento e praticar novamente; os pontos de experiência não substituem a conclusão dos desafios.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/07-jornada.png",
+                           "caption":  "Jornada de aprendizagem"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.5 Detetive da Fauna",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O primeiro desafio utiliza flashcards com fotografias e informações das fichas para estimular o reconhecimento das espécies. O estudante vira cada carta para consultar habitat e alimentação e, quando disponível no acervo, importância ecológica. Após explorar as cartas, associa as fotografias aos nomes populares e científicos. Uma associação incorreta apresenta uma pista e permite nova tentativa. As cartas podem ser consultadas durante a atividade. O estudo e as associações são registrados no servidor, e a conclusão de todos os pares permite conquistar o avatar de Guardião da Cantareira. As cartas utilizam os registros existentes, preservando as pendências de revisão científica indicadas nas fichas.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/01-flashcards-desktop-claro.png",
+                           "caption":  "Detetive da Fauna · Flashcards"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/02-flashcard-verso.png",
+                           "caption":  "Verso de uma carta educativa"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/05-associacao-desktop-escuro.png",
+                           "caption":  "Associação entre fotografias e nomes das espécies"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.6 Guardião da Cantareira",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O segundo desafio mantém o formato de quiz e apresenta situações-problema relativas à observação da fauna, descarte de resíduos, tráfico de animais e alterações dos habitats. As alternativas exigem escolhas e são acompanhadas de explicações sobre suas consequências. A atividade busca aproximar o conhecimento sobre ameaças de atitudes ambientalmente responsáveis. O aproveitamento mínimo de 70% é calculado no servidor. Com a conclusão, o estudante recebe o escudo que acompanha seu avatar.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/09-guardiao.png",
+                           "caption":  "Guardião da Cantareira"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.7 Missão de Preservação",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O terceiro desafio apresenta um cenário ilustrado e interativo de uma visita educativa à Cantareira, sem utilizar perguntas de quiz. O estudante seleciona uma ferramenta e interage com os elementos da cena. As três missões consistem em recolher e destinar três resíduos, observar e sinalizar uma ave presa e chamar a equipe de proteção, além de investigar um atalho e orientar o percurso autorizado com a equipe do jogo. O cenário muda conforme as ações são realizadas. A ave é atendida por profissionais na narrativa; a atividade não ensina o visitante a fazer uma soltura por conta própria. Os oito objetivos e o diário de ações ficam registrados. A conclusão de todas as missões libera o mapa, desde que os desafios anteriores também estejam concluídos. O cenário é fictício e as orientações educativas apresentam referências oficiais do ICMBio e do Ibama.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/08-missao-desktop-claro.png",
+                           "caption":  "Missão de Preservação"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/13-missao-concluida.png",
+                           "caption":  "Cenário após a conclusão das missões"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.8 Progresso e conquistas",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela de progresso apresenta a quantidade de desafios concluídos, as tentativas iniciadas, o avatar, o escudo conquistado e a situação do mapa. O histórico informa o início de cada tentativa, os objetivos ou acertos, o aproveitamento e a situação. As tentativas concluídas permitem revisão, enquanto as tentativas em andamento podem ser retomadas. As aprovações anteriores continuam válidas. Quando uma tentativa de quiz das etapas reformuladas ainda está em andamento, a interface solicita a confirmação para encerrar essa versão e iniciar o novo jogo, mantendo as questões e respostas anteriores no histórico. Esses registros permitem ao estudante acompanhar sua evolução e identificar os conteúdos que precisa estudar novamente.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/11-progresso.png",
+                           "caption":  "Progresso e conquistas"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.9 Mapa de avistamentos",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O mapa permite consultar registros aprovados de fauna por região e filtrar por espécie. Sua entrada permanece no menu principal e na página inicial. Antes da liberação, o endereço /Mapa apresenta os requisitos, a quantidade de desafios concluídos e o próximo passo. O acesso aos avistamentos é validado no servidor. Para estudantes, o sistema apresenta regiões aproximadas e preserva a posição precisa para a administração. As fotografias e os vídeos dos novos registros são evidências restritas à equipe administrativa. O fundo cartográfico utiliza OpenStreetMap e depende de conexão com a internet.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/12-mapa.png",
+                           "caption":  "Mapa de avistamentos"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.9.1 Registro de avistamento",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Após concluir a jornada, o estudante pode enviar um registro de fauna. O formulário solicita a espécie, a data, a quantidade de indivíduos, a posição e as observações. A posição pode ser indicada pelo mapa ou por campos de coordenadas acessíveis por teclado. Fotografias e vídeos compõem as evidências enviadas à administração. O sistema verifica os limites geográficos definidos no projeto e informa que a aprovação é necessária antes da exibição no mapa.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/registro-avistamento.png",
+                           "caption":  "Registro de avistamento"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O formulário de registro de avistamento é acessado pelo botão “Registrar avistamento”. O estudante informa a espécie, data, quantidade, posição e observações e anexa fotografias ou vídeos. A plataforma verifica se a localização está nos limites definidos no projeto e encaminha o registro para análise. O envio não publica automaticamente o ponto no mapa.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.10 Campanhas de preservação",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A área de campanhas centraliza ações de conscientização relacionadas ao tema do TCC. Os cards apresentam o nome, a descrição, o período e a situação de cada iniciativa. Ao selecionar uma campanha, o estudante consulta os objetivos e as orientações de participação. As datas e os responsáveis dos registros iniciais precisam ser confirmados pela equipe antes da divulgação como eventos efetivos.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/13-campanhas.png",
+                           "caption":  "Campanhas de preservação"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.11 Detalhes da campanha e mural",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A página de cada campanha reúne objetivos, período, local, orientações e confirmação de participação. O mural encontra-se vinculado à própria campanha, permitindo compartilhar reflexões, comentar e apoiar publicações relacionadas à ação. A administração acompanha esse conteúdo e pode arquivar publicações inadequadas. As comunidades independentes do antigo fórum deixam de integrar o fluxo da aplicação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/14-campanha-mural.png",
+                           "caption":  "Detalhes da campanha e mural"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.12 Voz Estudantil",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A Voz Estudantil reúne leituras do projeto e textos produzidos pelos estudantes sobre a fauna e sua preservação. O formulário de envio solicita título, apresentação breve, conteúdo e fontes consultadas. Os textos ficam pendentes até a revisão administrativa. Esse funcionamento retoma a proposta de compartilhar conhecimentos de educação ambiental sem manter o caderno de notas ou o recebimento de estudos externos como acervo independente.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/15-voz-estudantil.png",
+                           "caption":  "Voz Estudantil"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.13 Envio à Voz Estudantil",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O formulário de publicação permite que o estudante registre o que aprendeu sobre fauna e preservação. O envio solicita título, apresentação breve, texto e fontes consultadas. Após o preenchimento, o conteúdo fica pendente de revisão e pode ser acompanhado na área do próprio estudante. A atividade relaciona leitura, produção textual e reflexão ambiental.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/voz-publicar.png",
+                           "caption":  "Envio à Voz Estudantil"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.14 Minha conta",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela Minha conta permite atualizar o nome e o e-mail e alterar a senha mediante confirmação da senha atual. O perfil informa se a conta é de Estudante ou Administrador e oferece acesso direto ao progresso e às conquistas. A organização separa a manutenção cadastral do percurso educativo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/perfil-estudante.png",
+                           "caption":  "Minha conta"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.2.15 Ajuda e orientações",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A área de ajuda reúne orientações sobre o catálogo, os desafios, o desbloqueio do mapa, a Voz Estudantil e os murais. O estudante autenticado pode abrir uma dúvida e acompanhar a conversa por chamado. A simplificação mantém o suporte previsto na Meta 1 e reduz a quantidade de opções simultâneas.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/ajuda-estudante.png",
+                           "caption":  "Ajuda e orientações"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "As telas Minha conta e Ajuda complementam a navegação. O perfil permite atualizar nome, e-mail e senha. A ajuda apresenta orientações sobre a jornada e o envio de dúvidas à equipe, com acompanhamento de respostas por chamado.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3 Área do Administrador",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O Administrador é um usuário previamente autorizado pela equipe responsável pela EcoCanta. Sua função é organizar e revisar conteúdos, manter informações adequadas à proposta educativa e acompanhar as contribuições dos estudantes. O cadastro público não permite escolher esse perfil. As marcas históricas de Jornalista e Moderador permanecem no banco para preservação de registros, mas não concedem permissões nos fluxos reformulados.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.1 Painel administrativo",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A área administrativa centraliza ferramentas ligadas às funcionalidades mantidas na Meta 1. O painel informa a quantidade de espécies, textos em revisão e avistamentos aguardando análise. Os atalhos conduzem à gestão de usuários, espécies, desafios, quizzes, Voz Estudantil, campanhas, avistamentos, mural e suporte. A apresentação torna visíveis as tarefas de manutenção que sustentam o objetivo educativo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/16-admin.png",
+                           "caption":  "Painel administrativo"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.2 Gerenciamento de espécies",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A gestão de espécies permite cadastrar e editar as informações do catálogo. O formulário existente foi ampliado para receber a importância ecológica, ações de preservação, fontes científicas e avaliações de conservação por abrangência. Os dados do grupo foram preservados. Cabe à administração verificar a coerência científica, a procedência das imagens e a composição final do catálogo antes da publicação dos conteúdos ainda pendentes.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/17-admin-especies.png",
+                           "caption":  "Gerenciamento de espécies"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.2.1 Edição da ficha educativa",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O formulário de edição reúne os dados já utilizados pelo catálogo e os novos campos de revisão científica. O administrador pode atualizar habitat, alimentação, características, ameaças, fotografia e avaliações de conservação por abrangência. Campos científicos ainda não validados podem permanecer vazios, sem impedir a manutenção dos demais dados; a ficha pública informa essa pendência.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-formulario-especie.png",
+                           "caption":  "Edição da ficha educativa"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.3 Gerenciamento de questões e desafios",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A administração distingue os três formatos de atividade. As cartas do Detetive utilizam os dados e fotografias mantidos no gerenciamento de espécies; a Missão possui um cenário com objetivos ambientais próprios; e o editor de questões atende ao quiz do Guardião. O administrador pode cadastrar e revisar enunciados, alternativas, resposta esperada, explicação educativa, referência e imagem local do quiz. Uma questão pode ser desativada para novas tentativas. Os snapshots preservam o conteúdo de tentativas já iniciadas. As questões das versões anteriores do Detetive e da Missão permanecem disponíveis em um acervo de consulta e não entram nos novos jogos. Os quizzes específicos das espécies continuam acessíveis em ferramenta administrativa própria.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/18-admin-desafios.png",
+                           "caption":  "Gerenciamento de questões e desafios"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.3.1 Editor de questão",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O formulário identifica o quiz do Guardião da Cantareira e solicita o enunciado, as quatro alternativas, a resposta esperada, a explicação e a fonte. A imagem é opcional e deve utilizar um arquivo local do projeto. O controle de disponibilidade permite retirar uma questão de novas tentativas enquanto ela passa por revisão. O formulário não cria questões para os jogos de cartas ou exploração.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-editor-desafio.png",
+                           "caption":  "Editor de questão"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.3.2 Editor do quiz da espécie",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A gestão dos quizzes por espécie reaproveita a estrutura original da aplicação. O administrador pode organizar as perguntas e alternativas associadas a um animal. Esse quiz complementa a leitura da ficha e a conquista da espécie na CantaDex; o desbloqueio do mapa continua condicionado à jornada de três desafios.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-editor-quiz.png",
+                           "caption":  "Editor do quiz da espécie"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.4 Revisão da Voz Estudantil",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A revisão de publicações apresenta os textos recebidos, seus autores, conteúdos, fontes e situação. A administração pode aprovar a publicação ou solicitar revisão, incluindo uma observação para o estudante. A aprovação condiciona a disponibilização pública do texto e contribui para manter o foco em informações educativas e adequadas à proposta do TCC.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/19-admin-voz.png",
+                           "caption":  "Revisão da Voz Estudantil"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.5 Gerenciamento de campanhas",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O gerenciamento de campanhas permite cadastrar e atualizar ações de preservação, incluindo objetivos, cronograma e orientações. A listagem organiza campanhas ativas e encerradas e oferece acesso à página pública de cada ação. A criação de campanhas fica restrita à administração, conforme a retirada das sugestões de campanhas por estudantes definida na Meta 1.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/20-admin-campanhas.png",
+                           "caption":  "Gerenciamento de campanhas"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.5.1 Cadastro de campanha",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O cadastro administrativo reúne título, descrição, período, objetivos, orientações de participação e imagem. O administrador autorizado organiza o cronograma e os dados de contato ou organização. A definição de uma ação ativa ou encerrada orienta sua apresentação aos estudantes, sem permitir propostas de campanhas pelo cadastro público.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-cadastro-campanha.png",
+                           "caption":  "Cadastro de campanha"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.6 Moderação de avistamentos",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A administração consulta os registros enviados, suas evidências, observações e coordenadas restritas. Após a análise, pode aprovar um registro ou retirá-lo do mapa, preservando seus dados. O estudante visualiza somente os registros aprovados e a região aproximada. A análise contribui para evitar a divulgação de conteúdo falso, inadequado ou sensível para a proteção da fauna.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/21-admin-avistamentos.png",
+                           "caption":  "Moderação de avistamentos"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.7 Gerenciamento de usuários",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A gestão de contas apresenta nome, e-mail, perfil e situação de acesso. O administrador autorizado pode cadastrar uma conta ou editar seus dados, conceder acesso administrativo a pessoas autorizadas e bloquear contas quando necessário. O sistema mantém apenas os perfis ativos Estudante e Administrador. O bloqueio ou a retirada de permissão também é verificado durante a validação dos cookies de autenticação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/22-admin-usuarios.png",
+                           "caption":  "Gerenciamento de usuários"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.7.1 Cadastro administrativo de conta",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O formulário permite incluir uma conta de Estudante ou atribuir acesso de Administrador a uma pessoa previamente autorizada pela equipe. A decisão é explícita e restrita à área administrativa. O sistema impede que a conta em uso retire sua própria permissão ou bloqueie a si mesma durante a edição.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-cadastro-usuario.png",
+                           "caption":  "Cadastro administrativo de conta"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.8 Atendimento aos estudantes",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tela de atendimento apresenta os assuntos, os estudantes e a situação dos chamados. Ao selecionar um chamado, o administrador consulta a conversa e envia uma resposta. O atendimento auxilia a resolução de dúvidas sobre navegação, cadastro e aprendizagem sem manter um chat de comunidade independente.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-suporte.png",
+                           "caption":  "Atendimento aos estudantes"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.3.9 Moderação do mural das campanhas",
+                           "style":  "Heading3"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A moderação reúne publicações e comentários vinculados às campanhas. O administrador pode arquivar ou restaurar uma publicação e retirar comentários inadequados. As publicações arquivadas deixam de aparecer no mural público, mantendo seu registro para acompanhamento administrativo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/admin-mural.png",
+                           "caption":  "Moderação do mural das campanhas"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O suporte administrativo reúne os chamados dos estudantes e permite responder às dúvidas. A moderação do mural ocorre em página específica, vinculada às campanhas. Essas ferramentas substituem a distribuição de responsabilidades entre os antigos perfis e evitam a manutenção de módulos de rede social independentes.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4.2.4 Verificação da aplicação e pontos de validação",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A aplicação foi submetida a restauração de dependências, compilação, inicialização, verificações HTTP, validação de integridade SQLite e testes funcionais automatizados em banco isolado. O navegador Chrome foi utilizado para capturas reais e verificações em larguras de 1440, 768 e 390 pixels. Os resultados detalhados e os registros de execução estão disponíveis no relatório técnico e em documentacao/validacao/resultado.json.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Permanecem para validação editorial pelo grupo: seleção final das 14 espécies, referências e avaliações científicas por abrangência, conteúdos específicos de importância ecológica, confirmação dos registros de campanhas e fornecimento do link do GitHub. A aplicação sinaliza os conteúdos ainda não validados. Os testes técnicos não demonstram, por si, eficácia pedagógica ou acessibilidade integral, que dependem de avaliação com estudantes e revisão especializada.",
+                           "style":  "Normal"
+                       }
+                   ]
+    },
+    {
+        "filename":  "Meta2_Identidade_Visual_EcoCanta.docx",
+        "title":  "EcoCanta — Identidade visual",
+        "blocks":  [
+                       {
+                           "kind":  "p",
+                           "text":  "ECOCANTA — IDENTIDADE VISUAL",
+                           "style":  "Title"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Meta 2 · Grupo 12 · ETEC de Campo Limpo Paulista · 2026",
+                           "style":  "Subtitle"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "1 Apresentação da identidade visual",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A identidade visual da EcoCanta foi revisada visando o conforto, a simplicidade e o minimalismo, sem sobrecarregar os jovens com estímulos visuais, além de se alinhar ao conceito de natureza e educação. A reformulação mantém a marca, a paleta e a combinação tipográfica definidas pelo grupo e organiza sua aplicação em componentes reutilizáveis.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A plataforma é destinada aos estudantes do ensino médio e busca oferecer uma forma acessível de conhecer a fauna da Serra da Cantareira, compreender ameaças e refletir sobre atitudes de preservação. As decisões visuais priorizam a leitura dos conteúdos, a identificação das ações e a continuidade do percurso educativo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "2 Logotipo EcoCanta",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "apoio/image1.png",
+                           "caption":  "Logotipo original extraído de Grupo12_identidade_visual_do_sistema.docx."
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O logotipo apresenta uma gota em ciano sobre um fundo verde. Conforme o documento original do grupo, a gota representa a vida e o verde remete à fauna da Serra da Cantareira. A marca original foi preservada e incorporada ao cabeçalho e ao rodapé, acompanhada do nome EcoCanta.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A aplicação mantém a proporção do arquivo original, sem distorção ou alteração do desenho. O nome acompanha a marca para facilitar o reconhecimento. O espaço ao redor e o contraste com os fundos branco e verde-escuro evitam competição com os demais elementos.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "3 Paleta de cores",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "palette",
+                           "rows":  [
+                                        [
+                                            "214F46",
+                                            "Verde-escuro",
+                                            "#214F46",
+                                            "Títulos, texto de marca, botões principais e rodapé."
+                                        ],
+                                        [
+                                            "2B8171",
+                                            "Verde intermediário",
+                                            "#2B8171",
+                                            "Destaques, indicações de progresso e identidade ambiental."
+                                        ],
+                                        [
+                                            "106EFC",
+                                            "Azul de destaque",
+                                            "#106EFC",
+                                            "Foco visível de teclado e ações pontuais."
+                                        ],
+                                        [
+                                            "F1FAF7",
+                                            "Verde muito claro",
+                                            "#F1FAF7",
+                                            "Fundos de seções, feedback e áreas de apoio."
+                                        ],
+                                        [
+                                            "FFFFFF",
+                                            "Branco",
+                                            "#FFFFFF",
+                                            "Cabeçalho, cards, formulários e espaços de leitura."
+                                        ]
+                                    ]
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O verde predomina na aplicação, reforçando a relação com a natureza. O azul é reservado a situações pontuais e ao foco de interação. Fundos claros e bordas discretas organizam a página sem depender de degradês ou sombras intensas. Mensagens e estados também utilizam texto, para que a informação não dependa exclusivamente da cor.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "4 Tipografia — Sora e Inter",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A tipografia da plataforma foi definida visando à legibilidade e ao conforto do usuário ao utilizar o sistema. A fonte Inter é utilizada como principal, em parágrafos, menus, botões e formulários. A fonte Sora é utilizada em títulos e destaques, complementando a Inter. Essa combinação foi mantida a partir da identidade visual original.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "As versões variáveis de Sora e Inter são servidas localmente pelo projeto. O uso de arquivos locais evita depender do serviço de fontes para a leitura das páginas. As licenças de distribuição acompanham os arquivos na pasta wwwroot/fonts.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Sora — Conhecer para preservar.",
+                           "style":  "Heading2"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Inter — Explore as fichas, observe as espécies e transforme o conhecimento em atitudes de preservação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "5 Padronização dos títulos",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O título principal identifica a finalidade de cada tela. A escala varia conforme a largura disponível, com títulos maiores na apresentação inicial e menores em formulários e atividades. Subtítulos organizam seções e títulos de cards identificam conteúdos específicos. A sequência de cabeçalhos orienta a leitura e a navegação assistiva.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A apresentação utiliza títulos objetivos, descrições breves e ações claras. O alinhamento, os limites de largura e os espaços entre blocos evitam linhas excessivamente longas e ajudam a localizar as informações.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "6 Padronização dos botões",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O botão principal utiliza fundo verde-escuro e texto branco. A ação secundária utiliza fundo transparente ou claro, borda discreta e texto verde. Os botões possuem texto que descreve a ação, altura mínima e espaçamento adequados para uso por toque. Os estados de foco são visíveis em azul, permitindo identificar a posição do teclado.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Exemplos: “Começar minha jornada”, “Conhecer os animais”, “Confirmar resposta” e “Enviar para revisão”. Nos desafios, o envio válido altera temporariamente a indicação do botão para informar o salvamento. Resultados e falhas são apresentados em mensagens textuais próximas ao fluxo.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "7 Padronização dos cards",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Os cards utilizam fundo branco, bordas suaves e cantos arredondados. Cada card mantém um título, uma descrição curta e uma ação relacionada ao conteúdo. A jornada apresenta três cards, um para cada desafio. As categorias do catálogo combinam imagem e texto, enquanto as fichas organizam habitat, alimentação e ameaças em seções.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "As grades se adaptam à largura disponível. No celular, os conteúdos passam a ocupar uma coluna. As fotografias utilizam recorte proporcional com object-fit: cover, preservando o espaço do componente sem deformar a imagem.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "8 Padronização dos ícones",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Os ícones são utilizados com moderação e acompanhados de rótulos. Setas simples indicam continuidade, os números identificam a ordem dos desafios e marcas de conclusão reforçam estados já descritos por texto. Elementos meramente decorativos são ocultados das tecnologias assistivas. O menu móvel mantém um nome acessível e informa se está aberto ou fechado.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "O avatar de guardião e seu acessório são recompensas visuais apresentadas no progresso. A conquista não substitui a conclusão pedagógica dos desafios. A biblioteca de ícones existente é mantida para compatibilidade com formulários administrativos, sem ampliar a quantidade de símbolos nos fluxos principais.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "9 Exemplos de aplicação nas telas",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/03-inicio.png",
+                           "caption":  "Página inicial: marca preservada, fotografia relacionada ao catálogo, hierarquia de ações e jornada organizada."
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/01-login.png",
+                           "caption":  "Login: alinhamento dos rótulos, campos consistentes e ação principal identificável."
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/07-jornada.png",
+                           "caption":  "Jornada: sequência de desafios, estados e recompensas apresentados por texto e elementos visuais."
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/inicio-celular.png",
+                           "caption":  "Página inicial em 390 pixels: menu móvel, textos legíveis e organização em uma coluna."
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "capturas/16-admin.png",
+                           "caption":  "Administração: indicadores e navegação das funcionalidades mantidas na Meta 1."
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "As capturas representam a aplicação realmente implementada e executada localmente. Os fluxos autenticados utilizam dados de demonstração em banco isolado. A imagem do protótipo de referência não foi apresentada como captura da aplicação.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "style":  "Heading2",
+                           "text":  "Modo escuro e jogos educativos"
+                       },
+                       {
+                           "kind":  "p",
+                           "style":  "Normal",
+                           "text":  "O modo escuro utiliza fundos verdes profundos e textos claros, mantendo o logotipo original, a tipografia e as fotografias sem filtros de cor. O botão Claro/Escuro permanece no cabeçalho, inclusive no celular. O primeiro acesso acompanha a preferência do sistema; uma escolha explícita é salva no navegador. Os estilos compartilhados de aparência complementam a paleta original, sem substituí-la."
+                       },
+                       {
+                           "kind":  "p",
+                           "style":  "Normal",
+                           "text":  "Os flashcards combinam fotografias reais do acervo e um verso textual. No jogo de exploração, a ilustração vetorial original organiza os pontos de interação em um cenário fictício; ferramentas e missões recebem rótulos. Ações por clique, toque e teclado evitam depender de arrastar objetos. As fotografias do catálogo continuam sendo utilizadas para o estudo das espécies; a ave ilustrada da missão é simbólica e não apresenta uma identificação científica presumida."
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/10-missao-celular-escuro.png",
+                           "caption":  "Missão de Preservação no celular e em modo escuro"
+                       },
+                       {
+                           "kind":  "image",
+                           "file":  "jogos-20261114/capturas/02-flashcard-verso.png",
+                           "caption":  "Padrão visual do verso do flashcard"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "10 Justificativa das escolhas visuais",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A aplicação da mesma paleta, tipografia e elementos de interface permite que o estudante reconheça padrões entre as telas. Essa consistência facilita a navegação e a compreensão das funcionalidades. A redução de opções simultâneas organiza o acesso ao catálogo, à jornada e às campanhas em uma sequência compatível com a proposta educativa.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A apresentação visual não se limita à troca de cores. A finalidade ambiental é comunicada na página inicial, as categorias aproximam o usuário da fauna e os desafios recebem explicações após as respostas. O espaço em branco, as imagens relacionadas ao projeto e os rótulos objetivos ajudam a concentrar a atenção no aprendizado.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Os estilos da reformulação estão centralizados em wwwroot/css/meta2.css, complementados por appearance.css para os temas e jornada-jogos.css para as atividades. Cabeçalho, rodapé, mensagens e navegação administrativa são compartilhados pelas Razor Views. Os comportamentos de menu e interação ficam em arquivos JavaScript reutilizáveis, preservando a tecnologia ASP.NET Core MVC do projeto.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "11 Referências de projeto e validação",
+                           "style":  "Heading1"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "Foram utilizados como base: Grupo12_identidade_visual_do_sistema.docx; META 1_rec_grupo12 (1).docx; META2_grupo12.docx; Documentacao_Grupo12.docx; e o protótipo homepage_educativa_ecocanta_em_verde.png. A organização de trilhas e a hierarquia de conteúdos do Curso em Vídeo (https://www.cursoemvideo.com/) foram observadas como referência, mantendo a identidade própria da EcoCanta.",
+                           "style":  "Normal"
+                       },
+                       {
+                           "kind":  "p",
+                           "text":  "A verificação incluiu navegação, carregamento de imagens e fontes, menu móvel e transbordamento horizontal em larguras representativas de desktop, tablet e celular. Esses testes não substituem uma avaliação completa com leitores de tela nem testes de usabilidade com o público-alvo. As evidências e os limites estão registrados no relatório técnico.",
+                           "style":  "Normal"
+                       }
+                   ]
+    }
+]

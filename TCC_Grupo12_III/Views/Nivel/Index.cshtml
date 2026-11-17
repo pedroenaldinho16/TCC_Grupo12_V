@@ -1,0 +1,367 @@
+@model TCC_Grupo12_III.Models.NivelViewModel
+@using TCC_Grupo12_III.Data
+
+@{
+    ViewData["Title"] = "Trilha de Níveis & Desbloqueios";
+    var xpAtual = Model.Xp;
+    var nivelAtual = Model.Nivel;
+}
+
+<div class="eco-page" style="max-width: 960px; margin: 0 auto;">
+    <div class="eco-page__head">
+        <span class="eco-eyebrow">Gamificação & Progressão Justa</span>
+        <h1>Trilha de Níveis &amp; Recursos Desbloqueáveis</h1>
+        <p>Avance na sua jornada de Guardião da Cantareira acumulando XP por ações reais de conservação, pesquisa e ciência cidadã.</p>
+    </div>
+
+    @if (Model.Bloqueado)
+    {
+        <div class="eco-card mb-4" style="border-left: 4px solid #f59e0b; background: #fffbeb; padding: 16px 20px; border-radius: 12px;">
+            <div class="d-flex align-items-center gap-3">
+                <span style="color: #d97706; display: flex; font-size: 1.5rem;">
+                    <i class="bi bi-lock-fill"></i>
+                </span>
+                <div>
+                    <strong style="color: #92400e; display: block; font-size: 0.95rem;">Recurso Temporariamente Bloqueado</strong>
+                    <p style="margin: 0; color: #b45309; font-size: 0.9rem;">
+                        Você tentou acessar um recurso que requer um nível maior de guardião. Consulte abaixo os requisitos justos para desbloqueá-lo!
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Card Principal do Nível do Usuário -->
+    <div class="eco-level-card shadow-sm mb-4" style="background: linear-gradient(135deg, #ffffff 0%, #F0FDF4 100%); border: 1px solid #BBF7D0;">
+        <div class="eco-level-card__badge" style="background: #0E7C66; color: #fff; width: 68px; height: 68px; font-size: 1.8rem; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(14,124,102,0.25);">
+            @nivelAtual
+        </div>
+        <div class="eco-level-card__body">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-1">
+                <h2 class="h3 fw-bold text-dark mb-0">Nível @nivelAtual: @ObterTituloNivel(nivelAtual)</h2>
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1 rounded-pill fw-bold">
+                    @xpAtual XP Total
+                </span>
+            </div>
+            <p class="text-muted small mb-2">
+                Faltam <strong>@Model.XpParaProximo XP</strong> para alcançar o <strong>Nível @(nivelAtual + 1) (@ObterTituloNivel(nivelAtual + 1))</strong>.
+            </p>
+            <div class="eco-progress" style="height: 10px; background: #e2e8f0; border-radius: 999px; overflow: hidden;">
+                <div class="eco-progress__fill" style="width: @(Model.XpNoNivel * 100 / Model.XpPorNivel)%; background: #0E7C66; height: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trilha dos 5 Níveis de Desbloqueio -->
+    <h2 class="h4 fw-bold text-dark mb-3 mt-4">
+        <i class="bi bi-map-fill text-success me-2"></i>Roadmap de Progressão da Plataforma
+    </h2>
+
+    <div class="d-flex flex-column gap-3 mb-5">
+        <!-- NÍVEL 1 -->
+        <div class="card border rounded-4 bg-white shadow-sm p-4 @(nivelAtual >= 1 ? "border-success" : "")">
+            <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="p-3 rounded-circle bg-success text-white fs-4 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                        <i class="bi bi-check-lg"></i>
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="badge bg-success text-white">Nível 1 (0 XP)</span>
+                            <h3 class="h5 fw-bold text-dark mb-0">Guardião Iniciante</h3>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle">Desbloqueado</span>
+                        </div>
+                        <p class="text-muted small mt-2 mb-2">
+                            Acesso imediato para todos os membros que chegam ao EcoCanta.
+                        </p>
+                        <ul class="text-muted small ps-3 mb-0">
+                            <li><strong>CantaDex:</strong> Catálogo completo de espécies da fauna e flora com quiz interativo.</li>
+                            <li><strong>Jogo Diário:</strong> Resgate e salvamento diário de espécies para pontuar XP e liberar avistamentos.</li>
+                            <li><strong>Fórum & Debates:</strong> Leitura integral de tópicos e envio de comentários e respostas.</li>
+                            <li><strong>FAQ & Ouvidoria:</strong> Acesso à central de diretrizes e chat de suporte com moderadores.</li>
+                            <li><strong>Fiscalização Ambiental:</strong> Envio de denúncias ambientais georreferenciadas com fotos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <a asp-controller="Especies" asp-action="Index" asp-fragment="pokedex" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                        Explorar CantaDex
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- NÍVEL 2 -->
+        @{
+            var reqN2 = NivelHelper.XpNecessarioParaNivel(2);
+            var n2Desbloqueado = Model.TopicoForumDesbloqueado;
+            var xpFaltaN2 = Math.Max(0, reqN2 - xpAtual);
+        }
+        <div class="card border rounded-4 bg-white shadow-sm p-4 @(n2Desbloqueado ? "border-success" : "opacity-90")">
+            <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="p-3 rounded-circle @(n2Desbloqueado ? "bg-success text-white" : "bg-light text-muted border") fs-4 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                        @if (n2Desbloqueado) { <i class="bi bi-check-lg"></i> } else { <i class="bi bi-lock-fill"></i> }
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="badge @(n2Desbloqueado ? "bg-success text-white" : "bg-secondary text-white")">Nível 2 (@reqN2 XP)</span>
+                            <h3 class="h5 fw-bold text-dark mb-0">Observador da Serra</h3>
+                            @if (n2Desbloqueado)
+                            {
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">Desbloqueado</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Faltam @xpFaltaN2 XP</span>
+                            }
+                        </div>
+                        <p class="text-muted small mt-2 mb-2">
+                            Participação ativa na comunidade e mobilizações ecológicas de campo.
+                        </p>
+                        <ul class="text-muted small ps-3 mb-0">
+                            <li><strong>Criar Tópicos no Fórum:</strong> Liberdade para abrir novas discussões, relatos de trilha e dúvidas.</li>
+                            <li><strong>Participar de Campanhas:</strong> Inscrição oficial e pré-inscrição em mutirões e ações ecológicas.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    @if (n2Desbloqueado)
+                    {
+                        <a asp-controller="Campanhas" asp-action="Index" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                            Ver Campanhas
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-light text-muted border px-3 py-2">Requer @reqN2 XP</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- NÍVEL 3 -->
+        @{
+            var reqN3 = NivelHelper.XpNecessarioParaNivel(3);
+            var n3Desbloqueado = Model.MapaDesbloqueado;
+            var xpFaltaN3 = Math.Max(0, reqN3 - xpAtual);
+        }
+        <div class="card border rounded-4 bg-white shadow-sm p-4 @(n3Desbloqueado ? "border-success" : "opacity-90")">
+            <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="p-3 rounded-circle @(n3Desbloqueado ? "bg-success text-white" : "bg-light text-muted border") fs-4 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                        @if (n3Desbloqueado) { <i class="bi bi-check-lg"></i> } else { <i class="bi bi-lock-fill"></i> }
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="badge @(n3Desbloqueado ? "bg-success text-white" : "bg-secondary text-white")">Nível 3 (@reqN3 XP)</span>
+                            <h3 class="h5 fw-bold text-dark mb-0">Explorador da Cantareira</h3>
+                            @if (n3Desbloqueado)
+                            {
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">Desbloqueado</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Faltam @xpFaltaN3 XP</span>
+                            }
+                        </div>
+                        <p class="text-muted small mt-2 mb-2">
+                            Mapeamento científico cidadão e monitoramento territorial da fauna.
+                        </p>
+                        <ul class="text-muted small ps-3 mb-0">
+                            <li><strong>Mapa Comunitário Interativo:</strong> Visualização de registros aberta a todos para conscientização ambiental.</li>
+                            <li><strong>Registrar Avistamento de Campo:</strong> Cadastro de novas coordenadas na Serra com fotos e vídeos (requer Nível 3 e cartinha na CantaDex).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    @if (n3Desbloqueado)
+                    {
+                        <a asp-controller="Avistamentos" asp-action="Registrar" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                            Registrar Avistamento
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-light text-muted border px-3 py-2">Requer @reqN3 XP</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- NÍVEL 4 -->
+        @{
+            var reqN4 = NivelHelper.XpNecessarioParaNivel(4);
+            var n4Desbloqueado = Model.EstudosDesbloqueados;
+            var xpFaltaN4 = Math.Max(0, reqN4 - xpAtual);
+        }
+        <div class="card border rounded-4 bg-white shadow-sm p-4 @(n4Desbloqueado ? "border-success" : "opacity-90")">
+            <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="p-3 rounded-circle @(n4Desbloqueado ? "bg-success text-white" : "bg-light text-muted border") fs-4 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                        @if (n4Desbloqueado) { <i class="bi bi-check-lg"></i> } else { <i class="bi bi-lock-fill"></i> }
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="badge @(n4Desbloqueado ? "bg-success text-white" : "bg-secondary text-white")">Nível 4 (@reqN4 XP)</span>
+                            <h3 class="h5 fw-bold text-dark mb-0">Pesquisador de Campo</h3>
+                            @if (n4Desbloqueado)
+                            {
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">Desbloqueado</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Faltam @xpFaltaN4 XP</span>
+                            }
+                        </div>
+                        <p class="text-muted small mt-2 mb-2">
+                            Produção de conhecimento acadêmico e artigos de divulgação científica.
+                        </p>
+                        <ul class="text-muted small ps-3 mb-0">
+                            <li><strong>Caderno de Campo Digital:</strong> Criação e gestão de notas de observação botânica e zoológica.</li>
+                            <li><strong>Submissão de Estudos Científicos:</strong> Publicação de pesquisas formais para validação e destaque no portal.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    @if (n4Desbloqueado)
+                    {
+                        <a asp-controller="Educacao" asp-action="Index" asp-route-aba="estudos" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                            Ver Estudos
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-light text-muted border px-3 py-2">Requer @reqN4 XP</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- NÍVEL 5 -->
+        @{
+            var reqN5 = NivelHelper.XpNecessarioParaNivel(5);
+            var n5Desbloqueado = Model.LiderancaDesbloqueada;
+            var xpFaltaN5 = Math.Max(0, reqN5 - xpAtual);
+        }
+        <div class="card border rounded-4 bg-white shadow-sm p-4 @(n5Desbloqueado ? "border-success" : "opacity-90")">
+            <div class="d-flex align-items-start justify-content-between flex-wrap gap-3">
+                <div class="d-flex align-items-start gap-3">
+                    <span class="p-3 rounded-circle @(n5Desbloqueado ? "bg-success text-white" : "bg-light text-muted border") fs-4 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                        @if (n5Desbloqueado) { <i class="bi bi-check-lg"></i> } else { <i class="bi bi-lock-fill"></i> }
+                    </span>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <span class="badge @(n5Desbloqueado ? "bg-success text-white" : "bg-secondary text-white")">Nível 5 (@reqN5 XP)</span>
+                            <h3 class="h5 fw-bold text-dark mb-0">Guardião Líder</h3>
+                            @if (n5Desbloqueado)
+                            {
+                                <span class="badge bg-success-subtle text-success border border-success-subtle">Desbloqueado</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Faltam @xpFaltaN5 XP</span>
+                            }
+                        </div>
+                        <p class="text-muted small mt-2 mb-2">
+                            Liderança comunitária e iniciativa de novos movimentos ecológicos.
+                        </p>
+                        <ul class="text-muted small ps-3 mb-0">
+                            <li><strong>Fundar Comunidades do Fórum:</strong> Criar novos grupos temáticos (também acessível para jornalistas credenciados ou 10 estudos aprovados).</li>
+                            <li><strong>Propor Campanhas Ambientais:</strong> Enviar novas iniciativas para homologação e mobilização coletiva.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    @if (n5Desbloqueado)
+                    {
+                        <a asp-controller="Forum" asp-action="Index" asp-route-aba="comunidades" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                            Ver Comunidades
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-light text-muted border px-3 py-2">Requer @reqN5 XP</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela Como Ganhar XP -->
+    <h2 class="h4 fw-bold text-dark mb-3">
+        <i class="bi bi-stars text-warning me-2"></i>Como Ganhar XP no EcoCanta
+    </h2>
+    <div class="eco-table-wrap mb-4 shadow-sm">
+        <table class="eco-table">
+            <thead>
+                <tr>
+                    <th>Atividade / Ação Realizada</th>
+                    <th>XP Concedido</th>
+                    <th>Frequência / Detalhes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Descobrir uma espécie na CantaDex</strong> (abrir a página dela pela primeira vez)</td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpDescobrirEspecie XP</span></td>
+                    <td class="text-muted small">Por espécie descoberta</td>
+                </tr>
+                <tr>
+                    <td><strong>Dominar uma espécie no Quiz</strong> (acertar 70% ou mais das perguntas)</td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpDominarEspecie XP</span></td>
+                    <td class="text-muted small">Por domínio conquistado</td>
+                </tr>
+                <tr>
+                    <td><strong>Concluir o Jogo Diário</strong> e resgatar animais</td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpJogoDiarioBase XP (+@NivelHelper.XpPorAnimalResgatado XP/animal)</span></td>
+                    <td class="text-muted small">Diariamente</td>
+                </tr>
+                <tr>
+                    <td><strong>Registrar um avistamento no mapa</strong> com fotos/vídeos</td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpAvistamento XP</span></td>
+                    <td class="text-muted small">Por avistamento registrado</td>
+                </tr>
+                <tr>
+                    <td><strong>Participar ou pré-inscrever-se em campanhas ecológicas</strong></td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpCampanhaParticipacao XP</span></td>
+                    <td class="text-muted small">Por campanha inscrita</td>
+                </tr>
+                <tr>
+                    <td><strong>Criar uma publicação no fórum</strong></td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpTopicoForum XP</span></td>
+                    <td class="text-muted small">Por publicação realizada</td>
+                </tr>
+                <tr>
+                    <td><strong>Comentar e responder discussões no fórum</strong></td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpRespostaForum XP</span></td>
+                    <td class="text-muted small">Por resposta colaborativa</td>
+                </tr>
+                <tr>
+                    <td><strong>Submeter denúncia ambiental</strong></td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpDenuncia XP</span></td>
+                    <td class="text-muted small">Por denúncia documentada</td>
+                </tr>
+                <tr>
+                    <td><strong>Ter um estudo científico aprovado pela moderação</strong></td>
+                    <td><span class="badge bg-success">+@NivelHelper.XpEstudoAprovado XP</span></td>
+                    <td class="text-muted small">Por pesquisa homologada</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@functions {
+    public static string ObterTituloNivel(int nivel)
+    {
+        return nivel switch
+        {
+            1 => "Guardião Iniciante",
+            2 => "Observador da Serra",
+            3 => "Explorador da Cantareira",
+            4 => "Pesquisador de Campo",
+            _ => "Guardião Líder da Mata"
+        };
+    }
+}

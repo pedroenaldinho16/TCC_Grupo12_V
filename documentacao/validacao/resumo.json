@@ -1,0 +1,12 @@
+{
+    "verificacoesPrincipais":  290,
+    "verificacoesComplementares":  24,
+    "total":  314,
+    "reprovadas":  0,
+    "largurasVerificadas":  [
+                                1440,
+                                768,
+                                390
+                            ],
+    "capturas":  45
+}

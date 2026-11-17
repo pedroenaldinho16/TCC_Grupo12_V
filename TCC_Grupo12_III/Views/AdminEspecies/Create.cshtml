@@ -1,0 +1,27 @@
+@model TCC_Grupo12_III.Models.Especie
+
+@{
+    ViewData["Title"] = "Nova espécie";
+    ViewData["AdminTab"] = "especies";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Nova espécie</h1>
+            <p>Adicione uma espécie ao catálogo de fauna.</p>
+        </div>
+    </div>
+
+    <div class="eco-admin__form" style="max-width: 720px;">
+        <form asp-controller="AdminEspecies" asp-action="Create" method="post" enctype="multipart/form-data">
+            @await Html.PartialAsync("_Form", Model)
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

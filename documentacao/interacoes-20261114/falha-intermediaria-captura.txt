@@ -1,0 +1,5 @@
+System.Exception: Imagens carregadas 06-resultado-cartas
+   at JogosEducativos.<>c__DisplayClass0_1.<Run>g__Check|2(Boolean pass, String name) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 24
+   at JogosEducativos.<>c__DisplayClass0_5.<<Run>g__Capture|12>d.MoveNext() in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 120
+--- End of stack trace from previous location ---
+   at JogosEducativos.Run(String root, Boolean interacoes) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 193

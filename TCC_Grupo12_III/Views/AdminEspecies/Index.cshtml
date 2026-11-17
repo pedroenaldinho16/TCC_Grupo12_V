@@ -1,0 +1,3 @@
+@model List<TCC_Grupo12_III.Models.Especie>
+@{ViewData["Title"]="Gerenciar espécies";}
+<div class="ec-page"><h1>Gerenciar espécies</h1><partial name="_AdminTabs" /><p>Revise as informações, fotografias e referências científicas do catálogo.</p><a class="ec-button mb-4" asp-action="Create">Cadastrar espécie</a><div class="ec-history"><table><thead><tr><th>Espécie</th><th>Nome científico</th><th>Categoria</th><th>Fontes</th><th>Ação</th></tr></thead><tbody>@foreach(var e in Model){<tr><td>@e.Nome</td><td><em>@e.NomeCientifico</em></td><td>@(e.Categoria=="Aves"?"Aves":"Terrestres")</td><td>@(string.IsNullOrWhiteSpace(e.FonteCientifica)?"Em revisão":"Informadas")</td><td><a asp-action="Edit" asp-route-id="@e.Id">Editar ficha</a></td></tr>}</tbody></table></div></div>

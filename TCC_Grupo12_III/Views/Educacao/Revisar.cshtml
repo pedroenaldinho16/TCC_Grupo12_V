@@ -1,0 +1,5 @@
+@model List<TCC_Grupo12_III.Models.EstudoCientifico>
+@using System.Text.RegularExpressions
+@using System.Net
+@{ViewData["Title"]="Revisar Voz Estudantil";}
+<div class="ec-page"><h1>Revisar a Voz Estudantil</h1><partial name="_AdminTabs" />@foreach(var e in Model){<article class="ec-card mb-4"><h2 style="font-size:1.4rem">@e.Titulo</h2><p>@e.Autor · @e.StatusAprovacao</p><p>@e.Resumo</p><details><summary>Ler texto e referências</summary><p class="ec-article">@WebUtility.HtmlDecode(Regex.Replace(e.ConteudoHtml,"<[^>]+>"," "))</p><p class="ec-article">@e.ReferenciasTexto</p></details><form method="post" asp-action="Moderar"><input name="id" value="@e.Id" type="hidden" /><div class="ec-field"><label for="observacao-@e.Id">Observação para o estudante</label><textarea id="observacao-@e.Id" name="observacao" maxlength="1000" rows="2"></textarea></div><button class="ec-button" name="aprovar" value="true" type="submit">Aprovar publicação</button><button class="ec-button ec-button-outline" name="aprovar" value="false" type="submit">Solicitar revisão</button></form></article>}</div>

@@ -1,0 +1,81 @@
+Recuperação do projeto – Grupo 12 (Meta 02)
+Data de conclusão 16 de novembro de 2026 às 23:59•Vários envios permitidos•
+Fecha 16 de novembro de 2026 às 23:59
+Instruções
+Na Meta 2 – Reorganização visual e navegação do sistema, 
+o Grupo 12 deverá demonstrar que conseguiu melhorar a apresentação visual e a facilidade de utilização do sistema, considerando as funcionalidades e os usuários definidos e validados na primeira meta.
+É importante deixar claro que essa etapa não consiste apenas em trocar cores ou deixar as páginas mais bonitas. O grupo deverá organizar a interface para que o visitante consiga compreender a proposta do projeto, localizar as informações e utilizar as funcionalidades interativas sem dificuldades.site exemplo de layout: https://www.cursoemvideo.com/
+Atenção: nesta etapa, o grupo deverá priorizar a organização visual e a navegação das funcionalidades aprovadas na Meta 1. Não deverão ser acrescentados novos usuários ou módulos sem autorização das professoras.
+Atividades que deverão ser realizadas
+2.1. Revisão da identidade visual
+O grupo deverá revisar os elementos visuais utilizados no sistema, considerando:
+Escolha de uma paleta de cores relacionada ao tema ambiental e à preservação da fauna.
+Padronização das cores de fundo, textos, botões, menus e demais componentes.
+Definição de fontes e tamanhos adequados para facilitar a leitura.
+Padronização dos títulos, subtítulos, cards e ícones.
+Utilização de imagens relacionadas aos animais e à Serra da Cantareira.
+Organização visual que transmita a finalidade educativa e de conscientização do projeto.
+As cores e imagens deverão ser utilizadas de maneira equilibrada, evitando excesso de elementos que prejudiquem a leitura.
+
+2.2. Reorganização da página inicial
+A página inicial deverá apresentar claramente a finalidade do sistema.
+Deverá conter:
+Nome e identidade visual do projeto.
+Breve apresentação sobre a Serra da Cantareira e a importância da preservação da fauna.
+Explicação sobre o propósito da plataforma.
+Destaque para as principais funcionalidades interativas.
+Elementos visuais que incentivem o visitante a conhecer os animais e participar das atividades.
+O visitante deverá compreender, logo ao acessar a página, qual é o objetivo do sistema e o que poderá fazer nele.
+
+2.3. Organização do menu de navegação
+O grupo deverá revisar o menu principal e organizar as opções de acordo com as funcionalidades aprovadas na Meta 1.
+O menu deverá:
+Apresentar nomes curtos e objetivos.
+Utilizar termos de fácil compreensão.
+Organizar as funcionalidades em uma sequência lógica.
+Permitir que o visitante identifique facilmente onde acessar cada atividade.
+Evitar opções repetidas, desnecessárias ou que não estejam relacionadas ao tema.
+Exemplo de organização, considerando as funcionalidades que poderão ser aprovadas:
+Início;
+Conheça os animais;
+Jogos e desafios;
+Preserve a Cantareira;
+Sobre o projeto.
+A estrutura definitiva deverá respeitar as funcionalidades validadas pelas professoras.
+
+2.4. Organização das páginas e funcionalidades
+O grupo deverá revisar as páginas existentes e organizar seus conteúdos.
+Para cada página, verificar:
+Se o título representa corretamente seu conteúdo.
+Se as informações estão organizadas em seções.
+Se os textos estão objetivos e legíveis.
+Se as imagens possuem tamanho e posicionamento adequados.
+Se os botões estão identificados corretamente.
+Se existe uma forma clara de retornar à página inicial ou acessar outras áreas.
+Se não há informações repetidas ou elementos que não contribuem para a finalidade da página.
+2.5. Organização visual das funcionalidades interativas
+As funcionalidades interativas deverão apresentar uma interface que facilite a participação do visitante.
+Por exemplo:
+Detetive da Fauna:
+Imagem do animal ou elemento visual relacionado à pergunta.
+Pistas organizadas e de fácil leitura.
+Alternativas de resposta.
+Mensagem de acerto ou erro.
+Guardião da Cantareira:
+Apresentação clara da situação-problema.
+Alternativas de decisão.
+Espaço para explicar as consequências da escolha realizada.
+Esses exemplos deverão ser utilizados somente se as respectivas funcionalidades tiverem sido aprovadas na Meta 1.
+
+2.6. Facilidade de utilização e adaptação das telas
+O grupo deverá verificar se o sistema pode ser utilizado adequadamente em diferentes tamanhos de tela.
+Deverá observar:
+Se os textos permanecem legíveis.
+Se os botões podem ser identificados e utilizados facilmente.
+Se as imagens não ficam distorcidas.
+Se o menu continua acessível.
+Se os elementos não ficam sobrepostos.
+Se a organização das páginas funciona em computadores e dispositivos móveis.
+Enviar um arquivo .docx refazendo toda a subseção 4.2 da demostração da aplicação do sistema com as novas telas e suas descrições. Importante apresentar as telas de acordo com o fluxo de navegação de cada usuário. Primeiro apresenta a tela de login e cadastro e tela inicial que é para todos os usuarios. E depois as telas de cada usuarios com suas telas repsctivas (Estudante e o Administrador (explicando também quem pode ser o administrador). E também enviar nesse documento o link do github para as profesores terem acesso a aplicação web.
+Além disso, enviar um outro documento .docx apresentando a nova identidade visual refeita pelo grupo (logo, palea de cores, tipografia, padrão visual de botões, cards e ícones, exemplos de aplicação da identidade visual nas páginas)A apresentação do sistema será feita dia 17/11
+

@@ -1,0 +1,41 @@
+@model string
+<svg viewBox="0 0 120 120" fill="none" aria-hidden="true" focusable="false">
+@switch(Model){
+case "garrafa":
+    <path d="M47 18h26v17l11 16v51q-24 13-48 0V51l11-16Z" fill="#d6f0f3" stroke="#337487" stroke-width="3"/>
+    <path d="M47 8h26v14H47Z" fill="#327ba4" stroke="#24566e" stroke-width="3"/><path d="M38 60h44v27H38Z" fill="#4d9ebd"/><path d="m55 66-7 10h12l-3 8 14-13H58l4-5" fill="white"/><path d="M45 47v12m0 32v8" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    break;
+case "lata":
+    <path d="M32 23h56v77q-28 17-56 0Z" fill="#c7d5d8" stroke="#596d76" stroke-width="3"/><ellipse cx="60" cy="23" rx="28" ry="9" fill="#ecf2f1" stroke="#596d76" stroke-width="3"/><ellipse cx="60" cy="23" rx="9" ry="3" stroke="#596d76" stroke-width="3"/><path d="M33 44h54v38H33Z" fill="#c2644d"/><path d="m46 55 28 15M42 68l32-11" stroke="#fff4da" stroke-width="5" stroke-linecap="round"/><path d="M39 35v62" stroke="white" stroke-width="3" opacity=".7"/>
+    break;
+case "embalagem":
+    <path d="m17 19 12 5 12-5 13 5 13-5 12 5 13-5 11 5-8 34 8 41-13-5-12 5-12-5-13 5-12-5-13 5-12-5 9-35Z" fill="#f7d68d" stroke="#97704b" stroke-width="3"/>
+    <path d="m22 33 72 5-7 45-64-5Z" fill="#b85c46"/><ellipse cx="58" cy="58" rx="23" ry="15" fill="#ffefc4"/><path d="m40 62 16-15 19 17" stroke="#a87743" stroke-width="4" stroke-linecap="round"/><path d="m23 29 71 6m-69 52 68 6" stroke="#97704b" stroke-width="2"/>
+    break;
+case "descarte":
+    <ellipse cx="60" cy="112" rx="45" ry="6" fill="#244b3b" opacity=".15"/><path d="M26 32h70l-7 72q-30 13-57 0Z" fill="#34785b" stroke="#244e3e" stroke-width="3"/><path d="M18 24h86v17H18Z" fill="#74a17f" stroke="#244e3e" stroke-width="3"/><path d="M46 14h31v11H46Z" fill="#34785b" stroke="#244e3e" stroke-width="3"/><rect x="42" y="54" width="38" height="37" rx="6" fill="#f4f5df"/><path d="M49 64h24m-21 3 2 17h14l2-17M57 60h8" stroke="#34785b" stroke-width="3"/><path d="M39 47v51" stroke="#9bc3a0" stroke-width="3"/>
+    break;
+case "binoculos":
+    <path d="m28 35 21 5-6 51-31-7Zm44 5 21-5 15 49-31 7Z" fill="#355b55" stroke="#183e36" stroke-width="3"/><path d="M45 54h31v22H45Z" fill="#69948a" stroke="#183e36" stroke-width="3"/><circle cx="29" cy="86" r="20" fill="#23483f"/><circle cx="93" cy="86" r="20" fill="#23483f"/><circle cx="29" cy="86" r="13" fill="#a8d7db"/><circle cx="93" cy="86" r="13" fill="#a8d7db"/><path d="m21 82 10-7m54 7 10-7" stroke="white" stroke-width="4" stroke-linecap="round"/><path d="M29 34V22h17v16m30 0V22h17v12" stroke="#183e36" stroke-width="5"/>
+    break;
+case "radio":
+    <path d="M40 38V8" stroke="#203e37" stroke-width="7" stroke-linecap="round"/><rect x="28" y="32" width="66" height="78" rx="12" fill="#385b50" stroke="#203e37" stroke-width="3"/><rect x="39" y="45" width="43" height="23" rx="4" fill="#bad9ad"/><path d="M41 78h39m-39 8h39m-39 8h25" stroke="#a4c3ac" stroke-width="4" stroke-linecap="round"/><path d="M98 17q12 10 0 20m7-29q20 20 0 39" stroke="#4a8d76" stroke-width="3" stroke-linecap="round"/>
+    break;
+case "sinalizacao":
+    <path d="m58 16 28 77H30Z" fill="#e5a65d" stroke="#a16539" stroke-width="3"/><path d="m44 55 28 1 7 18H37Z" fill="#fff3d4"/><rect x="21" y="93" width="75" height="14" rx="5" fill="#a16539"/><path d="M21 48 7 41m88 7 17-7" stroke="#4e705e" stroke-width="3" stroke-linecap="round"/>
+    break;
+case "placa":
+    <path d="M60 45v69" stroke="#866945" stroke-width="12"/><path d="M12 15h73l24 23-24 23H12Z" fill="#f6e8c1" stroke="#866945" stroke-width="4"/><path d="M31 38h44m-11-11 12 11-12 11" stroke="#355d46" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    break;
+case "ave":
+    <path d="M13 103h96V43C109-1 13-1 13 43Z" fill="#f2ecd2" fill-opacity=".9" stroke="#887a59" stroke-width="4"/><path d="M13 103h96m-89-16h82" stroke="#887a59" stroke-width="5"/>
+    <path d="m48 83-8 23 20-18" fill="#648c60"/><ellipse cx="59" cy="70" rx="23" ry="26" fill="#648c60"/><path d="M45 66q19-7 25 16-18 6-25-16" fill="#94ad76"/><circle cx="76" cy="46" r="18" fill="#91a86f"/><path d="m90 44 17 8-17 6" fill="#cfaa62"/><circle cx="81" cy="42" r="3" fill="#203e37"/>
+    <path d="M31 20v82m22-94v94m22-94v94m20-82v82" stroke="#887a59" stroke-width="2.5" opacity=".65"/><path d="M54 7q7-13 14 0" stroke="#887a59" stroke-width="3"/>
+    break;
+case "atalho":
+    <path d="M11 113Q62 86 44 58T81 7" stroke="#b5976e" stroke-width="30"/><path d="M11 113Q62 86 44 58T81 7" stroke="#e7d4aa" stroke-width="22"/>
+    <g fill="#766346" transform="rotate(20 60 60)"><ellipse cx="42" cy="47" rx="6" ry="12"/><ellipse cx="66" cy="66" rx="6" ry="12"/><ellipse cx="42" cy="65" rx="5" ry="4"/><ellipse cx="66" cy="84" rx="5" ry="4"/></g>
+    <path d="m15 33 4-10 5 10m70 47 4-13 6 13" stroke="#568359" stroke-width="4" stroke-linecap="round"/>
+    break;
+}
+</svg>

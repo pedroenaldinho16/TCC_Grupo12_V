@@ -1,0 +1,3 @@
+System.Exception: Usuário pode ativar animações no jogo mesmo quando o sistema reduz movimento
+   at JogosEducativos.<>c__DisplayClass0_1.<Run>g__Check|2(Boolean pass, String name) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 24
+   at JogosEducativos.Run(String root, Boolean interacoes, Boolean confiabilidade) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 189

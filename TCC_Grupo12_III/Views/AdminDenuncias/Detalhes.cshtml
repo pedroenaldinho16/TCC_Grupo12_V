@@ -1,0 +1,144 @@
+@model TCC_Grupo12_III.Models.Denuncia
+
+@{
+    ViewData["Title"] = $"Denúncia #{Model.Id} - Detalhes";
+    ViewData["AdminTab"] = "aprovacoes";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <a asp-action="Index" asp-route-aba="denuncias" class="btn-eco btn-eco--ghost btn-eco--sm mb-2">&larr; Voltar para o painel de aprovações</a>
+            <h1>Detalhes da Denúncia #@Model.Id</h1>
+            <p>Registro recebido em @Model.CriadoEm.ToString("dd/MM/yyyy 'às' HH:mm").</p>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+            @if (Model.Resolvida)
+            {
+                <span class="badge bg-success fs-6 px-3 py-2">✓ Resolvida</span>
+            }
+            else
+            {
+                <span class="badge bg-warning text-dark fs-6 px-3 py-2">⚠️ Pendente de apuração</span>
+            }
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Coluna Principal com Dados da Ocorrência -->
+        <div class="col-lg-8">
+            <div class="p-4 bg-white rounded-3 border mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle fs-6">
+                        🚨 @Model.Tipo
+                    </span>
+                    <span class="text-muted small">
+                        Ocorrência: <strong>@(Model.DataOcorrencia.HasValue ? Model.DataOcorrencia.Value.ToString("dd/MM/yyyy") : "Data não especificada")</strong>
+                    </span>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="text-secondary small text-uppercase fw-bold mb-1">Localização Informada</h5>
+                    <p class="fs-5 text-dark fw-semibold mb-0">📍 @Model.Localizacao</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="text-secondary small text-uppercase fw-bold mb-2">Relato Detalhado</h5>
+                    <div class="p-3 bg-light rounded-3 text-dark" style="white-space: pre-wrap; line-height: 1.6; font-size: 1rem;">
+                        @Model.Descricao
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.FotoPath))
+                {
+                    <div>
+                        <h5 class="text-secondary small text-uppercase fw-bold mb-2">Evidência Fotográfica Anexada</h5>
+                        <div class="border rounded-3 p-2 bg-light text-center">
+                            <a href="@Model.FotoPath" target="_blank" title="Clique para abrir imagem em alta resolução">
+                                <img src="@Model.FotoPath" alt="Evidência fotográfica" class="img-fluid rounded" style="max-height: 480px; object-fit: contain;" />
+                            </a>
+                            <div class="mt-2 small text-muted">Clique na imagem para visualizar em tamanho ampliado em nova aba.</div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Card de Observação Interna do Administrador -->
+            <div class="p-4 bg-white rounded-3 border">
+                <h4 class="fs-5 mb-2">Anotações Internas &amp; Providências Tomadas</h4>
+                <p class="text-muted small mb-3">Registre órgãos contatados (ex: Polícia Ambiental, ICMBio, Guarda Civil), número de protocolo ou parecer técnico.</p>
+
+                <form asp-action="SalvarObservacao" asp-route-id="@Model.Id" method="post">
+                    <div class="mb-3">
+                        <textarea name="observacaoAdmin" class="form-control" rows="4" placeholder="Ex: Encaminhado à 1ª Cia do 1º Batalhão de Polícia Ambiental em 06/10/2026. Protocolo nº 12345/2026...">@Model.ObservacaoAdmin</textarea>
+                    </div>
+                    <button type="submit" class="btn-eco btn-eco--solid btn-eco--sm">Salvar anotação interna</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Coluna Lateral com Dados do Contato e Ações -->
+        <div class="col-lg-4">
+            <!-- Dados do Denunciante -->
+            <div class="p-4 bg-white rounded-3 border mb-4">
+                <h4 class="fs-6 text-uppercase fw-bold text-secondary mb-3">Informações do Denunciante</h4>
+                @if (Model.Anonima)
+                {
+                    <div class="p-3 bg-light rounded-3 text-center">
+                        <div style="font-size: 2rem;">🛡️</div>
+                        <strong class="d-block text-dark mt-1">Denúncia Anônima</strong>
+                        <small class="text-muted">O usuário optou por sigilo completo de identidade conforme as diretrizes ambientais.</small>
+                    </div>
+                }
+                else
+                {
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <span class="text-muted d-block small">Nome:</span>
+                            <strong class="text-dark">@(string.IsNullOrEmpty(Model.NomeContato) ? "Não informado" : Model.NomeContato)</strong>
+                        </li>
+                        <li class="mb-2">
+                            <span class="text-muted d-block small">E-mail:</span>
+                            @if (!string.IsNullOrEmpty(Model.EmailContato))
+                            {
+                                <a href="mailto:@Model.EmailContato" class="text-primary text-break">@Model.EmailContato</a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </li>
+                    </ul>
+                }
+            </div>
+
+            <!-- Painel de Gerenciamento -->
+            <div class="p-4 bg-white rounded-3 border">
+                <h4 class="fs-6 text-uppercase fw-bold text-secondary mb-3">Gestão da Ocorrência</h4>
+                <form asp-action="AlternarStatus" asp-route-id="@Model.Id" method="post" class="mb-3">
+                    <input type="hidden" name="returnUrl" value="@Url.Action("Detalhes", new { id = Model.Id })" />
+                    @if (Model.Resolvida)
+                    {
+                        <button type="submit" class="btn btn-warning w-100 py-2 fw-semibold">
+                            ⚠️ Reabrir como Pendente
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-success w-100 py-2 fw-semibold">
+                            ✓ Marcar como Resolvida
+                        </button>
+                    }
+                </form>
+
+                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" data-confirmar="Deseja realmente apagar esta denúncia? Esta ação não pode ser desfeita.">
+                    <button type="submit" class="btn btn-outline-danger w-100 py-2">
+                        Excluir Denúncia
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+@model TCC_Grupo12_III.Models.Campanha
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+@if (Model.Id != 0)
+{
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UsuarioId" />
+    <input type="hidden" asp-for="DataCriacao" />
+}
+
+<div class="mb-3">
+    <label asp-for="Titulo" class="form-label fw-semibold"></label>
+    <input asp-for="Titulo" class="form-control" placeholder="Ex: Reflorestamento e Preservação da Cantareira" />
+    <span asp-validation-for="Titulo" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Descricao" class="form-label fw-semibold"></label>
+    <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Resumo atrativo para os voluntários..."></textarea>
+    <span asp-validation-for="Descricao" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="ObjetivoPrincipal" class="form-label fw-semibold"></label>
+        <input asp-for="ObjetivoPrincipal" class="form-control" placeholder="Ex: Plantar 2.000 mudas nativas para proteger a mata ciliar" />
+        <span asp-validation-for="ObjetivoPrincipal" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Organizador" class="form-label fw-semibold"></label>
+        <input asp-for="Organizador" class="form-control" placeholder="Ex: Fundação Florestal / EcoCanta" />
+        <span asp-validation-for="Organizador" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ObjetivosEspecificos" class="form-label fw-semibold"></label>
+    <textarea asp-for="ObjetivosEspecificos" class="form-control" rows="3" placeholder="• Identificar áreas degradadas&#10;• Envolver estudantes locais&#10;• Monitorar taxa de crescimento"></textarea>
+    <div class="form-text">Insira um objetivo por linha. Eles serão exibidos com marcadores elegantes.</div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <label asp-for="DataInicio" class="form-label fw-semibold"></label>
+        <input asp-for="DataInicio" type="date" class="form-control" />
+        <div class="form-text">Se for no futuro, a campanha aparecerá em "Próximas Campanhas" com pré-inscrição aberta.</div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="DataFim" class="form-label fw-semibold"></label>
+        <input asp-for="DataFim" type="date" class="form-control" />
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Periodo" class="form-label fw-semibold"></label>
+        <input asp-for="Periodo" class="form-control" placeholder="Ex: 14/11/2026 ou Nov 2026" />
+        <span asp-validation-for="Periodo" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Horario" class="form-label fw-semibold"></label>
+        <input asp-for="Horario" class="form-control" placeholder="Ex: 08:30 às 13:00" />
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="LocalEncontro" class="form-label fw-semibold"></label>
+        <input asp-for="LocalEncontro" class="form-control" placeholder="Ex: Portaria do Núcleo Pedra Grande" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="PublicoAlvo" class="form-label fw-semibold"></label>
+        <input asp-for="PublicoAlvo" class="form-control" placeholder="Ex: Comunidade local, estudantes e voluntários" />
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="Participantes" class="form-label fw-semibold"></label>
+        <input asp-for="Participantes" type="number" min="0" class="form-control" />
+    </div>
+    <div class="col-md-3 mb-3">
+        <label asp-for="Meta" class="form-label fw-semibold"></label>
+        <input asp-for="Meta" type="number" min="0" class="form-control" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="OQueLevar" class="form-label fw-semibold"></label>
+        <textarea asp-for="OQueLevar" class="form-control" rows="3" placeholder="Calçado fechado, garrafa de água, protetor solar..."></textarea>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Cronograma" class="form-label fw-semibold"></label>
+        <textarea asp-for="Cronograma" class="form-control" rows="3" placeholder="08:30 Recepção&#10;09:00 Início da atividade&#10;12:00 Encerramento"></textarea>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="ImpactoEsperado" class="form-label fw-semibold"></label>
+    <textarea asp-for="ImpactoEsperado" class="form-control" rows="2" placeholder="Impacto ecológico e social esperado na Serra da Cantareira..."></textarea>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="StatusAprovacao" class="form-label fw-semibold"></label>
+        <select asp-for="StatusAprovacao" class="form-select">
+            <option value="Aprovado">Aprovado (Publicada)</option>
+            <option value="Pendente">Pendente (Em análise)</option>
+            <option value="Reprovado">Reprovado</option>
+        </select>
+    </div>
+    <div class="col-md-6 mb-3 d-flex align-items-center pt-3">
+        <div class="form-check">
+            <input asp-for="Ativa" class="form-check-input" />
+            <label asp-for="Ativa" class="form-check-label fw-semibold">Campanha Ativa / Em Inscrições</label>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+    <label for="imagem" class="form-label fw-semibold">Imagem de Capa da Campanha</label>
+    <input type="hidden" asp-for="ImagemUrl" />
+    @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+    {
+        <div class="eco-image-preview mb-2">
+            <img src="@Model.ImagemUrl" alt="Imagem atual de @Model.Titulo" style="max-height: 160px; object-fit: cover; border-radius: 8px;" />
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="removerImagem" value="true" id="removerImagem" />
+            <label class="form-check-label small" for="removerImagem">Remover imagem atual</label>
+        </div>
+    }
+    <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*" />
+    <div class="form-text">JPG, PNG, WEBP ou GIF de até 5 MB.</div>
+    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+    <span class="text-danger">@Html.ValidationMessage("imagem")</span>
+</div>
+
+<div class="d-flex gap-2">
+    <button type="submit" class="btn-eco btn-eco--solid">Salvar Campanha</button>
+    <a class="btn-eco btn-eco--ghost" asp-controller="AdminCampanhas" asp-action="Index">Cancelar</a>
+</div>

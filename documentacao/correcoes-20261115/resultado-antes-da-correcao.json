@@ -1,0 +1,109 @@
+{
+  "total": 26,
+  "checks": [
+    {
+      "teste": "Servidor inicia em c\u00F3pia isolada do banco",
+      "passou": true
+    },
+    {
+      "teste": "Jogos n\u00E3o exigem migra\u00E7\u00E3o ou altera\u00E7\u00E3o de esquema",
+      "passou": true
+    },
+    {
+      "teste": "Integridade SQLite",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Jornada",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Mapa",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Faq",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Home/Sobre",
+      "passou": true
+    },
+    {
+      "teste": "Navega\u00E7\u00E3o p\u00FAblica /Especies",
+      "passou": true
+    },
+    {
+      "teste": "Cadastro dos jogos continua criando somente estudante",
+      "passou": true
+    },
+    {
+      "teste": "Servidor impede pular para a miss\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Iniciar etapa 1",
+      "passou": true
+    },
+    {
+      "teste": "Detetive inicia cartas, sem quest\u00F5es de quiz",
+      "passou": true
+    },
+    {
+      "teste": "Edi\u00E7\u00E3o de esp\u00E9cie n\u00E3o muda cartas de uma tentativa iniciada",
+      "passou": true
+    },
+    {
+      "teste": "Outra conta n\u00E3o l\u00EA as cartas da tentativa",
+      "passou": true
+    },
+    {
+      "teste": "Outra conta n\u00E3o modifica as cartas da tentativa",
+      "passou": true
+    },
+    {
+      "teste": "A\u00E7\u00F5es exigem autentica\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "A\u00E7\u00F5es exigem antifalsifica\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "N\u00E3o existe comando de conclus\u00E3o arbitr\u00E1ria ou pontua\u00E7\u00E3o enviada pelo cliente",
+      "passou": true
+    },
+    {
+      "teste": "Associa\u00E7\u00E3o exige explorar todas as cartas",
+      "passou": true
+    },
+    {
+      "teste": "Mapa permanece bloqueado durante as cartas",
+      "passou": true
+    },
+    {
+      "teste": "Administra\u00E7\u00E3o distingue quiz atual e acervo anterior",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas 01-flashcards-desktop-claro",
+      "passou": true
+    },
+    {
+      "teste": "Virada vis\u00EDvel come\u00E7a antes da resposta de uma rede lenta",
+      "passou": false
+    }
+  ]
+}

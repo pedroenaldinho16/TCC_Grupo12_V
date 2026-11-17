@@ -1,0 +1,19 @@
+@model TCC_Grupo12_III.Models.JornadaQuestaoViewModel
+@using TCC_Grupo12_III.Services
+@{ViewData["Title"]=JornadaService.Titulos[Model.Tentativa.Desafio-1];}
+<div class="ec-page"><a class="ec-breadcrumb" asp-action="Index">← Voltar para a jornada</a><div class="ec-question">
+<span class="ec-eyebrow">@ViewData["Title"] · Questão @(Model.Posicao+1) de @Model.Tentativa.Total</span>
+@if(Model.Tentativa.Desafio==3){<p class="ec-notice">Missão de campo: você participa de uma visita educativa à Serra da Cantareira. Observe a fauna sem interferir em seu habitat e decida como protegê-la.</p>}
+<h1>@Model.Pergunta.Enunciado</h1>
+@if(!string.IsNullOrWhiteSpace(Model.Pergunta.ImagemUrl)){<img src="@Model.Pergunta.ImagemUrl" alt="Fotografia para observar na atividade de identificação" />}
+@if(!Model.Feedback){
+<form asp-action="Responder" method="post" data-submit-once>
+<input type="hidden" name="id" value="@Model.Tentativa.Id" /><input type="hidden" name="posicao" value="@Model.Posicao" />
+<fieldset><legend class="fs-6">Selecione uma alternativa</legend><div class="ec-options">@for(var i=1;i<=4;i++){<label class="ec-option"><input type="radio" name="resposta" value="@i" required /><span>@Model.Pergunta.Opcao(i)</span></label>}</div></fieldset>
+<button class="ec-button" type="submit">Confirmar resposta →</button></form>
+}else{
+ var selecionada=Model.Tentativa.Respostas[Model.Posicao];
+ <section class="ec-notice" role="status"><h2 style="font-size:1.3rem">@(selecionada==Model.Pergunta.Correta?"Boa descoberta!":"Vamos aprender com essa escolha.")</h2><p>Sua resposta: @Model.Pergunta.Opcao(selecionada)</p><p><strong>Resposta esperada: @Model.Pergunta.Opcao(Model.Pergunta.Correta)</strong></p><p>@Model.Pergunta.Explicacao</p><small>Referência: @Model.Pergunta.Fonte</small></section>
+ <a class="ec-button" asp-action="@(Model.Tentativa.ConcluidaEm!=null?"Resultado":"Jogar")" asp-route-id="@Model.Tentativa.Id">@(Model.Tentativa.ConcluidaEm!=null?"Ver meu resultado":"Próxima descoberta") →</a>
+}
+</div></div>

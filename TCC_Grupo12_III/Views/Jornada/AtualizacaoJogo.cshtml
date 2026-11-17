@@ -1,0 +1,13 @@
+@model JornadaTentativa
+@{ ViewData["Title"] = "Uma nova forma de aprender"; }
+<div class="ec-page">
+    <a class="ec-breadcrumb" asp-action="Index">← Voltar à jornada</a>
+    <h1>Uma nova forma de aprender.</h1>
+    <p class="ec-lead">Esta tentativa começou na versão anterior, em formato de quiz. Agora este desafio é um jogo interativo.</p>
+    <div class="ec-notice">Ao começar o novo jogo, a tentativa anterior será encerrada e ficará no histórico com suas respostas. Suas conquistas anteriores continuam válidas.</div>
+    <form asp-action="Iniciar" method="post">
+        <input type="hidden" name="desafio" value="@Model.Desafio" />
+        <input type="hidden" name="atualizar" value="true" />
+        <button class="ec-button" type="submit">Preservar tentativa e começar o novo jogo →</button>
+    </form>
+</div>

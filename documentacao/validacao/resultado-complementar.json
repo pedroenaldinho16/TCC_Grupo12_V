@@ -1,0 +1,101 @@
+{
+  "total": 24,
+  "checks": [
+    {
+      "teste": "XP n\u00E3o apresenta mensagem de desbloqueio do mapa",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia legada bloqueada para visitante",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia legada dispon\u00EDvel \u00E0 administra\u00E7\u00E3o",
+      "passou": true
+    },
+    {
+      "teste": "Evid\u00EAncia legada bloqueada para Estudante",
+      "passou": true
+    },
+    {
+      "teste": "Admin cadastra esp\u00E9cie com campos cient\u00EDficos opcionais vazios",
+      "passou": true
+    },
+    {
+      "teste": "Admin edita ficha com avalia\u00E7\u00F5es por abrang\u00EAncia",
+      "passou": true
+    },
+    {
+      "teste": "Campos cient\u00EDficos persistidos",
+      "passou": true
+    },
+    {
+      "teste": "Cria\u00E7\u00E3o administrativa de Estudante",
+      "passou": true
+    },
+    {
+      "teste": "Administrador concede permiss\u00E3o autorizada",
+      "passou": true
+    },
+    {
+      "teste": "Perfil administrativo persistido",
+      "passou": true
+    },
+    {
+      "teste": "Cria\u00E7\u00E3o administrativa de campanha",
+      "passou": true
+    },
+    {
+      "teste": "Campanha administrativa publicada sem proposta estudantil",
+      "passou": true
+    },
+    {
+      "teste": "Editor salva quest\u00E3o com explica\u00E7\u00E3o e fonte",
+      "passou": true
+    },
+    {
+      "teste": "Quest\u00E3o em revis\u00E3o n\u00E3o \u00E9 usada em novas tentativas",
+      "passou": true
+    },
+    {
+      "teste": "Administra\u00E7\u00E3o responde chamado",
+      "passou": true
+    },
+    {
+      "teste": "Resposta de suporte persistida",
+      "passou": true
+    },
+    {
+      "teste": "Quiz do Guardi\u00E3o dispon\u00EDvel para teste por teclado",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento admin-especies-celular",
+      "passou": true
+    },
+    {
+      "teste": "Tabela administrativa adaptada como registros leg\u00EDveis no celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento formulario-especie-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento desafio-teclado",
+      "passou": true
+    },
+    {
+      "teste": "Alternativa selecionada pelo teclado",
+      "passou": true
+    },
+    {
+      "teste": "Resposta enviada pelo teclado e feedback exibido",
+      "passou": true
+    },
+    {
+      "teste": "Resposta pelo teclado persistida",
+      "passou": true
+    }
+  ]
+}

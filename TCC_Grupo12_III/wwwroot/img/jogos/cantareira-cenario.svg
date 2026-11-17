@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" fill="none">
+<defs>
+ <linearGradient id="ceu" x2="0" y2="1"><stop stop-color="#dcebe2"/><stop offset="1" stop-color="#f6f3dd"/></linearGradient>
+ <linearGradient id="chao" x2="0" y2="1"><stop stop-color="#a4bb8c"/><stop offset="1" stop-color="#7b9c74"/></linearGradient>
+ <g id="arvore"><path d="m-11-13 4 163h17l2-169" fill="#807354"/><path d="m2 59-31-37m33 10 27-39" stroke="#807354" stroke-width="9"/><path d="M-3-164c-46-7-94 28-88 70-45 16-35 78 9 86-2 50 68 72 99 39 55 15 91-20 79-62 39-34 12-83-21-85-7-29-41-54-78-48Z" fill="#3d7056"/><path d="M-20-137c-36 3-64 31-55 60-31 12-20 57 15 54 4 33 49 35 67 14 33 5 66-14 53-48 22-27-3-61-28-62-13-19-31-24-52-18Z" fill="#638a64"/><path d="M-47-83c-14 5-26 15-27 27m42-56q22-16 45-5" stroke="#82a476" stroke-width="7" stroke-linecap="round"/></g>
+ <g id="buisson"><ellipse rx="60" ry="19" fill="#477452"/><circle cx="-21" cy="-13" r="22" fill="#789b6a"/><circle cx="12" cy="-20" r="28" fill="#668d5e"/><circle cx="40" cy="-9" r="17" fill="#86a574"/></g>
+</defs>
+<path fill="url(#ceu)" d="M0 0h1000v660H0z"/>
+<circle cx="647" cy="100" r="50" fill="#f8f3d4"/>
+<path d="M0 215 110 106l112 104 153-116 171 118L750 80l250 144v436H0Z" fill="#b7ccba"/>
+<path d="M0 267q185-116 364-19 185-128 368-33 146-67 268-10v455H0Z" fill="#97b39b"/>
+<path d="M0 333q237-111 460 4 267-132 540-56v379H0Z" fill="url(#chao)"/>
+<path d="M675 165C840 300 179 303 438 489s200 156 230 210" stroke="#bca67e" stroke-width="116"/>
+<path d="M675 165C840 300 179 303 438 489s200 156 230 210" stroke="#e4d5b0" stroke-width="104"/>
+<path d="M675 165C840 300 179 303 438 489s200 156 230 210" stroke="#eee2c3" stroke-width="70"/>
+<use href="#arvore" transform="translate(75 170) scale(1.08)"/><use href="#arvore" transform="translate(275 140) scale(.65)"/>
+<use href="#arvore" transform="translate(479 116) scale(.53)"/><use href="#arvore" transform="translate(925 205) scale(1.08)"/>
+<use href="#arvore" transform="translate(145 425) scale(.8)"/><use href="#arvore" transform="translate(920 490) scale(1.1)"/>
+<use href="#buisson" transform="translate(50 569)"/><use href="#buisson" transform="translate(774 401) scale(.8)"/>
+<use href="#buisson" transform="translate(222 183) scale(.6)"/><use href="#buisson" transform="translate(973 635)"/>
+<path d="M0 642q145-40 178-143" stroke="#83b4b7" stroke-width="51"/><path d="m32 623 34-8m37-27 21-17" stroke="#d7e9df" stroke-width="4" stroke-linecap="round"/>
+<g transform="translate(741 525)"><path d="M-35-8h142v103H-35Z" fill="#d7c8a0" stroke="#827255" stroke-width="3"/><path d="m-50-8 87-49 86 49Z" fill="#426d54"/><path d="M12 26h45v69H12Z" fill="#86785a"/><path d="M73 24h21v24H73Z" fill="#aec7bc" stroke="#827255" stroke-width="3"/></g>
+<g fill="#c3b28e"><ellipse cx="432" cy="399" rx="8" ry="4"/><ellipse cx="507" cy="489" rx="10" ry="4"/><ellipse cx="525" cy="568" rx="8" ry="4"/></g>
+<g stroke="#b5c49a" stroke-width="4" stroke-linecap="round"><path d="m319 547 2-11m4 13 6-8M720 384l2-12m3 13 5-7M75 418l-2-13m7 13 5-9"/></g>
+</svg>

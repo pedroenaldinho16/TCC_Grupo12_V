@@ -1,0 +1,42 @@
+@model List<TCC_Grupo12_III.Models.Especie>
+
+@{
+    ViewData["Title"] = "Quiz das espécies";
+    ViewData["AdminTab"] = "quizespecies";
+    var totais = (Dictionary<int, int>)ViewBag.Totais;
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Quiz das espécies</h1>
+            <p>Cada espécie tem seu próprio quiz. Escolha uma para criar, editar ou excluir perguntas.</p>
+        </div>
+    </div>
+
+    <div class="eco-table-wrap">
+        <table class="eco-table">
+            <thead>
+                <tr>
+                    <th>Espécie</th>
+                    <th>Perguntas</th>
+                    <th class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var especie in Model)
+                {
+                    <tr>
+                        <td>@especie.Nome<br /><span class="eco-scientific">@especie.NomeCientifico</span></td>
+                        <td>@(totais.TryGetValue(especie.Id, out var total) ? total : 0)</td>
+                        <td class="text-end">
+                            <a class="btn-eco btn-eco--ghost btn-eco--sm" asp-controller="AdminEspecieQuiz" asp-action="Gerenciar" asp-route-id="@especie.Id">Gerenciar quiz</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

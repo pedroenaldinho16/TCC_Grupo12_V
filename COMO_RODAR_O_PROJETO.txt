@@ -1,0 +1,86 @@
+﻿ECOCANTA — COMO EXECUTAR O PROJETO
+Grupo 12 · ETEC de Campo Limpo Paulista · Meta 2
+
+Requisito: .NET SDK 10. O projeto utiliza ASP.NET Core MVC, EF Core e SQLite.
+
+No terminal aberto na raiz deste workspace:
+    cd TCC_Grupo12_III
+    dotnet restore
+    dotnet build
+    dotnet run --launch-profile http
+
+Endereço do perfil HTTP:
+    http://localhost:5046
+Confira sempre a linha "Now listening on" apresentada pelo servidor.
+
+Para desenvolvimento com atualização automática:
+    dotnet watch run --launch-profile http
+
+Para encerrar, pressione Ctrl+C no terminal que iniciou a aplicação.
+Encerre o modo watch antes de compilar em outro terminal para evitar bloqueio do executável.
+Se a porta estiver ocupada, encerre a instância anterior deste projeto ou utilize:
+    dotnet run --launch-profile http --urls http://localhost:5047
+
+ACESSOS
+O cadastro público cria somente contas de Estudante.
+Use as contas já autorizadas pela equipe para acessar a administração.
+As permissões antigas de Jornalista e Moderador não concedem acessos especiais.
+Senhas e credenciais não fazem parte deste guia.
+
+JORNADA
+1. Consulte as fichas no catálogo.
+2. Entre na sua conta e abra Jogos e desafios.
+3. Conclua Detetive da Fauna, Guardião da Cantareira e Missão de Preservação.
+4. Explore os flashcards e complete as associações no Detetive; alcance 70% no quiz do Guardião; cumpra as três missões e os oito objetivos do cenário na Missão de Preservação.
+5. A conclusão dos três libera o mapa, com verificação no servidor.
+XP não substitui a conclusão dos desafios.
+
+O item Mapa fica sempre visível no menu principal e abre:
+    http://localhost:5046/Mapa
+Antes da liberação, essa página mostra os requisitos e o próximo desafio.
+As recompensas estão em Minhas conquistas: avatar no desafio 1, escudo no 2 e mapa no 3.
+No Detetive, o botão Animações permite ativar ou reduzir o movimento. Se o navegador seguir a redução de movimento do sistema, escolha Animações: ligadas para ver a virada das cartas.
+As tentativas antigas continuam no histórico. Uma tentativa antiga ainda em andamento apresenta uma confirmação para iniciar a nova atividade sem perder suas respostas anteriores.
+Nos jogos, use mouse, toque ou teclado. Na Missão, arraste os resíduos até a lixeira e utilize o item indicado nas etapas seguintes. Como alternativa, selecione o objeto e depois o destino com clique ou Tab e Enter. O progresso é salvo a cada ação.
+
+APARÊNCIA
+Use o botão Claro/Escuro no cabeçalho (sol/lua no celular).
+O primeiro acesso acompanha o sistema; sua escolha fica salva neste navegador.
+
+BANCO E ARQUIVOS
+O banco existente permanece em TCC_Grupo12_III/app.db.
+Backups anteriores às alterações e às migrações estão em backups.
+Não substitua o banco pelos bancos de teste.
+Novas evidências de avistamentos ficam em App_Data/avistamentos, fora da pasta pública.
+Os registros antigos foram preservados. A migração encaminha os avistamentos para revisão.
+Não publique o banco, os backups ou evidências com dados pessoais.
+
+MAPA E RECURSOS
+Fontes e Leaflet são servidos localmente.
+O fundo cartográfico do OpenStreetMap depende de internet.
+O catálogo atual contém os seis registros originais; a lista final de 14 precisa de validação.
+
+VERIFICAÇÃO AUTOMATIZADA
+Na raiz do workspace:
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- .
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --complementos
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --diagnostico
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --revisao-interface
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --jogos
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --interacoes
+    dotnet run --project tests/EcoCanta.Verificacao/EcoCanta.Verificacao.csproj -- . --confiabilidade
+
+Os testes usam uma cópia do banco, a porta 5057 e o Chrome instalado.
+As capturas e os resultados ficam em documentacao.
+O diagnóstico é somente leitura. Não utilize --restaurar-historico como rotina.
+
+DOCUMENTOS DA META 2
+    documentacao/Meta2_Subsecao_4_2_EcoCanta.docx
+    documentacao/Meta2_Identidade_Visual_EcoCanta.docx
+
+O link do GitHub está sinalizado como pendente e pode ser preenchido no Word.
+Para regenerar os documentos a partir de conteudo-meta2.json e das capturas:
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File documentacao/Gerar-Documentos.ps1
+
+Consulte documentacao/RELATORIO_META2.md para alterações, testes e pendências.
+Os novos jogos estão descritos em documentacao/jogos-20261114/RELATORIO.md.

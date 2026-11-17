@@ -1,0 +1,8 @@
+﻿{
+    "endereco":  "http://localhost:5046",
+    "mapa":  "http://localhost:5046/Mapa",
+    "processo":  4716,
+    "http":  200,
+    "modo":  "run --no-build --launch-profile http",
+    "temaAtualizado":  true
+}

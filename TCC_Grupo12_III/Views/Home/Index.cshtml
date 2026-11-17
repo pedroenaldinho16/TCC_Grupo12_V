@@ -1,0 +1,43 @@
+@using TCC_Grupo12_III.Services
+@inject JornadaService Jornada
+@{
+ ViewData["Title"] = "Conhecer para preservar";
+ var logado = User.Identity?.IsAuthenticated == true;
+ var concluido = logado ? Jornada.Concluidos(User) : 0;
+}
+<section class="ec-hero">
+ <div class="ec-container ec-hero-grid">
+  <div>
+   <span class="ec-eyebrow">Educação ambiental · Serra da Cantareira</span>
+   <h1>Aprenda sobre a fauna da <em>Serra da Cantareira.</em></h1>
+   <p>Conheça os animais, descubra sua importância e transforme o que você aprende em atitudes de preservação.</p>
+   <div class="ec-actions"><a class="ec-button" asp-controller="Jornada" asp-action="Index">@(logado ? "Continuar minha jornada" : "Começar minha jornada") <span aria-hidden="true">↗</span></a><a class="ec-button ec-button-outline" asp-controller="Especies" asp-action="Index">Conhecer os animais</a></div>
+  </div>
+  <figure class="ec-hero-media">
+   <img src="~/img/especies/papagaio-de-peito-roxo.jpg" alt="Papagaio-de-peito-roxo, uma das aves apresentadas no catálogo EcoCanta" width="520" height="390" fetchpriority="high" />
+   <figcaption class="ec-photo-caption"><span aria-hidden="true">↗</span><div><strong>Papagaio-de-peito-roxo</strong><span>Uma espécie, muitas descobertas.</span></div></figcaption>
+  </figure>
+ </div>
+</section>
+<div class="ec-container ec-home-map"><partial name="_AcessoMapa" model='new AcessoMapaViewModel(logado, User.IsInRole("Admin"), concluido)' /></div>
+<section class="ec-section">
+ <div class="ec-container">
+  <div class="ec-section-head"><div><span class="ec-eyebrow">Aprenda no seu ritmo</span><h2>@(logado ? $"Sua jornada, {User.Identity?.Name}" : "Sua jornada na EcoCanta")</h2><p>Conheça, reflita e coloque em prática. Três desafios para aprender a preservar.</p></div>@if(logado){<a asp-controller="Jornada" asp-action="Progresso">@concluido de 3 desafios concluídos →</a>}</div>
+  <div class="ec-grid">
+   @for(var i=1;i<=3;i++){
+    var titulo=JornadaService.Titulos[i-1]; var descricoes=new[]{"Vire as cartas e associe as fotografias aos nomes das espécies.","Explore situações reais e entenda as consequências das suas escolhas.","Explore um cenário e cumpra missões para cuidar da Cantareira."};
+    <article class="ec-card"><div class="ec-step"><span>@(i.ToString("00"))</span> Desafio @i</div><h3>@titulo</h3><p>@descricoes[i-1]</p><a asp-controller="Jornada" asp-action="Index" asp-fragment="@($"desafio-{i}")">Explorar desafio <span aria-hidden="true">→</span></a></article>
+   }
+  </div>
+ </div>
+</section>
+<section class="ec-section ec-section-soft">
+ <div class="ec-container">
+  <div class="ec-section-head"><div><span class="ec-eyebrow">CantaDex · Catálogo educativo</span><h2>Uma floresta de descobertas.</h2><p>Explore as fichas e conheça os animais que fazem parte do nosso projeto.</p></div><a asp-controller="Especies" asp-action="Index">Ver catálogo completo →</a></div>
+  <div class="ec-grid ec-grid-two">
+   <a class="ec-category" asp-controller="Especies" asp-action="Index" asp-route-filtro="Aves"><img src="~/img/especies/saira-sete-cores.jpg" alt="Saíra-sete-cores" loading="lazy" width="190" height="195" /><div><h3>Aves</h3><p>Cores, cantos e histórias da fauna da Cantareira.</p><span>Conhecer as aves →</span></div></a>
+   <a class="ec-category" asp-controller="Especies" asp-action="Index" asp-route-filtro="Terrestres"><img src="~/img/especies/bugio-ruivo.jpg" alt="Bugio-ruivo" loading="lazy" width="190" height="195" /><div><h3>Animais terrestres</h3><p>Descubra a vida que encontra abrigo na floresta.</p><span>Explorar espécies →</span></div></a>
+  </div>
+ </div>
+</section>
+<section class="ec-section"><div class="ec-container ec-preserve"><img src="~/img/especies/onca-parda.jpg" alt="Onça-parda" loading="lazy" width="520" height="330" /><div><span class="ec-eyebrow">Conhecer é o primeiro passo</span><h2>A preservação começa com o que você aprende.</h2><p>A EcoCanta aproxima os estudantes do ensino médio da fauna da Serra da Cantareira. Ao conhecer as espécies, suas ameaças e seus habitats, podemos compreender a importância de proteger a biodiversidade regional.</p><a class="ec-button ec-button-outline" asp-controller="Campanhas" asp-action="Index">Preserve a Cantareira →</a></div></div></section>

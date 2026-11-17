@@ -1,0 +1,845 @@
+{
+  "total": 210,
+  "checks": [
+    {
+      "teste": "Aplica\u00E7\u00E3o inicia na c\u00F3pia isolada do banco",
+      "passou": true
+    },
+    {
+      "teste": "Melhorias de interface n\u00E3o exigem altera\u00E7\u00E3o do modelo do banco",
+      "passou": true
+    },
+    {
+      "teste": "Visitante encontra apresenta\u00E7\u00E3o do mapa sem receber avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Mapa vis\u00EDvel no menu principal e na p\u00E1gina inicial",
+      "passou": true
+    },
+    {
+      "teste": "Administrador abre o mapa diretamente pelo novo atalho",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio no servidor orienta o estudante: /Avistamentos",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio no servidor orienta o estudante: /Avistamentos/Registrar",
+      "passou": true
+    },
+    {
+      "teste": "Bloqueio no servidor orienta o estudante: /Avistamentos/Criar",
+      "passou": true
+    },
+    {
+      "teste": "Tentativa insuficiente n\u00E3o apresenta recompensa conquistada",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 1: False",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 1: True",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 2: False",
+      "passou": true
+    },
+    {
+      "teste": "Primeiro desafio mostra o avatar como recompensa no resultado",
+      "passou": true
+    },
+    {
+      "teste": "Mapa bloqueado informa progresso e direciona ao segundo desafio",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 1: True",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 2: True",
+      "passou": true
+    },
+    {
+      "teste": "Segundo desafio equipa o escudo no avatar",
+      "passou": true
+    },
+    {
+      "teste": "Apresenta\u00E7\u00E3o do mapa aponta o \u00FAltimo desafio pendente",
+      "passou": true
+    },
+    {
+      "teste": "Primeiro acesso respeita o tema escuro do sistema",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo light",
+      "passou": true
+    },
+    {
+      "teste": "Prefer\u00EAncia expl\u00EDcita prevalece sobre o tema do sistema ao navegar",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Prefer\u00EAncia escura persiste ap\u00F3s recarregar",
+      "passou": true
+    },
+    {
+      "teste": "Tema inicial aplicado antes das folhas de estilo",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo light",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: inicio-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: inicio-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: inicio-claro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: inicio-claro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: inicio-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: inicio-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: inicio-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: inicio-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mapa-visitante-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mapa-visitante-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mapa-visitante-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mapa-visitante-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: login-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: login-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: login-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: login-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: cadastro-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: cadastro-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: cadastro-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: cadastro-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: inicio-escuro-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: inicio-escuro-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: inicio-escuro-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: inicio-escuro-tablet",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: inicio-escuro-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: inicio-escuro-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: inicio-escuro-celular",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: inicio-escuro-celular",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia de tema vis\u00EDvel com o menu m\u00F3vel fechado",
+      "passou": true
+    },
+    {
+      "teste": "Mapa f\u00E1cil de encontrar no menu m\u00F3vel",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia de tema funciona pelo teclado e atualiza estado acess\u00EDvel",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mapa-bloqueado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mapa-bloqueado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mapa-bloqueado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mapa-bloqueado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mapa-bloqueado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mapa-bloqueado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mapa-bloqueado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mapa-bloqueado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: recompensas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: recompensas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: recompensas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: recompensas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo light",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: recompensas-claro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: recompensas-claro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: recompensas-claro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: recompensas-claro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: recompensas-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: recompensas-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: recompensas-celular",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: recompensas-celular",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: resultado-avatar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: resultado-avatar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: resultado-avatar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: resultado-avatar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: resultado-escudo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: resultado-escudo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: resultado-escudo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: resultado-escudo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: catalogo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: catalogo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: catalogo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: catalogo-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: ficha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: ficha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: ficha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: ficha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: jornada-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: jornada-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: jornada-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: jornada-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: questao-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: questao-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: questao-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: questao-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: campanhas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: campanhas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: campanhas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: campanhas-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mural-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mural-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mural-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mural-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: voz-estudantil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: voz-estudantil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: voz-estudantil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: voz-estudantil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: publicar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: publicar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: publicar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: publicar-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: perfil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: perfil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: perfil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: perfil-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: ajuda-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: ajuda-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: ajuda-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: ajuda-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Estado persistido da recompensa 3: True",
+      "passou": true
+    },
+    {
+      "teste": "Tr\u00EAs desafios fazem o atalho abrir o mapa real",
+      "passou": true
+    },
+    {
+      "teste": "Prote\u00E7\u00E3o do mapa continua liberando estudante ap\u00F3s a jornada",
+      "passou": true
+    },
+    {
+      "teste": "Avatar e escudo preservados ap\u00F3s novo login",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: resultado-mapa-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: resultado-mapa-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: resultado-mapa-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: resultado-mapa-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mapa-liberado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mapa-liberado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mapa-liberado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mapa-liberado-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: mapa-liberado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: mapa-liberado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: mapa-liberado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: mapa-liberado-celular",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-celular-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-especies-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-especies-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-especies-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-especies-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-formulario-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-formulario-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-formulario-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-formulario-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-quiz-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-quiz-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-quiz-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-quiz-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-desafios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-desafios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-desafios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-desafios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-campanha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-campanha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-campanha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-campanha-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo dark",
+      "passou": true
+    },
+    {
+      "teste": "Sem transbordamento: admin-usuarios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Imagens carregadas: admin-usuarios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Sem erros JavaScript: admin-usuarios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Contraste dos componentes principais: admin-usuarios-escuro",
+      "passou": true
+    },
+    {
+      "teste": "Armazenamento bloqueado usa prefer\u00EAncia do sistema",
+      "passou": true
+    },
+    {
+      "teste": "Altern\u00E2ncia para modo light",
+      "passou": true
+    },
+    {
+      "teste": "Tema funciona sem erros quando armazenamento est\u00E1 indispon\u00EDvel",
+      "passou": true
+    },
+    {
+      "teste": "Prefer\u00EAncia por movimento reduzido preservada",
+      "passou": true
+    }
+  ]
+}

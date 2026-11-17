@@ -1,0 +1,161 @@
+@model TCC_Grupo12_III.Models.ForumTopico
+
+@{
+    var isAdmin = ViewBag.IsAdmin is bool b && b;
+    var podePublicarNoticia = ViewBag.PodePublicarNoticia is bool p && p;
+    var ehNoticia = Model.Categoria == "noticia";
+    ViewData["Title"] = ehNoticia ? "Publicar Notícia Oficial" : "Nova Publicação";
+}
+
+<div class="eco-page" style="max-width: 820px; margin: 0 auto;">
+    <!-- Navegação -->
+    <a class="eco-back-link mb-3" asp-controller="Forum" asp-action="Index" asp-route-aba="@(ehNoticia ? "noticias" : "posts")">
+        <i class="bi bi-arrow-left me-1"></i> Voltar para o Fórum
+    </a>
+
+    <div class="eco-page__head mb-4">
+        @if (ehNoticia)
+        {
+            <span class="eco-eyebrow">Portal Oficial de Notícias</span>
+            <h1>Publicar Notícia sobre a Cantareira</h1>
+            <p>Divulgue comunicados oficiais, pesquisas de conservação e alertas para todos os guardiões da serra.</p>
+        }
+        else
+        {
+            <span class="eco-eyebrow">Comunidade & Ciência Cidadã</span>
+            <h1>Nova Publicação na Comunidade</h1>
+            <p>Compartilhe dúvidas, relatos de campo, observações ecológicas ou propostas de preservação.</p>
+        }
+    </div>
+
+    <div class="eco-form-card shadow-sm" style="background: var(--eco-surface); border: 1px solid var(--eco-border); border-radius: var(--eco-radius-lg); padding: 32px 28px;">
+        <form asp-controller="Forum" asp-action="Criar" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            @if (podePublicarNoticia)
+            {
+                <div class="mb-4 p-3" style="background: #FAFCFB; border: 1.5px solid var(--eco-border); border-radius: var(--eco-radius-sm);">
+                    <label class="form-label fw-bold text-dark d-flex align-items-center gap-2 mb-2" style="font-size: 0.95rem;">
+                        <i class="bi bi-diagram-3-fill text-success"></i> Destino da Publicação
+                    </label>
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            <label class="d-flex align-items-start gap-2 p-3 border rounded-3 h-100 cursor-pointer @(Model.Categoria == "noticia" ? "bg-white border-success shadow-sm" : "bg-light")">
+                                <input class="form-check-input mt-1" type="radio" asp-for="Categoria" id="catNoticia" value="noticia" checked="@(Model.Categoria == "noticia")" />
+                                <div>
+                                    <strong class="d-block text-dark" style="font-size: 0.9rem;">
+                                        <i class="bi bi-newspaper me-1 text-success"></i> Notícia Oficial
+                                    </strong>
+                                    <small class="text-muted" style="font-size: 0.78rem;">Publicada na aba de notícias com selo de verificação.</small>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="d-flex align-items-start gap-2 p-3 border rounded-3 h-100 cursor-pointer @(Model.Categoria != "noticia" ? "bg-white border-success shadow-sm" : "bg-light")">
+                                <input class="form-check-input mt-1" type="radio" asp-for="Categoria" id="catComunidade" value="comunidade" checked="@(Model.Categoria != "noticia")" />
+                                <div>
+                                    <strong class="d-block text-dark" style="font-size: 0.9rem;">
+                                        <i class="bi bi-chat-quote-fill me-1 text-primary"></i> Post da Comunidade
+                                    </strong>
+                                    <small class="text-muted" style="font-size: 0.78rem;">Publicada na aba de debates abertos da comunidade.</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Categoria" value="comunidade" />
+            }
+
+            <div class="mb-4">
+                <label asp-for="ComunidadeId" class="form-label fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-people-fill text-success"></i> Comunidade de Destino
+                </label>
+                <select asp-for="ComunidadeId" class="form-select form-select-lg" style="font-size: 0.95rem; border-radius: 8px;">
+                    @if (ViewBag.Comunidades is List<TCC_Grupo12_III.Models.ForumComunidade> coms)
+                    {
+                        foreach (var com in coms)
+                        {
+                            <option value="@com.Id" selected="@(Model.ComunidadeId == com.Id)">
+                                @(com.IsGeral ? "🏛️ " : "🌿 ") @com.Nome @(com.IsGeral ? "(Geral Oficial)" : "")
+                            </option>
+                        }
+                    }
+                </select>
+                <div class="form-text">Selecione a comunidade temática onde seu post será publicado para organizar as discussões.</div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Titulo" class="form-label fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-type-h1 text-success"></i> Título da Publicação
+                </label>
+                <input asp-for="Titulo" class="form-control form-control-lg" placeholder="Ex: Avistamento de Macaco-Bugio próximo ao Núcleo Pedra Grande" style="font-size: 1rem; border-radius: 8px;" />
+                <span asp-validation-for="Titulo" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Conteudo" class="form-label fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-text text-success"></i> Conteúdo / Relato Completo
+                </label>
+                <textarea asp-for="Conteudo" class="form-control" rows="8" 
+                          placeholder="Compartilhe em detalhes: local aproximado, comportamento observado, dúvidas científicas ou orientações de preservação..." 
+                          style="font-size: 0.95rem; border-radius: 8px; line-height: 1.6;"></textarea>
+                <span asp-validation-for="Conteudo" class="text-danger small"></span>
+                <div class="form-text">Dica: Separe as ideias em parágrafos para facilitar a leitura dos outros membros.</div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Hashtags" class="form-label fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-hash text-success"></i> Hashtags Temáticas
+                </label>
+                <input asp-for="Hashtags" id="inputHashtags" class="form-control" 
+                       placeholder="Ex: mataatlantica, oncaparda, conservacao, trilhas" 
+                       style="border-radius: 8px;" />
+                <div class="form-text mb-2">Separe as palavras por vírgula ou espaço.</div>
+                
+                <!-- Sugestões Rápidas de Tags -->
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="small text-muted fw-semibold">Sugestões:</span>
+                    <button type="button" class="btn btn-sm btn-light border py-0 px-2 rounded-pill" onclick="adicionarTag('mataatlantica')">+ mataatlantica</button>
+                    <button type="button" class="btn btn-sm btn-light border py-0 px-2 rounded-pill" onclick="adicionarTag('biodiversidade')">+ biodiversidade</button>
+                    <button type="button" class="btn btn-sm btn-light border py-0 px-2 rounded-pill" onclick="adicionarTag('faunacantareira')">+ faunacantareira</button>
+                    <button type="button" class="btn btn-sm btn-light border py-0 px-2 rounded-pill" onclick="adicionarTag('trilhas')">+ trilhas</button>
+                    <button type="button" class="btn btn-sm btn-light border py-0 px-2 rounded-pill" onclick="adicionarTag('conservacao')">+ conservacao</button>
+                </div>
+                <span asp-validation-for="Hashtags" class="text-danger small"></span>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="d-flex align-items-center justify-content-between pt-3 border-top flex-wrap gap-2">
+                <a asp-controller="Forum" asp-action="Index" class="btn-eco btn-eco--ghost">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-eco btn-eco--solid shadow-sm">
+                    <i class="bi bi-check2-circle me-2"></i>
+                    @(ehNoticia && podePublicarNoticia ? "Publicar Notícia Oficial" : "Publicar no Fórum")
+                    <span class="badge bg-white text-dark ms-2 fw-semibold">+10 XP</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function adicionarTag(tag) {
+        var input = document.getElementById('inputHashtags');
+        if (!input) return;
+        var atual = input.value.trim();
+        var lista = atual ? atual.split(',').map(function(t) { return t.trim().toLowerCase().replace('#', ''); }) : [];
+        if (lista.indexOf(tag.toLowerCase()) === -1) {
+            lista.push(tag.toLowerCase());
+            input.value = lista.join(', ');
+        }
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

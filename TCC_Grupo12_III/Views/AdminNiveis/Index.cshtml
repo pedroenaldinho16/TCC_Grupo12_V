@@ -1,0 +1,72 @@
+@model List<TCC_Grupo12_III.Models.NivelJogo>
+
+@{
+    ViewData["Title"] = "Níveis do jogo";
+    ViewData["AdminTab"] = "niveis";
+    var nivelDoDiaId = ViewBag.NivelDoDiaId as int?;
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <h1>Níveis do jogo</h1>
+            <p>Crie os níveis diários do jogo de plataforma no editor visual e defina a data de cada um.</p>
+        </div>
+        <a class="btn-eco btn-eco--solid" asp-controller="AdminNiveis" asp-action="Create">Novo nível</a>
+    </div>
+
+    <div class="eco-table-wrap">
+        <table class="eco-table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Data</th>
+                    <th>Animais</th>
+                    <th>Status</th>
+                    <th class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nivel in Model)
+                {
+                    <tr>
+                        <td>
+                            @nivel.Titulo
+                            @if (nivelDoDiaId == nivel.Id)
+                            {
+                                <br /><span class="eco-status-pill eco-status-pill--ativa">Nível de hoje</span>
+                            }
+                        </td>
+                        <td>@nivel.Data.ToString("dd/MM/yyyy")</td>
+                        <td>@nivel.TotalAnimais</td>
+                        <td>
+                            @if (nivel.Ativo)
+                            {
+                                <span class="eco-status-pill eco-status-pill--ativa">Ativo</span>
+                            }
+                            else
+                            {
+                                <span class="eco-status-pill eco-status-pill--encerrada">Inativo</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn-eco btn-eco--ghost btn-eco--sm" asp-controller="AdminNiveis" asp-action="Testar" asp-route-id="@nivel.Id">Testar</a>
+                            <a class="btn-eco btn-eco--ghost btn-eco--sm" asp-controller="AdminNiveis" asp-action="Edit" asp-route-id="@nivel.Id">Editar</a>
+                            <form asp-controller="AdminNiveis" asp-action="Delete" asp-route-id="@nivel.Id" method="post" class="d-inline" data-confirmar="Remover o nível @nivel.Titulo?">
+                                <button type="submit" class="btn-eco btn-eco--danger btn-eco--sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5">Nenhum nível cadastrado ainda.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

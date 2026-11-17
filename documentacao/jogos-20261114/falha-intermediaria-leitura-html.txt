@@ -1,0 +1,3 @@
+System.Exception: Resultado histórico continua acessível
+   at JogosEducativos.<>c__DisplayClass0_0.<Run>g__Check|2(Boolean pass, String name) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 24
+   at JogosEducativos.Run(String root) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\JogosEducativos.cs:line 222

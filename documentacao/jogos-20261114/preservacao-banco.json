@@ -1,0 +1,201 @@
+{
+  "preservado": true,
+  "backup": "C:\\Users\\Admin\\Desktop\\recupera\u00E7\u00E3o\\TCC_Grupo12_V\\backups\\antes-jogos-20261114-151846",
+  "tabelas": 24,
+  "antes": {
+    "AvistamentoMidias": {
+      "registros": 6,
+      "sha256": "8E5E333E39C6268586D52EBBD79820DBFC860B32055F861FF6FE200C4EA29C27"
+    },
+    "Avistamentos": {
+      "registros": 6,
+      "sha256": "C346189455A4AA74CEB837B497C55A2C31DC155A62D1CBF462EFA6CAAC9E4225"
+    },
+    "CampanhaParticipacoes": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "Campanhas": {
+      "registros": 6,
+      "sha256": "EDDDCED048AB4E5EA6DF1A2ACF19EFCF0EF7DFAD0398229AE73F69FB0678211D"
+    },
+    "Denuncias": {
+      "registros": 4,
+      "sha256": "E89EA1395868D8F027D063500FAE33A50E1FA0422119E7C1785697D16C9BF968"
+    },
+    "EspecieQuizPerguntas": {
+      "registros": 18,
+      "sha256": "29C0DC910FCFFE291CD9DBDC1A46F07AAE718F005ECFB45130EDDE8BDE39A5D0"
+    },
+    "Especies": {
+      "registros": 6,
+      "sha256": "1E81D550F55CEC9C8E8EDAE78C67FC4EECCBBCDF84F01B2599FAC478765D4E38"
+    },
+    "EstudosCientificos": {
+      "registros": 3,
+      "sha256": "08E004EA7D63886E68F9DE7E0F9A988889A8DF6BA4E6A87BA7E0973F449A7C0E"
+    },
+    "FaqMensagens": {
+      "registros": 6,
+      "sha256": "91D52C9447B0B75027B83A5E75416D286941BF8597183CB94C1089AE8436266B"
+    },
+    "FaqTickets": {
+      "registros": 4,
+      "sha256": "8BCE1316D87098F5A70F649DE0B06BFF381D638E0D8C292ABBBE16D7AC9C94FA"
+    },
+    "ForumComunidades": {
+      "registros": 5,
+      "sha256": "6E7E02804B8A1FA5FC161F729825490E9438B195A9BB42CC3BA024ECBEFAE780"
+    },
+    "ForumCurtidasResposta": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "ForumCurtidasTopico": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "ForumRespostas": {
+      "registros": 14,
+      "sha256": "91BCA03828F82FF90D49A235C6302955BE89682DA3E3014263BE56B6DF31B50C"
+    },
+    "ForumTopicos": {
+      "registros": 9,
+      "sha256": "B0288AD9EF44E5371E4C0D44B9C675985416B2665ABD23D7C5E884CEAEC74BCD"
+    },
+    "JogoTentativas": {
+      "registros": 9,
+      "sha256": "6BBB53B62EC733A7527DC97ED6534200A73C1A1AD227A563CCA8B75970116865"
+    },
+    "JornadaPerguntas": {
+      "registros": 26,
+      "sha256": "472B952F5E7C4D24E894FB0731F06973BFF2895284497033EA7052729C3C016F"
+    },
+    "JornadaTentativas": {
+      "registros": 3,
+      "sha256": "7D648991FDA62F85D5E9EA8C7210B1258663F449670AE685DE0BCC858991B8D9"
+    },
+    "NivelJogos": {
+      "registros": 1,
+      "sha256": "06B3C6BEFDF05B6F7BABD4E5FC1151273D7DC377D32FF5431041A2221F372F65"
+    },
+    "NotasEstudo": {
+      "registros": 1,
+      "sha256": "FE3A36B653722DCEA8C2C3585B1FCCA363153DFBA9154B7AE6D79109FCE96D34"
+    },
+    "PokedexRegistros": {
+      "registros": 12,
+      "sha256": "CC350073C1CFCB38E884567898968F0FC0A92896E251556DBB94C607CC9A09ED"
+    },
+    "ReservasAvistamento": {
+      "registros": 5,
+      "sha256": "D8A19C11C62BEB6C5215DB16FB2F4C8593A53B683CB46C90658FEE7FA1736841"
+    },
+    "Usuarios": {
+      "registros": 16,
+      "sha256": "B3DAB564F1E88E1A6699C73551913C4CA09ECC0855C221D7F72644FC72EB16A7"
+    },
+    "__EFMigrationsHistory": {
+      "registros": 19,
+      "sha256": "52AAF92E329895C7EEA42C0D72D27C0298C31EB956FBC5BCBC0C2089FDCCE610"
+    }
+  },
+  "depois": {
+    "AvistamentoMidias": {
+      "registros": 6,
+      "sha256": "8E5E333E39C6268586D52EBBD79820DBFC860B32055F861FF6FE200C4EA29C27"
+    },
+    "Avistamentos": {
+      "registros": 6,
+      "sha256": "C346189455A4AA74CEB837B497C55A2C31DC155A62D1CBF462EFA6CAAC9E4225"
+    },
+    "CampanhaParticipacoes": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "Campanhas": {
+      "registros": 6,
+      "sha256": "EDDDCED048AB4E5EA6DF1A2ACF19EFCF0EF7DFAD0398229AE73F69FB0678211D"
+    },
+    "Denuncias": {
+      "registros": 4,
+      "sha256": "E89EA1395868D8F027D063500FAE33A50E1FA0422119E7C1785697D16C9BF968"
+    },
+    "EspecieQuizPerguntas": {
+      "registros": 18,
+      "sha256": "29C0DC910FCFFE291CD9DBDC1A46F07AAE718F005ECFB45130EDDE8BDE39A5D0"
+    },
+    "Especies": {
+      "registros": 6,
+      "sha256": "1E81D550F55CEC9C8E8EDAE78C67FC4EECCBBCDF84F01B2599FAC478765D4E38"
+    },
+    "EstudosCientificos": {
+      "registros": 3,
+      "sha256": "08E004EA7D63886E68F9DE7E0F9A988889A8DF6BA4E6A87BA7E0973F449A7C0E"
+    },
+    "FaqMensagens": {
+      "registros": 6,
+      "sha256": "91D52C9447B0B75027B83A5E75416D286941BF8597183CB94C1089AE8436266B"
+    },
+    "FaqTickets": {
+      "registros": 4,
+      "sha256": "8BCE1316D87098F5A70F649DE0B06BFF381D638E0D8C292ABBBE16D7AC9C94FA"
+    },
+    "ForumComunidades": {
+      "registros": 5,
+      "sha256": "6E7E02804B8A1FA5FC161F729825490E9438B195A9BB42CC3BA024ECBEFAE780"
+    },
+    "ForumCurtidasResposta": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "ForumCurtidasTopico": {
+      "registros": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "ForumRespostas": {
+      "registros": 14,
+      "sha256": "91BCA03828F82FF90D49A235C6302955BE89682DA3E3014263BE56B6DF31B50C"
+    },
+    "ForumTopicos": {
+      "registros": 9,
+      "sha256": "B0288AD9EF44E5371E4C0D44B9C675985416B2665ABD23D7C5E884CEAEC74BCD"
+    },
+    "JogoTentativas": {
+      "registros": 9,
+      "sha256": "6BBB53B62EC733A7527DC97ED6534200A73C1A1AD227A563CCA8B75970116865"
+    },
+    "JornadaPerguntas": {
+      "registros": 26,
+      "sha256": "472B952F5E7C4D24E894FB0731F06973BFF2895284497033EA7052729C3C016F"
+    },
+    "JornadaTentativas": {
+      "registros": 3,
+      "sha256": "7D648991FDA62F85D5E9EA8C7210B1258663F449670AE685DE0BCC858991B8D9"
+    },
+    "NivelJogos": {
+      "registros": 1,
+      "sha256": "06B3C6BEFDF05B6F7BABD4E5FC1151273D7DC377D32FF5431041A2221F372F65"
+    },
+    "NotasEstudo": {
+      "registros": 1,
+      "sha256": "FE3A36B653722DCEA8C2C3585B1FCCA363153DFBA9154B7AE6D79109FCE96D34"
+    },
+    "PokedexRegistros": {
+      "registros": 12,
+      "sha256": "CC350073C1CFCB38E884567898968F0FC0A92896E251556DBB94C607CC9A09ED"
+    },
+    "ReservasAvistamento": {
+      "registros": 5,
+      "sha256": "D8A19C11C62BEB6C5215DB16FB2F4C8593A53B683CB46C90658FEE7FA1736841"
+    },
+    "Usuarios": {
+      "registros": 16,
+      "sha256": "B3DAB564F1E88E1A6699C73551913C4CA09ECC0855C221D7F72644FC72EB16A7"
+    },
+    "__EFMigrationsHistory": {
+      "registros": 19,
+      "sha256": "52AAF92E329895C7EEA42C0D72D27C0298C31EB956FBC5BCBC0C2089FDCCE610"
+    }
+  }
+}

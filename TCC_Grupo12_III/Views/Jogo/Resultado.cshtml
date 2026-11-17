@@ -1,0 +1,100 @@
+@model TCC_Grupo12_III.Models.JogoResultadoViewModel
+@using TCC_Grupo12_III.Data
+@using TCC_Grupo12_III.Services
+
+@{
+    ViewData["Title"] = "Resultado";
+    var tempo = TimeSpan.FromSeconds(Model.Tentativa.TempoSegundos);
+    var xpTotal = NivelHelper.XpJogoDiarioBase + Model.Tentativa.AnimaisResgatados * NivelHelper.XpPorAnimalResgatado;
+}
+
+<div class="eco-page">
+    <div class="eco-page__head">
+        <h1>Resultado da missão</h1>
+        <p>@Model.Nivel.Titulo · @Model.Nivel.Data.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <div class="eco-quiz-card">
+        <div class="eco-quiz-card__meta">
+            <span class="eco-status-pill eco-status-pill--ativa">🐾 @Model.Tentativa.AnimaisResgatados de @Model.Tentativa.TotalAnimais animais</span>
+            <span class="eco-quiz-timer-chip">⏱️ @tempo.ToString(@"mm\:ss")</span>
+            <span class="eco-quiz-timer-chip">❤️ @Model.Tentativa.VidasRestantes vidas restantes</span>
+            <span class="eco-quiz-timer-chip">+@xpTotal XP</span>
+        </div>
+
+        @if (Model.EspecieSalva != null)
+        {
+            <div class="eco-reserva-sucesso-box mb-4">
+                <div class="eco-reserva-sucesso-box__emoji">
+                    @Model.EspecieSalvaEmoji
+                </div>
+                <div>
+                    <h3 class="text-success m-0">Espécie Salva: @Model.EspecieSalva.Nome! 🎉</h3>
+                    <p class="mb-1">
+                        Você concluiu o nível e resgatou @Model.EspecieSalva.Nome no fim da trilha!
+                    </p>
+                    <div class="eco-reserva-tag">
+                        ✨ <strong>+1 avistamento</strong> adicionado à sua Reserva! 
+                        (Total atual: <strong>@Model.ReservaTotalEspecie</strong> disponível@(Model.ReservaTotalEspecie == 1 ? "" : "s"))
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Tentativa.AnimaisResgatados == Model.Tentativa.TotalAnimais && Model.Tentativa.TotalAnimais > 0)
+        {
+            <h2>Resgate perfeito!</h2>
+            <p>Você resgatou todos os animais da trilha e salvou a espécie escolhida. A Serra da Cantareira agradece! 🌳</p>
+        }
+        else
+        {
+            <h2>Missão cumprida!</h2>
+            <p>Você chegou com segurança à base de resgate. Jogue novamente para salvar outras espécies e recarregar sua reserva!</p>
+        }
+
+        @if (Model.EspeciesResgatadas.Count > 0)
+        {
+            <p class="eco-section-title">Outros animais resgatados no percurso</p>
+            <div class="eco-jogo-resgatados">
+                @foreach (var especie in Model.EspeciesResgatadas)
+                {
+                    <a class="eco-jogo-resgatado" asp-controller="Especies" asp-action="Detalhe" asp-route-id="@especie.Id" title="Saiba mais sobre a espécie">
+                        <span class="eco-jogo-resgatado__emoji">@NivelJogoService.EmojiPara(especie)</span>
+                        <span>@especie.Nome</span>
+                    </a>
+                }
+            </div>
+        }
+
+        <div class="eco-jogo__acoes mt-4">
+            <a class="btn-eco btn-eco--solid" asp-controller="Avistamentos" asp-action="Index">Ir para o Mapa de Avistamentos</a>
+            <a class="btn-eco btn-eco--ghost" asp-controller="Jogo" asp-action="Index">Salvar outra espécie</a>
+            <a class="btn-eco btn-eco--ghost" asp-controller="Home" asp-action="Index">Voltar ao início</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .eco-reserva-sucesso-box {
+        background: #eef9f2;
+        border: 2px solid #2e7d32;
+        border-radius: 12px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+    .eco-reserva-sucesso-box__emoji {
+        font-size: 3rem;
+        line-height: 1;
+    }
+    .eco-reserva-tag {
+        display: inline-block;
+        background: #2e7d32;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.88rem;
+        margin-top: 6px;
+    }
+</style>

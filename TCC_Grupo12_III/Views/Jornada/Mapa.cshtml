@@ -1,0 +1,50 @@
+@model List<JornadaTentativa>
+@using TCC_Grupo12_III.Services
+@{
+    ViewData["Title"] = "Mapa de avistamentos";
+    var logado = User.Identity?.IsAuthenticated == true;
+    var feitos = Model.Where(t => t.Aprovada).Select(t => t.Desafio).Distinct().ToHashSet();
+    var proximo = Enumerable.Range(1, 3).First(i => !feitos.Contains(i));
+}
+<div class="ec-page">
+    <span class="ec-eyebrow">O próximo destino da sua jornada</span>
+    <h1>Mapa de avistamentos</h1>
+    <p class="ec-lead">Encontre registros de fauna da Serra da Cantareira e aprenda a observar a natureza com responsabilidade.</p>
+    <div class="ec-map-intro-grid">
+        <section class="ec-map-preview" aria-label="Apresentação ilustrativa do mapa">
+            <svg viewBox="0 0 520 280" fill="none" role="img" aria-label="Ilustração de uma floresta e uma trilha; não representa localizações de animais">
+                <rect width="520" height="280" rx="18" fill="var(--mist)"/>
+                <path d="M0 170 95 80l125 105L340 65l180 117v98H0Z" fill="var(--line)"/>
+                <path d="M0 231 143 128l99 96L385 99l135 135v46H0Z" fill="var(--green)" opacity=".22"/>
+                <path d="M130 280c-15-51 154-38 145-95s-100-44-63-83" stroke="var(--surface)" stroke-width="12" stroke-linecap="round"/>
+                <path d="M326 128c0 25-30 50-30 50s-30-25-30-50a30 30 0 1 1 60 0Z" fill="var(--button-bg)"/><circle cx="296" cy="128" r="10" fill="var(--button-text)"/>
+            </svg>
+            <p>Ao desbloquear, você poderá filtrar espécies, conhecer registros aprovados e enviar observações para análise.</p>
+            <small>Ilustração de apresentação. As posições reais dos animais permanecem protegidas.</small>
+        </section>
+        <section class="ec-card ec-map-requirements" aria-labelledby="requisitos-mapa">
+            <span class="ec-pill">@(logado ? $"{feitos.Count} de 3 desafios concluídos" : "Uma conquista da jornada")</span>
+            <h2 id="requisitos-mapa">Como desbloquear o mapa</h2>
+            <p>Complete as associações do Detetive, alcance <strong>70% no quiz do Guardião</strong> e cumpra todas as missões do cenário. Você pode revisar e tentar novamente.</p>
+            <ol class="ec-map-checklist">
+                @for (var i = 1; i <= 3; i++)
+                {
+                    <li class="@(feitos.Contains(i) ? "is-complete" : "")">
+                        <span class="ec-check-marker" aria-hidden="true">@(feitos.Contains(i) ? "✓" : i.ToString())</span>
+                        <span><strong>@JornadaService.Titulos[i - 1]</strong><small>@(feitos.Contains(i) ? "Concluído" : i == proximo ? "Seu próximo passo" : "Disponível após a etapa anterior")</small></span>
+                    </li>
+                }
+            </ol>
+            @if (logado)
+            {
+                <a class="ec-button" asp-action="Index" asp-fragment="@($"desafio-{proximo}")">Continuar no desafio @proximo <span aria-hidden="true">→</span></a>
+            }
+            else
+            {
+                <a class="ec-button" asp-controller="Login" asp-action="Index" asp-route-returnUrl="/Mapa">Entrar para começar <span aria-hidden="true">→</span></a>
+                <a class="mt-3" asp-controller="Cadastro" asp-action="Index">Ainda não tenho conta</a>
+            }
+        </section>
+    </div>
+    <p class="ec-map-help">O botão Mapa permanece no menu durante toda a jornada. Quando os três desafios estiverem concluídos, ele abrirá o mapa diretamente.</p>
+</div>

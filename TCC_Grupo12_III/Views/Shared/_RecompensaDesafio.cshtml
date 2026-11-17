@@ -1,0 +1,25 @@
+@model int
+@using TCC_Grupo12_III.Services
+<section class="ec-earned-reward" aria-labelledby="recompensa-titulo" data-reward-stage="@Model">
+    @if (Model < 3)
+    {
+        <partial name="_GuardiaoAvatar" model="new GuardiaoAvatarViewModel(true, Model >= 2, true)" />
+    }
+    else
+    {
+        <div class="ec-map-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 12-5 14 5 12-5v29l-12 5-14-5-12 5Z"/><path d="M17 7v29M31 12v29"/><path d="m20 23 5 5 9-11" stroke-width="3"/></svg></div>
+    }
+    <div>
+        <span class="ec-eyebrow">Conquista desta etapa</span>
+        <h2 id="recompensa-titulo">@JornadaService.Recompensas[Model - 1]</h2>
+        <p>@(Model == 1 ? "Seu avatar de Guardião está disponível em Minhas conquistas." : Model == 2 ? "O escudo de Guardião agora acompanha seu avatar em Minhas conquistas." : "Você concluiu a jornada! Agora pode explorar o mapa de avistamentos.")</p>
+        @if (Model == 3)
+        {
+            <a class="ec-button" asp-controller="Jornada" asp-action="Mapa">Abrir meu mapa <span aria-hidden="true">→</span></a>
+        }
+        else
+        {
+            <a asp-controller="Jornada" asp-action="Progresso">Ver meu avatar e minhas conquistas <span aria-hidden="true">→</span></a>
+        }
+    </div>
+</section>

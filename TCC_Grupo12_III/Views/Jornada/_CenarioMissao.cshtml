@@ -1,0 +1,38 @@
+@model JornadaJogoViewModel
+@using TCC_Grupo12_III.Services
+@{
+    var e=Model.Estado; var passo=JornadaJogosService.Passo(e);
+    var atendida=e.Objetivos.Contains("ave-atendida"); var sinalizada=e.Objetivos.Contains("trilha-sinalizada");
+}
+<div class="ec-mission-scene" data-scene-stage="@passo.Etapa" role="group" aria-label="Cenário da missão @Math.Min(passo.Etapa,3): @passo.Titulo">
+    <img class="ec-forest-scene" src="~/img/jogos/cantareira-cenario.svg" alt="" draggable="false" />
+    <span class="ec-scene-location">Serra da Cantareira <span>Visita educativa</span></span>
+    @if(passo.Etapa==1){
+        @foreach(var item in new[]{(Id:"garrafa",Nome:"Garrafa plástica",Classe:"bottle"),(Id:"lata",Nome:"Lata de alumínio",Classe:"can"),(Id:"embalagem",Nome:"Embalagem",Classe:"wrapper")}){
+            if(!e.Objetivos.Contains("descarte-"+item.Id) && e.Carregando!=item.Id){
+                <button class="ec-scene-object ec-scene-rubbish ec-object-@item.Classe" name="alvo" value="@item.Id" type="submit" data-drag-source="@item.Id" data-drag-destination="descarte" aria-pressed="false" aria-label="Arrastar @item.Nome para a lixeira; ou selecionar e depois ativar a lixeira" data-focus-key="objeto-@item.Id">
+                    <partial name="_IconeMissao" model="item.Id" /><span>@item.Nome</span><small>Arraste</small>
+                </button>
+            }
+        }
+    }
+    <button class="ec-scene-object ec-object-bin @(passo.Etapa!=1 ? "ec-scene-decoration" : "")" name="alvo" value="descarte" type="submit" disabled="@(passo.Etapa!=1)" data-drop-target="descarte" data-accept="garrafa lata embalagem" aria-label="Lixeira na entrada: solte os resíduos aqui; ou ative depois de selecionar um resíduo" data-focus-key="objeto-descarte">
+        <partial name="_IconeMissao" model='@("descarte")' /><span>Lixeira</span><small>@(passo.Etapa==1 ? "Solte aqui ↓" : "Trilha limpa ✓")</small>
+    </button>
+    @if(passo.Etapa>=2){
+        <div class="ec-bird-station">
+            <span class="ec-scene-zone">@(atendida ? "Ave em atendimento" : "Mantenha distância")</span>
+            <button class="ec-scene-object ec-object-bird @(atendida ? "is-resolved" : "")" name="alvo" value="ave" type="submit" disabled="@(passo.Etapa!=2)" data-drop-target="ave" data-accept="binoculos sinalizacao radio" aria-label="@(atendida ? "Ave em atendimento" : "Ave presa: solte aqui o item da missão")" data-focus-key="objeto-ave">
+                <partial name="_IconeMissao" model='@("ave")' /><span>@(atendida ? "Equipe no local ✓" : "Ave presa")</span><small>@(atendida ? "Ajuda acionada" : "Solte o item aqui")</small>
+            </button>
+            @if(e.Objetivos.Contains("ave-sinalizada")){<div class="ec-scene-cone" aria-hidden="true"><partial name="_IconeMissao" model='@("sinalizacao")' /></div>}
+            @if(atendida){<svg class="ec-scene-ranger" viewBox="0 0 44 90" aria-hidden="true"><path d="M14 58v30m16-30v30" stroke="#30483b" stroke-width="10"/><path d="M9 37q13-8 26 0v28H9Z" fill="#e5d9ae" stroke="#426d5a" stroke-width="3"/><path d="m8 38-6 22m34-22 6 22" stroke="#ad7f5a" stroke-width="6"/><circle cx="22" cy="20" r="12" fill="#ad7f5a"/><path d="M6 13h32M11 12l4-10h15l4 10" stroke="#426d5a" fill="#426d5a" stroke-width="4"/><path d="M17 42h10v10H17Z" fill="#426d5a"/></svg>}
+        </div>
+    }
+    @if(passo.Etapa>=3){
+        <button class="ec-scene-object ec-object-trail @(sinalizada ? "is-resolved" : "")" name="alvo" value="atalho" type="submit" data-drop-target="atalho" data-accept="binoculos placa" aria-label="Atalho fora do percurso: solte aqui o item da missão" data-focus-key="objeto-atalho">
+            <partial name="_IconeMissao" model='@(sinalizada ? "placa" : "atalho")' /><span>@(sinalizada ? "Percurso sinalizado ✓" : "Atalho fora da trilha")</span><small>@(sinalizada ? "Vegetação protegida" : "Solte o item aqui")</small>
+        </button>
+    }
+    @if(passo.Etapa==4){<span class="ec-scene-finish">✓ Você fez a diferença!</span>}
+</div>

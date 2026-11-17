@@ -1,0 +1,3 @@
+@model TCC_Grupo12_III.Models.ArtigoEducacao
+@{ViewData["Title"]=Model.Titulo;}
+<article class="ec-page" style="max-width:840px"><a class="ec-breadcrumb" asp-action="Index">← Voz Estudantil</a><span class="ec-eyebrow">@Model.Categoria</span><h1>@Model.Titulo</h1><p class="ec-lead">@Model.Resumo</p><p>@Model.Autor · @Model.DataPublicacao.ToString("dd/MM/yyyy")</p><div class="ec-article">@ViewBag.Conteudo</div><h2 class="mt-5">Referências informadas</h2><ul>@foreach(var r in Model.Referencias){<li>@r</li>}</ul><a class="ec-button" asp-controller="Jornada" asp-action="Index">Continuar aprendendo →</a></article>

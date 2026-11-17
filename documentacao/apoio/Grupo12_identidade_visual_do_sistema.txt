@@ -1,0 +1,69 @@
+ETEC de Campo Limpo Paulista
+Disciplina: Usabilidade, Design de Interação e Acessibilidade
+Nº do grupo e Integrantes: Grupo 12 – Murilo Henrique Almeida de Santana, Gustavo Henrique de Souza Faria, Pedro Gabriel Farias da Silva.
+
+
+IDENTIDADE VISUAL DO SISTEMA
+
+1 – Problema e Objetivo do sistema
+
+Objetivo do sistema:
+
+A plataforma tem como objetivo conscientizar estudantes do Ensino Médio sobre a extinção das espécies terrestres e aviárias na Serra da Cantareira, permitindo que eles aprendam por meio de um catálogo, pratiquem seus conhecimentos com um quiz, compartilhem informações em um fórum, leiam notícias importantes sobre a Serra, observem as espécies através de registros em um mapa, sejam informados sobre novas campanhas e denunciem casos de descumprimento ao meio ambiente. Nossa plataforma busca, por meio dos estudantes, expandir o conhecimento sobre a Serra da Cantareira, tendo em vista sua importância para o nosso estado, além de contribuir para a melhora da consciência ambiental.
+
+Problema que o sistema busca solucionar:
+
+Recentemente, temos percebido uma preocupação crescente em relação ao meio ambiente, principalmente no que diz respeito à Mata Atlântica. Notamos que o principal núcleo regional da Mata Atlântica tem sofrido diversos impactos decorrentes da expansão urbana, os quais ocorrem, em grande parte, por desconhecimento geral da população. A falta de consciência ambiental pode gerar graves consequências futuras para o nosso ambiente.
+
+2 - Público-alvo
+
+A plataforma é destinada a estudantes do Ensino Médio, entre 15 e 19 anos de idade, que pouco conhecem a importância da Serra da Cantareira. Buscamos oferecer a eles uma forma prática, divertida e social de aprender mais sobre a fauna da Serra e de se conscientizar sobre sua preservação.
+
+3 - Nome e conceito do sistema
+
+A nossa plataforma recebeu o nome EcoCanta com o objetivo de representar a conscientização ambiental entre os estudantes do Ensino Médio. O nome está relacionado à forma como nos referimos à fauna da Serra da Cantareira, que faz parte do ecossistema local, além de fazer referência direta à própria Serra. Também é um nome simples, minimalista e intuitivo, o que gera uma boa identificação com o público jovem e facilita o acesso deles à plataforma.
+
+4 - Logotipo
+
+
+Figura 1 – Logotipo da plataforma
+Fonte: Elaborada pelos autores (2026).
+
+O logotipo apresenta uma gota em ciano, escolhida para representar a vida, sobre um fundo verde, que representa a fauna da Serra da Cantareira. A utilização desse logotipo cria uma associação imediata com o sistema, justamente por sua simplicidade e minimalismo, além do uso de cores específicas e não saturadas, o que facilita sua identificação pelo público-alvo.
+
+5 - Tipografia
+
+
+A tipografia da plataforma foi definida visando à legibilidade e ao conforto do usuário ao utilizar o sistema. A fonte Inter é utilizada como principal, em parágrafos e textos gerais. A fonte Sora é utilizada em títulos e destaques, complementando a Inter. A combinação dessas duas fontes foi pensada para compor um site de visual simples e “tragável”.
+
+6 - Paleta de cores
+
+
+Figura 2 – Paleta de cores da plataforma
+Fonte: Elaborada pelos autores (2026).
+
+A paleta de cores foi definida visando o conforto, a simplicidade e o minimalismo, sem sobrecarregar os jovens com estímulos visuais, além de se alinhar ao conceito de natureza e educação. A cor #106EFC foi usada especialmente em botões, indicando que ali é possível realizar uma ação, por se tratar de uma cor mais chamativa. A cor #2B8171 foi utilizada em pequenos textos e em alguns botões, representando a identidade ambientalista do site. A cor #214F46 foi utilizada no nome da plataforma e para dar profundidade às cores do site. A cor #F1FAF7 foi usada como plano de fundo do site, com um tom levemente esverdeado, para combinar com a identidade do site. Já a cor #FFFFFF foi utilizada para destacar elementos que não fazem parte do plano de fundo, como o header e o footer.
+
+7 - Aplicação da identidade visual no sistema
+
+
+Figura 3 – Tela inicial da plataforma
+Fonte: Elaborada pelos autores (2026).
+
+
+Figura 4 – Tela de login da plataforma
+Fonte: Elaborada pelos autores (2026).
+
+
+Figura 5 – Tela de cadastro da plataforma
+Fonte: Elaborada pelos autores (2026).
+
+
+
+A identidade visual foi aplicada nas diferentes telas do sistema com o objetivo de manter uma apresentação consistente, organizada e adequada ao público-alvo. A utilização da mesma paleta de cores, tipografia e elementos gráficos permite que o usuário reconheça padrões entre as diferentes telas, facilitando a navegação e a compreensão das funcionalidades.
+Na tela inicial, a cor #214F46 é utilizada como plano de fundo em degradê, remetendo às montanhas da Serra da Cantareira, enquanto o botão “Entrar” aparece em branco e o botão “Cadastrar” em um tom mais escuro, destacando as duas principais ações da página. O logotipo e o nome EcoCanta aparecem no cabeçalho, junto ao menu de navegação, seguindo a tipografia Sora nos títulos e Inter no texto de apoio, o que garante legibilidade mesmo sobre um fundo colorido.
+Na tela de login, o fundo claro (#F1FAF7) e o cabeçalho branco reforçam a simplicidade e o minimalismo da identidade visual. Os campos de “Email” e “Senha” são apresentados em caixas brancas bem delimitadas, e o botão principal “Entrar” utiliza a cor #106EFC, destacando-se como a ação central da tela. O link “Cadastre-se”, em verde, mantém a coerência com a identidade ambientalista do sistema e orienta o usuário que ainda não possui conta.
+A tela de cadastro segue o mesmo padrão visual da tela de login, mantendo a organização dos campos (“Nome completo”, “Email” e “Senha”) e o botão azul “Cadastrar” como elemento de destaque. Essa repetição de estrutura reduz a curva de aprendizado do usuário, que já reconhece o padrão de formulários do sistema, tornando o processo de cadastro rápido e intuitivo.
+A aplicação da identidade visual nas telas contribui para a usabilidade ao estabelecer padrões visuais consistentes. O usuário pode reconhecer facilmente os elementos de navegação, identificar as ações mais importantes por meio das cores de destaque e compreender a organização das informações em cada etapa do seu percurso pela plataforma.
+
+

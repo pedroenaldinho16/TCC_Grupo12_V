@@ -1,0 +1,104 @@
+@model TCC_Grupo12_III.Models.Especie
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+@if (Model.Id != 0)
+{
+    <input type="hidden" asp-for="Id" />
+}
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Nome" class="form-label"></label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="NomeCientifico" class="form-label"></label>
+        <input asp-for="NomeCientifico" class="form-control" />
+        <span asp-validation-for="NomeCientifico" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Categoria" class="form-label"></label>
+        <select asp-for="Categoria" class="form-select">
+            <option>Mamíferos</option>
+            <option>Aves</option>
+            <option>Répteis</option>
+        </select>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="StatusConservacao" class="form-label"></label>
+        <select asp-for="StatusConservacao" class="form-select">
+            <option>Pouco Preocupante</option>
+            <option>Quase Ameaçada</option>
+            <option>Vulnerável</option>
+            <option>Em Perigo</option>
+            <option>Criticamente Ameaçado</option>
+        </select>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Tags" class="form-label"></label>
+    <input asp-for="Tags" class="form-control" placeholder="Ex: Floresta Densa, Mamífero, Carnívoro, Noturno" />
+</div>
+
+<div class="mb-3">
+    <label asp-for="Habitat" class="form-label"></label>
+    <textarea asp-for="Habitat" class="form-control"></textarea>
+    <span asp-validation-for="Habitat" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Alimentacao" class="form-label"></label>
+    <textarea asp-for="Alimentacao" class="form-control"></textarea>
+    <span asp-validation-for="Alimentacao" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Ameacas" class="form-label"></label>
+    <textarea asp-for="Ameacas" class="form-control" rows="4"></textarea>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Caracteristicas" class="form-label"></label>
+    <textarea asp-for="Caracteristicas" class="form-control"></textarea>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Comportamento" class="form-label"></label>
+    <textarea asp-for="Comportamento" class="form-control"></textarea>
+</div>
+
+<div class="mb-4">
+    <label asp-for="StatusDetalhe" class="form-label"></label>
+    <textarea asp-for="StatusDetalhe" class="form-control"></textarea>
+</div>
+
+<div class="mb-4">
+    <label for="imagem" class="form-label">Imagem da espécie</label>
+    <input type="hidden" asp-for="ImagemUrl" />
+    @if (!string.IsNullOrWhiteSpace(Model.ImagemUrl))
+    {
+        <div class="eco-image-preview">
+            <img src="@Model.ImagemUrl" alt="Imagem atual de @Model.Nome" />
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" name="removerImagem" value="true" id="removerImagem" />
+            <label class="form-check-label" for="removerImagem">Remover imagem atual</label>
+        </div>
+    }
+    <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*" />
+    <div class="form-text">JPG, PNG, WEBP ou GIF de até 5 MB. Ela aparece no card da espécie.</div>
+    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+    <span class="text-danger">@Html.ValidationMessage("imagem")</span>
+</div>
+
+
+<h2 class="mt-4">Revisão científica e conservação</h2><p>Informe a avaliação, o ano e a fonte em cada abrangência. Deixe vazio quando ainda não houver validação.</p><div class="ec-field"><label for="ImportanciaEcologica">Importância ecológica</label><textarea id="ImportanciaEcologica" name="ImportanciaEcologica" rows="3">@Model.ImportanciaEcologica</textarea></div><div class="ec-field"><label for="AcoesPreservacao">Atitudes de preservação</label><textarea id="AcoesPreservacao" name="AcoesPreservacao" rows="3">@Model.AcoesPreservacao</textarea></div><div class="ec-field"><label for="FonteCientifica">Referências científicas da ficha</label><textarea id="FonteCientifica" name="FonteCientifica" rows="3">@Model.FonteCientifica</textarea></div><div class="ec-field"><label for="ConservacaoGlobal">Conservação global: avaliação, ano e fonte</label><textarea id="ConservacaoGlobal" name="ConservacaoGlobal" rows="3">@Model.ConservacaoGlobal</textarea></div><div class="ec-field"><label for="ConservacaoNacional">Conservação no Brasil: avaliação, ano e fonte</label><textarea id="ConservacaoNacional" name="ConservacaoNacional" rows="3">@Model.ConservacaoNacional</textarea></div><div class="ec-field"><label for="ConservacaoRegional">Conservação em São Paulo: avaliação, ano e fonte</label><textarea id="ConservacaoRegional" name="ConservacaoRegional" rows="3">@Model.ConservacaoRegional</textarea></div><div class="d-flex gap-2">
+    <button type="submit" class="btn-eco btn-eco--solid">Salvar</button>
+    <a class="btn-eco btn-eco--ghost" asp-controller="AdminEspecies" asp-action="Index">Cancelar</a>
+</div>

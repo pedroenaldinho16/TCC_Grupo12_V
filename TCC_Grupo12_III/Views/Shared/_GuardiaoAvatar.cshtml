@@ -1,0 +1,28 @@
+@model GuardiaoAvatarViewModel
+<div class="ec-guardian @(Model.Compacto ? "ec-guardian-compact" : "") @(!Model.Conquistado ? "is-locked" : "")"
+     role="img" aria-label="@(Model.Conquistado ? Model.Acessorio ? "Avatar de Guardião com escudo conquistado" : "Avatar de Guardião conquistado" : "Avatar de Guardião ainda não conquistado")">
+    <svg viewBox="0 0 160 160" fill="none" aria-hidden="true">
+        <circle cx="80" cy="80" r="77" fill="var(--mist)" stroke="var(--line)" stroke-width="2"/>
+        @if (Model.Conquistado)
+        {
+            <path d="M29 145v-17c0-27 22-43 51-43s51 16 51 43v17" fill="#2B8171"/>
+            <path d="m61 92 19 19 19-19" fill="#214F46"/>
+            <path d="M69 81v15l11 11 11-11V81" fill="#B97650"/>
+            <ellipse cx="80" cy="61" rx="29" ry="34" fill="#D8A17C"/>
+            <path d="M50 58c-7-28 11-42 30-42 25 0 38 19 29 45l-8-21c-17 8-29 8-41 5Z" fill="#302C25"/>
+            <path d="M66 63h1m26 0h1" stroke="#302C25" stroke-width="5" stroke-linecap="round"/>
+            <path d="M72 78q8 7 16 0" stroke="#78482F" stroke-width="3" stroke-linecap="round"/>
+            <path d="M80 111v34" stroke="#214F46" stroke-width="3"/>
+            <path d="M43 125h19m38 0h17" stroke="#A5D9BF" stroke-width="3" stroke-linecap="round"/>
+            @if (Model.Acessorio)
+            {
+                <g data-guardian-accessory><path d="m115 103 18 6v14c0 13-18 23-18 23s-18-10-18-23v-14Z" fill="#E2F5E9" stroke="#214F46" stroke-width="3"/><path d="m106 123 6 6 12-14" stroke="#2B8171" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+            }
+        }
+        else
+        {
+            <rect x="54" y="66" width="52" height="43" rx="9" stroke="var(--muted)" stroke-width="4"/>
+            <path d="M64 66V54a16 16 0 0 1 32 0v12M80 84v9" stroke="var(--muted)" stroke-width="4" stroke-linecap="round"/>
+        }
+    </svg>
+</div>

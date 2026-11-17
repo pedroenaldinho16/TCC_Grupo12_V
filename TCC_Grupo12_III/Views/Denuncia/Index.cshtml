@@ -1,0 +1,102 @@
+@model TCC_Grupo12_III.Models.Denuncia
+
+@{
+    ViewData["Title"] = "Denúncia Ambiental";
+}
+
+<div class="eco-page">
+    <div class="eco-page__head">
+        <h1>Denúncia Ambiental</h1>
+        <p>Ajude a proteger a fauna da Serra da Cantareira</p>
+    </div>
+
+    <div class="eco-emergency">
+        <strong>Crime em andamento?</strong>
+        <span>Ligue imediatamente: 190 (PM) ou 0800-618080 (Linha Verde IBAMA)</span>
+    </div>
+
+    <div class="eco-form-card">
+        <form asp-controller="Denuncia" asp-action="Index" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Tipo" class="form-label">Tipo de Denúncia *</label>
+                <select asp-for="Tipo" class="form-select">
+                    <option value="">Selecione o tipo</option>
+                    <option>Caça ilegal</option>
+                    <option>Desmatamento</option>
+                    <option>Queimada / incêndio florestal</option>
+                    <option>Maus-tratos a animais</option>
+                    <option>Poluição de nascente ou rio</option>
+                    <option>Tráfico de animais silvestres</option>
+                    <option>Outro</option>
+                </select>
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Localizacao" class="form-label">Localização *</label>
+                <input asp-for="Localizacao" class="form-control" placeholder="Ex: Entrada Norte do Parque" />
+                <span asp-validation-for="Localizacao" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataOcorrencia" class="form-label"></label>
+                <input asp-for="DataOcorrencia" class="form-control" />
+                <span asp-validation-for="DataOcorrencia" class="text-danger"></span>
+            </div>
+
+            <div class="mb-1">
+                <label asp-for="Descricao" class="form-label">Descrição *</label>
+                <textarea asp-for="Descricao" class="form-control" rows="4" placeholder="Descreva o que foi observado com detalhes..."></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <p class="eco-form-hint">Mínimo 50 caracteres</p>
+
+            <div class="mb-4">
+                <label class="form-label">Fotos (opcional)</label>
+                <label class="eco-dropzone" id="dropzoneLabel">
+                    <span>Clique para escolher um arquivo</span><br />
+                    <small>JPG, PNG, PDF — máx. 5MB</small>
+                    <span class="eco-dropzone__filename" id="nomeArquivo"></span>
+                    <input type="file" name="foto" accept=".jpg,.jpeg,.png,.pdf" onchange="document.getElementById('nomeArquivo').textContent = this.files[0] ? this.files[0].name : '';" />
+                </label>
+            </div>
+
+            <h2>Informações de Contato</h2>
+            <p class="eco-form-hint">Opcional — para receber atualizações</p>
+
+            <div class="mb-3">
+                <label asp-for="NomeContato" class="form-label">Nome</label>
+                <input asp-for="NomeContato" class="form-control" placeholder="Seu nome" id="campoNome" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="EmailContato" class="form-label">E-mail</label>
+                <input asp-for="EmailContato" class="form-control" placeholder="seu@email.com" id="campoEmail" />
+                <span asp-validation-for="EmailContato" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="Anonima" class="form-check-input" id="checkAnonima" />
+                <label asp-for="Anonima" class="form-check-label"></label>
+            </div>
+
+            <button type="submit" class="btn-eco btn-eco--dark eco-support-btn">Enviar Denúncia</button>
+            <p class="eco-form-hint text-center">* Campos obrigatórios. Denúncia encaminhada aos órgãos competentes.</p>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        document.getElementById('checkAnonima').addEventListener('change', function () {
+            var nome = document.getElementById('campoNome');
+            var email = document.getElementById('campoEmail');
+            nome.disabled = this.checked;
+            email.disabled = this.checked;
+            if (this.checked) { nome.value = ''; email.value = ''; }
+        });
+    </script>
+}

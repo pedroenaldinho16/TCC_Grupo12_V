@@ -1,0 +1,673 @@
+CENTRO PAULA SOUZA
+ETEC de Campo Limpo Paulista
+Informática para a Internet integrado ao Ensino Médio
+
+DESENVOLVIMENTO DE UMA PLATAFORMA WEB PARA AJUDAR NA CONSCIENTIZAÇÃO AMBIENTAL DE ESTUDANTES DO ENSINO MÉDIO SOBRE A PRESERVAÇÃO DAS ESPÉCIES TERRESTRES E AVIÁRIAS DA SERRA DA CANTAREIRA.
+
+Murilo Henrique Almeida de Santana
+Gustavo Henrique de Souza Faria
+Pedro Gabriel Farias da Silva
+Barbara Kathellen Andrade Porfirio 
+Thaynara Cristina Maia dos Santos 
+
+Resumo: Este trabalho apresenta o desenvolvimento da EcoCanta, uma plataforma web voltada à conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP. A proposta justifica-se pela necessidade de ampliar o acesso dos estudantes a informações sobre a biodiversidade regional, as ameaças às espécies e as formas de preservação. O objetivo geral foi desenvolver uma plataforma web capaz de contribuir para essa conscientização, a partir do levantamento das necessidades do público e da definição de recursos educativos. Foi realizada uma pesquisa de natureza aplicada, com objetivos exploratórios e descritivos, abordagem quantitativa e procedimentos bibliográficos e de campo. A coleta de dados ocorreu por meio de questionário eletrônico com 35 respostas válidas, sendo 33 participantes do ensino médio e 2 do ensino fundamental. Os resultados indicaram que 27 participantes (77,1%) responderam que não sabiam ou não tinham certeza sobre a existência de espécies ameaçadas na Serra da Cantareira e que 26 (74,3%) nunca haviam participado de ações ambientais. Também foi identificada preferência por informações sobre animais, fotos, vídeos e recursos digitais. O protótipo de média fidelidade foi submetido a teste de usabilidade no Maze, obtendo 100% de taxa de conclusão na tarefa de localização de espécie (onça-parda), evidenciando a clareza da navegação e orientando os ajustes da aplicação. Conclui-se que a EcoCanta apresenta uma proposta viável para reunir informações, educação ambiental e recursos interativos direcionados ao público estudantil.
+
+Palavras-chave: Educação ambiental; Serra da Cantareira; Biodiversidade; Plataforma web.
+
+
+Abstract: This paper presents the development of EcoCanta, a web platform aimed at promoting environmental awareness among high school students regarding the preservation of terrestrial and avian species of the Serra da Cantareira, in the municipality of Guarulhos-SP. The initiative is justified by the need to expand student access to information on regional biodiversity, species threats, and conservation practices. The main objective was to develop a web platform capable of contributing to this awareness, based on public needs assessment and educational resources definition. An applied research study was conducted, with exploratory and descriptive goals, quantitative approach, and bibliographic and field procedures. Data collection took place via an electronic questionnaire with 35 valid responses (33 high school students and 2 elementary school students). Results indicated that 27 participants (77.1%) were unaware or unsure of threatened species in the Serra da Cantareira, and 26 (74.3%) had never engaged in environmental activities. Preference for animal facts, photos, videos, and digital tools was also identified. The medium-fidelity prototype underwent usability testing on Maze, achieving a 100% completion rate on the assigned task, proving navigation efficiency and guiding software adjustments. In conclusion, EcoCanta provides a viable proposal to integrate information, environmental education, and interactive resources for high school students.
+
+Keywords: Environmental education; Serra da Cantareira; Biodiversity; Web platform.
+
+1 INTRODUÇÃO
+A Serra da Cantareira, localizada na Região Metropolitana de São Paulo e parcialmente inserida no município de Guarulhos, é considerada uma das maiores florestas urbanas do mundo e abriga expressiva diversidade de espécies terrestres e aviárias associadas ao bioma Mata Atlântica (PIMENTA, 2024). De acordo com Brasil (2022), a Mata Atlântica apresenta a segunda maior biodiversidade das Américas, perdendo apenas para a Amazônia, o que reforça a relevância ecológica da região para a conservação da fauna nativa.
+Apesar dessa relevância, a proximidade da Serra da Cantareira com áreas densamente urbanizadas tem intensificado pressões locais como desmatamento, poluição e ocupação irregular, fatores que contribuem para a redução e fragmentação de habitats. Em escala mais ampla, tais intervenções humanas representam vetores determinantes para o aumento do risco de extinção de diversas espécies da fauna (IUCN, 2026). Esse cenário evidencia a necessidade de iniciativas que aproximem a população do conhecimento sobre a fauna regional e estimulem práticas de preservação.
+Nesse contexto, a educação ambiental se apresenta como instrumento central para a conscientização da sociedade. De acordo com a Lei nº 9.795/1999, que institui a Política Nacional de Educação Ambiental, esse processo educativo volta-se à construção de valores, conhecimentos e atitudes direcionados à conservação do meio ambiente. Estudos recentes reforçam que a educação ambiental amplia a compreensão sobre a importância da biodiversidade e favorece a participação ativa na conservação de ecossistemas urbanos (NUNES; LEHN, 2022; CAVALCANTE et al., 2023).
+Aliada a esse processo, a utilização de tecnologias digitais pode ampliar o acesso a conteúdos de educação ambiental e favorecer a disseminação de informações relacionadas à conservação (SILVA; RODRIGUES, 2024).
+Diante desse cenário, este trabalho busca responder à seguinte questão: de que maneira uma plataforma web pode contribuir para a conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP?
+A justificativa deste trabalho fundamenta-se na necessidade de aproximar os estudantes do ensino médio da realidade ecológica regional, disponibilizando conteúdos sobre a fauna da Serra da Cantareira em ambiente digital. Ao aliar informações sobre espécies, ameaças e preservação a recursos interativos e linguagem adequada ao público jovem, a proposta busca despertar o interesse pela biodiversidade local e incentivar o engajamento comunitário na proteção dos ecossistemas.
+Este trabalho tem como objetivo geral desenvolver uma plataforma web para contribuir com a conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP. De forma específica, busca-se levantar informações sobre as espécies terrestres e aviárias da região, incluindo aquelas ameaçadas de extinção, definir os requisitos funcionais do sistema, elaborar a modelagem e o protótipo da solução e disponibilizar conteúdos educativos que estimulem a participação dos estudantes na preservação ambiental.
+Para o desenvolvimento deste trabalho, foi realizada uma pesquisa de natureza aplicada, de caráter exploratório e descritivo, com abordagem quantitativa, fundamentada em levantamento bibliográfico sobre biodiversidade, extinção de espécies e educação ambiental. Também foi aplicado um questionário a estudantes, com predominância de participantes do ensino médio, definidos como público-alvo da plataforma. Os resultados da coleta subsidiaram o levantamento de requisitos, a modelagem, a prototipação e o desenvolvimento da plataforma EcoCanta.
+O restante deste trabalho está organizado da seguinte forma: a seção 2 apresenta o Referencial Teórico, abordando conceitos de educação ambiental, ameaças à extinção das espécies na Serra da Cantareira, preservação da fauna e da biodiversidade e trabalhos relacionados; a seção 3 descreve a Metodologia e a Modelagem do Sistema; a seção 4 apresenta os Resultados e Discussões; e, por fim, a seção 5 traz as Considerações Finais, com as conclusões do estudo e sugestões para trabalhos futuros.
+
+2 REFERENCIAL TEÓRICO
+2.1 Educação Ambiental
+A educação ambiental é compreendida como um processo educativo relacionado à construção de valores sociais, conhecimentos, habilidades, atitudes e competências voltadas à conservação do meio ambiente. A Lei nº 9.795/1999 estabelece a educação ambiental como componente essencial e permanente da educação nacional, presente de forma articulada nos diferentes níveis e modalidades do processo educativo (BRASIL, 1999).
+Nunes e Lehn (2022) relacionam a educação ambiental à preservação da biodiversidade e destacam a importância de experiências educativas que aproximem os estudantes das questões ambientais. Essa perspectiva contribui para que o estudante não apenas receba informações, mas compreenda sua relação com o ambiente e com a conservação das espécies.
+No contexto escolar, a educação ambiental pode ser integrada aos conteúdos e às práticas pedagógicas. Barbosa e Oliveira (2020), ao analisarem a presença da educação ambiental na Base Nacional Comum Curricular, discutem sua inserção na formação escolar e sua relação com a construção de conhecimentos voltados às questões socioambientais.
+Zottele e Pinho (2024) abordam a conscientização e a preservação ambiental no meio escolar, reforçando a escola como espaço relevante para a formação de estudantes capazes de reconhecer problemas ambientais e refletir sobre formas de preservação. Essa relação é especialmente importante para o ensino médio, público-alvo definido neste trabalho.
+Diante dessas contribuições, considera-se que a educação ambiental fornece a base conceitual para aproximar os estudantes das questões de preservação. No presente projeto, esse entendimento orienta a seleção de conteúdos e a linguagem utilizada para tratar da fauna da Serra da Cantareira.
+
+2.2 Ameaças à extinção das espécies na Serra da Cantareira
+A extinção de espécies é um fenômeno documentado na história geológica da Terra, porém as ações antrópicas têm acelerado intensamente o ritmo de desaparecimento biológico. Cowie, Bouchet e Fontaine (2022) demonstram que a magnitude e a celeridade das perdas contemporâneas configuram uma crise de biodiversidade impulsionada pela pressão humana. Nesse cenário, a União Internacional para a Conservação da Natureza (IUCN, 2026) monitora o estado de conservação global por meio da Lista Vermelha, servindo como referencial crítico para a avaliação de espécies em perigo.
+No contexto da Serra da Cantareira, inserida no bioma Mata Atlântica, a fauna silvestre enfrenta ameaças diretas decorrentes de sua localização contígua à maior mancha urbana da América Latina. Conforme apontam Pimenta (2024) e Brasil (2026a), a Mata Atlântica sofre com um histórico severo de devastação que reduziu suas matas originais a fragmentos florestais isolados. Na região da Cantareira e nos limites do município de Guarulhos, os principais fatores de risco à fauna envolvem a perda e fragmentação contínua de habitats pela expansão urbana desordenada, o desmatamento e ocupações irregulares, a poluição de recursos hídricos, a caça e captura de aves e pequenos mamíferos, atropelamentos em rodovias periféricas e o impacto predatório de espécies exóticas e animais domésticos invasores.
+Tais pressões comprometem a integridade das populações de espécies nativas relevantes, como o bugio-ruivo (Alouatta guariba clamitans), a onça-parda (Puma concolor) e diversas espécies de aves passeriformes. Diante dessas ameaças, evidencia-se a urgência de iniciativas de conservação e conscientização que informem a população jovem sobre a vulnerabilidade da fauna local e a importância da proteção dos habitats remanescentes.
+
+2.3 Preservação da Fauna e da Biodiversidade
+A preservação da biodiversidade pressupõe a salvaguarda integrada dos seres vivos e dos ecossistemas dos quais dependem para sua sobrevivência. De acordo com Brasil (2026a), a preservação dos remanescentes da Mata Atlântica é determinante para o equilíbrio climático, a regulação hídrica e a manutenção do patrimônio genético nativo. Pimenta (2024) reforça que conservar a fauna silvestre demanda conter o avanço da degradação sobre as florestas remanescentes, garantindo corredores ecológicos que viabilizem a reprodução e o fluxo gênico das populações naturais.
+Além de seu valor intrínseco, as espécies da fauna desempenham funções ecossistêmicas indispensáveis, tais como dispersão de sementes, polinização de espécies vegetais nativas e controle biológico de populações. A supressão dessas funções ecológicas compromete a regeneração natural da vegetação e afeta diretamente a qualidade ambiental das áreas urbanas e periurbanas do entorno.
+Nesse horizonte, Cavalcante et al. (2023) e Nunes e Lehn (2022) demonstram que as ações pedagógicas de Educação Ambiental potencializam a preservação, transformando o conhecimento científico sobre a biodiversidade em engajamento ativo da comunidade. A compreensão das relações entre fauna, ecossistema e bem-estar coletivo favorece a formação de uma postura ética e cidadã voltada à conservação, fundamentando a proposta educativa deste projeto.
+
+2.4 Trabalhos relacionados
+Existem plataformas digitais voltadas à conservação ambiental, à divulgação de informações sobre biodiversidade e à educação ecológica. Entre os exemplos analisados neste trabalho estão as plataformas do WWF Brasil, da Fundação SOS Mata Atlântica e do Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio).
+O WWF Brasil constitui uma organização não governamental voltada à conservação ambiental e à proteção da biodiversidade. Sua plataforma digital reúne campanhas de engajamento, pesquisas científicas, notícias e conteúdos educativos sobre os biomas brasileiros (WWF BRASIL, 2026). A análise dessa solução permite observar estruturas eficientes para a organização de campanhas de conscientização e fichas de animais, servindo como parâmetro para a estruturação de conteúdos digitais adaptados ao recorte regional da Serra da Cantareira.
+A Fundação SOS Mata Atlântica dedica-se prioritariamente à defesa e conservação dos remanescentes da Mata Atlântica e de seus ecossistemas associados (FUNDAÇÃO SOS MATA ATLÂNTICA, 2026b). Seu portal disponibiliza relatórios de monitoramento, projetos de reflorestamento, dados sobre desmatamento e materiais educativos direcionados à mobilização cidadã. Essa plataforma evidencia a eficácia da comunicação ambiental focada em um bioma específico, servindo como modelo inspirador para o desenvolvimento de iniciativas digitais complementares voltadas ao público jovem.
+O Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio), autarquia federal responsável pela gestão das unidades de conservação do país, mantém portal oficial com dados institucionais, relatórios técnicos e informações normativas sobre a fauna brasileira e planos de manejo (BRASIL, 2026b). O portal se destaca pelo rigor científico de suas publicações oficiais, reforçando a importância de transpor tais informações técnicas para uma linguagem pedagógica e acessível, compatível com as necessidades de aprendizagem de estudantes do ensino médio.
+A análise comparativa dessas soluções revela que, embora existam portais relevantes de alcance nacional e biômico, constata-se a carência de aplicações digitais direcionadas especificamente à fauna da Serra da Cantareira e desenhadas com recursos de interação adaptados ao público estudantil local. Esse diagnóstico consolida a oportunidade e a relevância da proposta da EcoCanta.
+
+3 METODOLOGIA
+
+A pesquisa é de natureza aplicada, pois utiliza conhecimentos sobre educação ambiental, biodiversidade e desenvolvimento web para construir uma solução prática: a plataforma EcoCanta. Quanto aos objetivos, possui caráter exploratório e descritivo. É exploratória por buscar compreender o conhecimento e os hábitos do público em relação à Serra da Cantareira e à preservação ambiental; e descritiva por apresentar e analisar as características dos participantes e as respostas obtidas no questionário.
+A abordagem adotada é quantitativa, uma vez que as respostas do questionário foram organizadas em frequências absolutas e percentuais. Quanto aos procedimentos, foram utilizadas pesquisa bibliográfica e pesquisa de campo. A pesquisa bibliográfica apoiou a fundamentação teórica e foi organizada por meio de fichamento bibliográfico das fontes consultadas.
+Na pesquisa bibliográfica, foram utilizados termos relacionados ao tema do trabalho, entre eles: “Serra da Cantareira e a conservação da biodiversidade: a maior floresta urbana do mundo.”, “Análise e discussão dos planos de manejo das unidades de conservação.”, “Educação Ambiental e preservação da biodiversidade: relato de um estudo de caso em distintas realidades escolares.”, “Bioma mais devastado, Mata Atlântica luta para manter biodiversidade.”, “A Educação Ambiental através das tecnologias digitais para conservação e preservação das espécies em risco de extinção: uma abordagem didática atual.” e “Conscientização e preservação ambiental no meio escolar.”. A pesquisa foi realizada em fontes acadêmicas como o Google Acadêmico (GOOGLE, 2026), publicações institucionais e documentos oficiais relacionados ao tema. As referências efetivamente utilizadas estão reunidas ao final do trabalho.
+A coleta de dados foi realizada por meio de um questionário elaborado no Google Forms (GOOGLE, 2026) e aplicado de forma remota entre 14 de abril de 2026 e 19 de setembro de 2026. Ao todo, foram obtidas 35 respostas válidas.
+O público-alvo do projeto é formado prioritariamente por estudantes do ensino médio, em razão da relação direta da proposta pedagógica com a educação ambiental em ambiente digital. A coleta de dados contou com a participação majoritária desse público, registrando também respostas de estudantes do ensino fundamental, as quais foram mantidas no conjunto de dados sem comprometer o foco central estabelecido para a plataforma.
+Os dados coletados foram organizados de forma agrupada a partir das respostas e dos gráficos gerados pelo formulário. Foram utilizadas frequências absolutas e percentuais para comparar as alternativas, identificar características da amostra e reconhecer necessidades que pudessem orientar o planejamento da solução.
+O planejamento do sistema foi iniciado em 14 de abril de 2026. A partir da pesquisa bibliográfica e das necessidades identificadas na coleta de dados, foram definidos os perfis de usuário, os requisitos funcionais, as regras de funcionamento, o diagrama de casos de uso, o protótipo de média fidelidade e o modelo lógico do banco de dados.
+O desenvolvimento da plataforma EcoCanta envolveu a implementação da interface gráfica e da lógica de aplicação utilizando as tecnologias .NET com ASP.NET Core (C#), CSHTML e CSS (W3C, 2026), integradas a um banco de dados relacional por meio de comandos SQLite (SQLITE, 2026), enquanto o Figma (FIGMA, 2026) foi empregado na prototipação das telas. O sistema foi estruturado para atender aos dois perfis de usuários estabelecidos: Estudante do Ensino Médio e Administrador. Para os estudantes, a aplicação desenvolvida contempla a consulta de espécies, o acesso a conteúdos educativos e notícias, a realização de quizzes e a publicação de relatos e interações em mural. O protótipo de média fidelidade contempla adicionalmente a funcionalidade de mapa interativo de avistamentos, projetada para integração futura. Para os administradores, o sistema disponibiliza funcionalidades de moderação e gerenciamento de espécies, notícias, quizzes, denúncias e usuários.
+Após a elaboração do protótipo de média fidelidade no Figma, foi realizado um teste de usabilidade de forma remota e não moderada por meio da ferramenta Maze, entre 14 e 18 de junho de 2026. O objetivo principal do teste foi avaliar se o usuário conseguia localizar determinada informação no protótipo de forma intuitiva. A missão proposta consistiu em navegar pela interface até acessar a página de detalhes da onça-parda. O teste contou com a participação de cinco voluntários convidados especificamente para essa avaliação, e todos concluíram a tarefa com sucesso, permitindo validar a estrutura de navegação e subsidiar melhorias para a fase de implementação.
+As respostas do questionário foram analisadas por meio de frequências absolutas e percentuais, permitindo identificar o perfil da amostra, lacunas de conhecimento e preferências dos participantes. Em seguida, os resultados foram relacionados às decisões do sistema, diferenciando conteúdos, como informações, fotos e vídeos, de recursos ou funcionalidades, como mapa e quiz. Os resultados do questionário e os resultados do teste de usabilidade foram analisados separadamente.
+Antes do preenchimento do questionário, os participantes foram informados sobre a finalidade acadêmica da pesquisa e sobre o caráter voluntário da participação. As respostas foram tratadas de forma agrupada e anônima, preservando integralmente a identidade dos participantes e evitando a divulgação de quaisquer dados pessoais sensíveis. Os resultados obtidos destinam-se exclusivamente a fundamentar o desenvolvimento da plataforma proposta.
+
+3.1 Modelagem do sistema
+
+3.1.1 Usuários do sistema
+Nesta seção foram determinados quais seriam os diferentes tipos de usuário do sistema. Os tipos definidos são: Estudante do Ensino Médio, Moderador, Jornalista e Administrador, descritos a seguir:
+Estudante do Ensino Médio: usuário principal da plataforma, responsável por consultar informações sobre espécies, acessar conteúdos educativos, visualizar notícias, realizar quizzes e utilizar os recursos de postagem e interação disponíveis no sistema. O acesso ao mapa de avistamentos está condicionado ao nível mínimo definido pela regra de negócio da plataforma.
+Moderador: usuário responsável pela mediação das interações da comunidade e pela manutenção de um ambiente colaborativo saudável e seguro. Tem como atribuições analisar postagens, comentários e discussões no fórum, validar registros e pontos de avistamento de espécies submetidos pelos estudantes no mapa interativo, além de triar denúncias de conteúdo inadequado e aplicar advertências ou sanções de acordo com as diretrizes da plataforma.
+Jornalista: usuário responsável pela produção, curadoria e veiculação de conteúdos informativos e de divulgação científica na plataforma. É responsável por redigir e gerenciar notícias sobre a biodiversidade da Serra da Cantareira, publicar artigos didáticos e comunicados científicos, cobrir campanhas socioambientais e divulgar eventos e iniciativas de conscientização ecológica.
+Administrador: usuário com privilégios máximos, responsável pelo gerenciamento global das informações e das funcionalidades administrativas do sistema, incluindo o catálogo de espécies, conteúdos educativos, notícias, quizzes, mensagens de suporte, regras de denúncias, trilhas de níveis e gamificação, além da administração e controle de privilégios de todas as contas de usuários (estudantes, moderadores, jornalistas e administradores).
+
+3.1.2 Funcionalidades agrupadas por tipo de usuário
+As funcionalidades do sistema foram definidas e são detalhadas nas tabelas a seguir. A Tabela 1 apresenta as funções que podem ser executadas pelo Estudante do Ensino Médio.
+Tabela 1 - Requisitos funcionais do Estudante do Ensino Médio
+Código
+Requisito Funcional
+Descrição
+RF001
+Consultar espécies
+O estudante poderá acessar uma lista de espécies terrestres e aviárias cadastradas na plataforma, visualizando informações básicas como nome popular, imagem e categoria da espécie.
+RF002
+Pesquisar espécies
+O estudante poderá buscar espécies digitando o nome popular ou científico em campo de busca, visualizando os registros correspondentes.
+RF003
+Visualizar detalhes da espécie
+O estudante poderá acessar a página completa da espécie selecionada, visualizando características físicas, habitat, alimentação, curiosidades e estado de conservação.
+RF004
+Visualizar mapa
+O estudante poderá consultar a distribuição geográfica e pontos de ocorrência das espécies na Serra da Cantareira em mapa interativo, condicionado ao nível de acesso atingido.
+RF005
+Realizar quiz
+O estudante poderá responder a questionários interativos cronometrados sobre a fauna da Serra da Cantareira e preservação ambiental, recebendo pontuação imediata.
+RF006
+Visualizar conteúdos educativos
+O estudante poderá consultar guias, artigos didáticos e materiais educativos sobre biodiversidade, Mata Atlântica e práticas de conservação.
+RF007
+Visualizar notícias
+O estudante poderá consultar notícias relacionadas à fauna, à biodiversidade, à Serra da Cantareira e às ações de conservação e preservação ambiental.
+RF008
+Visualizar fórum
+O estudante poderá visualizar o fórum da plataforma onde haverá postagens, comunidades e notícias.
+RF009
+Realizar postagem
+O estudante poderá publicar uma postagem relacionada a algum assunto e comunidade.
+RF010
+Curtir postagem
+O estudante poderá curtir publicações realizadas por outros usuários no fórum.
+RF011
+Comentar postagem
+O estudante poderá registrar comentários e interações textuais nas publicações do fórum.
+RF012
+Entrar em contato
+O estudante poderá enviar mensagens, dúvidas e sugestões aos administradores por meio do FAQ.
+RF013
+Registrar avistamento
+O estudante poderá registrar novos avistamentos por meio do mapa.
+Fonte: Elaborada pelos autores (2026).
+
+A Tabela 2 apresenta as funções destinadas ao Moderador da plataforma.
+Tabela 2 - Requisitos funcionais do Moderador da plataforma
+Código
+Requisito Funcional
+Descrição
+RF014
+Moderar postagens do fórum
+O moderador poderá analisar postagens e tópicos criados pela comunidade escolar no fórum e no mural, aprovando-os, editando-os, ocultando-os ou excluindo publicações que violem as regras da plataforma.
+RF015
+Moderar comentários e respostas
+O moderador poderá visualizar e moderar comentários inseridos nas discussões e postagens, removendo mensagens inadequadas ou ofensivas.
+RF016
+Validar avistamentos no mapa
+O moderador poderá avaliar a autenticidade e a qualidade dos registros fotográficos e pontos de avistamento de espécies submetidos pelos estudantes antes de sua consolidação pública no mapa interativo.
+RF017
+Triar denúncias
+O moderador poderá examinar denúncias registradas pelos usuários contra ações que violam o meio ambiente, aplicando as ações cabíveis de acionar as autoridades.
+RF018
+Emitir suspensões
+O moderador poderá suspender os usuários que descumprirem as diretrizes de convivência da plataforma.
+RF019
+Revisar submissões de estudos
+O moderador poderá avaliar materiais didáticos e estudos científicos submetidos pela comunidade escolar antes de sua publicação no acervo científico.
+Fonte: Elaborada pelos autores (2026).
+
+A Tabela 3 apresenta as funções destinadas ao Jornalista da plataforma.
+Tabela 3 - Requisitos funcionais do Jornalista da plataforma
+Código
+Requisito Funcional
+Descrição
+RF020
+Publicar notícias socioambientais
+O jornalista poderá redigir, formatar e publicar notícias, matérias e reportagens sobre a biodiversidade da Serra da Cantareira e temas de preservação ambiental.
+RF021
+Gerenciar acervo de notícias
+O jornalista poderá editar, atualizar, categorizar e arquivar suas notícias publicadas na plataforma.
+RF022
+Divulgar estudos científicos
+O jornalista poderá redigir e veicular matérias informativas e resumos didáticos baseados em artigos e pesquisas do Centro de Estudos Científicos.
+RF023
+Criar campanhas ambientais
+O jornalista poderá criar campanhas ambientais para a Serra da Cantareira.
+Fonte: Elaborada pelos autores (2026).
+
+A Tabela 4 apresenta as funções destinadas ao Administrador da plataforma.
+Tabela 4 - Requisitos funcionais do Administrador da plataforma
+Código
+Requisito Funcional
+Descrição
+RF025
+Gerenciar espécies
+O administrador poderá cadastrar, editar, consultar e inativar informações e mídias das espécies catalogadas na plataforma.
+RF026
+Gerenciar conteúdos educativos
+O administrador poderá cadastrar, editar e excluir conteúdos educativos e guias relacionados à fauna e à preservação ambiental.
+RF027
+Supervisionar notícias e publicações
+O administrador poderá supervisionar todo o fluxo editorial de notícias, autorizando ou revogando publicações quando necessário.
+RF028
+Gerenciar quizzes
+O administrador poderá criar, editar e excluir quizzes educativos, incluindo enunciados, alternativas, respostas corretas e tempo de resposta.
+RF029
+Gerenciar mensagens e FAQ
+O administrador poderá visualizar, organizar e responder às mensagens, dúvidas e sugestões enviadas pelos usuários por meio da plataforma.
+RF030
+Gerenciar denúncias
+O administrador poderá supervisionar denúncias tratadas e deliberar sobre casos reincidentes.
+RF031
+Gerenciar contas e permissões
+O administrador poderá visualizar contas cadastradas, gerenciar perfis de acesso (estudantes, moderadores, jornalistas e administradores) e efetuar bloqueios no sistema.
+RF032
+Gerenciar mapa
+O administrador poderá gerenciar avistamentos.
+RF033
+Gerenciar campanhas socioambientais
+O administrador poderá cadastrar, editar, aprovar e encerrar campanhas socioambientais institucionais na plataforma.
+RF034
+Gerenciar gamificação
+O administrador poderá gerenciar trilha de níveis, criar novos níveis de jogo, pontuações e parâmetros de desbloqueio da plataforma.
+Fonte: Elaborada pelos autores (2026).
+
+3.1.3 Diagrama de casos de uso
+O diagrama de casos de uso representa as principais interações que podem ser realizadas pelos usuários da plataforma, com ênfase nas ações do Estudante do Ensino Médio e do Administrador. Para a representação, considera-se que os usuários já estejam cadastrados e tenham realizado o acesso ao sistema.
+A Figura 1 apresenta as funcionalidades relacionadas aos requisitos funcionais descritos nas tabelas anteriores. O acesso ao mapa é representado pelo caso de uso “Visualizar mapa”, enquanto a exigência de um nível mínimo de acesso é considerada uma regra de negócio e uma pré-condição para a utilização dessa funcionalidade.
+Figura 1 - Diagrama de casos de uso da plataforma EcoCanta
+
+Fonte: Elaborada pelos autores (2026).
+
+3.1.4 Protótipo de média fidelidade
+Para orientar o desenvolvimento da EcoCanta, foi elaborado um protótipo de média fidelidade utilizando o Figma. Foram priorizadas as telas relacionadas às principais funcionalidades da plataforma, permitindo representar a organização das informações e o fluxo de navegação entre as páginas.
+O protótipo não contempla telas de cadastro e autenticação, pois essas funcionalidades não fazem parte da representação apresentada nesta etapa. A Figura 2 apresenta as principais telas elaboradas para a plataforma EcoCanta.
+
+Figura 2 - Protótipo de média fidelidade das principais telas da EcoCanta
+
+
+Fonte: Elaborada pelos autores (2026).
+
+3.1.5 Diagrama Entidade-Relacionamento (DER)
+O modelo lógico do banco de dados, apresentado na Figura 3, foi elaborado a partir das funcionalidades definidas para a plataforma. A estrutura organiza as principais informações necessárias ao funcionamento do sistema, incluindo dados dos usuários, níveis e pontos de experiência (XP), espécies, conteúdos, notícias, denúncias, quizzes, perguntas, alternativas, tentativas e respostas, além das postagens, comentários, curtidas e registros de avistamentos.
+Os relacionamentos entre as entidades foram definidos de acordo com as necessidades de armazenamento e consulta das informações utilizadas pela plataforma, permitindo representar os dados relacionados aos estudantes, administradores, espécies e demais funcionalidades previstas no sistema.
+
+Figura 3 - Modelo lógico do banco de dados da EcoCanta
+
+Fonte: Elaborada pelos autores (2026).
+
+4 RESULTADOS E DISCUSSÕES
+
+4.1 Análise dos dados
+Os dados coletados forneceram informações sobre o perfil dos participantes, o conhecimento a respeito da fauna da Serra da Cantareira, a percepção das ameaças às espécies e os hábitos de busca por informações ambientais. Nesta seção, são analisados os resultados obtidos por meio de um questionário elaborado no Google Forms e respondido por 35 participantes.
+O questionário contou com 12 questões, sendo 8 de escolha única e 4 de múltipla escolha, estas com campo opcional para outras respostas. As questões foram organizadas em cinco eixos: perfil do respondente, conhecimento geral, consciência ambiental, acesso à informação e tecnologia e sugestões do usuário. A coleta de dados ocorreu entre 14/04/2026 e 19/09/2026, totalizando 35 respostas válidas.
+Todos os participantes autorizaram o uso das respostas para fins de pesquisa acadêmica. O questionário não solicitou informações destinadas à identificação direta dos respondentes, e os dados foram analisados de forma agrupada, conforme os cuidados descritos nos aspectos éticos da pesquisa.
+
+A primeira questão verificou a concordância dos participantes quanto ao uso das informações fornecidas para fins de pesquisa acadêmica. Conforme a Figura 4, todos os 35 participantes (100%) assinalaram a opção “Sim, estou de acordo”, o que permitiu a utilização integral das respostas coletadas, sem a necessidade de excluir nenhum questionário.
+
+Figura 4 – Concordância com o uso das informações 
+
+Fonte: Elaborada pelos autores (2026).
+A segunda questão verificou a faixa etária dos participantes. Como mostra a Figura 5, 34 dos 35 respondentes (97,1%) têm entre 16 e 18 anos, enquanto apenas um participante (2,9%) declarou ter entre 13 e 15 anos, não havendo registros nas demais faixas etárias (de menos de 10 anos a 41 anos ou mais). A predominância de participantes entre 16 e 18 anos mostra que a amostra se concentra na faixa etária correspondente ao público estudantil definido para o projeto. Ao mesmo tempo, essa concentração limita a generalização dos resultados para outras faixas etárias, aspecto que deve ser considerado na interpretação dos dados.
+Figura 5 – Faixa etária
+
+Fonte: Elaborada pelos autores (2026).
+
+A terceira questão perguntou se o participante reside em Guarulhos ou na região da Serra da Cantareira. De acordo com a Figura 6, 28 participantes (80,0%) não residem na região, ao passo que 7 (20,0%) afirmaram morar em Guarulhos ou no entorno da serra. Esse resultado mostra que a maior parte da amostra não reside em Guarulhos nem no entorno da Serra da Cantareira. Isso reforça a importância de apresentar, de maneira contextualizada, informações sobre a região e sua biodiversidade também para estudantes que não possuem contato cotidiano com esse território.
+
+Figura 6 – Residência em Guarulhos ou na região da Serra da Cantareira
+
+Fonte: Elaborada pelos autores (2026).
+
+A quarta questão investigou o nível de escolaridade dos participantes. Conforme a Figura 7, 33 respondentes (94,3%) indicaram o Ensino Médio e 2 (5,7%) indicaram o Ensino Fundamental, não havendo participantes com Ensino Superior ou Pós-Graduação. O resultado é coerente com a faixa etária apresentada na Figura 5 e confirma que a pesquisa alcançou predominantemente o público-alvo definido, já que 33 dos 35 participantes cursavam o ensino médio. Para o desenvolvimento da plataforma, esse dado orienta o uso de linguagem acessível e recursos digitais adequados ao público estudantil.
+
+Figura 7 – Nível de escolaridade dos participantes
+
+Fonte: Elaborada pelos autores (2026).
+
+A quinta questão perguntou se os participantes já haviam ouvido falar da Serra da Cantareira. Segundo a Figura 8, 19 respondentes (54,3%) responderam que sim, enquanto 16 (45,7%) declararam nunca ter ouvido falar da região. A proximidade entre os percentuais mostra que uma parcela expressiva da amostra ainda não possuía conhecimento prévio sobre a Serra da Cantareira. O fato de 16 participantes (45,7%) declararem nunca ter ouvido falar da Serra da Cantareira evidencia uma lacuna de conhecimento sobre a região. Esse resultado reforça a utilidade de uma plataforma que apresente a serra, sua biodiversidade e sua relevância ambiental de forma acessível ao público estudantil.
+
+Figura 8 – Conhecimento sobre a Serra da Cantareira
+
+Fonte: Elaborada pelos autores (2026).
+
+A sexta questão perguntou se os participantes sabiam da existência de espécies ameaçadas de extinção na Serra da Cantareira. A Figura 9 mostra que 8 respondentes (22,9%) afirmaram saber, 11 (31,4%) responderam que já haviam ouvido falar, mas não tinham certeza, e 16 (45,7%) responderam que não sabiam. Os resultados da Figura 9 mostram que 27 participantes (77,1%) responderam “Não” ou “Já ouvi falar, mas não tenho certeza”. Esses grupos representam situações diferentes, mas ambos indicam ausência de conhecimento seguro sobre o tema. Esse resultado evidencia uma possivel lacuna de informação que a plataforma pode ajudar a reduzir por meio da divulgação de conteúdos sobre as espécies e seu estado de conservação.
+
+Figura 9 – Conhecimento sobre espécies ameaçadas de extinção na Serra da Cantareira
+
+Fonte: Elaborada pelos autores (2026).
+
+A sétima questão, de múltipla escolha, na qual a soma dos percentuais ultrapassa 100% pela possibilidade de assinalar mais de uma alternativa, perguntou quais animais nativos da região o participante conhece. Segundo a Figura 10, o tucano e a capivara foram os mais assinalados, com 23 marcações cada (65,7%), seguidos pela coruja (22; 62,9%), pela onça-parda (19; 54,3%) e pelo bugio (17; 48,6%). A opção “Não sei” foi marcada por 11 participantes (31,4%). Os resultados mostram que tucano e capivara foram os animais mais reconhecidos pelos participantes, enquanto onça-parda e bugio apresentaram frequências menores. Além disso, a alternativa “Não sei” recebeu 11 marcações (31,4%). Esses dados apoiam a inclusão de fichas informativas e fotografias das espécies na plataforma.
+
+Figura 10 – Animais nativos da Serra da Cantareira conhecidos pelos participantes
+
+Fonte: Elaborada pelos autores (2026).
+A oitava questão, também de múltipla escolha, investigou os motivos que, na opinião dos participantes, podem causar a extinção de animais na região. Como mostra a Figura 11, o desmatamento foi apontado por todos os 35 participantes (100%), seguido pela poluição e pela expansão urbana, com 28 marcações cada (80,0%), pela caça ilegal (26; 74,3%) e pelas mudanças climáticas (23; 65,7%). A marcação do desmatamento por todos os 35 participantes demonstra que essa ameaça é amplamente reconhecida pela amostra. Poluição, expansão urbana, caça ilegal e mudanças climáticas também receberam número expressivo de marcações. Assim, a plataforma pode aprofundar esse conhecimento por meio de conteúdos que expliquem como cada fator afeta a fauna e os habitats da Serra da Cantareira.
+
+Figura 11 – Motivos apontados como causas da extinção de animais na Serra da Cantareira
+
+Fonte: Elaborada pelos autores (2026).
+A nona questão perguntou se o participante já participou de alguma ação ambiental ou campanha de preservação. De acordo com a Figura 12, 26 respondentes (74,3%) nunca participaram, enquanto 9 (25,7%) já se envolveram em iniciativas desse tipo. Ou seja, cerca de três em cada quatro participantes nunca tiveram experiência prática com a preservação ambiental. O resultado indica que, apesar de os participantes reconhecerem diferentes ameaças ambientais, a maioria ainda não havia participado de ações ou campanhas de preservação. Dessa forma, a plataforma pode complementar o conteúdo informativo com a divulgação de campanhas, atividades e orientações sobre formas de participação ambiental.
+
+Figura 12 – Participação em ações ambientais ou campanhas de preservação
+
+Fonte: Elaborada pelos autores (2026).
+A décima questão investigou com que frequência os participantes buscam informações sobre meio ambiente. Conforme a Figura 13, a resposta mais comum foi “Às vezes”, com 16 participantes (45,7%), seguida por “Raramente” (7; 20,0%), “Nunca” (6; 17,1%), “Frequentemente” (3; 8,6%) e “Muito frequentemente” (3; 8,6%). Somando as respostas “Raramente” e “Nunca”, 13 participantes (37,1%) demonstraram pouca ou nenhuma regularidade na busca por informações ambientais. Por outro lado, 6 participantes (17,1%) responderam “Frequentemente” ou “Muito frequentemente”. O predomínio da resposta “Às vezes” indica que o contato com o tema é majoritariamente ocasional, o que orienta a adoção de conteúdos objetivos e recursos interativos na plataforma.
+
+Figura 13 – Frequência de busca por informações sobre meio ambiente
+
+Fonte: Elaborada pelos autores (2026).
+A décima primeira questão, de múltipla escolha, perguntou qual meio os participantes mais utilizam para aprender sobre temas ambientais. A Figura 14 mostra que as redes sociais lideram, com 22 marcações (62,9%), seguidas pelos sites na internet (20; 57,1%), pela TV e jornais (14; 40,0%) e pela escola (13; 37,1%). Já 5 participantes (14,3%) declararam nunca buscar esse tipo de informação. Redes sociais e sites na internet foram os meios mais assinalados para aprender sobre temas ambientais, com 22 (62,9%) e 20 (57,1%) marcações, respectivamente. Esses resultados são compatíveis com a proposta de uma solução digital e indicam potencial para que a EcoCanta seja utilizada como fonte complementar de informação e apoio a atividades educativas.
+
+Figura 14 – Meios mais utilizados para aprender sobre temas ambientais
+
+Fonte: Elaborada pelos autores (2026).
+A décima segunda e última questão perguntou o que os participantes gostariam de encontrar em uma plataforma desse tipo. Conforme a Figura 15, os recursos mais desejados foram as informações sobre animais (31; 88,6%) e as fotos e vídeos (29; 82,9%), seguidos pelas notícias ambientais (25; 71,4%), pelo mapa da região (23; 65,7%) e pelo quiz educativo (17; 48,6%). Um participante (2,9%) apresentou sugestão própria. A sugestão livre propôs a organização de campanhas contra a poluição e a caça, a comparação entre dados antigos e atuais e “planos de ação sobre como ajudar o ambiente mesmo com gestos pequenos”. Entre os itens apresentados na questão, informações sobre animais, fotos, vídeos e notícias ambientais correspondem a conteúdos; mapa e quiz correspondem a recursos ou funcionalidades. Essa distinção foi considerada na definição da solução.
+
+Figura 15 – Recursos desejados em uma plataforma de conscientização ambiental
+
+Fonte: Elaborada pelos autores (2026).
+De modo geral, os resultados revelam uma amostra predominantemente jovem e formada por estudantes do ensino médio. As respostas mostram interesse por recursos digitais e reconhecimento de ameaças ambientais, principalmente o desmatamento. Ao mesmo tempo, parte expressiva dos participantes demonstrou conhecimento limitado sobre a Serra da Cantareira e sobre as espécies ameaçadas da região, além de baixa participação em ações ambientais.
+Ressalta-se que a amostra foi composta por 35 participantes e concentrou-se principalmente em estudantes de 16 a 18 anos. Por esse motivo, os resultados devem ser interpretados considerando esse recorte e não podem ser generalizados para toda a população. Ainda assim, os dados obtidos fornecem subsídios para orientar as decisões relacionadas ao público-alvo do projeto.
+Com base nos resultados obtidos, destacam-se como conteúdos relevantes para a plataforma as informações e fotografias sobre os animais e as notícias ambientais. Entre os recursos ou funcionalidades, destacam-se o mapa da região, o quiz educativo e a divulgação de campanhas e ações de preservação. Dessa maneira, a análise dos dados relaciona as preferências e necessidades observadas na amostra às características previstas para a EcoCanta.
+
+4.2 Apresentação da aplicação desenvolvida
+A aplicação EcoCanta foi organizada para permitir o acesso estruturado e intuitivo às funcionalidades desenvolvidas para cada perfil de usuário do sistema. As principais interfaces da plataforma compreendem as Telas de Acesso e Apresentação Inicial (4.2.1), a Área do Estudante (4.2.2), a Área do Moderador (4.2.3), a Área do Jornalista (4.2.4) e a Área do Administrador (4.2.5). A seguir, são apresentadas as telas da aplicação acompanhadas da descrição de suas respectivas funcionalidades e elementos visuais.
+4.2.1 Telas de Acesso e Apresentação Inicial
+A tela inicial da EcoCanta (Tela Início Deslogado) constitui o ponto de entrada público da plataforma, apresentando sua identidade visual e os recursos ecológicos voltados à comunidade escolar. A página destaca um carrossel interativo com espécies nativas da Serra da Cantareira — como o papagaio-de-peito-roxo (Amazona vinacea) —, indicando sua categoria de vulnerabilidade ('Criticamente Ameaçado') e informações de habitat. Ao lado, o painel 'Portal do Estudante' recepciona os visitantes com o convite 'Aprenda biologia e salve a Cantareira!', disponibilizando os botões de ação para abertura de conta gratuita ('Criar Conta Grátis') e autenticação de usuários já cadastrados ('Já sou Guardião / Entrar'), além de atalhos rápidos para o Jogo Diário de Resgate, o Caderno com Editor de Notas e os Quizzes com ganho de experiência (XP). No topo, a barra de navegação viabiliza o acesso direto às seções de Animais, Educação, Avistamentos, Campanhas, Fórum e FAQ, conforme ilustrado na Figura 16.
+Figura 16 - Tela inicial da EcoCanta (Tela Início Deslogado)
+
+Fonte: Elaborada pelos autores (2026).
+Para usufruir de todas as funcionalidades pedagógicas e registrar seu progresso, novos estudantes e educadores realizam seu cadastro na plataforma. O formulário solicita o preenchimento de nome ou apelido de guardião, e-mail institucional ou pessoal e a definição de uma senha com no mínimo seis caracteres, acionando o botão principal 'Começar Minha Jornada Grátis'. A interface ressalta o compromisso educacional da ferramenta — garantindo gratuidade integral para discentes e docentes, ferramenta simplificada de edição para trabalhos de biologia e o desbloqueio do mapa interativo de avistamentos no Nível 2 —, contando ainda com links diretos para a tela de login ('Já tem uma conta? Entrar agora') e opção de retorno à página inicial, conforme demonstrado na Tela Cadastro A e na Tela Cadastro B (Figura 17).
+Figura 17 - Tela de cadastro de usuário: (a) Tela Cadastro A; (b) Tela Cadastro B
+
+(a) Tela Cadastro A - formulário de cadastro de estudante
+
+(b) Tela Cadastro B - compromisso educacional e navegação
+Fonte: Elaborada pelos autores (2026).
+Após a realização do cadastro, o usuário realiza sua autenticação segura na plataforma por meio da tela de login. Apresentando a mensagem 'Bem-vindo de volta!', o formulário solicita o e-mail e a senha cadastrados, permitindo a validação das credenciais pelo botão 'Entrar como Guardião'. O painel sintetiza os benefícios oferecidos ao estudante na plataforma — como o caderno de anotações com salvamento automático, as fases diárias de jogos educativos com pulo duplo e power-ups, e a enciclopédia CantaDex com quizzes bonificados em XP —, disponibilizando adicionalmente atalho para criação imediata de conta caso o usuário ainda não possua cadastro, botão de retorno à página inicial e rodapé institucional com atalhos de suporte e diretrizes, conforme apresentado na Tela Login A e na Tela Login B (Figura 18).
+Figura 18 - Tela de login: (a) Tela Login A; (b) Tela Login B
+
+(a) Tela Login A - campos de autenticação do usuário
+
+(b) Tela Login B - benefícios do estudante e navegação
+Fonte: Elaborada pelos autores (2026).
+4.2.2 Área do Estudante
+A Área do Estudante concentra as ferramentas interativas destinadas aos discentes do ensino médio, abrangendo a consulta à enciclopédia de espécies, a realização de quizzes gamificados, o registro de avistamentos no mapa e a participação comunitária no fórum.
+Após a autenticação bem-sucedida, o estudante é direcionado ao seu painel principal personalizado na plataforma. A interface exibe uma saudação nominal com o nível atual do guardião, contadores de experiência (XP), espécies catalogadas e avistamentos registrados, acompanhados de atalhos rápidos para o jogo diário, estudos recentes e campanhas ativas. A página organiza o fluxo de aprendizado com cards dinâmicos que incentivam a exploração da fauna e a participação comunitária, conforme ilustrado na Tela Início Logado A e na Tela Início Logado B (Figura 19).
+Figura 19 - Página inicial do estudante: (a) Tela Início Logado A; (b) Tela Início Logado B
+
+(a) Tela Início Logado A - painel superior e métricas do estudante
+
+(b) Tela Início Logado B - atalhos pedagógicos e atividades
+Fonte: Elaborada pelos autores (2026).
+A tela de perfil reúne a identidade do estudante dentro da comunidade EcoCanta, exibindo sua foto de perfil, biografia, estatísticas gerais de navegação, insígnias conquistadas por dedicação ecológica e histórico de contribuições. O aluno pode visualizar seu progresso em desafios ambientais e gerenciar suas preferências cadastrais, conforme demonstrado na Tela Perfil e Conquistas A e na Tela Perfil e Conquistas B (Figura 20).
+Figura 20 - Perfil e conquistas do estudante: (a) Tela Perfil e Conquistas A; (b) Tela Perfil e Conquistas B
+
+(a) Tela Perfil e Conquistas A - dados do perfil e medalhas
+
+(b) Tela Perfil e Conquistas B - histórico de atividades e insígnias
+Fonte: Elaborada pelos autores (2026).
+A trilha de níveis estrutura a jornada de gamificação educativa da EcoCanta, apresentando uma progressão visual de etapas que o aluno alcança à medida que acumula pontos de experiência (XP). Cada novo nível desbloqueia recursos interativos especiais, como acesso ao mapa georreferenciado, ferramentas avançadas de publicação e títulos ecológicos honorários, conforme demonstrado na Tela Trilha de Níveis e Desbloqueios A e na Tela Trilha de Níveis e Desbloqueios B (Figura 21).
+Figura 21 - Trilha de níveis e desbloqueios: (a) Tela Trilha de Níveis e Desbloqueios A; (b) Tela Trilha de Níveis e Desbloqueios B
+
+(a) Tela Trilha de Níveis e Desbloqueios A - visualização da trilha de evolução
+
+(b) Tela Trilha de Níveis e Desbloqueios B - recompensas e critérios de desbloqueio
+Fonte: Elaborada pelos autores (2026).
+O caderno de notas digital oferece aos estudantes um ambiente integrado para elaboração, armazenamento e edição de anotações de campo, resumos teóricos de biologia e observações sobre a biodiversidade da Serra da Cantareira. O editor conta com salvamento em tempo real, formatação textual e organização por temas de pesquisa, conforme exibido na Tela Caderno de Notas A e na Tela Caderno de Notas B (Figura 22).
+Figura 22 - Caderno de notas digital: (a) Tela Caderno de Notas A; (b) Tela Caderno de Notas B
+
+(a) Tela Caderno de Notas A - listagem de anotações e pastas
+
+(b) Tela Caderno de Notas B - editor de texto de notas científicas
+Fonte: Elaborada pelos autores (2026).
+A tela CantaDex Animais funciona como a enciclopédia digital faunística da plataforma, catalogando as espécies nativas da Serra da Cantareira em formato de grade interativa. Os alunos podem buscar animais pelo nome popular ou científico, filtrar por famílias biológicas (mamíferos, aves, répteis) e verificar o estado de preservação de acordo com a Lista Vermelha, conforme apresentado na Tela CantaDex Animais A e na Tela CantaDex Animais B (Figura 23).
+Figura 23 - CantaDex Animais: (a) Tela CantaDex Animais A; (b) Tela CantaDex Animais B
+
+(a) Tela CantaDex Animais A - grade de animais e filtros taxonômicos
+
+(b) Tela CantaDex Animais B - paginação e status de conservação
+Fonte: Elaborada pelos autores (2026).
+Ao selecionar uma espécie na CantaDex, o usuário acessa sua ficha técnica pormenorizada. A aba de informações exibe imagens de alta definição, nome científico, classificação taxonômica, bioma de ocorrência, hábitos alimentares, comportamento reprodutivo e as principais ameaças antrópicas enfrentadas pela espécie na Cantareira, conforme apresentado na Tela Detalhes da Espécie - Informações A e na Tela Detalhes da Espécie - Informações B (Figura 24).
+Figura 24 - Detalhes da espécie - Informações: (a) Tela Detalhes da Espécie - Informações A; (b) Tela Detalhes da Espécie - Informações B
+
+(a) Tela Detalhes da Espécie - Informações A - cabeçalho taxonômico e habitat
+
+(b) Tela Detalhes da Espécie - Informações B - ecologia e ameaças à espécie
+Fonte: Elaborada pelos autores (2026).
+A aba de quiz integrada à página da espécie permite avaliar de forma lúdica a fixação dos conhecimentos biológicos recém-estudados pelo aluno. A interface apresenta perguntas objetivas de múltipla escolha com temporizador e feedback imediato com justificativas pedagógicas, conforme demonstrado na Tela Detalhes da Espécie - Quiz A e na Tela Detalhes da Espécie - Quiz B (Figura 25).
+Figura 25 - Detalhes da espécie - Quiz: (a) Tela Detalhes da Espécie - Quiz A; (b) Tela Detalhes da Espécie - Quiz B
+
+(a) Tela Detalhes da Espécie - Quiz A - introdução ao desafio do animal
+
+(b) Tela Detalhes da Espécie - Quiz B - execução de perguntas e pontuação
+Fonte: Elaborada pelos autores (2026).
+Na aba de estudos da espécie, os estudantes encontram uma curadoria de artigos científicos, publicações acadêmicas e relatórios técnicos diretamente vinculados à preservação daquele animal. Esse recurso aproxima a juventude da literatura científica real, conforme ilustrado na Tela Detalhes da Espécie - Estudos A e na Tela Detalhes da Espécie - Estudos B (Figura 26).
+Figura 26 - Detalhes da espécie - Estudos: (a) Tela Detalhes da Espécie - Estudos A; (b) Tela Detalhes da Espécie - Estudos B
+
+(a) Tela Detalhes da Espécie - Estudos A - lista de pesquisas acadêmicas associadas
+
+(b) Tela Detalhes da Espécie - Estudos B - resumos e links para leitura
+Fonte: Elaborada pelos autores (2026).
+O Mapa de Avistamentos permite aos estudantes visualizar a distribuição geográfica de animais silvestres observados na Serra da Cantareira e em áreas verdes do entorno de Guarulhos e São Paulo. A interface interativa dispõe de marcadores geográficos, filtros por espécie e cards informativos com data e fotografia do avistamento, conforme apresentado na Tela Mapa de Avistamentos A e na Tela Mapa de Avistamentos B (Figura 27).
+Figura 27 - Mapa de Avistamentos: (a) Tela Mapa de Avistamentos A; (b) Tela Mapa de Avistamentos B
+
+(a) Tela Mapa de Avistamentos A - mapa georreferenciado e pontos de observação
+
+(b) Tela Mapa de Avistamentos B - detalhes do registro e dados ecológicos
+Fonte: Elaborada pelos autores (2026).
+Para incentivar a ciência cidadã, a funcionalidade de registrar avistamento permite ao estudante documentar encontros com a fauna local. O formulário contempla a seleção da espécie identificada, data, horário, coordenadas geográficas aproximadas, relato do comportamento observado e upload de fotografias comprobatórias, conforme ilustrado na Tela Registrar Avistamento A e na Tela Registrar Avistamento B (Figura 28).
+Figura 28 - Registrar Avistamento: (a) Tela Registrar Avistamento A; (b) Tela Registrar Avistamento B
+
+(a) Tela Registrar Avistamento A - seleção da espécie e localização
+
+(b) Tela Registrar Avistamento B - anexo de fotografia e descrição
+Fonte: Elaborada pelos autores (2026).
+A tela de denúncia ambiental disponibiliza um canal cidadão para registro e encaminhamento de irregularidades ecológicas constatadas na Serra da Cantareira (tais como desmatamento, queimadas, caça ilegal, descarte irregular de resíduos e ocupações indevidas). A interface guia o usuário na caracterização da ocorrência, garantindo sigilo das informações e orientação de órgãos responsáveis, conforme exibido na Tela Denúncia Ambiental A e na Tela Denúncia Ambiental B (Figura 29).
+Figura 29 - Denúncia Ambiental: (a) Tela Denúncia Ambiental A; (b) Tela Denúncia Ambiental B
+
+(a) Tela Denúncia Ambiental A - tipificação da infração e dados do local
+
+(b) Tela Denúncia Ambiental B - evidências e protocolo de envio
+Fonte: Elaborada pelos autores (2026).
+A área de campanhas ambientais centraliza ações ecológicas, mutirões de plantio de mudas nativas, eventos de limpeza de trilhas e palestras de conscientização promovidas por escolas e organizações do entorno da Cantareira. Os cards exibem metas, cronogramas e número de voluntários engajados, conforme apresentado na Tela Campanhas Ambientais A e na Tela Campanhas Ambientais B (Figura 30).
+Figura 30 - Campanhas Ambientais: (a) Tela Campanhas Ambientais A; (b) Tela Campanhas Ambientais B
+
+(a) Tela Campanhas Ambientais A - iniciativas em andamento e destaques
+
+(b) Tela Campanhas Ambientais B - campanhas concluídas e resultados
+Fonte: Elaborada pelos autores (2026).
+Ao abrir uma campanha específica, o estudante consulta o cronograma completo das atividades, ponto de encontro na Serra, recomendações de segurança e conduta ecológica, além do botão para confirmação de presença e compartilhamento social, conforme exibido na Tela Detalhes da Campanha A e na Tela Detalhes da Campanha B (Figura 31).
+Figura 31 - Detalhes da Campanha: (a) Tela Detalhes da Campanha A; (b) Tela Detalhes da Campanha B
+
+(a) Tela Detalhes da Campanha A - objetivos, data e localização do evento
+
+(b) Tela Detalhes da Campanha B - orientações de participação e inscrições
+Fonte: Elaborada pelos autores (2026).
+A plataforma estimula a liderança estudantil permitindo que os próprios alunos proponham campanhas de conservação. O formulário solicita título do projeto, justificativa ecológica, público-alvo, estimativa de participantes e plano de ação, que passa por moderação antes de ser publicada, conforme ilustrado na Tela Propor Nova Campanha A e na Tela Propor Nova Campanha B (Figura 32).
+Figura 32 - Propor Nova Campanha: (a) Tela Propor Nova Campanha A; (b) Tela Propor Nova Campanha B
+
+(a) Tela Propor Nova Campanha A - dados gerais da proposta
+
+(b) Tela Propor Nova Campanha B - cronograma e envio para avaliação
+Fonte: Elaborada pelos autores (2026).
+A área do Jogo Diário de Resgate integra elementos de gamificação ativa ao aprendizado escolar. A tela de seleção apresenta as missões diárias disponíveis, variando por nível de dificuldade, bioma simulado e recompensas em XP e itens de guardião, conforme demonstrado na Tela Jogo Diário - Seleção de Missão A e na Tela Jogo Diário - Seleção de Missão B (Figura 33).
+Figura 33 - Jogo Diário - Seleção de Missão: (a) Tela Jogo Diário - Seleção de Missão A; (b) Tela Jogo Diário - Seleção de Missão B
+
+(a) Tela Jogo Diário - Seleção de Missão A - catálogo de fases e missões diárias
+
+(b) Tela Jogo Diário - Seleção de Missão B - regras, bônus de XP e seleção
+Fonte: Elaborada pelos autores (2026).
+A interface da Missão de Resgate coloca o estudante em desafios práticos de identificação de pegadas, resolução de dilemas de preservação e salvamento de animais nativos em perigo na Serra da Cantareira. A mecânica lúdica combina perguntas com tempo e recursos educativos interativos, conforme exibido na Figura 34.
+Figura 34 - Jogo Diário - Missão de Resgate
+
+Fonte: Elaborada pelos autores (2026).
+O fórum da EcoCanta funciona como um espaço de diálogo socioambiental onde estudantes, professores e entusiastas compartilham dúvidas, relatam descobertas e debatem questões sobre o meio ambiente. A tela principal reúne tópicos recentes, marcadores de tendências e contador de interações, conforme exibido na Tela Fórum - Todas as Discussões A e na Tela Fórum - Todas as Discussões B (Figura 35).
+Figura 35 - Fórum - Todas as Discussões: (a) Tela Fórum - Todas as Discussões A; (b) Tela Fórum - Todas as Discussões B
+
+(a) Tela Fórum - Todas as Discussões A - linha do tempo de postagens e filtros
+
+(b) Tela Fórum - Todas as Discussões B - tópicos populares e paginação
+Fonte: Elaborada pelos autores (2026).
+Para promover o trabalho em equipe, a área de comunidades permite organizar os estudantes por turmas escolares, grêmios ou grupos temáticos de pesquisa (como Observadores de Aves, Amigos da Cantareira e Defensores das Águas), conforme ilustrado na Tela Fórum - Comunidades A e na Tela Fórum - Comunidades B (Figura 36).
+Figura 36 - Fórum - Comunidades: (a) Tela Fórum - Comunidades A; (b) Tela Fórum - Comunidades B
+
+(a) Tela Fórum - Comunidades A - catálogo de grupos comunitários
+
+(b) Tela Fórum - Comunidades B - membros ativos e botão de adesão
+Fonte: Elaborada pelos autores (2026).
+Ao ingressar em uma comunidade, o usuário acessa o mural exclusivo do grupo, com discussões direcionadas, eventos internos e arquivos didáticos compartilhados entre os participantes, conforme apresentado na Tela Comunidade do Fórum A e na Tela Comunidade do Fórum B (Figura 37).
+Figura 37 - Comunidade do Fórum: (a) Tela Comunidade do Fórum A; (b) Tela Comunidade do Fórum B
+
+(a) Tela Comunidade do Fórum A - cabeçalho do grupo e regras
+
+(b) Tela Comunidade do Fórum B - mural de discussões internas
+Fonte: Elaborada pelos autores (2026).
+A página de detalhe do tópico exibe o conteúdo integral da publicação do autor, incluindo relatos de campo, imagens anexadas, respostas encadeadas de outros usuários e opções de interação (curtidas e citações), conforme apresentado na Tela Detalhe do Tópico do Fórum A e na Tela Detalhe do Tópico do Fórum B (Figura 38).
+Figura 38 - Detalhe do Tópico do Fórum: (a) Tela Detalhe do Tópico do Fórum A; (b) Tela Detalhe do Tópico do Fórum B
+
+(a) Tela Detalhe do Tópico do Fórum A - publicação principal e autor
+
+(b) Tela Detalhe do Tópico do Fórum B - comentários e campo de resposta
+Fonte: Elaborada pelos autores (2026).
+A criação de um novo tópico no fórum conta com um editor de texto com suporte a formatação, categorização temática (fauna, flora, trilhas, denúncias ou eventos) e upload de fotografias, conforme ilustrado na Tela Nova Publicação no Fórum A e na Tela Nova Publicação no Fórum B (Figura 39).
+Figura 39 - Nova Publicação no Fórum: (a) Tela Nova Publicação no Fórum A; (b) Tela Nova Publicação no Fórum B
+
+(a) Tela Nova Publicação no Fórum A - título, categoria e corpo da mensagem
+
+(b) Tela Nova Publicação no Fórum B - tags temáticas e publicação
+Fonte: Elaborada pelos autores (2026).
+Estudantes que atingem níveis avançados na plataforma podem criar novas comunidades autônomas, preenchendo o nome do grupo, descrição das metas ecológicas, regras de convivência e imagem representativa, conforme demonstrado na Tela Fundar Comunidade no Fórum A e na Tela Fundar Comunidade no Fórum B (Figura 40).
+Figura 40 - Fundar Comunidade no Fórum: (a) Tela Fundar Comunidade no Fórum A; (b) Tela Fundar Comunidade no Fórum B
+
+(a) Tela Fundar Comunidade no Fórum A - dados do novo grupo e descrição
+
+(b) Tela Fundar Comunidade no Fórum B - regras comunitárias e criação
+Fonte: Elaborada pelos autores (2026).
+A página de FAQ e Diretrizes reúne respostas às dúvidas mais comuns sobre navegação, pontuação em XP, regras de visitação consciente à Serra da Cantareira e termos de compromisso ecológico, estruturada em blocos expansíveis de fácil consulta, conforme exibido na Tela FAQ e Diretrizes A e na Tela FAQ e Diretrizes B (Figura 41).
+Figura 41 - FAQ e Diretrizes: (a) Tela FAQ e Diretrizes A; (b) Tela FAQ e Diretrizes B
+
+(a) Tela FAQ e Diretrizes A - perguntas frequentes categorizadas
+
+(b) Tela FAQ e Diretrizes B - diretrizes éticas e conduta ambiental
+Fonte: Elaborada pelos autores (2026).
+O canal de suporte ao estudante permite enviar dúvidas técnicas ou pedagógicas diretamente à equipe administrativa da EcoCanta. A interface conta com envio de mensagens em tempo real e histórico de tíquetes solucionados, conforme demonstrado na Tela Chat de Dúvida com Suporte A e na Tela Chat de Dúvida com Suporte B (Figura 42).
+Figura 42 - Chat de Dúvida com Suporte: (a) Tela Chat de Dúvida com Suporte A; (b) Tela Chat de Dúvida com Suporte B
+
+(a) Tela Chat de Dúvida com Suporte A - abertura de solicitação de ajuda
+
+(b) Tela Chat de Dúvida com Suporte B - histórico de atendimento e respostas
+Fonte: Elaborada pelos autores (2026).
+4.2.3 Área do Moderador
+A Área do Moderador reúne os módulos voltados à mediação comunitária, validação de registros ambientais e moderação de conteúdos submetidos pelos usuários, zelando pela integridade, ética e respeito no ambiente colaborativo da plataforma.
+Para manter um ambiente saudável e respeitoso de aprendizado, a tela de moderação do fórum permite aos moderadores analisar denúncias de mensagens ofensivas, ocultar publicações inadequadas e emitir alertas educativos à comunidade escolar, conforme exibido na Tela Painel de Moderação do Fórum A e na Tela Painel de Moderação do Fórum B (Figura 43).
+Figura 43 - Painel de Moderação do Fórum: (a) Tela Painel de Moderação do Fórum A; (b) Tela Painel de Moderação do Fórum B
+
+(a) Tela Painel de Moderação do Fórum A - fila de mensagens sinalizadas
+
+(b) Tela Painel de Moderação do Fórum B - ações de moderação e justificativas
+Fonte: Elaborada pelos autores (2026).
+Para assegurar o rigor científico e a confiabilidade dos registros da plataforma, os avistamentos de fauna enviados pelos estudantes passam por triagem prévia. O moderador avalia a acurácia da identificação da espécie, inspeciona as fotografias comprobatórias e valida as coordenadas geográficas antes de sua disponibilização pública no mapa interativo, conforme exibido na Tela Admin - Avistamentos e Mapa A e na Tela Admin - Avistamentos e Mapa B (Figura 44).
+Figura 44 - Admin - Avistamentos e Mapa: (a) Tela Admin - Avistamentos e Mapa A; (b) Tela Admin - Avistamentos e Mapa B
+
+(a) Tela Admin - Avistamentos e Mapa A - fila de validação de avistamentos
+
+(b) Tela Admin - Avistamentos e Mapa B - aprovação de coordenadas e imagens
+Fonte: Elaborada pelos autores (2026).
+O painel de moderação de denúncias reúne os relatos de agressão socioambiental e condutas impróprias reportadas pela comunidade escolar. O moderador classifica a gravidade das ocorrências, atualiza o status da apuração e define as ações disciplinares necessárias, conforme exibido na Tela Admin - Denúncias e Moderação A e na Tela Admin - Denúncias e Moderação B (Figura 45).
+Figura 45 - Admin - Denúncias e Moderação: (a) Tela Admin - Denúncias e Moderação A; (b) Tela Admin - Denúncias e Moderação B
+
+(a) Tela Admin - Denúncias e Moderação A - painel de ocorrências e prioridade
+
+(b) Tela Admin - Denúncias e Moderação B - triagem e encaminhamentos
+Fonte: Elaborada pelos autores (2026).
+Na visualização detalhada da denúncia, o moderador analisa as evidências anexadas, a descrição do fato, o histórico do usuário reportado e os pareceres registrados, aplicando advertências educativas, suspensões ou encaminhamentos cabíveis, conforme demonstrado na Tela Admin - Detalhes da Denúncia A e na Tela Admin - Detalhes da Denúncia B (Figura 46).
+Figura 46 - Admin - Detalhes da Denúncia: (a) Tela Admin - Detalhes da Denúncia A; (b) Tela Admin - Detalhes da Denúncia B
+
+(a) Tela Admin - Detalhes da Denúncia A - provas fotográficas e descrição
+
+(b) Tela Admin - Detalhes da Denúncia B - parecer administrativo e resolução
+Fonte: Elaborada pelos autores (2026).
+4.2.4 Área do Jornalista
+A Área do Jornalista compreende as funcionalidades de produção, curadoria e publicação de matérias socioambientais, além da veiculação de pesquisas científicas e cobertura de campanhas ecológicas promovidas na comunidade escolar.
+A seção de notícias ambientais constitui o canal editorial gerenciado pelo perfil de jornalista, reunindo reportagens, matérias socioambientais e comunicados sobre a preservação da Serra da Cantareira. Os usuários podem acompanhar matérias exclusivas e interagir em debates temáticos, conforme demonstrado na Tela Fórum - Notícias da Serra A e na Tela Fórum - Notícias da Serra B (Figura 47).
+Figura 47 - Fórum - Notícias da Serra: (a) Tela Fórum - Notícias da Serra A; (b) Tela Fórum - Notícias da Serra B
+
+(a) Tela Fórum - Notícias da Serra A - manchetes e destaques ambientais
+
+(b) Tela Fórum - Notícias da Serra B - artigos noticiosos e área de debate
+Fonte: Elaborada pelos autores (2026).
+O Centro de Estudos Científicos organiza o acervo de publicações, artigos didáticos e materiais pedagógicos voltados à biodiversidade da Cantareira e Mata Atlântica. O jornalista é responsável pela curadoria e difusão desses conteúdos, tornando o conhecimento científico acessível aos discentes e docentes, conforme ilustrado na Tela Centro de Estudos Científicos A e na Tela Centro de Estudos Científicos B (Figura 48).
+Figura 48 - Centro de Estudos Científicos: (a) Tela Centro de Estudos Científicos A; (b) Tela Centro de Estudos Científicos B
+
+(a) Tela Centro de Estudos Científicos A - acervo de artigos e mecanismo de busca
+
+(b) Tela Centro de Estudos Científicos B - listagem temática e metadados
+Fonte: Elaborada pelos autores (2026).
+A tela de leitura disponibiliza o conteúdo integral dos estudos e artigos didáticos, formatados com resumos, metodologias simplificadas, dados taxonômicos e correlações diretas com espécies da Cantareira, conforme demonstrado na Tela Leitura de Estudo Científico A e na Tela Leitura de Estudo Científico B (Figura 49).
+Figura 49 - Leitura de Estudo Científico: (a) Tela Leitura de Estudo Científico A; (b) Tela Leitura de Estudo Científico B
+
+(a) Tela Leitura de Estudo Científico A - cabeçalho do artigo e resumo
+
+(b) Tela Leitura de Estudo Científico B - corpo do estudo e referências
+Fonte: Elaborada pelos autores (2026).
+A interface de submissão de estudos permite aos jornalistas e pesquisadores redigir, estruturar e enviar novos artigos e sínteses de pesquisa de campo para incorporação ao acervo científico da plataforma, conforme ilustrado na Tela Submeter Novo Estudo A e na Tela Submeter Novo Estudo B (Figura 50).
+Figura 50 - Submeter Novo Estudo: (a) Tela Submeter Novo Estudo A; (b) Tela Submeter Novo Estudo B
+
+(a) Tela Submeter Novo Estudo A - dados bibliográficos e título
+
+(b) Tela Submeter Novo Estudo B - upload de documento e confirmação
+Fonte: Elaborada pelos autores (2026).
+4.2.5 Área do Administrador
+A Área do Administrador centraliza o gerenciamento sistêmico e institucional da EcoCanta, viabilizando o controle de contas e privilégios de acesso, a expansão do catálogo de espécies, a parametrização da gamificação e o suporte aos usuários.
+O painel administrativo principal oferece uma visão sistêmica da plataforma EcoCanta, exibindo indicadores em tempo real de usuários ativos, novos estudos pendentes de aprovação, denúncias recentes e métricas de engajamento escolar, conforme apresentado na Tela Admin - Visão Geral e Pendências A e na Tela Admin - Visão Geral e Pendências B (Figura 51).
+Figura 51 - Admin - Visão Geral e Pendências: (a) Tela Admin - Visão Geral e Pendências A; (b) Tela Admin - Visão Geral e Pendências B
+
+(a) Tela Admin - Visão Geral e Pendências A - métricas globais e pendências
+
+(b) Tela Admin - Visão Geral e Pendências B - gráficos de adesão e resumos
+Fonte: Elaborada pelos autores (2026).
+A tela de gerenciamento de contas permite aos administradores consultar todos os usuários cadastrados, filtrar por papel (estudante, moderador, jornalista ou administrador), editar privilégios e realizar bloqueios quando necessário, conforme apresentado na Tela Admin - Gerenciamento de Contas A e na Tela Admin - Gerenciamento de Contas B (Figura 52).
+Figura 52 - Admin - Gerenciamento de Contas: (a) Tela Admin - Gerenciamento de Contas A; (b) Tela Admin - Gerenciamento de Contas B
+
+(a) Tela Admin - Gerenciamento de Contas A - listagem de usuários e filtros
+
+(b) Tela Admin - Gerenciamento de Contas B - ações de gerenciamento de permissões
+Fonte: Elaborada pelos autores (2026).
+Para inclusão manual de novos colaboradores com perfis diferenciados (como moderadores, jornalistas ou novos administradores), o administrador dispõe de um formulário específico com definição direta de perfil de acesso e escola de vínculo, conforme ilustrado na Figura 53.
+Figura 53 - Admin - Cadastro de Nova Conta
+
+Fonte: Elaborada pelos autores (2026).
+A área de gestão de espécies possibilita aos administradores revisar todo o acervo biológico cadastrado na CantaDex, monitorar dados científicos e atualizar status ecológicos conforme as listas da IUCN e ICMBio, conforme demonstrado na Tela Admin - Gestão de Espécies A e na Tela Admin - Gestão de Espécies B (Figura 54).
+Figura 54 - Admin - Gestão de Espécies: (a) Tela Admin - Gestão de Espécies A; (b) Tela Admin - Gestão de Espécies B
+
+(a) Tela Admin - Gestão de Espécies A - tabela de espécies e busca taxonômica
+
+(b) Tela Admin - Gestão de Espécies B - botões de edição rápida e status
+Fonte: Elaborada pelos autores (2026).
+O formulário de cadastro de nova espécie viabiliza a expansão contínua da CantaDex, exigindo o preenchimento de nomes vulgar e científico, família, ordem, bioma, dieta, comportamento, ameaças e fotos de alta resolução, conforme demonstrado na Tela Admin - Cadastrar Nova Espécie A e na Tela Admin - Cadastrar Nova Espécie B (Figura 55).
+Figura 55 - Admin - Cadastrar Nova Espécie: (a) Tela Admin - Cadastrar Nova Espécie A; (b) Tela Admin - Cadastrar Nova Espécie B
+
+(a) Tela Admin - Cadastrar Nova Espécie A - taxonomia e dados gerais
+
+(b) Tela Admin - Cadastrar Nova Espécie B - fotos, habitat e ameaças
+Fonte: Elaborada pelos autores (2026).
+Nesta seção, a equipe administrativa acompanha o andamento das iniciativas socioambientais promovidas pela rede escolar, valida propostas submetidas por estudantes e gerencia os relatórios de encerramento, conforme exibido na Tela Admin - Gestão de Campanhas A e na Tela Admin - Gestão de Campanhas B (Figura 56).
+Figura 56 - Admin - Gestão de Campanhas: (a) Tela Admin - Gestão de Campanhas A; (b) Tela Admin - Gestão de Campanhas B
+
+(a) Tela Admin - Gestão de Campanhas A - listagem de campanhas e status
+
+(b) Tela Admin - Gestão de Campanhas B - estatísticas de adesão e moderação
+Fonte: Elaborada pelos autores (2026).
+A criação oficial de campanhas por parte da coordenação conta com formulário para especificação de organizadores, cronograma, metas de mudas plantadas ou áreas limpas, e diretrizes de participação, conforme apresentado na Tela Admin - Cadastrar Nova Campanha A e na Tela Admin - Cadastrar Nova Campanha B (Figura 57).
+Figura 57 - Admin - Cadastrar Nova Campanha: (a) Tela Admin - Cadastrar Nova Campanha A; (b) Tela Admin - Cadastrar Nova Campanha B
+
+(a) Tela Admin - Cadastrar Nova Campanha A - objetivos e informações gerais
+
+(b) Tela Admin - Cadastrar Nova Campanha B - cronograma e confirmação
+Fonte: Elaborada pelos autores (2026).
+O módulo de quizzes administrativos permite supervisionar as baterias de testes ecológicos atreladas a cada animal da CantaDex, acompanhando taxas de acerto discente e índices de dificuldade, conforme ilustrado na Tela Admin - Quizzes das Espécies A e na Tela Admin - Quizzes das Espécies B (Figura 58).
+Figura 58 - Admin - Quizzes das Espécies: (a) Tela Admin - Quizzes das Espécies A; (b) Tela Admin - Quizzes das Espécies B
+
+(a) Tela Admin - Quizzes das Espécies A - catálogo de questionários ativos
+
+(b) Tela Admin - Quizzes das Espécies B - métricas de acertos por espécie
+Fonte: Elaborada pelos autores (2026).
+O editor de quiz viabiliza a formulação de perguntas pedagógicas, configuração de alternativas, definição da resposta correta e inclusão de feedbacks explicativos que reforçam o aprendizado após cada resposta do aluno, conforme demonstrado na Tela Admin - Editar Quiz da Espécie A e na Tela Admin - Editar Quiz da Espécie B (Figura 59).
+Figura 59 - Admin - Editar Quiz da Espécie: (a) Tela Admin - Editar Quiz da Espécie A; (b) Tela Admin - Editar Quiz da Espécie B
+
+(a) Tela Admin - Editar Quiz da Espécie A - enunciado da questão e gabarito
+
+(b) Tela Admin - Editar Quiz da Espécie B - justificativa pedagógica e salvamento
+Fonte: Elaborada pelos autores (2026).
+A tela de gestão de níveis reúne as configurações da jornada de gamificação da plataforma, possibilitando calibrar a quantidade de XP necessária para cada patente e os privilégios concedidos aos alunos, conforme apresentado na Tela Admin - Níveis do Jogo A e na Tela Admin - Níveis do Jogo B (Figura 60).
+Figura 60 - Admin - Níveis do Jogo: (a) Tela Admin - Níveis do Jogo A; (b) Tela Admin - Níveis do Jogo B
+
+(a) Tela Admin - Níveis do Jogo A - escala de progressão e patentes
+
+(b) Tela Admin - Níveis do Jogo B - recompensas e parâmetros de XP
+Fonte: Elaborada pelos autores (2026).
+O editor de níveis permite customizar os parâmetros de uma fase específica, ajustando missões, tempo limite de resposta e elementos lúdicos associados à preservação da Cantareira, conforme ilustrado na Figura 61.
+Figura 61 - Admin - Editor de Nível do Jogo
+
+Fonte: Elaborada pelos autores (2026).
+A área de gestão de FAQ permite atualizar tópicos de ajuda, incluir novas orientações pedagógicas decorrentes de dúvidas recorrentes dos discentes e organizar a base de conhecimento institucional, conforme ilustrado na Tela Admin - Dúvidas e FAQ A e na Tela Admin - Dúvidas e FAQ B (Figura 62).
+Figura 62 - Admin - Dúvidas e FAQ: (a) Tela Admin - Dúvidas e FAQ A; (b) Tela Admin - Dúvidas e FAQ B
+
+(a) Tela Admin - Dúvidas e FAQ A - administração de artigos de ajuda
+
+(b) Tela Admin - Dúvidas e FAQ B - edição de respostas e publicação
+Fonte: Elaborada pelos autores (2026).
+Por fim, a central de atendimento administrativo disponibiliza um painel de chamados abertos pelos estudantes, onde a equipe técnica responde a solicitações de suporte, resolve dúvidas sobre cadastros e apoia as atividades educativas, conforme apresentado na Tela Admin - Atendimento de Dúvida Suporte A e na Tela Admin - Atendimento de Dúvida Suporte B (Figura 63).
+Figura 63 - Admin - Atendimento de Dúvida Suporte: (a) Tela Admin - Atendimento de Dúvida Suporte A; (b) Tela Admin - Atendimento de Dúvida Suporte B
+
+(a) Tela Admin - Atendimento de Dúvida Suporte A - fila de tíquetes de suporte
+
+(b) Tela Admin - Atendimento de Dúvida Suporte B - área de resposta e fechamento
+Fonte: Elaborada pelos autores (2026).
+5 CONSIDERAÇÕES FINAIS
+Este trabalho teve como tema o desenvolvimento da plataforma web EcoCanta, voltada à conscientização ambiental de estudantes do ensino médio acerca da preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP. A investigação articulou conceitos fundamentais de educação ambiental, as pressões antrópicas incidentes sobre a biodiversidade da Mata Atlântica e a análise de sistemas correlatos, fundamentando-se nas necessidades e preferências levantadas junto ao público escolar da região.
+O objetivo geral de projetar e implementar uma plataforma web voltada a contribuir para a conscientização ecológica dos estudantes foi plenamente alcançado ao longo do projeto. De modo articulado, os objetivos específicos foram atendidos por meio do levantamento bibliográfico das espécies nativas e seus graus de vulnerabilidade, da definição dos requisitos funcionais do sistema, da modelagem orientada a objetos com diagramas de casos de uso e modelo lógico de dados, da prototipação de média fidelidade e do desenvolvimento dos módulos essenciais da aplicação.
+O problema de pesquisa buscou compreender de que maneira uma plataforma web pode apoiar a conscientização ambiental de estudantes do ensino médio sobre a fauna regional. A realização deste estudo evidenciou que a oferta de recursos digitais interativos — associando fichas informativas detalhadas, recursos visuais, notícias locais e atividades lúdicas como quizzes — fornece subsídios práticos e atrativos para estreitar o contato dos jovens com o ecossistema da Cantareira, preenchendo lacunas de conhecimento e incentivando atitudes proativas de conservação.
+A pesquisa de campo contou com 35 respostas válidas, evidenciando que 77,1% dos participantes não detinham conhecimento seguro acerca da presença de animais ameaçados de extinção na serra e que 74,3% nunca haviam participado de ações ambientais práticas. Os dados indicaram forte receptividade a recursos audiovisuais e tecnologias digitais. Complementando a coleta, o teste de usabilidade realizado no Maze com cinco voluntários registrou 100% de êxito na conclusão da tarefa proposta de localização da onça-parda, atestando a clareza e a ergonomia do fluxo de navegação concebido no protótipo.
+A contribuição central deste trabalho reside na proposição de uma ferramenta educacional inédita com recorte geográfico estritamente direcionado à Serra da Cantareira e contextualizado para a realidade educacional de Guarulhos. Ao integrar catálogo faunístico, notícias ambientais, módulos didáticos e espaços de interação em uma interface amigável, a EcoCanta desponta como recurso complementar para subsidiar práticas pedagógicas escolares e fomentar o senso de pertencimento e preservação ambiental.
+Como trabalhos futuros, recomenda-se a implementação integral do mapa interativo georreferenciado para catalogação colaborativa de avistamentos, a expansão do banco de dados para contemplar a flora e os anfíbios nativos, a integração com redes de monitoramento ambiental e a realização de testes empíricos com grupos ampliados de estudantes em ambiente de sala de aula, avaliando de forma longitudinal a assimilação de conhecimentos ecológicos.
+
+REFERÊNCIAS
+BARBOSA, Giovani; OLIVEIRA, Caroline Terra de. Educação Ambiental na Base Nacional Comum Curricular. REMEA - Revista Eletrônica do Mestrado em Educação Ambiental, v. 37, n. 1, p. 323-335, 2020. DOI: 10.14295/remea.v37i1.11000. Disponível em: https://periodicos.furg.br/remea/article/view/11000. Acesso em: 28 ago. 2026.
+BRASIL. [Lei nº 9.795, de 27 de abril de 1999]. Institui a Política Nacional de Educação Ambiental e dá outras providências. Diário Oficial da União, Brasília, DF, 1999. Disponível em: http://www.planalto.gov.br/ccivil_03/leis/L9795.htm. Acesso em: 28 ago. 2026.
+BRASIL. Ministério do Meio Ambiente e Mudança do Clima. Biomas e ecossistemas. Brasília, 2026a. Disponível em: https://www.gov.br/mma/pt-br/assuntos/biodiversidade-e-biomas/biomas-e-ecossistemas. Acesso em: 21 maio 2026.
+BRASIL. Instituto Chico Mendes de Conservação da Biodiversidade. O Instituto. Brasília, 2026b. Disponível em: https://www.gov.br/icmbio/pt-br/acesso-a-informacao/institucional/o-instituto. Acesso em: 19 set. 2026.
+CAVALCANTE, Luciene Morais et al. Biodiversidade e antropismo em inselbergues como instrumento de Educação Ambiental e sustentabilidade. Revista Brasileira de Educação Ambiental (RevBEA), v. 18, n. 5, p. 39-60, 2023. DOI: 10.34024/revbea.2023.v18.14472. Disponível em: https://periodicos.unifesp.br/index.php/revbea/article/view/14472. Acesso em: 28 ago. 2026.
+COWIE, Robert H.; BOUCHET, Philippe; FONTAINE, Benoît. The Sixth Mass Extinction: fact, fiction or speculation? Biological Reviews, v. 97, n. 2, p. 640-663, 2022. DOI: 10.1111/brv.12816. Disponível em: https://doi.org/10.1111/brv.12816. Acesso em: 28 ago. 2026.
+FUNDAÇÃO SOS MATA ATLÂNTICA. Água limpa. São Paulo, 2026a. Disponível em: https://www.sosma.org.br. Acesso em: 1 out. 2026.
+FUNDAÇÃO SOS MATA ATLÂNTICA. Quem somos. São Paulo, 2026b. Disponível em: https://sosma.org.br/sobre/quem-somos. Acesso em: 19 set. 2026.
+IUCN. The Red List of Threatened Species. Gland, 2026. Disponível em: https://www.iucnredlist.org. Acesso em: 20 maio 2026.
+NUNES, Marcela Martins; LEHN, Carlos Rodrigo. Educação Ambiental e preservação da biodiversidade: relato de um estudo de caso em distintas realidades escolares. Revista Brasileira de Educação Ambiental (RevBEA), v. 17, n. 6, p. 498-511, 2022. DOI: 10.34024/revbea.2022.v17.13415. Disponível em: https://periodicos.unifesp.br/index.php/revbea/article/view/13415. Acesso em: 31 ago. 2026.
+PIMENTA, Paula. Bioma mais devastado, Mata Atlântica luta para manter biodiversidade. Agência Senado, Brasília, DF, 12 jan. 2024. Disponível em: https://www12.senado.leg.br/noticias/infomaterias/2024/01/bioma-mais-devastado-mata-atlantica-luta-para-manter-biodiversidade. Acesso em: 20 maio 2026.
+SILVA, Bruno de Lucas Barros da; RODRIGUES, Artemis Socorro do Nascimento. A Educação Ambiental através das tecnologias digitais para conservação e preservação das espécies em risco de extinção na Amazônia: uma abordagem didática atual. REVISTA EA - Revista de Educação Ambiental, 2024. Disponível em: https://periodicos.ufs.br/revisea/article/view/22830. Acesso em: 22 maio 2026.
+WWF BRASIL. WWF-Brasil. Brasília, 2026. Disponível em: https://www.wwf.org.br. Acesso em: 19 set. 2026.
+ZOTTELE, Thauane Gonçalves; PINHO, Silvia Teixeira de. Conscientização e preservação ambiental no meio escolar. Revista Foco, v. 17, n. 5, e5088, 2024. DOI: 10.54751/revistafoco.v17n5-060. Disponível em: https://ojs.focopublicacoes.com.br/foco/article/view/5088. Acesso em: 28 ago. 2026.
+APÊNDICES
+APÊNDICE A - Fichamento
+APÊNDICE B – Questionário
+APÊNDICE C – Teste de usabilidade
+APÊNDICE D – Identidade Visual
+
+
+

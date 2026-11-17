@@ -1,0 +1,115 @@
+@model TCC_Grupo12_III.Models.ForumComunidade
+
+@{
+    ViewData["Title"] = "Fundar Nova Comunidade";
+    var totalEstudos = ViewBag.TotalEstudos as int? ?? 0;
+    var ehAdmin = User.IsInRole("Admin");
+}
+
+<div class="eco-page" style="max-width: 860px; margin: 0 auto;">
+    <!-- Voltar -->
+    <a class="eco-back-link mb-3" asp-controller="Forum" asp-action="Index" asp-route-aba="comunidades">
+        <i class="bi bi-arrow-left me-1"></i> Voltar para as Comunidades
+    </a>
+
+    <!-- Cabeçalho -->
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+        <div>
+            <span class="eco-eyebrow">Fórum da Cantareira</span>
+            <h1 class="h2 fw-bold text-dark mb-1" style="font-family: 'Sora', sans-serif;">
+                <i class="bi bi-people-fill text-success me-2"></i>Fundar Nova Comunidade
+            </h1>
+            <p class="text-muted mb-0">Crie um espaço dedicado para debater causas, espécies, trilhas ou projetos científicos na Serra da Cantareira.</p>
+        </div>
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold">
+            @if (ehAdmin)
+            {
+                <i class="bi bi-shield-check me-1"></i><span>Administrador</span>
+            }
+            else if (User.IsInRole("Jornalista") || User.HasClaim("IsJornalista", "true"))
+            {
+                <i class="bi bi-patch-check-fill me-1"></i><span>Jornalista Credenciado</span>
+            }
+            else
+            {
+                <i class="bi bi-award-fill me-1"></i><span>Pesquisador Credenciado (@totalEstudos/10 estudos)</span>
+            }
+        </span>
+    </div>
+
+    @if (!ehAdmin)
+    {
+        <div class="alert alert-info border-info-subtle bg-info-subtle text-dark p-3 rounded-3 shadow-sm mb-4">
+            <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-info-circle-fill text-primary fs-4 flex-shrink-0"></i>
+                <div class="small">
+                    <strong>Processo de Homologação da Comunidade:</strong>
+                    Para mantermos a qualidade e relevância ecológica do fórum, sua proposta de comunidade passará pela validação de um Administrador. Assim que aprovada, qualquer usuário poderá publicar tópicos e participar de campanhas vinculadas!
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Formulário -->
+    <div class="eco-form-card shadow-sm p-4 bg-white rounded-3 border">
+        <form asp-controller="Forum" asp-action="CriarComunidade" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Dados Básicos -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-card-text text-success me-2"></i>Identidade da Comunidade
+                </h5>
+
+                <div class="mb-3">
+                    <label asp-for="Nome" class="form-label fw-semibold">Nome da Comunidade <span class="text-danger">*</span></label>
+                    <input asp-for="Nome" class="form-control form-control-lg" placeholder="Ex: Guardiões da Onça-Parda, Observadores de Aves Cantareira, Flora Nativa..." maxlength="100" required />
+                    <span asp-validation-for="Nome" class="text-danger small"></span>
+                    <div class="form-text">Escolha um nome claro, conciso e representativo para o grupo.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descricao" class="form-label fw-semibold">Descrição do Propósito <span class="text-danger">*</span></label>
+                    <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Explique sobre o que é esta comunidade, quais tópicos serão debatidos e quem deve participar..." maxlength="500" required></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Regras" class="form-label fw-semibold">Regras & Diretrizes de Convivência (Opcional)</label>
+                    <textarea asp-for="Regras" class="form-control" rows="3" placeholder="Ex: 1. Respeito mútuo; 2. Foco exclusivo na Serra da Cantareira; 3. Fotos de avistamento com indicação de trilha..." maxlength="600"></textarea>
+                    <span asp-validation-for="Regras" class="text-danger small"></span>
+                    <div class="form-text">Diretrizes específicas que os membros devem respeitar ao publicar nesta comunidade.</div>
+                </div>
+            </div>
+
+            <!-- Identidade Visual -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-image text-success me-2"></i>Identidade Visual
+                </h5>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Ícone / Brasão da Comunidade</label>
+                        <input type="file" name="icone" class="form-control" accept="image/*" />
+                        <div class="form-text">Quadrado ou circular (PNG, JPG ou WEBP, máx. 4MB).</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Banner de Capa (Header)</label>
+                        <input type="file" name="banner" class="form-control" accept="image/*" />
+                        <div class="form-text">Imagem horizontal panorâmica (PNG, JPG ou WEBP, máx. 6MB).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                <a class="btn btn-outline-secondary px-4" asp-controller="Forum" asp-action="Index" asp-route-aba="comunidades">Cancelar</a>
+                <button type="submit" class="btn-eco btn-eco--solid px-4">
+                    <i class="bi bi-check-circle me-1"></i> @(ehAdmin ? "Criar e Publicar Imediatamente" : "Submeter para Aprovação do Administrador")
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

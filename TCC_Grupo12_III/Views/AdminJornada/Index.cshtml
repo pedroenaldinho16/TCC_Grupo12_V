@@ -1,0 +1,10 @@
+@model List<JornadaPergunta>
+@{ ViewData["Title"] = "Gerenciar desafios"; }
+<div class="ec-page">
+    <h1>Três formas de aprender.</h1><partial name="_AdminTabs" />
+    <div class="ec-notice"><strong>Detetive:</strong> cartas com os dados das espécies. <a asp-controller="AdminEspecies" asp-action="Index">Gerenciar fichas</a>.<br /><strong>Guardião:</strong> quiz com situações-problema editáveis abaixo.<br /><strong>Missão:</strong> exploração de um cenário com três missões ambientais, sem perguntas de quiz.</div>
+    <h2>Quiz · Guardião da Cantareira</h2><p>Revise situações, alternativas, explicações e fontes. As tentativas iniciadas preservam seu conteúdo.</p>
+    <a class="ec-button mb-4" asp-action="Edit">Criar questão do Guardião</a>
+    <div class="ec-history"><table><thead><tr><th>Situação</th><th>Disponibilidade</th><th>Ação</th></tr></thead><tbody>@foreach (var q in Model.Where(q => q.Desafio == 2)) { <tr><td>@q.Enunciado</td><td>@(q.Ativa ? "Ativa" : "Em revisão")</td><td><a asp-action="Edit" asp-route-id="@q.Id">Editar</a></td></tr> }</tbody></table></div>
+    <details class="ec-game-reference mt-4"><summary>Acervo da versão anterior (@Model.Count(q => q.Desafio != 2) questões)</summary><p>Estas questões não entram em novos jogos. Foram mantidas para preservar a documentação e as tentativas anteriores.</p>@foreach (var q in Model.Where(q => q.Desafio != 2)) { <details class="ec-card mb-3"><summary>Desafio @q.Desafio · @q.Enunciado</summary><p>@q.Explicacao</p><small>@q.Fonte</small></details> }</details>
+</div>

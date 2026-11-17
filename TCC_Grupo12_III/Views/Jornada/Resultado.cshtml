@@ -1,0 +1,43 @@
+@model JornadaTentativa
+@using TCC_Grupo12_III.Services
+@{ ViewData["Title"] = "Resultado do desafio"; var jogo = Model.Jogo; }
+<div class="ec-page">
+    <span class="ec-eyebrow">@JornadaService.Titulos[Model.Desafio - 1] @(jogo is null && Model.Desafio != 2 ? "· Versão anterior" : "")</span>
+    <h1>@(Model.ArquivadaNaAtualizacao ? "Seu histórico foi preservado." : Model.Aprovada ? "Mais um passo pela Cantareira." : "Cada tentativa é uma descoberta.")</h1>
+    <p class="ec-lead">@Model.Pontos de @Model.Total @(jogo is null ? "respostas corretas" : "objetivos concluídos") · @Model.Aproveitamento% de aproveitamento.</p>
+    <div class="ec-notice">@(Model.ArquivadaNaAtualizacao ? "Esta tentativa de quiz foi encerrada na atualização dos jogos. Suas respostas continuam disponíveis abaixo." : Model.Aprovada ? $"Desafio concluído! Conquista: {JornadaService.Recompensas[Model.Desafio - 1]}." : "Para concluir o quiz, alcance pelo menos 70%. Revise as explicações e tente novamente no seu ritmo.")</div>
+    <div class="ec-actions"><a class="ec-button" asp-action="Index">Continuar minha jornada →</a><a class="ec-button ec-button-outline" asp-action="Progresso">Ver minhas conquistas</a></div>
+    @if (Model.Aprovada) { <partial name="_RecompensaDesafio" model="Model.Desafio" /> }
+    <section class="ec-section">
+        <h2>Reveja o que você aprendeu</h2>
+        @if (jogo is not null)
+        {
+            var estado = Model.EstadoJogo;
+            <p>@estado.Interacoes interações registradas. Você pode jogar novamente; suas conquistas permanecem salvas.</p>
+            @if (jogo.Tipo == "cartas")
+            {
+                <p>Você explorou @estado.Estudadas.Count cartas e montou @estado.Associadas.Count associações. As consultas e novas tentativas fazem parte do aprendizado.</p>
+                <div class="ec-flash-grid">@foreach(var carta in jogo.Cartas){<article class="ec-card"><h3>@carta.Nome</h3><em>@carta.NomeCientifico</em><p>Habitat: @carta.Habitat</p><p>Alimentação: @carta.Alimentacao</p><p>@carta.Importancia</p><small>@carta.Fonte</small><a asp-controller="Especies" asp-action="Detalhe" asp-route-id="@carta.Id">Rever ficha completa →</a></article>}</div>
+            }
+            else
+            {
+                <a asp-action="Jogar" asp-route-id="@Model.Id">Rever meu cenário concluído →</a>
+                <div class="ec-grid ec-game-review">
+                    @foreach (var missao in jogo.Missoes)
+                    {
+                        <article class="ec-card"><span class="ec-pill">✓ Concluída</span><h3>@missao.Titulo</h3><p>@missao.Aprendizado</p><a href="@missao.Fonte" target="_blank" rel="noopener">Consultar fonte oficial ↗</a></article>
+                    }
+                </div>
+            }
+            <details class="ec-game-reference"><summary>Meu diário de ações</summary><ol>@foreach (var evento in estado.Diario) { <li>@evento.Mensagem</li> }</ol></details>
+        }
+        else
+        {
+            @for (var i = 0; i < Math.Min(Model.Questoes.Count, Model.Respostas.Count); i++)
+            {
+                var p = Model.Questoes[i];
+                <details class="ec-card mb-3"><summary>@(i + 1). @p.Enunciado · @(Model.Respostas[i] == p.Correta ? "Acerto" : "Revisar")</summary><p class="mt-3">Sua escolha: @p.Opcao(Model.Respostas[i])</p><p><strong>Resposta esperada: @p.Opcao(p.Correta)</strong></p><p>@p.Explicacao</p><small>Referência: @p.Fonte</small></details>
+            }
+        }
+    </section>
+</div>

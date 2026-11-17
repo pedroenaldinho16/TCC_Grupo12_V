@@ -1,0 +1,1628 @@
+@model TCC_Grupo12_III.Models.AdminAprovacoesViewModel
+
+@{
+    ViewData["Title"] = "Moderação & Aprovações";
+    ViewData["AdminTab"] = "aprovacoes";
+
+    var isDenuncias = Model.AbaAtiva == "denuncias";
+    var isCampanhas = Model.AbaAtiva == "campanhas";
+    var isJornalistas = Model.AbaAtiva == "jornalistas";
+    var isEstudos = Model.AbaAtiva == "estudos";
+    var isComunidades = Model.AbaAtiva == "comunidades";
+}
+
+<div class="eco-admin">
+    @await Html.PartialAsync("_AdminTabs")
+
+    <div class="eco-admin__head">
+        <div>
+            <span class="eco-eyebrow eco-eyebrow--dark">Fiscalização, Moderação &amp; Pesquisas</span>
+            <h1>Painel de Moderação &amp; Aprovações</h1>
+            <p>Gerencie denúncias ambientais, aprove propostas de campanhas, credenciais de jornalistas, estudos científicos e comunidades do fórum.</p>
+        </div>
+        <div class="d-flex gap-2">
+            @if (isDenuncias)
+            {
+                <a class="btn-eco btn-eco--ghost" asp-controller="Denuncia" asp-action="Index" target="_blank" title="Abrir formulário público de denúncia">Nova denúncia (público) ↗</a>
+            }
+            else if (isCampanhas)
+            {
+                <a class="btn-eco btn-eco--solid" asp-controller="AdminCampanhas" asp-action="Create" title="Criar nova campanha">
+                    <i class="bi bi-plus-lg me-1"></i> Nova Campanha
+                </a>
+            }
+            else if (isEstudos)
+            {
+                <a class="btn-eco btn-eco--ghost" asp-controller="Educacao" asp-action="Publicar" target="_blank" title="Submeter nova pesquisa">Submeter estudo (formulário) ↗</a>
+            }
+            else if (isComunidades)
+            {
+                <a class="btn-eco btn-eco--solid" asp-controller="Forum" asp-action="CriarComunidade" target="_blank" title="Fundar nova comunidade">
+                    <i class="bi bi-plus-lg me-1"></i> Nova Comunidade
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Navegação por Abas Principais da Moderação -->
+    <div class="d-flex gap-2 mb-4 border-bottom pb-3 flex-wrap">
+        <a class="btn-eco @(isDenuncias ? "btn-eco--solid" : "btn-eco--ghost")" asp-action="Index" asp-route-aba="denuncias">
+            <i class="bi bi-shield-exclamation me-1"></i> Denúncias Ambientais
+            @if (Model.TotalDenunciasPendentes > 0)
+            {
+                <span class="badge bg-danger rounded-pill ms-1">@Model.TotalDenunciasPendentes</span>
+            }
+        </a>
+        <a class="btn-eco @(isCampanhas ? "btn-eco--solid" : "btn-eco--ghost")" asp-action="Index" asp-route-aba="campanhas">
+            <i class="bi bi-megaphone-fill me-1"></i> Propostas de Campanhas
+            @if (Model.TotalCampanhasPendentes > 0)
+            {
+                <span class="badge bg-warning text-dark rounded-pill ms-1">@Model.TotalCampanhasPendentes pendentes</span>
+            }
+        </a>
+        <a class="btn-eco @(isJornalistas ? "btn-eco--solid" : "btn-eco--ghost")" asp-action="Index" asp-route-aba="jornalistas">
+            <i class="bi bi-newspaper me-1"></i> Credenciais de Jornalistas
+            @if (Model.TotalJornalistasPendentes > 0)
+            {
+                <span class="badge bg-warning text-dark rounded-pill ms-1">@Model.TotalJornalistasPendentes pendentes</span>
+            }
+        </a>
+        <a class="btn-eco @(isEstudos ? "btn-eco--solid" : "btn-eco--ghost")" asp-action="Index" asp-route-aba="estudos">
+            <i class="bi bi-mortarboard-fill me-1"></i> Estudos Científicos
+            @if (Model.TotalEstudosPendentes > 0)
+            {
+                <span class="badge bg-warning text-dark rounded-pill ms-1">@Model.TotalEstudosPendentes pendentes</span>
+            }
+        </a>
+        <a class="btn-eco @(isComunidades ? "btn-eco--solid" : "btn-eco--ghost")" asp-action="Index" asp-route-aba="comunidades">
+            <i class="bi bi-people-fill me-1"></i> Comunidades do Fórum
+            @if (Model.TotalComunidadesPendentes > 0)
+            {
+                <span class="badge bg-warning text-dark rounded-pill ms-1">@Model.TotalComunidadesPendentes pendentes</span>
+            }
+        </a>
+    </div>
+
+    @if (isDenuncias)
+    {
+        <!-- ========================================== -->
+        <!-- ABA 1: DENÚNCIAS AMBIENTAIS                -->
+        <!-- ========================================== -->
+
+        <!-- Cards de resumo rápido -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-warning bg-warning-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ⚠️
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalDenunciasPendentes</h3>
+                        <span class="text-muted small">Denúncias pendentes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-success bg-success-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ✓
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalDenunciasResolvidas</h3>
+                        <span class="text-muted small">Denúncias resolvidas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-primary bg-primary-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        📋
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalDenuncias</h3>
+                        <span class="text-muted small">Total recebidas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Filtros e Busca -->
+        <form method="get" class="p-3 bg-light rounded-3 border mb-4">
+            <input type="hidden" name="aba" value="denuncias" />
+            <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-4">
+                    <input type="text" name="busca" value="@Model.BuscaDenuncia" class="form-control form-control-sm" placeholder="Buscar por local, descrição ou autor..." />
+                </div>
+                <div class="col-6 col-md-3">
+                    <select name="status" class="form-select form-select-sm">
+                        <option value="todos" selected="@(Model.StatusDenuncia == "todos")">Todos os status</option>
+                        <option value="pendente" selected="@(Model.StatusDenuncia == "pendente")">⚠️ Somente Pendentes</option>
+                        <option value="resolvida" selected="@(Model.StatusDenuncia == "resolvida")">✓ Somente Resolvidas</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-3">
+                    <select name="tipo" class="form-select form-select-sm">
+                        <option value="Todos" selected="@(Model.TipoDenuncia == "Todos")">Todos os tipos</option>
+                        @foreach (var t in Model.TiposDisponiveis)
+                        {
+                            <option value="@t" selected="@(Model.TipoDenuncia == t)">@t</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-12 col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn-eco btn-eco--solid btn-eco--sm w-100">Filtrar</button>
+                    @if (!string.IsNullOrWhiteSpace(Model.BuscaDenuncia) || Model.StatusDenuncia != "todos" || Model.TipoDenuncia != "Todos")
+                    {
+                        <a asp-action="Index" asp-route-aba="denuncias" class="btn-eco btn-eco--ghost btn-eco--sm" title="Limpar filtros">✕</a>
+                    }
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabela de denúncias -->
+        <div class="eco-table-wrap">
+            <table class="eco-table align-middle">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Foto</th>
+                        <th>Tipo &amp; Ocorrência</th>
+                        <th>Localização</th>
+                        <th>Status</th>
+                        <th>Denunciante</th>
+                        <th>Recebida em</th>
+                        <th class="text-end" style="min-width: 250px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model.Denuncias)
+                    {
+                        var resolvida = d.Resolvida;
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(d.FotoPath))
+                                {
+                                    <a href="@d.FotoPath" target="_blank" title="Clique para ver a foto original">
+                                        <img src="@d.FotoPath" alt="Foto da denúncia" style="width:48px;height:48px;object-fit:cover;border-radius:8px;border:1px solid #ddd;" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <div class="bg-light text-muted d-flex align-items-center justify-content-center rounded" style="width:48px;height:48px;font-size:0.75rem;">
+                                        Sem foto
+                                    </div>
+                                }
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">
+                                    @if (d.Tipo.Contains("Fogo", StringComparison.OrdinalIgnoreCase) || d.Tipo.Contains("Queimada", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle me-1">🔥 @d.Tipo</span>
+                                    }
+                                    else if (d.Tipo.Contains("Desmatamento", StringComparison.OrdinalIgnoreCase) || d.Tipo.Contains("Corte", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle me-1">🪓 @d.Tipo</span>
+                                    }
+                                    else if (d.Tipo.Contains("Caça", StringComparison.OrdinalIgnoreCase) || d.Tipo.Contains("Animal", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle me-1">🎯 @d.Tipo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle me-1">⚠️ @d.Tipo</span>
+                                    }
+                                </div>
+                                <a asp-action="Detalhes" asp-route-id="@d.Id" class="text-muted small mt-1 d-block text-decoration-none" style="max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Clique para ler: @d.Descricao">
+                                    @d.Descricao
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-action="Detalhes" asp-route-id="@d.Id" class="fw-bold text-dark text-decoration-none d-block" title="Clique para ler a denúncia">
+                                    📍 @d.Localizacao
+                                </a>
+                                @if (d.DataOcorrencia.HasValue)
+                                {
+                                    <span class="d-block text-muted small">Ocorrido em: @d.DataOcorrencia.Value.ToString("dd/MM/yyyy")</span>
+                                }
+                            </td>
+                            <td>
+                                @if (resolvida)
+                                {
+                                    <span class="badge bg-success text-white px-2 py-1 rounded-pill">
+                                        ✓ Resolvida
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1 rounded-pill">
+                                        ⚠️ Pendente
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                @if (d.Anonima)
+                                {
+                                    <span class="text-muted small d-inline-flex align-items-center gap-1">
+                                        🛡️ <em>Anônima</em>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <div class="small">
+                                        <strong>@(d.NomeContato ?? "Cidadão")</strong>
+                                        @if (!string.IsNullOrEmpty(d.EmailContato))
+                                        {
+                                            <div class="text-muted">@d.EmailContato</div>
+                                        }
+                                    </div>
+                                }
+                            </td>
+                            <td class="text-muted small">
+                                @d.CriadoEm.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+                            <td class="text-end" style="white-space: nowrap;">
+                                <div class="d-inline-flex gap-2 align-items-center">
+                                    <a asp-action="Detalhes" asp-route-id="@d.Id" class="btn btn-sm btn-primary text-white fw-bold d-inline-flex align-items-center gap-1 shadow-sm px-3" title="Ler denúncia completa e providências">
+                                        <i class="bi bi-file-earmark-text-fill"></i> Ler Denúncia
+                                    </a>
+
+                                    <form asp-action="AlternarStatus" asp-route-id="@d.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                        <button type="submit" class="btn btn-sm @(resolvida ? "btn-outline-warning" : "btn-outline-success") fw-semibold" style="font-size:0.78rem;padding:5px 9px;" title="@(resolvida ? "Reabrir denúncia como pendente" : "Marcar denúncia como resolvida")">
+                                            @(resolvida ? "Reabrir" : "Resolver")
+                                        </button>
+                                    </form>
+
+                                    <form asp-action="Delete" asp-route-id="@d.Id" method="post" class="d-inline" data-confirmar="Tem certeza que deseja excluir esta denúncia definitivamente?">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" style="font-size:0.78rem;padding:5px 9px;" title="Excluir denúncia">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                    @if (Model.Denuncias.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <div style="font-size: 2.2rem; margin-bottom: 8px;">🌱</div>
+                                <strong>Nenhuma denúncia encontrada.</strong><br />
+                                <small>Quando os usuários enviarem denúncias pela plataforma, elas aparecerão listadas aqui para triagem.</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else if (isCampanhas)
+    {
+        <!-- ========================================== -->
+        <!-- ABA: PROPOSTAS DE CAMPANHAS AMBIENTAIS    -->
+        <!-- ========================================== -->
+
+        <!-- Cards de Métricas da Moderação de Campanhas -->
+        <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-md-3">
+                <div class="p-3 bg-white border rounded-3 shadow-sm d-flex align-items-center gap-3">
+                    <div class="bg-warning-subtle text-warning-emphasis p-2 rounded-circle fs-4" style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">@Model.TotalCampanhasPendentes</h4>
+                        <span class="text-muted small">Aguardando Homologação</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="p-3 bg-white border rounded-3 shadow-sm d-flex align-items-center gap-3">
+                    <div class="bg-success-subtle text-success p-2 rounded-circle fs-4" style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">@Model.TotalCampanhasAprovadas</h4>
+                        <span class="text-muted small">Campanhas Aprovadas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="p-3 bg-white border rounded-3 shadow-sm d-flex align-items-center gap-3">
+                    <div class="bg-danger-subtle text-danger p-2 rounded-circle fs-4" style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">@Model.TotalCampanhasReprovadas</h4>
+                        <span class="text-muted small">Propostas Reprovadas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="p-3 bg-white border rounded-3 shadow-sm d-flex align-items-center gap-3">
+                    <div class="bg-primary-subtle text-primary p-2 rounded-circle fs-4" style="width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+                        <i class="bi bi-megaphone-fill"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">@Model.TotalCampanhas</h4>
+                        <span class="text-muted small">Total de Propostas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros e Busca -->
+        <div class="card border rounded-3 shadow-sm bg-white p-3 mb-4">
+            <form method="get" asp-action="Index" class="row g-2 align-items-center">
+                <input type="hidden" name="aba" value="campanhas" />
+                <div class="col-md-7">
+                    <input type="text" name="buscaCampanha" value="@Model.BuscaCampanha" class="form-control" 
+                           placeholder="Buscar por título da campanha, descrição ou proponente..." />
+                </div>
+                <div class="col-md-3">
+                    <select name="statusCampanha" class="form-select">
+                        <option value="todos" selected="@(Model.StatusCampanhaFiltro == "todos")">Todos os Status</option>
+                        <option value="pendente" selected="@(Model.StatusCampanhaFiltro == "pendente")">Aguardando Homologação (@Model.TotalCampanhasPendentes)</option>
+                        <option value="aprovado" selected="@(Model.StatusCampanhaFiltro == "aprovado")">Aprovadas</option>
+                        <option value="reprovado" selected="@(Model.StatusCampanhaFiltro == "reprovado")">Reprovadas</option>
+                    </select>
+                </div>
+                <div class="col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn-eco btn-eco--solid w-100">Filtrar</button>
+                    <a asp-action="Index" asp-route-aba="campanhas" class="btn-eco btn-eco--ghost">Limpar</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Lista de Propostas de Campanhas -->
+        @if (Model.Campanhas.Count == 0)
+        {
+            <div class="card p-5 text-center bg-white border rounded-3 mb-4">
+                <i class="bi bi-megaphone text-muted fs-1 d-block mb-2"></i>
+                <h5 class="fw-bold text-dark">Nenhuma proposta de campanha encontrada</h5>
+                <p class="text-muted small mb-0">Nenhuma campanha cadastrada corresponde aos filtros selecionados.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-3 mb-4">
+                @foreach (var c in Model.Campanhas)
+                {
+                    var ehPendente = c.StatusAprovacao == "Pendente";
+                    var ehReprovado = c.StatusAprovacao == "Reprovado";
+                    var ehAprovado = c.StatusAprovacao == "Aprovado" || (string.IsNullOrEmpty(c.StatusAprovacao) && c.Ativa);
+
+                    <div class="col-12">
+                        <div class="card border rounded-3 shadow-sm bg-white p-3 @(ehPendente ? "border-warning" : "")">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-md-2">
+                                    <div class="eco-table-thumb" style="width: 100%; height: 110px;">
+                                        @if (!string.IsNullOrWhiteSpace(c.ImagemUrl))
+                                        {
+                                            <img src="@c.ImagemUrl" alt="@c.Titulo" style="width:100%; height:100%; object-fit:cover; border-radius:6px;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light text-muted d-flex align-items-center justify-content-center h-100 rounded">
+                                                <i class="bi bi-image fs-3"></i>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        @if (ehPendente)
+                                        {
+                                            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2 py-1 rounded-pill fw-semibold">
+                                                <i class="bi bi-hourglass-split me-1"></i> Aguardando Aprovação
+                                            </span>
+                                        }
+                                        else if (ehAprovado)
+                                        {
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill fw-semibold">
+                                                <i class="bi bi-check-circle-fill me-1"></i> Aprovada / Homologada
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 rounded-pill fw-semibold">
+                                                <i class="bi bi-x-circle-fill me-1"></i> Reprovada
+                                            </span>
+                                        }
+                                        <span class="text-muted small">Submetida em @c.DataCriacao.ToString("dd/MM/yyyy às HH:mm")</span>
+                                    </div>
+                                    <h5 class="fw-bold mb-1 text-dark">@c.Titulo</h5>
+                                    <p class="text-muted small mb-2 text-truncate" style="max-width: 520px;">@c.Descricao</p>
+                                    <div class="d-flex gap-3 small text-muted flex-wrap">
+                                        <span><i class="bi bi-person-fill text-success me-1"></i><strong>Proponente:</strong> @(c.Usuario?.Nome ?? "Membro")</span>
+                                        <span><i class="bi bi-calendar-event text-primary me-1"></i><strong>Data:</strong> @(c.DataInicio?.ToString("dd/MM/yyyy") ?? c.Periodo)</span>
+                                        <span><i class="bi bi-people text-secondary me-1"></i><strong>Meta:</strong> @c.Meta vagas</span>
+                                        @if (!string.IsNullOrEmpty(c.LocalEncontro))
+                                        {
+                                            <span><i class="bi bi-geo-alt text-danger me-1"></i><strong>Local:</strong> @c.LocalEncontro</span>
+                                        }
+                                    </div>
+                                    @if (ehReprovado && !string.IsNullOrWhiteSpace(c.MotivoReprovacao))
+                                    {
+                                        <div class="alert alert-danger p-2 small mt-2 mb-0">
+                                            <strong>Motivo da Reprovação:</strong> @c.MotivoReprovacao
+                                        </div>
+                                    }
+                                </div>
+                                <div class="col-md-4 text-md-end">
+                                    <div class="d-flex gap-2 justify-content-md-end flex-wrap">
+                                        <a asp-controller="Campanhas" asp-action="Detalhes" asp-route-id="@c.Id" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-box-arrow-up-right me-1"></i> Visualizar
+                                        </a>
+
+                                        @if (ehPendente)
+                                        {
+                                            <form method="post" asp-action="AprovarCampanha" asp-route-id="@c.Id" class="d-inline" data-confirmar="Aprovar e homologar a campanha @c.Titulo?">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="returnUrl" value="@Context.Request.Path?aba=campanhas" />
+                                                <button type="submit" class="btn btn-sm btn-success px-3 shadow-sm">
+                                                    <i class="bi bi-check-lg me-1"></i> Aprovar Campanha
+                                                </button>
+                                            </form>
+
+                                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalReprovarCampanhaDen_@c.Id">
+                                                <i class="bi bi-x-lg me-1"></i> Reprovar
+                                            </button>
+                                        }
+                                        else if (ehAprovado)
+                                        {
+                                            <a asp-controller="AdminCampanhas" asp-action="Edit" asp-route-id="@c.Id" class="btn btn-sm btn-outline-dark">
+                                                <i class="bi bi-pencil me-1"></i> Editar Campanha
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Reprovar Campanha -->
+                    @if (ehPendente)
+                    {
+                        <div class="modal fade" id="modalReprovarCampanhaDen_@c.Id" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content shadow border-0 rounded-3">
+                                    <form method="post" asp-action="ReprovarCampanha" asp-route-id="@c.Id">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path?aba=campanhas" />
+                                        <div class="modal-header border-bottom py-3">
+                                            <h5 class="modal-title fw-bold text-danger">Reprovar Proposta de Campanha</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body p-4 text-start">
+                                            <p class="mb-3">Você está reprovando a proposta <strong>@c.Titulo</strong> submetida por <strong>@(c.Usuario?.Nome ?? "Membro")</strong>.</p>
+                                            <label class="form-label fw-semibold" for="motivoCamp_@c.Id">Motivo da Não Homologação:</label>
+                                            <textarea name="motivo" id="motivoCamp_@c.Id" class="form-control" rows="3" placeholder="Informe orientações ou correções necessárias para o autor..." required></textarea>
+                                        </div>
+                                        <div class="modal-footer border-top py-2">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm px-3">Confirmar Reprovação</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    }
+    else if (isJornalistas)
+    {
+        <!-- ========================================== -->
+        <!-- ABA 2: CREDENCIAIS DE JORNALISTAS          -->
+        <!-- ========================================== -->
+
+        <!-- Cards de Métricas de Jornalistas -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-warning bg-warning-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ⏳
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalJornalistasPendentes</h3>
+                        <span class="text-muted small">Pendentes de análise</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-success bg-success-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ✓
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalJornalistasAprovados</h3>
+                        <span class="text-muted small">Jornalistas aprovados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-danger bg-danger-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ✕
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalJornalistasReprovados</h3>
+                        <span class="text-muted small">Solicitações reprovadas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-primary bg-primary-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        📰
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalJornalistas</h3>
+                        <span class="text-muted small">Total de solicitações</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Busca e Filtros de Jornalistas -->
+        <form method="get" class="p-3 bg-light rounded-3 border mb-4">
+            <input type="hidden" name="aba" value="jornalistas" />
+            <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-6">
+                    <input type="text" name="buscaJornalista" value="@Model.BuscaJornalista" class="form-control form-control-sm" placeholder="Buscar por nome, e-mail, registro MTB ou veículo..." />
+                </div>
+                <div class="col-6 col-md-4">
+                    <select name="statusJornalista" class="form-select form-select-sm">
+                        <option value="todos" selected="@(Model.StatusJornalistaFiltro == "todos")">Todos os status</option>
+                        <option value="pendente" selected="@(Model.StatusJornalistaFiltro == "pendente")">⏳ Somente Pendentes (Em Análise)</option>
+                        <option value="aprovado" selected="@(Model.StatusJornalistaFiltro == "aprovado")">✓ Somente Aprovados</option>
+                        <option value="reprovado" selected="@(Model.StatusJornalistaFiltro == "reprovado")">✕ Somente Reprovados</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2 d-flex gap-2">
+                    <button type="submit" class="btn-eco btn-eco--solid btn-eco--sm w-100">Filtrar</button>
+                    @if (!string.IsNullOrWhiteSpace(Model.BuscaJornalista) || Model.StatusJornalistaFiltro != "todos")
+                    {
+                        <a asp-action="Index" asp-route-aba="jornalistas" class="btn-eco btn-eco--ghost btn-eco--sm" title="Limpar filtros">✕</a>
+                    }
+                </div>
+            </div>
+        </form>
+
+        <!-- Tabela de Solicitações de Jornalistas -->
+        <div class="eco-table-wrap">
+            <table class="eco-table align-middle">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Registro Profissional</th>
+                        <th>Veículo / Organização</th>
+                        <th>Portfólio / Matérias</th>
+                        <th>Status</th>
+                        <th>Data Pedido</th>
+                        <th class="text-end" style="min-width: 220px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var j in Model.Jornalistas)
+                    {
+                        var isPendente = j.StatusJornalista == "Pendente";
+                        var isAprovado = j.StatusJornalista == "Aprovado" || (j.IsJornalista && j.StatusJornalista != "Reprovado");
+                        var isReprovado = j.StatusJornalista == "Reprovado";
+
+                        <tr>
+                            <td>
+                                <div class="fw-bold text-dark d-flex align-items-center gap-2">
+                                    <span class="rounded-circle bg-light border d-inline-flex align-items-center justify-content-center fw-bold" style="width:32px;height:32px;font-size:0.85rem;">
+                                        @(j.Nome.Length > 0 ? j.Nome[0].ToString().ToUpper() : "?")
+                                    </span>
+                                    <div>
+                                        <div>@j.Nome</div>
+                                        <div class="text-muted small fw-normal">@j.Email</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(j.RegistroJornalista))
+                                {
+                                    <span class="badge bg-light text-dark border">
+                                        <i class="bi bi-card-heading me-1 text-success"></i>@j.RegistroJornalista
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">Não informado</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="fw-semibold text-dark">@(j.VeiculoJornalista ?? "Independente")</span>
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(j.LinkPortfolioJornalista))
+                                {
+                                    <a href="@j.LinkPortfolioJornalista" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary py-0 px-2 text-decoration-none" style="font-size:0.78rem;" title="Abrir link do portfólio em nova aba">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i> Acessar
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">Sem link</span>
+                                }
+                            </td>
+                            <td>
+                                @if (isPendente)
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1 rounded-pill">
+                                        ⏳ Pendente
+                                    </span>
+                                }
+                                else if (isAprovado)
+                                {
+                                    <span class="badge bg-success text-white px-2 py-1 rounded-pill">
+                                        ✓ Aprovado
+                                    </span>
+                                }
+                                else if (isReprovado)
+                                {
+                                    <span class="badge bg-danger text-white px-2 py-1 rounded-pill" title="@j.MotivoReprovacaoJornalista">
+                                        ✕ Reprovado
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary px-2 py-1 rounded-pill">
+                                        Padrão
+                                    </span>
+                                }
+                            </td>
+                            <td class="text-muted small">
+                                @(j.DataSolicitacaoJornalista?.ToString("dd/MM/yyyy HH:mm") ?? "-")
+                            </td>
+                            <td class="text-end">
+                                <div class="d-inline-flex gap-1">
+                                    <!-- Botão Ver Detalhes -->
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalVerJornalista_@j.Id" title="Ver justificativa e detalhes completos">
+                                        <i class="bi bi-eye"></i> Detalhes
+                                    </button>
+
+                                    @if (isPendente || isReprovado)
+                                    {
+                                        <!-- Botão Aprovar -->
+                                        <button type="button" class="btn btn-sm btn-success text-white" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalAprovarJornalista_@j.Id" title="Aprovar credenciais de jornalista">
+                                            <i class="bi bi-check-lg"></i> Aprovar
+                                        </button>
+                                    }
+
+                                    @if (isPendente)
+                                    {
+                                        <!-- Botão Reprovar -->
+                                        <button type="button" class="btn btn-sm btn-danger text-white" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalReprovarJornalista_@j.Id" title="Reprovar credenciais de jornalista">
+                                            <i class="bi bi-x-lg"></i> Reprovar
+                                        </button>
+                                    }
+
+                                    @if (isAprovado)
+                                    {
+                                        <!-- Botão Revogar -->
+                                        <button type="button" class="btn btn-sm btn-outline-danger" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalRevogarJornalista_@j.Id" title="Revogar autorização de jornalista">
+                                            <i class="bi bi-slash-circle"></i> Revogar
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- ============================================== -->
+                        <!-- MODAL: Ver Detalhes das Credenciais           -->
+                        <!-- ============================================== -->
+                        <div class="modal fade" id="modalVerJornalista_@j.Id" tabindex="-1" aria-labelledby="modalVerLabel_@j.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-start">
+                                    <div class="modal-header border-bottom">
+                                        <h5 class="modal-title fw-bold text-dark fs-6" id="modalVerLabel_@j.Id">
+                                            <i class="bi bi-newspaper text-success me-2"></i>Credenciais de @j.Nome
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="text-muted small fw-bold text-uppercase d-block">E-mail do Usuário</label>
+                                            <span class="text-dark">@j.Email</span>
+                                        </div>
+                                        <div class="row g-2 mb-3">
+                                            <div class="col-sm-6">
+                                                <label class="text-muted small fw-bold text-uppercase d-block">Registro Profissional (MTB)</label>
+                                                <span class="fw-semibold text-dark">@(j.RegistroJornalista ?? "Não informado")</span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label class="text-muted small fw-bold text-uppercase d-block">Veículo / Organização</label>
+                                                <span class="fw-semibold text-dark">@(j.VeiculoJornalista ?? "Não informado")</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="text-muted small fw-bold text-uppercase d-block">Link do Portfólio / Matérias</label>
+                                            @if (!string.IsNullOrEmpty(j.LinkPortfolioJornalista))
+                                            {
+                                                <a href="@j.LinkPortfolioJornalista" target="_blank" rel="noopener noreferrer" class="text-primary text-break">
+                                                    @j.LinkPortfolioJornalista <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">Não informado</span>
+                                            }
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="text-muted small fw-bold text-uppercase d-block">Linha Editorial & Justificativa</label>
+                                            <div class="p-3 bg-light rounded border small text-dark" style="white-space: pre-wrap;">
+                                                @(j.JustificativaJornalista ?? "Nenhuma justificativa detalhada foi fornecida.")
+                                            </div>
+                                        </div>
+                                        <div class="row g-2 small text-muted border-top pt-2">
+                                            <div class="col-6">
+                                                <strong>Solicitado em:</strong> @(j.DataSolicitacaoJornalista?.ToString("dd/MM/yyyy HH:mm") ?? "-")
+                                            </div>
+                                            <div class="col-6">
+                                                <strong>Respondido em:</strong> @(j.DataRespostaJornalista?.ToString("dd/MM/yyyy HH:mm") ?? "-")
+                                            </div>
+                                            @if (!string.IsNullOrEmpty(j.MotivoReprovacaoJornalista))
+                                            {
+                                                <div class="col-12 mt-2">
+                                                    <strong class="text-danger">Observação da Moderação:</strong>
+                                                    <span class="text-dark">@j.MotivoReprovacaoJornalista</span>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer border-top">
+                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- MODAL: Aprovar Credencial                      -->
+                        <!-- ============================================== -->
+                        <div class="modal fade" id="modalAprovarJornalista_@j.Id" tabindex="-1" aria-labelledby="modalAprovarLabel_@j.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-start">
+                                    <form asp-action="AprovarJornalista" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@j.Id" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+
+                                        <div class="modal-header border-bottom">
+                                            <h5 class="modal-title fw-bold text-success fs-6" id="modalAprovarLabel_@j.Id">
+                                                <i class="bi bi-check-circle-fill me-2"></i>Aprovar Credencial de Jornalista
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-3">
+                                                Deseja confirmar e aprovar <strong>@j.Nome</strong> como jornalista oficial da plataforma?
+                                            </p>
+                                            <div class="p-3 bg-light rounded border small mb-3">
+                                                <div><strong>Registro:</strong> @(j.RegistroJornalista ?? "-")</div>
+                                                <div><strong>Veículo:</strong> @(j.VeiculoJornalista ?? "-")</div>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label small fw-semibold" for="obsAprovar_@j.Id">Observação interna ou boas-vindas (opcional):</label>
+                                                <textarea name="observacaoAdmin" id="obsAprovar_@j.Id" class="form-control form-control-sm" rows="2" placeholder="Ex: Credencial verificada no registro oficial MTB."></textarea>
+                                            </div>
+                                            <div class="alert alert-info py-2 px-3 small mb-0">
+                                                <i class="bi bi-info-circle me-1"></i> Com esta aprovação, o usuário receberá o selo verificado e terá permissão plena para publicar na aba <strong>Notícias</strong> do Fórum.
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-success btn-sm px-3">
+                                                <i class="bi bi-check2-circle me-1"></i> Confirmar Aprovação
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- MODAL: Reprovar Solicitação                    -->
+                        <!-- ============================================== -->
+                        <div class="modal fade" id="modalReprovarJornalista_@j.Id" tabindex="-1" aria-labelledby="modalReprovarLabel_@j.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-start">
+                                    <form asp-action="ReprovarJornalista" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@j.Id" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+
+                                        <div class="modal-header border-bottom">
+                                            <h5 class="modal-title fw-bold text-danger fs-6" id="modalReprovarLabel_@j.Id">
+                                                <i class="bi bi-x-circle-fill me-2"></i>Reprovar Credencial de Jornalista
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-3">
+                                                Você está prestes a recusar o pedido de credencial de <strong>@j.Nome</strong>.
+                                            </p>
+                                            <div class="mb-3">
+                                                <label class="form-label small fw-bold" for="motivoReprovar_@j.Id">
+                                                    Motivo da Reprovação <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea name="motivoReprovacao" id="motivoReprovar_@j.Id" class="form-control form-control-sm" rows="3" 
+                                                          placeholder="Informe o motivo para orientar o usuário (ex: Registro MTB não encontrado na base oficial, portfólio inacessível, etc.)" required></textarea>
+                                                <div class="form-text small">Esta justificativa será exibida no perfil do usuário para que ele possa ajustar os dados e reenviar.</div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm px-3">
+                                                <i class="bi bi-x-circle me-1"></i> Confirmar Reprovação
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- MODAL: Revogar Credencial                      -->
+                        <!-- ============================================== -->
+                        <div class="modal fade" id="modalRevogarJornalista_@j.Id" tabindex="-1" aria-labelledby="modalRevogarLabel_@j.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-start">
+                                    <form asp-action="RevogarJornalista" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@j.Id" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+
+                                        <div class="modal-header border-bottom">
+                                            <h5 class="modal-title fw-bold text-danger fs-6" id="modalRevogarLabel_@j.Id">
+                                                <i class="bi bi-slash-circle me-2"></i>Revogar Credencial de Jornalista
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-3">
+                                                Tem certeza que deseja revogar o acesso editorial de <strong>@j.Nome</strong>?
+                                            </p>
+                                            <div class="mb-3">
+                                                <label class="form-label small fw-bold" for="motivoRevogar_@j.Id">
+                                                    Motivo da Revogação <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea name="motivo" id="motivoRevogar_@j.Id" class="form-control form-control-sm" rows="3" 
+                                                          placeholder="Informe a justificativa da revogação..." required></textarea>
+                                            </div>
+                                            <div class="alert alert-warning py-2 px-3 small mb-0">
+                                                O usuário perderá imediatamente a permissão para publicar notícias oficiais.
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm px-3">
+                                                <i class="bi bi-slash-circle me-1"></i> Revogar Credencial
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Jornalistas.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <div style="font-size: 2.2rem; margin-bottom: 8px;">📰</div>
+                                <strong>Nenhuma solicitação de jornalista encontrada.</strong><br />
+                                <small>Quando os usuários solicitarem credenciamento editorial pelo perfil, suas credenciais aparecerão aqui para verificação e aprovação.</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else if (isEstudos)
+    {
+        <!-- ========================================== -->
+        <!-- ABA 3: ESTUDOS CIENTÍFICOS SUBMETIDOS      -->
+        <!-- ========================================== -->
+
+        <!-- Cards de Métricas de Estudos -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-warning bg-warning-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ⏳
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalEstudosPendentes</h3>
+                        <span class="text-muted small">Pendentes de aprovação</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-success bg-success-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ✅
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalEstudosAprovados</h3>
+                        <span class="text-muted small">Estudos publicados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-danger bg-danger-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ❌
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalEstudosReprovados</h3>
+                        <span class="text-muted small">Estudos reprovados</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-primary bg-primary-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        🔬
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalEstudos</h3>
+                        <span class="text-muted small">Total submetidos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros e Busca de Estudos -->
+        <div class="p-3 bg-white rounded-3 border mb-4">
+            <form method="get" asp-action="Index" class="row g-2 align-items-center">
+                <input type="hidden" name="aba" value="estudos" />
+
+                <div class="col-md-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
+                        <input type="text" name="buscaEstudo" value="@Model.BuscaEstudo" class="form-control" placeholder="Buscar por título, autor, espécie ou instituição..." />
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <select name="statusEstudo" class="form-select form-select-sm" onchange="this.form.submit()">
+                        <option value="todos" selected="@(Model.StatusEstudoFiltro == "todos")">Todos os status</option>
+                        <option value="pendente" selected="@(Model.StatusEstudoFiltro == "pendente")">⏳ Apenas Pendentes</option>
+                        <option value="aprovado" selected="@(Model.StatusEstudoFiltro == "aprovado")">✅ Apenas Aprovados</option>
+                        <option value="reprovado" selected="@(Model.StatusEstudoFiltro == "reprovado")">❌ Apenas Reprovados</option>
+                    </select>
+                </div>
+
+                <div class="col-md-5 d-flex gap-2 justify-content-end">
+                    <button type="submit" class="btn btn-sm btn-primary px-3">
+                        <i class="bi bi-funnel-fill me-1"></i> Filtrar
+                    </button>
+                    <a asp-action="Index" asp-route-aba="estudos" class="btn btn-sm btn-outline-secondary">
+                        Limpar
+                    </a>
+                    <a asp-controller="Educacao" asp-action="Index" target="_blank" class="btn btn-sm btn-outline-success">
+                        <i class="bi bi-box-arrow-up-right me-1"></i> Ver Biblioteca
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabela de Estudos Científicos -->
+        <div class="table-responsive bg-white rounded-3 border shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 50px;">#</th>
+                        <th>Título &amp; Pesquisa</th>
+                        <th>Autor / Instituição</th>
+                        <th>Categoria / Espécie</th>
+                        <th>Status</th>
+                        <th>Data de Envio</th>
+                        <th class="text-end" style="min-width: 250px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var est in Model.Estudos)
+                    {
+                        var isPendente = est.StatusAprovacao == "Pendente";
+                        var isAprovado = est.StatusAprovacao == "Aprovado";
+                        var isReprovado = est.StatusAprovacao == "Reprovado";
+
+                        <tr class="@(isPendente ? "table-warning bg-opacity-25" : "")">
+                            <td>
+                                <strong>#@est.Id</strong>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark" style="max-width: 320px;">
+                                    <a href="javascript:void(0)" class="text-decoration-none text-dark hover-underline" data-bs-toggle="modal" data-bs-target="#modalVerEstudo_@est.Id" title="Clique para ler o estudo completo">
+                                        @est.Titulo
+                                    </a>
+                                </div>
+                                <small class="text-muted text-truncate d-block" style="max-width: 320px;">
+                                    @est.Subtitulo
+                                </small>
+                            </td>
+                            <td>
+                                <div><i class="bi bi-person-fill text-secondary"></i> @est.Autor</div>
+                                @if (!string.IsNullOrWhiteSpace(est.Instituicao))
+                                {
+                                    <small class="text-muted d-block"><i class="bi bi-bank"></i> @est.Instituicao</small>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@est.Categoria</span>
+                                @if (!string.IsNullOrWhiteSpace(est.EspecieNome))
+                                {
+                                    <small class="d-block text-success fw-semibold mt-1">
+                                        🐾 @est.EspecieNome
+                                    </small>
+                                }
+                            </td>
+                            <td>
+                                @if (isPendente)
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1">
+                                        <i class="bi bi-hourglass-split me-1"></i> Pendente
+                                    </span>
+                                }
+                                else if (isAprovado)
+                                {
+                                    <span class="badge bg-success px-2 py-1">
+                                        <i class="bi bi-check-circle-fill me-1"></i> Aprovado
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger px-2 py-1" title="@est.MotivoReprovacao">
+                                        <i class="bi bi-x-circle-fill me-1"></i> Reprovado
+                                    </span>
+                                }
+                            </td>
+                            <td class="text-muted small">
+                                @est.DataSubmissao.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+                            <td class="text-end" style="white-space: nowrap;">
+                                <div class="d-inline-flex gap-1 flex-wrap justify-content-end">
+                                    <!-- Botão Inspecionar Estudo -->
+                                    <button type="button" class="btn btn-sm btn-primary text-white fw-bold d-inline-flex align-items-center gap-1 shadow-sm px-2 py-1" data-bs-toggle="modal" data-bs-target="#modalVerEstudo_@est.Id" title="Visualizar estudo completo">
+                                        <i class="bi bi-file-earmark-text-fill"></i> Ler Estudo
+                                    </button>
+
+                                    @if (isPendente || isReprovado)
+                                    {
+                                        <!-- Botão Aprovar -->
+                                        <button type="button" class="btn btn-sm btn-success text-white" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalAprovarEstudo_@est.Id" title="Aprovar e publicar estudo">
+                                            <i class="bi bi-check-lg"></i> Aprovar
+                                        </button>
+                                    }
+
+                                    @if (isPendente || isAprovado)
+                                    {
+                                        <!-- Botão Reprovar -->
+                                        <button type="button" class="btn btn-sm btn-danger text-white" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalReprovarEstudo_@est.Id" title="Reprovar estudo">
+                                            <i class="bi bi-x-lg"></i> Reprovar
+                                        </button>
+                                    }
+
+                                    <!-- Botão Excluir -->
+                                    <button type="button" class="btn btn-sm btn-outline-danger" style="font-size:0.78rem;padding:4px 8px;" data-bs-toggle="modal" data-bs-target="#modalExcluirEstudo_@est.Id" title="Excluir estudo">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Modal Ver Estudo Completo -->
+                        <div class="modal fade" id="modalVerEstudo_@est.Id" tabindex="-1" aria-labelledby="labelVerEstudo_@est.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content border-0 shadow">
+                                    <div class="modal-header bg-light border-bottom">
+                                        <div>
+                                            <span class="badge bg-secondary mb-1">#@est.Id &bull; @est.Categoria</span>
+                                            <h5 class="modal-title fw-bold text-dark mb-0" id="labelVerEstudo_@est.Id">@est.Titulo</h5>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                    </div>
+                                    <div class="modal-body p-4" style="max-height: 70vh; overflow-y: auto;">
+                                        <div class="mb-3">
+                                            <p class="text-muted fst-italic">@est.Subtitulo</p>
+                                        </div>
+                                        <div class="p-3 bg-light rounded-3 border mb-3 small">
+                                            <div class="row g-2">
+                                                <div class="col-sm-6"><strong>Autor:</strong> @est.Autor</div>
+                                                <div class="col-sm-6"><strong>Instituição:</strong> @(est.Instituicao ?? "Não informada")</div>
+                                                <div class="col-sm-6"><strong>Espécie em foco:</strong> @(est.EspecieNome ?? "Geral / Ecossistema")</div>
+                                                <div class="col-sm-6"><strong>Tempo de leitura:</strong> @est.TempoLeituraMinutos min</div>
+                                                <div class="col-sm-6"><strong>Enviado em:</strong> @est.DataSubmissao.ToString("dd/MM/yyyy HH:mm")</div>
+                                                <div class="col-sm-6"><strong>Status:</strong> <span class="badge @(isAprovado ? "bg-success" : isPendente ? "bg-warning text-dark" : "bg-danger")">@est.StatusAprovacao</span></div>
+                                            </div>
+                                        </div>
+
+                                        @if (!string.IsNullOrWhiteSpace(est.ImagemUrl))
+                                        {
+                                            <div class="mb-3 text-center">
+                                                <img src="@est.ImagemUrl" alt="@est.Titulo" class="img-fluid rounded border shadow-sm" style="max-height: 250px; object-fit: cover;" />
+                                            </div>
+                                        }
+
+                                        <h6 class="fw-bold text-success border-bottom pb-1 mb-2">Resumo Executivo</h6>
+                                        <p class="small text-dark mb-4">@est.Resumo</p>
+
+                                        <h6 class="fw-bold text-success border-bottom pb-1 mb-2">Conteúdo da Pesquisa</h6>
+                                        <div class="small text-dark mb-4 p-3 bg-white border rounded" style="line-height: 1.6;">
+                                            @Html.Raw(est.ConteudoHtml)
+                                        </div>
+
+                                        @if (!string.IsNullOrWhiteSpace(est.DestaquesTexto))
+                                        {
+                                            <h6 class="fw-bold text-success border-bottom pb-1 mb-2">Destaques da Pesquisa</h6>
+                                            <ul class="small mb-3 ps-3">
+                                                @foreach (var d in est.DestaquesTexto.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                                                {
+                                                    <li>@d</li>
+                                                }
+                                            </ul>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(est.AmeacasTexto))
+                                        {
+                                            <h6 class="fw-bold text-danger border-bottom pb-1 mb-2">Ameaças Identificadas</h6>
+                                            <ul class="small mb-3 ps-3">
+                                                @foreach (var a in est.AmeacasTexto.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                                                {
+                                                    <li>@a</li>
+                                                }
+                                            </ul>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(est.AcoesTexto))
+                                        {
+                                            <h6 class="fw-bold text-primary border-bottom pb-1 mb-2">Ações de Conservação</h6>
+                                            <ul class="small mb-3 ps-3">
+                                                @foreach (var ac in est.AcoesTexto.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                                                {
+                                                    <li>@ac</li>
+                                                }
+                                            </ul>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(est.ReferenciasTexto))
+                                        {
+                                            <h6 class="fw-bold text-secondary border-bottom pb-1 mb-2">Referências Bibliográficas</h6>
+                                            <ul class="small mb-3 ps-3 text-muted">
+                                                @foreach (var r in est.ReferenciasTexto.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                                                {
+                                                    <li>@r</li>
+                                                }
+                                            </ul>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(est.MotivoReprovacao))
+                                        {
+                                            <div class="alert alert-danger py-2 px-3 small mt-3">
+                                                <strong>Motivo da Reprovação:</strong> @est.MotivoReprovacao
+                                            </div>
+                                        }
+
+                                        @if (!string.IsNullOrWhiteSpace(est.ObservacoesAdmin))
+                                        {
+                                            <div class="alert alert-info py-2 px-3 small mt-3">
+                                                <strong>Observação Interna:</strong> @est.ObservacoesAdmin
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="modal-footer border-top bg-light">
+                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
+                                        @if (isPendente)
+                                        {
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalReprovarEstudo_@est.Id">
+                                                <i class="bi bi-x-lg me-1"></i> Reprovar
+                                            </button>
+                                            <button type="button" class="btn btn-success btn-sm text-white" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalAprovarEstudo_@est.Id">
+                                                <i class="bi bi-check-lg me-1"></i> Aprovar Estudo
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Aprovar Estudo -->
+                        <div class="modal fade" id="modalAprovarEstudo_@est.Id" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0 shadow">
+                                    <form method="post" asp-action="AprovarEstudo" asp-route-id="@est.Id">
+                                        @Html.AntiForgeryToken()
+                                        <div class="modal-header bg-success text-white">
+                                            <h5 class="modal-title fw-bold">
+                                                <i class="bi bi-check-circle-fill me-2"></i> Aprovar e Publicar Estudo
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-3">
+                                                Deseja aprovar o estudo <strong>@est.Titulo</strong> de autoria de <strong>@est.Autor</strong>?
+                                            </p>
+                                            <div class="alert alert-success py-2 px-3 small mb-3">
+                                                <i class="bi bi-info-circle-fill me-1"></i> O artigo será imediatamente publicado na Biblioteca de Estudos e o autor receberá <strong>+25 XP</strong> na plataforma.
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label small fw-bold" for="obsAprovar_@est.Id">
+                                                    Observação do Administrador (opcional)
+                                                </label>
+                                                <textarea name="observacaoAdmin" id="obsAprovar_@est.Id" class="form-control form-control-sm" rows="2" placeholder="Ex: Pesquisa aprovada com louvor pela coordenação."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-success btn-sm text-white px-3">
+                                                <i class="bi bi-check-lg me-1"></i> Confirmar Aprovação
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Reprovar Estudo -->
+                        <div class="modal fade" id="modalReprovarEstudo_@est.Id" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0 shadow">
+                                    <form method="post" asp-action="ReprovarEstudo" asp-route-id="@est.Id">
+                                        @Html.AntiForgeryToken()
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title fw-bold">
+                                                <i class="bi bi-x-circle-fill me-2"></i> Reprovar Estudo
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-3">
+                                                Você está reprovando a pesquisa <strong>@est.Titulo</strong>.
+                                            </p>
+                                            <div class="mb-3">
+                                                <label class="form-label small fw-bold" for="motivoReprovarEst_@est.Id">
+                                                    Motivo da Reprovação <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea name="motivo" id="motivoReprovarEst_@est.Id" class="form-control form-control-sm" rows="3" placeholder="Informe o motivo para orientação do autor (ex: dados inconclusivos, formatação inadequada, etc.)." required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm px-3">
+                                                <i class="bi bi-x-lg me-1"></i> Reprovar Estudo
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Excluir Estudo -->
+                        <div class="modal fade" id="modalExcluirEstudo_@est.Id" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0 shadow">
+                                    <form method="post" asp-action="ExcluirEstudo" asp-route-id="@est.Id">
+                                        @Html.AntiForgeryToken()
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title fw-bold">
+                                                <i class="bi bi-trash-fill me-2"></i> Excluir Estudo
+                                            </h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="mb-0">
+                                                Tem certeza que deseja excluir permanentemente o estudo <strong>@est.Titulo</strong>? Esta ação não pode ser desfeita.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer border-top">
+                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm px-3">
+                                                <i class="bi bi-trash me-1"></i> Excluir Permanentemente
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.Estudos.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <div style="font-size: 2.2rem; margin-bottom: 8px;">🔬</div>
+                                <strong>Nenhum estudo científico encontrado com os filtros selecionados.</strong><br />
+                                <small>Pesquisas e artigos submetidos pelos membros da comunidade aparecerão aqui para moderação e publicação oficial.</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @if (isComunidades)
+    {
+        <!-- ========================================== -->
+        <!-- ABA 5: COMUNIDADES DO FÓRUM               -->
+        <!-- ========================================== -->
+
+        <!-- Cards de resumo rápido -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-warning bg-warning-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ⏳
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalComunidadesPendentes</h3>
+                        <span class="text-muted small">Pendentes de Homologação</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-success bg-success-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ✅
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalComunidadesAprovadas</h3>
+                        <span class="text-muted small">Comunidades Ativas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-danger bg-danger-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        ❌
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalComunidadesReprovadas</h3>
+                        <span class="text-muted small">Propostas Rejeitadas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-primary bg-primary-subtle" style="width:48px;height:48px;font-size:1.4rem;">
+                        🏛️
+                    </div>
+                    <div>
+                        <h3 class="m-0 fs-4 fw-bold text-dark">@Model.TotalComunidades</h3>
+                        <span class="text-muted small">Total Cadastradas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de filtros -->
+        <div class="p-3 bg-white rounded-3 border mb-4">
+            <form method="get" class="row g-2 align-items-center">
+                <input type="hidden" name="aba" value="comunidades" />
+                
+                <div class="col-md-3">
+                    <label class="form-label small text-muted mb-1">Status da Comunidade</label>
+                    <select name="statusComunidade" class="form-select form-select-sm" onchange="this.form.submit()">
+                        <option value="todos" selected="@(Model.StatusComunidadeFiltro == "todos")">Todos os Status</option>
+                        <option value="pendente" selected="@(Model.StatusComunidadeFiltro == "pendente")">⏳ Pendente de Análise</option>
+                        <option value="aprovada" selected="@(Model.StatusComunidadeFiltro == "aprovada")">✅ Aprovada / Ativa</option>
+                        <option value="rejeitada" selected="@(Model.StatusComunidadeFiltro == "rejeitada")">❌ Rejeitada</option>
+                    </select>
+                </div>
+
+                <div class="col-md-7">
+                    <label class="form-label small text-muted mb-1">Buscar por Nome, Descrição ou Fundador</label>
+                    <input type="text" name="buscaComunidade" class="form-control form-control-sm" 
+                           placeholder="Digite o nome da comunidade, criador..." 
+                           value="@Model.BuscaComunidade" />
+                </div>
+
+                <div class="col-md-2 d-flex gap-2 align-items-end" style="padding-top: 22px;">
+                    <button type="submit" class="btn btn-sm btn-primary w-100">
+                        <i class="bi bi-search me-1"></i> Filtrar
+                    </button>
+                    @if (Model.StatusComunidadeFiltro != "todos" || !string.IsNullOrEmpty(Model.BuscaComunidade))
+                    {
+                        <a asp-action="Index" asp-route-aba="comunidades" class="btn btn-sm btn-outline-secondary" title="Limpar filtros">
+                            <i class="bi bi-x-lg"></i>
+                        </a>
+                    }
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabela de Comunidades -->
+        <div class="eco-table-wrap">
+            <table class="eco-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Ícone</th>
+                        <th>Nome da Comunidade</th>
+                        <th>Fundador</th>
+                        <th>Data de Envio</th>
+                        <th>Engajamento</th>
+                        <th>Status</th>
+                        <th class="text-end" style="min-width: 170px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var com in Model.Comunidades)
+                    {
+                        var ehPendente = com.StatusAprovacao == "Pendente";
+                        var ehAprovada = com.StatusAprovacao == "Aprovada";
+                        var ehRejeitada = com.StatusAprovacao == "Rejeitada";
+
+                        <tr>
+                            <td>
+                                <div class="rounded-circle border d-flex align-items-center justify-content-center overflow-hidden" 
+                                     style="width: 44px; height: 44px; background: #f8fafc;">
+                                    @if (!string.IsNullOrWhiteSpace(com.IconePath))
+                                    {
+                                        <img src="@com.IconePath" alt="@com.Nome" style="width:100%;height:100%;object-fit:cover;" />
+                                    }
+                                    else if (com.IsGeral)
+                                    {
+                                        <span style="font-size: 1.3rem;">🏛️</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="font-size: 1.3rem;">🌿</span>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">
+                                    @com.Nome
+                                    @if (com.IsGeral)
+                                    {
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle ms-1" style="font-size: 0.7rem;">Oficial Geral</span>
+                                    }
+                                </div>
+                                <div class="text-muted small" style="max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    @com.Descricao
+                                </div>
+                                <span class="badge bg-light text-muted border mt-1" style="font-size: 0.68rem;">slug: /@com.Slug</span>
+                            </td>
+                            <td>
+                                @if (com.Criador != null)
+                                {
+                                    <div class="fw-semibold text-dark small">@com.Criador.Nome</div>
+                                    <div class="text-muted small" style="font-size: 0.72rem;">@com.Criador.Email</div>
+                                    @if (com.Criador.IsJornalista && com.Criador.StatusJornalista == "Aprovado")
+                                    {
+                                        <span class="badge bg-info-subtle text-info border border-info-subtle" style="font-size: 0.65rem;">Jornalista</span>
+                                    }
+                                }
+                                else if (com.IsGeral)
+                                {
+                                    <span class="badge bg-dark text-white" style="font-size: 0.7rem;">Administração EcoCanta</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">Membro do site</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="small text-dark">@com.CriadoEm.ToString("dd/MM/yyyy")</span>
+                                <div class="text-muted small" style="font-size: 0.72rem;">@com.CriadoEm.ToString("HH:mm")</div>
+                            </td>
+                            <td>
+                                <div class="small text-dark"><strong>@com.Topicos.Count</strong> posts</div>
+                                <div class="small text-muted"><strong>@com.Campanhas.Count</strong> campanhas</div>
+                            </td>
+                            <td>
+                                @if (ehPendente)
+                                {
+                                    <span class="badge bg-warning text-dark px-2 py-1 rounded-pill">
+                                        <i class="bi bi-clock-history me-1"></i> Pendente
+                                    </span>
+                                }
+                                else if (ehAprovada)
+                                {
+                                    <span class="badge bg-success px-2 py-1 rounded-pill">
+                                        <i class="bi bi-check-circle me-1"></i> Aprovada
+                                    </span>
+                                    @if (com.AprovadoEm.HasValue)
+                                    {
+                                        <div class="text-muted small" style="font-size: 0.7rem;">Em @com.AprovadoEm.Value.ToString("dd/MM/yy")</div>
+                                    }
+                                }
+                                else if (ehRejeitada)
+                                {
+                                    <span class="badge bg-danger px-2 py-1 rounded-pill" title="@com.MotivoRejeicao">
+                                        <i class="bi bi-x-circle me-1"></i> Rejeitada
+                                    </span>
+                                    @if (!string.IsNullOrWhiteSpace(com.MotivoRejeicao))
+                                    {
+                                        <div class="text-danger small" style="font-size: 0.68rem; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="@com.MotivoRejeicao">
+                                            @com.MotivoRejeicao
+                                        </div>
+                                    }
+                                }
+                            </td>
+                            <td class="text-end">
+                                <div class="d-flex align-items-center justify-content-end gap-1">
+                                    <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@com.Slug" target="_blank" class="btn btn-sm btn-outline-secondary" title="Abrir página da comunidade">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+
+                                    @if (ehPendente && !com.IsGeral)
+                                    {
+                                        <form method="post" asp-action="AprovarComunidade" asp-route-id="@com.Id" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <button type="submit" class="btn btn-sm btn-success" title="Homologar e Aprovar Comunidade">
+                                                <i class="bi bi-check-lg me-1"></i> Aprovar
+                                            </button>
+                                        </form>
+
+                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalRejeitarComunidade_@com.Id" title="Rejeitar proposta de comunidade">
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Modal de Rejeição de Comunidade -->
+                        @if (ehPendente && !com.IsGeral)
+                        {
+                            <div class="modal fade" id="modalRejeitarComunidade_@com.Id" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0 shadow">
+                                        <form method="post" asp-action="RejeitarComunidade" asp-route-id="@com.Id">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                            <div class="modal-header bg-danger text-white">
+                                                <h5 class="modal-title fw-bold">
+                                                    <i class="bi bi-shield-x me-2"></i> Rejeitar Proposta de Comunidade
+                                                </h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="mb-2">
+                                                    Informe o motivo pelo qual a comunidade <strong>@com.Nome</strong> está sendo rejeitada:
+                                                </p>
+                                                <textarea name="motivo" class="form-control" rows="3" placeholder="Ex: Comunidade duplicada; tema já coberto pela comunidade Assuntos Gerais; ou fora do escopo da Serra da Cantareira." required></textarea>
+                                            </div>
+                                            <div class="modal-footer border-top">
+                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-danger btn-sm px-3">
+                                                    <i class="bi bi-x-circle me-1"></i> Confirmar Rejeição
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (Model.Comunidades.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <div style="font-size: 2.2rem; margin-bottom: 8px;">🏛️</div>
+                                <strong>Nenhuma comunidade encontrada com os filtros selecionados.</strong><br />
+                                <small>Comunidades fundadas por jornalistas e pesquisadores credenciados aparecerão aqui para homologação administrativa.</small>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

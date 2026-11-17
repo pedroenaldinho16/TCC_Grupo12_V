@@ -1,0 +1,5 @@
+System.Exception: Contraste dos componentes principais: admin-quiz-escuro
+   at RevisaoInterface.<>c__DisplayClass0_0.<Run>g__Check|1(Boolean pass, String name) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\RevisaoInterface.cs:line 31
+   at RevisaoInterface.<>c__DisplayClass0_3.<<Run>g__Capture|11>d.MoveNext() in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\RevisaoInterface.cs:line 170
+--- End of stack trace from previous location ---
+   at RevisaoInterface.Run(String root) in C:\Users\Admin\Desktop\recuperação\TCC_Grupo12_V\tests\EcoCanta.Verificacao\RevisaoInterface.cs:line 239

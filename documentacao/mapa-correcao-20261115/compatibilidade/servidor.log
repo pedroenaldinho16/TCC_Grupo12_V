@@ -1,0 +1,8 @@
+warn: Microsoft.AspNetCore.Builder.StaticAssetDevelopmentRuntimeHandler[1]
+      The static asset '/js/cantareira-mapa.js' was not found in the built time manifest. This file will not be available at runtime if it is not available at compile time during the publish process. If the file was not added to the project during development, and is created at runtime, use the StaticFiles middleware to serve it instead.
+warn: Microsoft.AspNetCore.Builder.StaticAssetDevelopmentRuntimeHandler[1]
+      The static asset '/js/cantareira-mapa.js' was not found in the built time manifest. This file will not be available at runtime if it is not available at compile time during the publish process. If the file was not added to the project during development, and is created at runtime, use the StaticFiles middleware to serve it instead.
+warn: Microsoft.AspNetCore.Builder.StaticAssetDevelopmentRuntimeHandler[1]
+      The static asset '/js/cantareira-mapa.js' was not found in the built time manifest. This file will not be available at runtime if it is not available at compile time during the publish process. If the file was not added to the project during development, and is created at runtime, use the StaticFiles middleware to serve it instead.
+warn: Microsoft.AspNetCore.Builder.StaticAssetDevelopmentRuntimeHandler[1]
+      The static asset '/js/cantareira-mapa.js' was not found in the built time manifest. This file will not be available at runtime if it is not available at compile time during the publish process. If the file was not added to the project during development, and is created at runtime, use the StaticFiles middleware to serve it instead.

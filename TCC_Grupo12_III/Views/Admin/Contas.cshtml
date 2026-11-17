@@ -1,0 +1,3 @@
+@model List<TCC_Grupo12_III.Models.Usuario>
+@{ViewData["Title"]="Usuários";}
+<div class="ec-page"><h1>Gerenciar usuários</h1><partial name="_AdminTabs" /><a class="ec-button mb-4" asp-action="Create">Cadastrar conta</a><div class="ec-history"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Situação</th><th>Ação</th></tr></thead><tbody>@foreach(var u in Model){<tr><td>@u.Nome</td><td>@u.Email</td><td>@(u.IsAdmin?"Administrador":"Estudante")</td><td>@(u.IsBanido?"Bloqueado":"Ativo")</td><td><a asp-action="Edit" asp-route-id="@u.Id">Editar conta</a></td></tr>}</tbody></table></div></div>

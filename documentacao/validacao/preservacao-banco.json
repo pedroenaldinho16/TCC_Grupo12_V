@@ -1,0 +1,153 @@
+{
+  "backupComparado": "antes-migracao-20261113-190929.db",
+  "integridade": "ok",
+  "tabelas": [
+    {
+      "tabela": "Usuarios",
+      "antes": 16,
+      "depois": 16,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "Especies",
+      "antes": 6,
+      "depois": 6,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "Campanhas",
+      "antes": 6,
+      "depois": 6,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "Avistamentos",
+      "antes": 6,
+      "depois": 6,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "PokedexRegistros",
+      "antes": 12,
+      "depois": 12,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "EstudosCientificos",
+      "antes": 3,
+      "depois": 3,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ForumTopicos",
+      "antes": 9,
+      "depois": 9,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ForumRespostas",
+      "antes": 14,
+      "depois": 14,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "JogoTentativas",
+      "antes": 9,
+      "depois": 9,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "NotasEstudo",
+      "antes": 1,
+      "depois": 1,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "Denuncias",
+      "antes": 4,
+      "depois": 4,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "EspecieQuizPerguntas",
+      "antes": 18,
+      "depois": 18,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "CampanhaParticipacoes",
+      "antes": 0,
+      "depois": 0,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ForumComunidades",
+      "antes": 5,
+      "depois": 5,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "FaqTickets",
+      "antes": 4,
+      "depois": 4,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "FaqMensagens",
+      "antes": 6,
+      "depois": 6,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "AvistamentoMidias",
+      "antes": 6,
+      "depois": 6,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ReservasAvistamento",
+      "antes": 5,
+      "depois": 5,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "NivelJogos",
+      "antes": 1,
+      "depois": 1,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ForumCurtidasTopico",
+      "antes": 0,
+      "depois": 0,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    },
+    {
+      "tabela": "ForumCurtidasResposta",
+      "antes": 0,
+      "depois": 0,
+      "registrosOriginaisAusentesOuAlterados": 0,
+      "registrosNovosOuAlterados": 0
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+META 1 – RETOMADA DO FOCO DO PROJETO
+Grupo 12 – Planejamento de readequação do sistema
+
+1. Identificação do projeto
+Título do TCC: Desenvolvimento de uma plataforma web para ajudar na conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira.
+Nome da plataforma: EcoCanta.
+Integrantes: Murilo Henrique Almeida de Santana, Gustavo Henrique de Souza Faria, Pedro Gabriel Farias da Silva.
+Professoras orientadoras: Barbara Kathellen Andrade Porfirio; Thaynara Cristina Maia dos Santos.
+Tema: Conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira.
+
+2. Retomada da proposta original
+Problema de pesquisa. De que maneira uma plataforma web pode contribuir para a conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP?
+Objetivo geral. Desenvolver uma plataforma web para contribuir com a conscientização ambiental de estudantes do ensino médio sobre a preservação das espécies terrestres e aviárias da Serra da Cantareira, no município de Guarulhos-SP.
+Objetivos específicos:
+•  Levantar informações sobre as espécies terrestres e aviárias da região, incluindo aquelas ameaçadas de extinção.
+•  Definir os requisitos funcionais do sistema de acordo com as necessidades do público-alvo e a proposta educativa.
+•  Elaborar a modelagem e o protótipo da solução, organizando os fluxos de navegação e as informações necessárias.
+•  Disponibilizar conteúdos educativos que estimulem o conhecimento, a reflexão e a participação dos estudantes na preservação ambiental.
+Finalidade do sistema: A EcoCanta foi proposta para reunir informações sobre os animais da Serra da Cantareira e apresentar, de forma acessível aos estudantes do ensino médio, suas características, as ameaças que enfrentam e a importância da preservação de seus habitats. Para isso, o sistema deve priorizar o catálogo de espécies, as fichas informativas dos animais, os materiais educativos e atividades como o quiz, além de notícias e campanhas relacionadas ao tema.
+3. Usuários do sistema
+Após a revisão, o sistema contará com dois perfis: Estudante do Ensino Médio e Administrador. Essa divisão atende às necessidades da plataforma sem criar funções de acesso desnecessárias.
+Estudante do Ensino Médio. É o público-alvo do projeto. Poderá cadastrar-se, acessar a plataforma, consultar e pesquisar espécies, ler conteúdos e artigos ambientais, acompanhar campanhas de preservação e realizar jogos educativos. Esse perfil é necessário porque a proposta do TCC é voltada à conscientização de estudantes do ensino médio.
+Administrador. Será responsável pela organização e atualização das informações publicadas. Poderá gerenciar espécies, materiais educativos, notícias, campanhas, perguntas do quiz e contas de usuário. Esse perfil é necessário para manter o conteúdo da plataforma atualizado e adequado à proposta educativa.
+Os perfis de Jornalista e Moderador serão retirados. A publicação de notícias e a revisão dos conteúdos, quando necessárias, poderão ser realizadas pelo Administrador. As atividades ligadas ao fórum e a outros recursos que serão excluídos não precisarão ser mantidas.
+
+4. Diagnóstico das funcionalidades atuais
+As funcionalidades levantadas na documentação do TCC foram analisadas conforme sua relação com o tema e os objetivos da pesquisa.
+Tabela 1 – Diagnóstico das funcionalidades da EcoCanta
+Funcionalidade atual
+Classificação
+Justificativa
+Acesso e direcionamento por perfil
+Corrigir
+Manter somente os acessos de Estudante e Administrador.
+Página inicial do estudante
+Manter
+Destacar catálogo de animais, materiais, notícias, quiz e campanhas.
+Medalhas e conquistas do perfil
+Manter
+Ajuda o estudante a se manter engajado no site.
+Níveis, patentes e pontos de experiência
+Manter
+Também ajuda o estudante a se manter engajado no site.
+Caderno de notas com salvamento automático
+Remover
+O editor de anotações não é essencial para a proposta original.
+Catálogo de espécies (CantaDex)
+Manter
+Recompensa o estudante ao dominar sobre uma espécie em extinção.
+Fichas informativas das espécies
+Corrigir
+Principal método de educação da plataforma, porém ainda está muito estático e entediante.
+Quiz nas fichas das espécies
+Manter
+É uma boa forma de testar o conhecimento do estudante.
+Área de estudos e materiais de leitura
+Corrigir
+A área de estudos deverá ser transformada nas “Voz Estudantil”, onde haverá materiais dos próprios estudantes.
+Mapa interativo de avistamentos
+Manter
+É uma forma de engajar os estudantes a registrarem os animais.
+Registro de avistamentos
+Manter
+Funcionalidade do mapa necessária para que todo mundo possa ver os avistamentos registrados pelos estudantes.
+Envio de denúncias ambientais
+Remover
+Receber e encaminhar denúncias não é a finalidade da plataforma educativa, o que será feito no lugar é ensinar como denunciar aos órgãos competentes.
+Lista de campanhas ambientais
+Manter
+Divulga ações de preservação relacionadas ao tema.
+Detalhes das campanhas
+Manter
+Explica objetivos e orientações das ações de preservação.
+Sugestão de campanhas por estudantes
+Remover
+Exige um processo adicional de análise e aprovação de propostas.
+Jogo diário
+Corrigir
+Precisa ser refeito de uma maneira mais simples, intuitiva e que realmente eduque o estudante.
+Fórum de discussões
+Corrigir
+Será realocado por um mural de postagens dentro das campanhas.
+Comunidades e grupos do fórum
+Remover
+A criação de grupos amplia o funcionamento de rede social.
+Postagens
+Corrigir
+Será readaptada a realocação do “Fórum”.
+Comentários e curtidas em postagens
+Corrigir
+São recursos ligados ao fórum que será realocado e reimaginado como “Mural de Postagens”.
+Criação de novas comunidades
+Remover
+Não é necessária pois cada campanha funcionará como uma comunidade.
+FAQ e regras da comunidade
+Corrigir
+São recursos ligados ao fórum que será realocado e reimaginado como “Mural de Postagens”.
+Chat e chamados de suporte
+Corrigir
+Deve ser simplificado, pois na situação atual o chat está muito poluído.
+Moderação de postagens do fórum
+Corrigir
+Deve ser feita por um administrador e será adaptada com a realocação do fórum.
+Moderação de avistamentos
+Manter
+Os registros de avistamentos devem ser moderados para evitar conteúdo falso ou inapropriado.
+Análise de denúncias
+Remover
+A plataforma não manterá o recebimento de denúncias.
+Publicação de notícias pelo Jornalista
+Corrigir
+Será adaptada para criação de artigos pelos próprios estudantes na aba “Voz Estudantil”.
+Centro de estudos científicos
+Remover
+A gestão de um acervo independente amplia a complexidade do sistema.
+Envio de estudos externos
+Remover
+O recebimento de estudos exige avaliação especializada de materiais.
+Painel do Administrador
+Corrigir
+Apresentar somente as ferramentas ligadas às funcionalidades mantidas.
+Gestão de contas e permissões
+Corrigir
+Limitar as permissões aos dois perfis definidos para o sistema.
+Criação administrativa de contas
+Corrigir
+Adequar o cadastro administrativo de contas à estrutura de dois perfis.
+Cadastro e edição de espécies
+Manter
+Permite atualizar dados e imagens das espécies apresentadas.
+Gerenciamento de materiais educativos
+Concluir
+A função está prevista nos requisitos, mas sua implementação completa precisa ser conferida.
+Gerenciamento de notícias
+Corrigir
+Precisa ser readaptado como “Gerenciamento da Voz Estudantil”.
+Gerenciamento de campanhas
+Manter
+Permite atualizar as campanhas divulgadas aos estudantes.
+Gerenciamento de quizzes
+Manter
+Permite organizar perguntas e respostas relacionadas ao tema.
+Atendimento de chamados de FAQ
+Manter
+O recurso de suporte por chamados é necessário para que dúvidas especificas sejam respondidas.
+
+5. Proposta de reorganização do sistema
+Após a revisão, decidimos manter as funcionalidades abaixo:
+Catálogo de espécies. O estudante poderá consultar os animais terrestres e as aves apresentados na plataforma. Atende à necessidade de conhecer a fauna regional. Objetivo relacionado: Levantamento de informações sobre as espécies; disponibilização de conteúdos educativos. Situação atual: Implementada.
+Ficha informativa das espécies. O estudante poderá consultar características, habitat, ameaças e situação de conservação, com informações obtidas de fontes confiáveis. Ajuda na compreensão sobre a importância de proteger as espécies. Objetivo relacionado: Levantamento de informações sobre as espécies; disponibilização de conteúdos educativos. Situação atual: Precisa de correção.
+Materiais educativos ou Voz Estudantil. O estudante escrever e poderá ler orientações de outros estudantes sobre a fauna e sua preservação. Apresenta explicações complementares dos próprios estudantes. Objetivo relacionado: Disponibilização de conteúdos educativos. Situação atual: Precisa de correção.
+Quiz educativo. O estudante poderá responder perguntas sobre espécies, ameaças e preservação, recebendo correção e explicações. Incentiva a reflexão sobre os conteúdos apresentados. Objetivo relacionado: Disponibilização de conteúdos educativos. Situação atual: Precisa de correção.
+Campanhas de preservação. O estudante poderá conhecer campanhas, suas finalidades e orientações. Mostra ações de proteção ambiental relacionadas ao tema do TCC. Objetivo relacionado: Disponibilização de conteúdos educativos. Situação atual: Precisa de correção.
+Gerenciamento de espécies. O Administrador poderá cadastrar, revisar e editar as informações das espécies. Permite manter as fichas do catálogo atualizadas. Objetivo relacionado: Levantamento de informações sobre as espécies; definição dos requisitos funcionais. Situação atual: Implementada.
+Gerenciamento da Voz Estudantil. O Administrador poderá revisar e moderar artigos, materiais e avistamentos feitos por estudantes. Objetivo relacionado: disponibilização de conteúdos educativos. Situação atual:Uma função que precisa ser corrigida e transformada.
+Gerenciamento do quiz. O Administrador poderá organizar perguntas, alternativas e respostas. Mantém a atividade educativa coerente com o conteúdo do projeto. Objetivo relacionado: Definição dos requisitos funcionais; disponibilização de conteúdos educativos. Situação atual: Implementada.
+Gerenciamento de campanhas. O Administrador poderá cadastrar, atualizar e encerrar campanhas de preservação. Permite manter as ações divulgadas atualizadas. Objetivo relacionado: Definição dos requisitos funcionais; disponibilização de conteúdos educativos. Situação atual: Implementada.
+Gerenciamento de usuários. O Administrador poderá consultar contas e permissões, mantendo apenas os perfis de Estudante e Administrador. Evita a manutenção de categorias de usuário desnecessárias. Objetivo relacionado: Definição dos requisitos funcionais; modelagem e protótipo. Situação atual: Precisa de correção.
+6. Relação entre os objetivos e as funcionalidades
+Tabela 2 – Relação entre os objetivos específicos e as funcionalidades
+Objetivo específico
+Funcionalidades relacionadas
+Como contribuem para o objetivo
+Levantar informações sobre as espécies terrestres e aviárias da região, incluindo aquelas ameaçadas de extinção.
+Catálogo de espécies; fichas informativas; gerenciamento de espécies.
+Permitem organizar e consultar as informações levantadas sobre os animais da região.
+Definir os requisitos funcionais do sistema de acordo com as necessidades do público-alvo e a proposta educativa.
+funcionalidades do Estudante e do Administrador; gerenciamento de usuários.
+Delimitam o que cada perfil poderá fazer, de acordo com as necessidades do projeto.
+Elaborar a modelagem e o protótipo da solução, organizando os fluxos de navegação e as informações necessárias.
+catálogo; jogos; voz estudantil; painel administrativo.
+Servem de base para organizar as telas, os fluxos de acesso e a representação do sistema no protótipo.
+Disponibilizar conteúdos educativos que estimulem o conhecimento, a reflexão e a participação dos estudantes na preservação ambiental.
+Fichas das espécies; voz estudantil; quiz; campanhas de preservação; jogo diário.
+Apresentam conhecimentos sobre a fauna e estimulam a reflexão sobre atitudes de preservação.
+
+

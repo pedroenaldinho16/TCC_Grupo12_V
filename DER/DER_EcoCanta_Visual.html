@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Diagrama Entidade-Relacionamento - EcoCanta</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #091316;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #E2E8F0;
+    padding: 36px;
+    width: 2500px;
+  }
+  .header {
+    background: linear-gradient(135deg, #064E3B 0%, #134E4A 50%, #0F2D3C 100%);
+    border: 1px solid #14B8A6;
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #F0FDF4;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: -0.5px;
+  }
+  .header p {
+    color: #A7F3D0;
+    font-size: 14.5px;
+    margin-top: 5px;
+  }
+  .header .badge-total {
+    background: #059669;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(5,150,105,0.4);
+    border: 1px solid #34D399;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 26px;
+    align-items: start;
+  }
+  .cluster-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .cluster-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .c-mod { background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35); }
+  .c-bio { background: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.35); }
+  .c-map { background: rgba(167, 139, 250, 0.15); color: #A78BFA; border: 1px solid rgba(167, 139, 250, 0.35); }
+  .c-for { background: rgba(251, 191, 36, 0.15); color: #FBBF24; border: 1px solid rgba(251, 191, 36, 0.35); }
+  .c-gam { background: rgba(248, 113, 113, 0.15); color: #F87171; border: 1px solid rgba(248, 113, 113, 0.35); }
+
+  .table-card {
+    background: #15222E;
+    border: 1px solid #233544;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .table-header {
+    padding: 10px 14px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #F8FAFC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid;
+  }
+  .th-mod { background: #0A2838; border-color: #0284C7; }
+  .th-bio { background: #063124; border-color: #059669; }
+  .th-map { background: #20193D; border-color: #7C3AED; }
+  .th-for { background: #32250B; border-color: #D97706; }
+  .th-gam { background: #331518; border-color: #DC2626; }
+
+  .col-row {
+    padding: 5.5px 12px;
+    font-size: 11.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .col-row:last-child { border-bottom: none; }
+  .col-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    color: #F1F5F9;
+  }
+  .col-type {
+    color: #38BDF8;
+    font-size: 10.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 500;
+  }
+  .badge-pk {
+    background: #EAB308;
+    color: #000;
+    font-size: 8.5px;
+    font-weight: 800;
+    padding: 1.5px 4.5px;
+    border-radius: 3px;
+  }
+  .badge-fk {
+    background: #2563EB;
+    color: #FFF;
+    font-size: 8.5px;
+    font-weight: 800;
+    padding: 1.5px 4.5px;
+    border-radius: 3px;
+  }
+  .fk-footer {
+    background: rgba(0,0,0,0.3);
+    padding: 7px 12px;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+    font-size: 10px;
+    color: #93C5FD;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>🌿 EcoCanta — Diagrama Entidade-Relacionamento (DER)</h1>
+      <p>Banco de Dados Relacional MySQL 8.0 / InnoDB • 21 Tabelas • Mapeamento de Fauna, Ciência Cidadã, Fórum, Campanhas e Gamificação</p>
+    </div>
+    <div class="badge-total">21 Tabelas Integradas</div>
+  </div>
+
+  <div class="grid-container">
+    <div class="cluster-col">
+      <div class="cluster-title c-mod">👤 Usuários & Moderação</div>
+      
+      <div class="table-card">
+        <div class="table-header th-mod">
+          <span>Usuarios</span>
+          <span style="font-size: 11px; opacity: 0.85;">24 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Email</span>
+            <span class="col-type">VARCHAR(150)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsAdmin</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Nome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Senha</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Xp</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsJornalista</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">RegistroJornalista</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataRespostaJornalista</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataSolicitacaoJornalista</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">JustificativaJornalista</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">LinkPortfolioJornalista</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoReprovacaoJornalista</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusJornalista</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">VeiculoJornalista</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">BanidoPorNome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataBanimento</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataSuspensaoForum</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsBanido</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsModerador</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoBanimento</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoSuspensaoForum</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">SuspensoForumAte</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">SuspensoPorNome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+        
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-mod">
+          <span>Denuncias</span>
+          <span style="font-size: 11px; opacity: 0.85;">12 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Tipo</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Localizacao</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataOcorrencia</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Descricao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">FotoPath</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">NomeContato</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">EmailContato</span>
+            <span class="col-type">VARCHAR(150)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Anonima</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ObservacaoAdmin</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Resolvida</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+        
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-mod">
+          <span>FaqTickets</span>
+          <span style="font-size: 11px; opacity: 0.85;">8 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Assunto</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Categoria</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Status</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AtualizadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">UltimaRespostaPor</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-mod">
+          <span>FaqMensagens</span>
+          <span style="font-size: 11px; opacity: 0.85;">7 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>FaqTicketId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Conteudo</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsEquipeModOuAdmin</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CargoAutor</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; FaqTicketId &rarr; FaqTickets(Id)</div></div>
+      </div>
+    
+    </div>
+
+    <div class="cluster-col">
+      <div class="cluster-title c-bio">🦉 Fauna & Ciência</div>
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>Especies</span>
+          <span style="font-size: 11px; opacity: 0.85;">13 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Nome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">NomeCientifico</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Categoria</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusConservacao</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Tags</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Habitat</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Alimentacao</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Ameacas</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Caracteristicas</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Comportamento</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusDetalhe</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ImagemUrl</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+        
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>EspecieQuizPerguntas</span>
+          <span style="font-size: 11px; opacity: 0.85;">9 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>EspecieId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Enunciado</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">OpcaoA</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">OpcaoB</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">OpcaoC</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">OpcaoD</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">RespostaCorreta</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Ordem</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; EspecieId &rarr; Especies(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>PokedexRegistros</span>
+          <span style="font-size: 11px; opacity: 0.85;">8 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>EspecieId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">VistaEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Dominada</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DominadaEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">EstudoLido</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">QuizAprovado</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; EspecieId &rarr; Especies(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>ReservasAvistamento</span>
+          <span style="font-size: 11px; opacity: 0.85;">4 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>EspecieId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">QuantidadeDisponivel</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; EspecieId &rarr; Especies(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>EstudosCientificos</span>
+          <span style="font-size: 11px; opacity: 0.85;">24 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Titulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Subtitulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Categoria</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Resumo</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ConteudoHtml</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Slug</span>
+            <span class="col-type">VARCHAR(120)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">EspecieNome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>EspecieId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusConservacao</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Autor</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Instituicao</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ImagemUrl</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">TempoLeituraMinutos</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DestaquesTexto</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AmeacasTexto</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AcoesTexto</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ReferenciasTexto</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusAprovacao</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataSubmissao</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataResposta</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoReprovacao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ObservacoesAdmin</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; EspecieId &rarr; Especies(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-bio">
+          <span>NotasEstudo</span>
+          <span style="font-size: 11px; opacity: 0.85;">9 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Titulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ConteudoHtml</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ResumoTexto</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ArtigoSlug</span>
+            <span class="col-type">VARCHAR(120)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ArtigoTitulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataCriacao</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataAtualizacao</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div></div>
+      </div>
+    
+    </div>
+
+    <div class="cluster-col">
+      <div class="cluster-title c-map">📍 Avistamentos & Campanhas</div>
+      
+      <div class="table-card">
+        <div class="table-header th-map">
+          <span>Avistamentos</span>
+          <span style="font-size: 11px; opacity: 0.85;">12 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>EspecieId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">NomeAnimal</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">FotoPath</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Latitude</span>
+            <span class="col-type">DECIMAL(10,7)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Longitude</span>
+            <span class="col-type">DECIMAL(10,7)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataAvistamento</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Quantidade</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Observacoes</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">NomeObservador</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; EspecieId &rarr; Especies(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-map">
+          <span>AvistamentoMidias</span>
+          <span style="font-size: 11px; opacity: 0.85;">5 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>AvistamentoId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Caminho</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Tipo</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; AvistamentoId &rarr; Avistamentos(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-map">
+          <span>Campanhas</span>
+          <span style="font-size: 11px; opacity: 0.85;">26 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AprovadoPorNome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Ativa</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>ComunidadeId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Cronograma</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataCriacao</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataFim</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataInicio</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DataResposta</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Descricao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Horario</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ImagemUrl</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ImpactoEsperado</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">LocalEncontro</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Meta</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoReprovacao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">OQueLevar</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ObjetivoPrincipal</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ObjetivosEspecificos</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Organizador</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Participantes</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Periodo</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">PublicoAlvo</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusAprovacao</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Titulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; ComunidadeId &rarr; ForumComunidades(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-map">
+          <span>CampanhaParticipacoes</span>
+          <span style="font-size: 11px; opacity: 0.85;">3 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>CampanhaId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; CampanhaId &rarr; Campanhas(Id)</div></div>
+      </div>
+    
+    </div>
+
+    <div class="cluster-col">
+      <div class="cluster-title c-for">💬 Comunidades & Fórum</div>
+      
+      <div class="table-card">
+        <div class="table-header th-for">
+          <span>ForumComunidades</span>
+          <span style="font-size: 11px; opacity: 0.85;">14 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Nome</span>
+            <span class="col-type">VARCHAR(100)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Slug</span>
+            <span class="col-type">VARCHAR(120)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Descricao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Regras</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IconePath</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">BannerPath</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>CriadorId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">StatusAprovacao</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AprovadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AprovadoPorId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">MotivoRejeicao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IsGeral</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; CriadorId &rarr; Usuarios(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-for">
+          <span>ForumTopicos</span>
+          <span style="font-size: 11px; opacity: 0.85;">8 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Categoria</span>
+            <span class="col-type">VARCHAR(50)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>ComunidadeId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Conteudo</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Hashtags</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Titulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; ComunidadeId &rarr; ForumComunidades(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-for">
+          <span>ForumRespostas</span>
+          <span style="font-size: 11px; opacity: 0.85;">5 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>ForumTopicoId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Conteudo</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; ForumTopicoId &rarr; ForumTopicos(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-for">
+          <span>ForumCurtidasTopico</span>
+          <span style="font-size: 11px; opacity: 0.85;">4 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>ForumTopicoId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; ForumTopicoId &rarr; ForumTopicos(Id)</div></div>
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-for">
+          <span>ForumCurtidasResposta</span>
+          <span style="font-size: 11px; opacity: 0.85;">4 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>ForumRespostaId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">CriadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; ForumRespostaId &rarr; ForumRespostas(Id)</div></div>
+      </div>
+    
+    </div>
+
+    <div class="cluster-col">
+      <div class="cluster-title c-gam">🎮 Gamificação Diária</div>
+      
+      <div class="table-card">
+        <div class="table-header th-gam">
+          <span>NivelJogos</span>
+          <span style="font-size: 11px; opacity: 0.85;">7 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Titulo</span>
+            <span class="col-type">VARCHAR(200)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Descricao</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Data</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Ativo</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">DadosJson</span>
+            <span class="col-type">TEXT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">TotalAnimais</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+        
+      </div>
+    
+      
+      <div class="table-card">
+        <div class="table-header th-gam">
+          <span>JogoTentativas</span>
+          <span style="font-size: 11px; opacity: 0.85;">12 colunas</span>
+        </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-pk">PK</span>Id</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>NivelJogoId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name"><span class="badge-fk">FK</span>UsuarioId</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Dia</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">IniciadoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">ConcluidoEm</span>
+            <span class="col-type">DATETIME</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">Concluida</span>
+            <span class="col-type">TINYINT(1)</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AnimaisResgatados</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">TotalAnimais</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">TempoSegundos</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">VidasRestantes</span>
+            <span class="col-type">INT</span>
+          </div>
+        
+          <div class="col-row">
+            <span class="col-name">AnimaisResgatadosIds</span>
+            <span class="col-type">VARCHAR(255)</span>
+          </div>
+        
+        <div class="fk-footer"><div>&bull; UsuarioId &rarr; Usuarios(Id)</div><div>&bull; NivelJogoId &rarr; NivelJogos(Id)</div></div>
+      </div>
+    
+    </div>
+  </div>
+</body>
+</html>

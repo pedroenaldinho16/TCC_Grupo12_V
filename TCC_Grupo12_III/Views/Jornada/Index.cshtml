@@ -1,0 +1,24 @@
+@model List<TCC_Grupo12_III.Models.JornadaTentativa>
+@using TCC_Grupo12_III.Services
+@inject JornadaService Jornada
+@{
+ ViewData["Title"]="Sua jornada de aprendizagem";
+ var logado=User.Identity?.IsAuthenticated==true;
+ var aprovados=Model.Where(t=>t.Aprovada).Select(t=>t.Desafio).Distinct().ToHashSet();
+}
+<div class="ec-page"><span class="ec-eyebrow">Conheça · Reflita · Preserve</span><h1>Pequenas descobertas.<br />Uma grande missão.</h1><p class="ec-lead">Estude as fichas, pratique e descubra como suas escolhas ajudam a proteger a Cantareira. Explore as cartas, reflita no quiz e cumpra as missões no cenário.</p>
+@if(ViewBag.Bloqueado==true){<div class="ec-notice" role="status">O mapa completo é liberado após a conclusão dos três desafios. Seu progresso fica salvo na sua conta.</div>}
+<ol class="ec-progress" aria-label="Etapas da jornada">@for(var i=1;i<=3;i++){<li class="@(aprovados.Contains(i)?"done":"")">@i. @JornadaService.Titulos[i-1] @(aprovados.Contains(i)?"✓":"")</li>}<li class="@(aprovados.Count==3?"done":"")">4. Mapa de avistamentos</li></ol>
+<div class="ec-grid">
+@for(var i=1;i<=3;i++){
+ var liberado=logado&&Jornada.PodeIniciar(User,i);
+ var descricoes=new[]{"Vire os flashcards, conheça as fichas e associe fotografias aos nomes das espécies.","Reflita sobre ameaças à fauna em um quiz com explicações. Alcance pelo menos 70%.","Explore um cenário: recolha resíduos, peça apoio para uma ave e proteja a trilha."};
+ <article id="desafio-@i" class="ec-card"><div class="ec-step"><span>@(i.ToString("00"))</span>@(aprovados.Contains(i)?"Concluído":liberado?"Disponível":"Próxima descoberta")</div><h2 style="font-size:1.3rem;margin-top:25px">@JornadaService.Titulos[i-1]</h2><p>@descricoes[i-1]</p><p><small>Conquista: @JornadaService.Recompensas[i-1].</small></p>
+ @if(!logado){<a class="ec-button" asp-controller="Login" asp-action="Index">Entrar para começar</a>}
+ else if(liberado){<form asp-action="Iniciar" method="post"><input type="hidden" name="desafio" value="@i" /><button class="ec-button" type="submit">@(aprovados.Contains(i)?"Praticar novamente":"Começar ou continuar") →</button></form>}
+ else{<span class="ec-lock">Conclua o desafio @(i-1) para desbloquear.</span>}
+ </article>
+}
+</div>
+<partial name="_AcessoMapa" model='new AcessoMapaViewModel(logado, User.IsInRole("Admin"), aprovados.Count)' />
+<div class="ec-actions"><a class="ec-button ec-button-outline" asp-controller="Especies" asp-action="Index">Revisar as fichas educativas</a>@if(logado){<a asp-action="Progresso">Ver progresso e tentativas →</a>}</div></div>

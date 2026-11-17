@@ -1,0 +1,9 @@
+﻿{
+    "endereco":  "http://localhost:5046",
+    "jornada":  "http://localhost:5046/Jornada",
+    "processo":  2260,
+    "http":  200,
+    "css":  200,
+    "js":  200,
+    "modo":  "run --no-build --launch-profile http"
+}

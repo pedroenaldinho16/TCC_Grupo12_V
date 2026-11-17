@@ -1,0 +1,46 @@
+[
+  {
+    "tela": "mapa-desktop",
+    "analise": {
+      "contorno": 0,
+      "semTransbordamento": true,
+      "erros": [],
+      "tilesCarregados": 15,
+      "tiles": 15,
+      "status": ""
+    }
+  },
+  {
+    "tela": "mapa-celular-escuro",
+    "analise": {
+      "contorno": 0,
+      "semTransbordamento": true,
+      "erros": [],
+      "tilesCarregados": 6,
+      "tiles": 6,
+      "status": ""
+    }
+  },
+  {
+    "tela": "registro-desktop",
+    "analise": {
+      "contorno": 0,
+      "semTransbordamento": true,
+      "erros": [],
+      "tilesCarregados": 15,
+      "tiles": 15
+    },
+    "selecaoDoPontoFunciona": true
+  },
+  {
+    "tela": "registro-celular",
+    "analise": {
+      "contorno": 0,
+      "semTransbordamento": true,
+      "erros": [],
+      "tilesCarregados": 4,
+      "tiles": 4
+    },
+    "selecaoDoPontoFunciona": true
+  }
+]

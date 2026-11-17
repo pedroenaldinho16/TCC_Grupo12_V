@@ -1,0 +1,55 @@
+@model JornadaJogoViewModel
+@using TCC_Grupo12_III.Services
+@{ ViewData["Title"]="Missão de Preservação"; var passo=JornadaJogosService.Passo(Model.Estado); }
+<div class="ec-page ec-game-page ec-mission-page">
+    <a class="ec-breadcrumb" asp-action="Index">← Voltar para a jornada</a>
+    <span class="ec-eyebrow">Desafio 03 · Aprender fazendo</span>
+    <h1>Missão de Preservação</h1>
+    <p class="ec-lead">Uma trilha para cuidar. Arraste, descubra e veja suas ações transformarem a paisagem.</p>
+    <div id="atividade" data-game="missao" data-attempt="@Model.Tentativa.Id">
+        <ol class="ec-mission-steps" aria-label="Missões da visita">
+            @foreach(var item in new[]{(Id:"residuos",Nome:"Limpar a trilha"),(Id:"ave",Nome:"Ajudar a ave"),(Id:"trilha",Nome:"Proteger o caminho")}){
+                var numero=Array.FindIndex(new[]{"residuos","ave","trilha"},id=>id==item.Id)+1; var feita=JornadaJogosService.MissaoConcluida(item.Id,Model.Estado);
+                <li class="@(feita ? "is-done" : passo.Etapa==numero ? "is-current" : "")" aria-current="@(passo.Etapa==numero ? "step" : null)"><span>@(feita ? "✓" : numero.ToString("00"))</span>@item.Nome</li>
+            }
+        </ol>
+        <partial name="_EstadoJogo" model="Model" />
+        <section class="ec-mission-brief" aria-labelledby="missao-atual">
+            <div><span class="ec-eyebrow">@(passo.Etapa==4 ? "Visita concluída" : $"Missão {passo.Etapa} de 3")</span><h2 id="missao-atual">@passo.Titulo</h2><p>@passo.Instrucao</p></div>
+            @if(passo.Etapa==1){<span class="ec-mission-count">@JornadaJogosService.Residuos.Count(r=>Model.Estado.Objetivos.Contains("descarte-"+r))<small>de 3 resíduos</small></span>}
+        </section>
+        <form asp-action="Agir" method="post" data-game-form class="ec-mission-controls">
+            <input type="hidden" name="id" value="@Model.Tentativa.Id" /><input type="hidden" name="revisao" value="@Model.Estado.Revisao" /><input type="hidden" name="acao" value="interagir" /><input type="hidden" name="ferramenta" value="@passo.Ferramenta" />
+            <fieldset disabled="@Model.Tentativa.Aprovada">
+                <legend class="visually-hidden">Cenário interativo e itens da missão</legend>
+                <div class="ec-mission-layout">
+                    <partial name="_CenarioMissao" model="Model" />
+                    <aside class="ec-mission-kit" aria-label="Itens e orientação da missão">
+                        @if(passo.Etapa==4){
+                            <span class="ec-mission-emblem" aria-hidden="true">✓</span><h3>Cantareira bem cuidada.</h3><p>Você destinou os resíduos, pediu ajuda para a ave e orientou o caminho.</p>
+                        }else if(passo.Etapa==1 && Model.Estado.Carregando is null){
+                            <span class="ec-kit-heading">Sua missão</span><h3>Do chão para a lixeira.</h3><p>Segure uma garrafa, lata ou embalagem e arraste até a lixeira.</p>
+                            <div class="ec-drag-example" aria-hidden="true"><span>Resíduo</span><span>→</span><span>Lixeira</span></div>
+                        }else{
+                            var item=passo.Etapa==1 ? Model.Estado.Carregando! : passo.Item;
+                            var nome=passo.Etapa==1 ? "Resíduo na bolsa" : passo.NomeItem;
+                            <span class="ec-kit-heading">@(passo.Etapa==1 ? "Continue daqui" : "Item desta etapa")</span>
+                            <button class="ec-kit-item" type="button" data-drag-source="@item" data-drag-destination="@passo.Destino" data-focus-key="item-@item" aria-pressed="false"><partial name="_IconeMissao" model="item" /><strong>@nome</strong><span>Arraste até @(passo.Destino=="ave" ? "a ave" : passo.Destino=="atalho" ? "o atalho" : "a lixeira") →</span></button>
+                            <p>Use o item no ponto indicado do cenário.</p>
+                        }
+                        @if(passo.Etapa!=4){
+                            <p class="ec-mission-access"><strong>Prefere outra forma?</strong> Selecione o objeto e depois o destino. Pelo teclado, use Tab e Enter.</p>
+                            <noscript><p>Sem JavaScript, toque em um resíduo e depois na lixeira. Nas outras missões, ative a ave ou o atalho para realizar a etapa indicada.</p></noscript>
+                        }
+                    </aside>
+                </div>
+            </fieldset>
+        </form>
+        @if(Model.Tentativa.Aprovada){<div class="ec-mission-complete ec-notice"><strong>Seu mapa está desbloqueado!</strong><p>Revise suas descobertas e receba sua conquista.</p><a class="ec-button" asp-action="Resultado" asp-route-id="@Model.Tentativa.Id">Ver minha conquista →</a></div>}
+        <details class="ec-game-reference"><summary>Meu diário de campo e o que aprendi</summary>
+            @foreach(var missao in Model.Jogo.Missoes){var feita=JornadaJogosService.MissaoConcluida(missao.Id,Model.Estado);<section class="ec-mission-objective" data-mission="@missao.Id" data-complete="@feita.ToString().ToLowerInvariant()"><h3>@(feita ? "✓ " : "")@missao.Titulo</h3><p>@missao.Aprendizado</p><a href="@missao.Fonte" target="_blank" rel="noopener">Orientação oficial @(missao.Id=="ave" ? "do Ibama" : "do ICMBio") ↗</a></section>}
+        </details>
+        <p class="ec-game-caption">Cenário fictício de uma visita educativa. A sinalização é feita com a equipe do parque; o rádio funciona apenas no jogo. O atendimento da ave fica com profissionais.</p>
+    </div>
+</div>
+@section Scripts {<script src="~/js/jornada-jogos.js" asp-append-version="true"></script>}

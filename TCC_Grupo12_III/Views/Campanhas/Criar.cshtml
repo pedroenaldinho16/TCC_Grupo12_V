@@ -1,0 +1,206 @@
+@model TCC_Grupo12_III.Models.Campanha
+
+@{
+    ViewData["Title"] = "Propor Nova Campanha Ecológica";
+    var totalEstudos = ViewBag.TotalEstudos as int? ?? 0;
+    var ehAdmin = User.IsInRole("Admin");
+}
+
+<div class="eco-page" style="max-width: 860px; margin: 0 auto;">
+    <a class="eco-back-link mb-3" asp-controller="Campanhas" asp-action="Index">
+        <i class="bi bi-arrow-left me-1"></i> Voltar para Campanhas
+    </a>
+
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+        <div>
+            <h1 class="h2 fw-bold text-dark mb-1" style="font-family: 'Sora', sans-serif;">
+                <i class="bi bi-megaphone-fill text-success me-2"></i>Propor Nova Campanha
+            </h1>
+            <p class="text-muted mb-0">Crie uma ação ambiental de mobilização para preservação e conscientização na Serra da Cantareira.</p>
+        </div>
+        <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold">
+            @if (ehAdmin)
+            {
+                <i class="bi bi-shield-check me-1"></i><span>Administrador</span>
+            }
+            else if (User.IsInRole("Jornalista"))
+            {
+                <i class="bi bi-patch-check-fill me-1"></i><span>Jornalista Credenciado</span>
+            }
+            else
+            {
+                <i class="bi bi-award-fill me-1"></i><span>Pesquisador (@totalEstudos estudos aprovados)</span>
+            }
+        </span>
+    </div>
+
+    @if (!ehAdmin)
+    {
+        <div class="alert alert-info border-info-subtle bg-info-subtle text-dark p-3 rounded-3 shadow-sm mb-4">
+            <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-info-circle-fill text-primary fs-4 flex-shrink-0"></i>
+                <div class="small">
+                    <strong>Processo de Aprovação:</strong>
+                    Sua proposta de campanha passará pela avaliação da moderação e administração. Assim que aprovada, ela entrará no ar e os membros da comunidade poderão participar ou realizar pré-inscrições!
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="eco-form-card shadow-sm p-4 bg-white rounded-3 border">
+        <form asp-controller="Campanhas" asp-action="Criar" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Dados Básicos -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-card-text text-success me-2"></i>Informações Gerais
+                </h5>
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label fw-semibold">Título da Campanha <span class="text-danger">*</span></label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Ex: Mutirão de Reflorestamento e Limpeza no Córrego Cantareira" maxlength="120" required />
+                    <span asp-validation-for="Titulo" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descricao" class="form-label fw-semibold">Visão Geral / Descrição <span class="text-danger">*</span></label>
+                    <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Apresente um resumo atrativo e claro da ação para os voluntários..." required></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ComunidadeId" class="form-label fw-semibold">
+                        <i class="bi bi-people-fill text-success me-1"></i>Vincular a uma Comunidade do Fórum (Opcional)
+                    </label>
+                    <select asp-for="ComunidadeId" class="form-select">
+                        <option value="">Nenhuma (Campanha Geral Independente)</option>
+                        @if (ViewBag.Comunidades is List<TCC_Grupo12_III.Models.ForumComunidade> comunidades)
+                        {
+                            foreach (var com in comunidades)
+                            {
+                                <option value="@com.Id">@(com.IsGeral ? "🏛️ " : "🌿 ") @com.Nome @(com.IsGeral ? "(Comunidade Oficial)" : "")</option>
+                            }
+                        }
+                    </select>
+                    <div class="form-text">Ao vincular a uma comunidade, esta campanha ganhará destaque prioritário na página da comunidade!</div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="Organizador" class="form-label fw-semibold">Organização / Coletivo Responsável</label>
+                        <input asp-for="Organizador" class="form-control" placeholder="Ex: Coletivo Verde Cantareira, ONG Amigos da Mata..." maxlength="150" />
+                        <span asp-validation-for="Organizador" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Meta" class="form-label fw-semibold">Meta de Voluntários / Vagas <span class="text-danger">*</span></label>
+                        <input asp-for="Meta" type="number" min="5" max="5000" class="form-control" placeholder="Ex: 50" required />
+                        <span asp-validation-for="Meta" class="text-danger small"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objetivos -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-bullseye text-success me-2"></i>Objetivos da Ação
+                </h5>
+
+                <div class="mb-3">
+                    <label asp-for="ObjetivoPrincipal" class="form-label fw-semibold">Objetivo Principal</label>
+                    <input asp-for="ObjetivoPrincipal" class="form-control" placeholder="Ex: Plantar 1.000 mudas nativas para proteger a nascente do rio" />
+                    <div class="form-text">Qual a meta central mais importante desta iniciativa?</div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ObjetivosEspecificos" class="form-label fw-semibold">Objetivos Específicos (um por linha)</label>
+                    <textarea asp-for="ObjetivosEspecificos" class="form-control" rows="4" placeholder="• Identificar áreas degradadas
+• Mapear presença de espécies polinizadoras
+• Engajar 40 moradores do entorno
+• Promover oficina de compostagem doméstica"></textarea>
+                    <div class="form-text">Separe os objetivos específicos quebrando linhas. Eles serão exibidos com marcadores elegantes.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImpactoEsperado" class="form-label fw-semibold">Impacto Ecológico Esperado</label>
+                    <textarea asp-for="ImpactoEsperado" class="form-control" rows="2" placeholder="Ex: Recuperação de 1 hectare de vegetação nativa, contenção de sedimentos e aumento da biodiversidade local."></textarea>
+                </div>
+            </div>
+
+            <!-- Logística, Data e Ponto de Encontro -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-geo-alt-fill text-success me-2"></i>Data, Horário e Localização
+                </h5>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label asp-for="DataInicio" class="form-label fw-semibold">Data da Ação <span class="text-danger">*</span></label>
+                        <input asp-for="DataInicio" type="date" class="form-control" required />
+                        <div class="form-text">Se for uma data futura, a campanha ficará em "Próximas Campanhas" para pré-inscrições.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Horario" class="form-label fw-semibold">Horário das Atividades</label>
+                        <input asp-for="Horario" class="form-control" placeholder="Ex: 08:30 às 12:30" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Periodo" class="form-label fw-semibold">Texto do Período (Rótulo)</label>
+                        <input asp-for="Periodo" class="form-control" placeholder="Ex: 14 de Novembro de 2026" />
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-7">
+                        <label asp-for="LocalEncontro" class="form-label fw-semibold">Ponto de Encontro / Local</label>
+                        <input asp-for="LocalEncontro" class="form-control" placeholder="Ex: Portaria do Núcleo Pedra Grande - Horto Florestal" />
+                    </div>
+
+                    <div class="col-md-5">
+                        <label asp-for="PublicoAlvo" class="form-label fw-semibold">Público-Alvo</label>
+                        <input asp-for="PublicoAlvo" class="form-control" placeholder="Ex: Famílias, jovens e voluntários em geral" />
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label asp-for="OQueLevar" class="form-label fw-semibold">O que levar / Recomendações</label>
+                        <textarea asp-for="OQueLevar" class="form-control" rows="3" placeholder="Ex: Garrafa de água reutilizável, calçado fechado e confortável, protetor solar, repelente e boné."></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Cronograma" class="form-label fw-semibold">Cronograma das Etapas</label>
+                        <textarea asp-for="Cronograma" class="form-control" rows="3" placeholder="08:30 Recepção e instruções
+09:00 Início da caminhada
+11:30 Finalização das atividades e lanche coletivo"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imagem de Capa -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3 border-bottom pb-2">
+                    <i class="bi bi-image text-success me-2"></i>Foto de Capa da Campanha
+                </h5>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold" for="imagem">Selecione uma imagem (JPG, PNG, WEBP)</label>
+                    <input type="file" name="imagem" id="imagem" class="form-control" accept="image/*" />
+                    <div class="form-text">Recomendado formato horizontal (16:9) de alta qualidade. Máximo 5MB.</div>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between pt-3 border-top flex-wrap gap-2">
+                <a asp-controller="Campanhas" asp-action="Index" class="btn-eco btn-eco--ghost">
+                    Cancelar
+                </a>
+                <button type="submit" class="btn-eco btn-eco--solid px-4 py-2">
+                    <i class="bi bi-send-check me-2"></i> Submeter Proposta de Campanha
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

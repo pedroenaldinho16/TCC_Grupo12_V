@@ -1,0 +1,52 @@
+@model TCC_Grupo12_III.Models.AdminEspecieQuizPerguntaViewModel
+
+@{
+    var prefixo = (string)ViewData["Prefixo"]!;
+}
+
+<div class="eco-quiz-admin-question" data-pergunta>
+    <div class="eco-quiz-admin-question__head">
+        <h3 data-pergunta-titulo>Pergunta</h3>
+        <button type="button" class="btn-eco btn-eco--danger btn-eco--sm" data-remover-pergunta>Remover</button>
+    </div>
+
+    <input type="hidden" name="@(prefixo).Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Enunciado</label>
+        <textarea name="@(prefixo).Enunciado" class="form-control" rows="2">@Model.Enunciado</textarea>
+    </div>
+
+    <div class="row">
+        @for (var opcao = 1; opcao <= 4; opcao++)
+        {
+            var letra = (char)('A' + opcao - 1);
+            var campo = $"{prefixo}.Opcao{letra}";
+            var valor = opcao switch
+            {
+                1 => Model.OpcaoA,
+                2 => Model.OpcaoB,
+                3 => Model.OpcaoC,
+                _ => Model.OpcaoD
+            };
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Alternativa @letra</label>
+                <input type="text" name="@campo" value="@valor" class="form-control" />
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Alternativa correta</label>
+            <select name="@(prefixo).RespostaCorreta" class="form-select">
+                @for (var opcao = 1; opcao <= 4; opcao++)
+                {
+                    var letra = (char)('A' + opcao - 1);
+                    <option value="@opcao" selected="@(Model.RespostaCorreta == opcao)">@letra</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>

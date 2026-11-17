@@ -1,0 +1,11 @@
+﻿{
+    "endereco":  "http://localhost:5046",
+    "jornada":  "http://localhost:5046/Jornada",
+    "processo":  7136,
+    "http":  200,
+    "css":  200,
+    "js":  200,
+    "modo":  "run --no-build --launch-profile http",
+    "emExecucao":  false,
+    "motivoEncerramento":  "Porta liberada para execução pelo usuário no terminal."
+}

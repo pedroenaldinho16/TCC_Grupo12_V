@@ -1,0 +1,547 @@
+@model TCC_Grupo12_III.Models.ForumTopico
+@using System.Security.Claims
+@using TCC_Grupo12_III.Data
+
+@{
+    ViewData["Title"] = Model.Titulo;
+    var meuId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var souAdmin = User.IsInRole("Admin");
+    var souModerador = (bool)(ViewBag.IsModerador ?? false);
+    var curtiTopico = (bool)ViewBag.CurtiTopico;
+    var respostasCurtidas = (HashSet<int>)ViewBag.RespostasCurtidas;
+    var tags = Model.Hashtags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    var isNoticia = Model.Categoria == "noticia";
+    var autorAdmin = Model.Usuario != null && Model.Usuario.IsAdmin;
+    var autorModerador = Model.Usuario != null && Model.Usuario.IsModerador;
+    var autorBanido = Model.Usuario != null && Model.Usuario.IsBanido;
+    var autorJornalista = Model.Usuario != null && Model.Usuario.IsJornalista && Model.Usuario.StatusJornalista == "Aprovado";
+    var nivelAutor = Model.Usuario != null ? NivelHelper.Nivel(Model.Usuario.Xp) : 1;
+    var tempoLeitura = Math.Max(1, Model.Conteudo.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length / 120);
+
+    var usuarioSuspenso = (bool)(ViewBag.UsuarioSuspenso ?? false);
+    var suspensoForumAte = (DateTime?)ViewBag.SuspensoForumAte;
+    var motivoSuspensao = (string?)ViewBag.MotivoSuspensao;
+    var usuarioBanido = (bool)(ViewBag.UsuarioBanido ?? false);
+}
+
+<div class="eco-page" style="max-width: 900px; margin: 0 auto;">
+    <!-- Breadcrumb e Navegação -->
+    <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+        <a class="eco-back-link mb-0" asp-controller="Forum" asp-action="Index" asp-route-aba="@(isNoticia ? "noticias" : "posts")">
+            <i class="bi bi-arrow-left me-1"></i> Voltar para @(isNoticia ? "Notícias da Serra" : "Discussões da Comunidade")
+        </a>
+
+        <div class="d-flex align-items-center gap-2">
+            @if (souModerador || souAdmin)
+            {
+                <a class="btn-eco btn-eco--ghost btn-eco--sm shadow-sm" asp-controller="Forum" asp-action="Moderacao">
+                    <i class="bi bi-shield-shaded me-1 text-primary"></i> Painel de Moderação
+                </a>
+            }
+            @if (isNoticia)
+            {
+                <span class="badge" style="background: #0E7C66; color: #fff; font-size: 0.78rem; padding: 5px 12px; border-radius: 6px; font-weight: 700;">
+                    <i class="bi bi-newspaper me-1"></i> Notícia Oficial
+                </span>
+            }
+            @if (Model.Comunidade != null)
+            {
+                <a asp-controller="Forum" asp-action="Comunidade" asp-route-slug="@Model.Comunidade.Slug" class="badge bg-light text-dark border text-decoration-none shadow-sm" style="font-size: 0.78rem; padding: 5px 12px; border-radius: 6px; font-weight: 600;">
+                    @(Model.Comunidade.IsGeral ? "🏛️ " : "🌿 ") Comunidade: @Model.Comunidade.Nome
+                </a>
+            }
+            else
+            {
+                <span class="badge bg-light text-secondary border" style="font-size: 0.78rem; padding: 5px 12px; border-radius: 6px; font-weight: 600;">
+                    <i class="bi bi-chat-quote me-1"></i> Comunidade Guardiões
+                </span>
+            }
+        </div>
+    </div>
+
+    <!-- Card Principal do Artigo / Tópico -->
+    <article class="eco-forum-post-card @(isNoticia ? "eco-forum-post-card--news" : "")">
+        <!-- Cabeçalho do Autor -->
+        <div class="eco-forum-card__header mb-3">
+            <div class="eco-forum-card__author">
+                <div class="eco-forum-card__avatar @(autorAdmin ? "eco-forum-card__avatar--admin" : (autorModerador ? "eco-forum-card__avatar--admin" : (autorJornalista ? "eco-forum-card__avatar--journalist" : "")))" style="width: 44px; height: 44px; font-size: 1.1rem;">
+                    @if (autorAdmin)
+                    {
+                        <i class="bi bi-shield-check"></i>
+                    }
+                    else if (autorModerador)
+                    {
+                        <i class="bi bi-shield-shaded"></i>
+                    }
+                    else if (autorJornalista)
+                    {
+                        <i class="bi bi-newspaper"></i>
+                    }
+                    else
+                    {
+                        @(Model.Usuario != null && Model.Usuario.Nome.Length > 0 ? Model.Usuario.Nome[0].ToString().ToUpper() : "?")
+                    }
+                </div>
+                <div class="eco-forum-card__author-details">
+                    <span class="eco-forum-card__author-name" style="font-size: 1rem;">
+                        @(Model.Usuario?.Nome ?? (isNoticia ? "Administração da Cantareira" : "Guardião da Serra"))
+                        @if (autorBanido)
+                        {
+                            <span class="badge bg-danger ms-1" style="font-size: 0.72rem;">
+                                <i class="bi bi-slash-circle me-1"></i>Banido
+                            </span>
+                        }
+                        else if (autorAdmin)
+                        {
+                            <span class="eco-forum-card__role-badge eco-forum-card__role-badge--admin">
+                                <i class="bi bi-patch-check-fill me-1"></i>Administrador
+                            </span>
+                        }
+                        else if (autorModerador)
+                        {
+                            <span class="eco-forum-card__role-badge" style="background: #2563EB; color: #fff;">
+                                <i class="bi bi-shield-shaded me-1"></i>Moderador
+                            </span>
+                        }
+                        else if (autorJornalista)
+                        {
+                            <span class="eco-forum-card__role-badge eco-forum-card__role-badge--journalist">
+                                <i class="bi bi-patch-check-fill me-1"></i>Jornalista
+                                @if (!string.IsNullOrWhiteSpace(Model.Usuario?.RegistroJornalista))
+                                {
+                                    <span class="opacity-75 ms-1">(@Model.Usuario.RegistroJornalista)</span>
+                                }
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="eco-forum-card__role-badge">
+                                <i class="bi bi-tree me-1"></i>Guardião Nv. @nivelAutor
+                            </span>
+                        }
+                    </span>
+                    <span class="eco-forum-card__time">
+                        <i class="bi bi-calendar-event me-1"></i>Publicado em @Model.CriadoEm.ToString("dd/MM/yyyy às HH:mm") &middot; <i class="bi bi-stopwatch me-1"></i>~@tempoLeitura min de leitura
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                @if ((souAdmin || souModerador) && Model.Usuario != null && Model.UsuarioId.ToString() != meuId && !Model.Usuario.IsAdmin && (!souModerador || !Model.Usuario.IsModerador))
+                {
+                    <button type="button" class="btn btn-outline-warning btn-sm" 
+                            onclick="abrirModalModerar(@Model.Usuario.Id, '@Model.Usuario.Nome', @(Model.Usuario.EstaSuspensoDoForum() ? "true" : "false"), '@(Model.Usuario.SuspensoForumAte?.ToString("dd/MM/yyyy HH:mm"))', '@Model.Usuario.MotivoSuspensaoForum', @(Model.Usuario.IsBanido ? "true" : "false"))"
+                            title="Moderar este autor (suspender ou banir)">
+                        <i class="bi bi-shield-exclamation me-1"></i> Moderar Autor
+                    </button>
+                }
+
+                @if (meuId == Model.UsuarioId.ToString() || souAdmin || souModerador)
+                {
+                    <form asp-controller="Forum" asp-action="ExcluirTopico" asp-route-id="@Model.Id" method="post" data-confirmar="Tem certeza que deseja excluir esta publicação e todas as respostas?">
+                        <button type="submit" class="btn btn-outline-danger btn-sm" title="Excluir publicação">
+                            <i class="bi bi-trash3 me-1"></i> Excluir
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+
+        <!-- Título -->
+        <h1 class="h2 fw-bold text-dark mb-3" style="font-family: 'Sora', sans-serif; line-height: 1.25;">@Model.Titulo</h1>
+
+        <!-- Corpo do Texto -->
+        <div class="eco-forum-article-body">
+            @Model.Conteudo
+        </div>
+
+        <!-- Hashtags -->
+        @if (tags.Length > 0)
+        {
+            <div class="eco-hashtags mb-4">
+                @foreach (var tag in tags)
+                {
+                    <a class="eco-tag text-decoration-none" asp-controller="Forum" asp-action="Index" asp-route-aba="@(isNoticia ? "noticias" : "posts")" asp-route-hashtag="@tag">
+                        #@tag
+                    </a>
+                }
+            </div>
+        }
+
+        <!-- Ações do Artigo -->
+        <div class="eco-forum-article-actions">
+            <div class="d-flex align-items-center gap-2">
+                <form asp-controller="Forum" asp-action="CurtirTopico" asp-route-id="@Model.Id" method="post" class="eco-like-form mb-0">
+                    <button type="submit" class="eco-like-btn @(curtiTopico ? "is-liked" : "")">
+                        <i class="bi @(curtiTopico ? "bi-heart-fill text-danger" : "bi-heart")"></i>
+                        <span>@Model.Curtidas.Count @(Model.Curtidas.Count == 1 ? "curtida" : "curtidas")</span>
+                    </button>
+                </form>
+
+                <button type="button" class="btn-eco btn-eco--ghost btn-eco--sm" onclick="compartilharPublicacao()" title="Copiar link para compartilhar">
+                    <i class="bi bi-share me-1"></i> Compartilhar
+                </button>
+            </div>
+
+            <div class="text-muted small">
+                <i class="bi bi-chat-text-fill me-1 text-success"></i> @Model.Respostas.Count @(Model.Respostas.Count == 1 ? "comentário" : "comentários")
+            </div>
+        </div>
+    </article>
+
+    <!-- Seção de Discussão e Comentários -->
+    <div class="mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h2 class="h4 fw-bold mb-0" style="font-family: 'Sora', sans-serif;">
+                <i class="bi bi-chat-left-dots-fill text-success me-2"></i>Discussão da Comunidade 
+                <span class="badge bg-secondary rounded-pill fs-6 ms-1">@Model.Respostas.Count</span>
+            </h2>
+        </div>
+
+        @if (Model.Respostas.Count == 0)
+        {
+            <div class="text-center py-4 px-3 mb-4" style="background: var(--eco-surface); border: 1px dashed var(--eco-border); border-radius: var(--eco-radius-sm);">
+                <i class="bi bi-chat-heart text-muted mb-2" style="font-size: 2rem;"></i>
+                <p class="text-muted mb-0">Ainda não há comentários nesta conversa. Seja o primeiro a participar e compartilhe sua visão!</p>
+            </div>
+        }
+        else
+        {
+            <div class="eco-forum-replies-list">
+                @foreach (var resposta in Model.Respostas.OrderBy(r => r.CriadoEm))
+                {
+                    var respostaCurtida = respostasCurtidas.Contains(resposta.Id);
+                    var autorRespAdmin = resposta.Usuario != null && resposta.Usuario.IsAdmin;
+                    var autorRespModerador = resposta.Usuario != null && resposta.Usuario.IsModerador;
+                    var autorRespBanido = resposta.Usuario != null && resposta.Usuario.IsBanido;
+                    var autorRespJornalista = resposta.Usuario != null && resposta.Usuario.IsJornalista && resposta.Usuario.StatusJornalista == "Aprovado";
+                    var nivelResp = resposta.Usuario != null ? NivelHelper.Nivel(resposta.Usuario.Xp) : 1;
+
+                    <div class="eco-forum-reply-card">
+                        <div class="eco-forum-reply-head">
+                            <div class="eco-forum-card__author">
+                                <div class="eco-avatar eco-avatar--sm @(autorRespAdmin ? "eco-avatar--admin" : (autorRespModerador ? "eco-avatar--admin" : (autorRespJornalista ? "eco-avatar--journalist" : "")))">
+                                    @if (autorRespAdmin)
+                                    {
+                                        <i class="bi bi-shield-check"></i>
+                                    }
+                                    else if (autorRespModerador)
+                                    {
+                                        <i class="bi bi-shield-shaded"></i>
+                                    }
+                                    else if (autorRespJornalista)
+                                    {
+                                        <i class="bi bi-newspaper"></i>
+                                    }
+                                    else
+                                    {
+                                        @(resposta.Usuario != null && resposta.Usuario.Nome.Length > 0 ? resposta.Usuario.Nome[0].ToString().ToUpper() : "?")
+                                    }
+                                </div>
+                                <div>
+                                    <strong class="d-flex align-items-center gap-1" style="font-size: 0.9rem;">
+                                        @(resposta.Usuario?.Nome ?? "Guardião da Cantareira")
+                                        @if (autorRespBanido)
+                                        {
+                                            <span class="badge bg-danger text-white border px-2 py-0" style="font-size: 0.68rem;">Banido</span>
+                                        }
+                                        else if (autorRespAdmin)
+                                        {
+                                            <span class="badge bg-info-subtle text-info border px-2 py-0" style="font-size: 0.68rem;">Admin</span>
+                                        }
+                                        else if (autorRespModerador)
+                                        {
+                                            <span class="badge" style="background:#2563EB; color:#fff; font-size: 0.68rem; padding: 2px 6px; border-radius: 4px;">Moderador</span>
+                                        }
+                                        else if (autorRespJornalista)
+                                        {
+                                            <span class="badge bg-success-subtle text-success border px-2 py-0" style="font-size: 0.68rem;">Jornalista</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-light text-muted border px-2 py-0" style="font-size: 0.68rem;">Nv. @nivelResp</span>
+                                        }
+                                    </strong>
+                                    <span class="eco-forum-meta" style="font-size: 0.75rem;">
+                                        @resposta.CriadoEm.ToString("dd/MM/yyyy às HH:mm")
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-2">
+                                @if ((souAdmin || souModerador) && resposta.Usuario != null && resposta.UsuarioId.ToString() != meuId && !resposta.Usuario.IsAdmin && (!souModerador || !resposta.Usuario.IsModerador))
+                                {
+                                    <button type="button" class="btn btn-link text-warning p-0" 
+                                            onclick="abrirModalModerar(@resposta.Usuario.Id, '@resposta.Usuario.Nome', @(resposta.Usuario.EstaSuspensoDoForum() ? "true" : "false"), '@(resposta.Usuario.SuspensoForumAte?.ToString("dd/MM/yyyy HH:mm"))', '@resposta.Usuario.MotivoSuspensaoForum', @(resposta.Usuario.IsBanido ? "true" : "false"))"
+                                            title="Moderar usuário">
+                                        <i class="bi bi-shield-exclamation"></i>
+                                    </button>
+                                }
+
+                                @if (meuId == resposta.UsuarioId.ToString() || souAdmin || souModerador)
+                                {
+                                    <form asp-controller="Forum" asp-action="ExcluirResposta" asp-route-id="@resposta.Id" asp-route-topicoId="@Model.Id" method="post" data-confirmar="Excluir este comentário?">
+                                        <button type="submit" class="btn btn-link text-danger p-0" title="Excluir resposta" style="font-size: 0.85rem;">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+
+                        <p class="mb-3" style="line-height: 1.6; color: var(--eco-text); white-space: pre-wrap;">@resposta.Conteudo</p>
+
+                        <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                            <form asp-controller="Forum" asp-action="CurtirResposta" asp-route-id="@resposta.Id" asp-route-topicoId="@Model.Id" method="post" class="eco-like-form mb-0">
+                                <button type="submit" class="eco-like-btn eco-like-btn--sm @(respostaCurtida ? "is-liked" : "")" title="Apoiar este comentário">
+                                    <i class="bi @(respostaCurtida ? "bi-heart-fill" : "bi-heart")"></i>
+                                    <span>@resposta.Curtidas.Count</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Caixa de Resposta / Composer -->
+    @if (usuarioBanido)
+    {
+        <div class="alert alert-danger p-4 rounded-3 shadow-sm text-center">
+            <i class="bi bi-slash-circle fs-3 d-block mb-2"></i>
+            <h5 class="fw-bold mb-1">Conta Banida</h5>
+            <p class="mb-0 text-muted">Sua conta foi banida permanentemente pela administração e você não pode enviar respostas.</p>
+        </div>
+    }
+    else if (usuarioSuspenso)
+    {
+        <div class="alert alert-warning p-4 rounded-3 shadow-sm">
+            <div class="d-flex align-items-center gap-2 mb-2 text-warning-emphasis">
+                <i class="bi bi-pause-circle-fill fs-4"></i>
+                <h5 class="fw-bold mb-0">Comentários Temporariamente Bloqueados</h5>
+            </div>
+            <p class="mb-1 text-dark">
+                Sua conta está suspensa de postar ou comentar no fórum até <strong>@(suspensoForumAte?.ToString("dd/MM/yyyy às HH:mm"))</strong>.
+            </p>
+            @if (!string.IsNullOrWhiteSpace(motivoSuspensao))
+            {
+                <small class="text-muted"><strong>Motivo:</strong> @motivoSuspensao</small>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="eco-form-card shadow-sm" style="background: var(--eco-surface); border: 1px solid var(--eco-border); border-radius: var(--eco-radius-sm); padding: 24px;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-chat-square-quote-fill text-success fs-5"></i>
+                <h3 class="h6 fw-bold mb-0">Adicionar um comentário à conversa</h3>
+            </div>
+
+            <form asp-controller="Forum" asp-action="Responder" method="post" id="formComentarioForum">
+                <input type="hidden" name="topicoId" value="@Model.Id" />
+                <div class="mb-3">
+                    <textarea name="conteudo" id="textareaComentarioForum" class="form-control" rows="4" 
+                              placeholder="Compartilhe suas ideias, dúvidas, observações ou relatos sobre este tema..." 
+                              required style="font-size: 0.95rem; border-radius: 8px;"></textarea>
+                </div>
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <span class="text-muted small">
+                        <i class="bi bi-keyboard me-1 text-success"></i> <strong>Enter</strong> envia &bull; <strong>Shift + Enter</strong> pula linha
+                    </span>
+                    <button type="submit" class="btn-eco btn-eco--solid shadow-sm">
+                        <i class="bi bi-send-fill me-2"></i> Publicar Resposta <span class="badge bg-white text-dark ms-2 fw-semibold">+5 XP</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    }
+</div>
+
+<!-- Modal Unificado de Moderação do Fórum (Suspensão e Banimento) -->
+<div class="modal fade eco-modal" id="modalModerarUsuario" tabindex="-1" aria-labelledby="modalModerarTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body eco-modal__body text-start p-4">
+                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-shield-shaded text-primary fs-3"></i>
+                        <div>
+                            <h4 class="modal-title h5 fw-bold mb-0 text-dark" id="modalModerarTitle">Moderar Usuário</h4>
+                            <small class="text-muted" id="moderarSubtitulo"></small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Se já estiver suspenso -->
+                <div id="secaoUsuarioJaSuspenso" class="alert alert-warning p-3 mb-3 d-none">
+                    <div class="d-flex align-items-start gap-2">
+                        <i class="bi bi-pause-circle-fill text-warning fs-4 flex-shrink-0"></i>
+                        <div>
+                            <strong>Usuário atualmente suspenso</strong>
+                            <div class="small mt-1" id="infoSuspensaoAtiva"></div>
+                        </div>
+                    </div>
+                    <form asp-controller="Forum" asp-action="RemoverSuspensao" method="post" class="mt-3">
+                        <input type="hidden" name="usuarioId" id="revogarSuspensaoUsuarioId" />
+                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                        <button type="submit" class="btn btn-outline-success btn-sm w-100">
+                            <i class="bi bi-play-circle me-1"></i> Revogar Suspensão Agora
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Formulário de Suspensão -->
+                <div id="secaoAplicarSuspensao">
+                    <form asp-controller="Forum" asp-action="SuspenderUsuario" method="post">
+                        <input type="hidden" name="usuarioId" id="suspenderFormUsuarioId" />
+                        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-dark" for="selectDiasSuspensao">
+                                Tempo de suspensão @(souAdmin ? "" : "(Máximo 1 mês)")
+                            </label>
+                            <select name="dias" id="selectDiasSuspensao" class="form-select">
+                                <option value="1">1 dia (24 horas)</option>
+                                <option value="3">3 dias</option>
+                                <option value="7" selected>7 dias (1 semana)</option>
+                                <option value="15">15 dias</option>
+                                <option value="30">30 dias (1 mês - Limite Moderador)</option>
+                                @if (souAdmin)
+                                {
+                                    <option value="60">60 dias (2 meses - Admin)</option>
+                                    <option value="90">90 dias (3 meses - Admin)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-dark" for="motivoSuspensaoInput">
+                                Motivo da suspensão
+                            </label>
+                            <textarea name="motivo" id="motivoSuspensaoInput" class="form-control" rows="2" 
+                                      placeholder="Ex: Linguagem ofensiva, desrespeito ou quebra das diretrizes da comunidade..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning text-dark fw-bold w-100 mb-3 shadow-sm">
+                            <i class="bi bi-pause-circle me-1"></i> Aplicar Suspensão no Fórum
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Seção de Banimento (Apenas Admin) -->
+                @if (souAdmin)
+                {
+                    <div class="border-top pt-3 mt-2">
+                        <h6 class="fw-bold text-danger mb-2">
+                            <i class="bi bi-slash-circle me-1"></i> Poder Administrativo: Banimento
+                        </h6>
+
+                        <div id="secaoUsuarioJaBanido" class="alert alert-danger p-2 mb-2 d-none small">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i> Este usuário está <strong>banido permanentemente</strong> da plataforma.
+                            <form asp-controller="Forum" asp-action="DesbanirUsuario" method="post" class="mt-2">
+                                <input type="hidden" name="usuarioId" id="desbanirUsuarioId" />
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                <button type="submit" class="btn btn-outline-success btn-sm w-100">
+                                    <i class="bi bi-unlock me-1"></i> Revogar Banimento (Desbanir)
+                                </button>
+                            </form>
+                        </div>
+
+                        <div id="secaoAplicarBanimento">
+                            <form asp-controller="Forum" asp-action="BanirUsuario" method="post">
+                                <input type="hidden" name="usuarioId" id="banirFormUsuarioId" />
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                <div class="mb-2">
+                                    <input type="text" name="motivo" class="form-control form-control-sm" placeholder="Motivo do banimento permanente..." required />
+                                </div>
+                                <button type="submit" class="btn btn-outline-danger btn-sm w-100" data-confirmar="Atenção: Banir o usuário impedirá totalmente o acesso à conta. Prosseguir?">
+                                    <i class="bi bi-slash-circle me-1"></i> Banir Permanentemente da Plataforma
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function compartilharPublicacao() {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                if (typeof window.ecoExibirModalFeedback === 'function') {
+                    window.ecoExibirModalFeedback('sucesso', 'Link copiado!', 'O endereço desta publicação foi copiado para sua área de transferência.');
+                } else {
+                    alert('Link copiado para a área de transferência!');
+                }
+            });
+        }
+    }
+
+    function abrirModalModerar(id, nome, estaSuspenso, suspensoAte, motivoSuspensao, estaBanido) {
+        document.getElementById('moderarSubtitulo').innerText = nome;
+        document.getElementById('suspenderFormUsuarioId').value = id;
+        document.getElementById('revogarSuspensaoUsuarioId').value = id;
+
+        var desbanirId = document.getElementById('desbanirUsuarioId');
+        if (desbanirId) desbanirId.value = id;
+
+        var banirId = document.getElementById('banirFormUsuarioId');
+        if (banirId) banirId.value = id;
+
+        var secaoJaSuspenso = document.getElementById('secaoUsuarioJaSuspenso');
+        var secaoAplicarSuspensao = document.getElementById('secaoAplicarSuspensao');
+        var infoSuspensaoAtiva = document.getElementById('infoSuspensaoAtiva');
+
+        if (estaSuspenso) {
+            secaoJaSuspenso.classList.remove('d-none');
+            infoSuspensaoAtiva.innerHTML = 'Suspenso até: <strong>' + (suspensoAte || '') + '</strong><br>Motivo: ' + (motivoSuspensao || 'Violação das regras');
+            secaoAplicarSuspensao.classList.add('d-none');
+        } else {
+            secaoJaSuspenso.classList.add('d-none');
+            secaoAplicarSuspensao.classList.remove('d-none');
+        }
+
+        var secaoJaBanido = document.getElementById('secaoUsuarioJaBanido');
+        var secaoAplicarBanimento = document.getElementById('secaoAplicarBanimento');
+        if (secaoJaBanido && secaoAplicarBanimento) {
+            if (estaBanido) {
+                secaoJaBanido.classList.remove('d-none');
+                secaoAplicarBanimento.classList.add('d-none');
+            } else {
+                secaoJaBanido.classList.add('d-none');
+                secaoAplicarBanimento.classList.remove('d-none');
+            }
+        }
+
+        var modal = new bootstrap.Modal(document.getElementById('modalModerarUsuario'));
+        modal.show();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var textarea = document.getElementById('textareaComentarioForum');
+        var form = document.getElementById('formComentarioForum');
+
+        if (textarea && form) {
+            textarea.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    if (e.shiftKey) {
+                        return;
+                    } else {
+                        e.preventDefault();
+                        if (textarea.value.trim().length > 0) {
+                            if (typeof form.requestSubmit === 'function') {
+                                form.requestSubmit();
+                            } else {
+                                form.submit();
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
